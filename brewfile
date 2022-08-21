@@ -4,10 +4,7 @@ tap "homebrew/bundle", "https://github.com/Homebrew/homebrew-bundle.git"
 tap "homebrew/cask", "https://github.com/Homebrew/homebrew-cask.git"
 tap "homebrew/core", "https://github.com/Homebrew/homebrew-core.git"
 tap "homebrew/services", "https://github.com/Homebrew/homebrew-services.git"
-tap "jesseduffield/lazydocker", "https://github.com/jesseduffield/homebrew-lazydocker.git"
 tap "universal-ctags/universal-ctags", "https://github.com/universal-ctags/homebrew-universal-ctags.git"
-# Fast, simple and clean video downloader
-brew "annie"
 # YAML Parser
 brew "libyaml"
 # Cryptography and SSL/TLS Toolkit
@@ -16,8 +13,6 @@ brew "openssl@1.1"
 brew "sqlite"
 # Interpreted, interactive, object-oriented programming language
 brew "python"
-# Automate deployment, configuration, and upgrading
-brew "ansible", link: false
 # C library implementing the SSH2 protocol
 brew "libssh2"
 # Download with resuming and segmented downloading
@@ -112,8 +107,6 @@ brew "libuv"
 brew "libzip"
 # Tools for zmodem/xmodem/ymodem file transfer
 brew "lrzsz"
-# Clone of ls with colorful output, file type icons, and more
-brew "lsd"
 # Unix documentation system
 brew "man-db"
 # The mandoc UNIX manpage compiler toolset
@@ -166,8 +159,6 @@ brew "proxychains-ng"
 brew "pyenv"
 # Pyenv plugin to manage virtualenv
 brew "pyenv-virtualenv"
-# Interpreted, interactive, object-oriented programming language
-brew "python@2"
 # QR Code generation
 brew "qrencode"
 # Reattach process (e.g., tmux) to background
@@ -186,20 +177,12 @@ brew "sphinx-doc"
 brew "switchaudio-osx"
 # Send macOS User Notifications from the command-line
 brew "terminal-notifier"
-# Code-search similar to ack
-brew "the_silver_searcher"
 # Simplified and community-driven man pages
 brew "tldr"
 # Terminal multiplexer
 brew "tmux"
-# Implementation of Java Servlet and JavaServer Pages
-brew "tomcat", restart_service: true
-# Display directories as trees (with optional color/HTML output)
-brew "tree"
 # Tool for writing command-line pipes with instant live preview
 brew "up"
-# Vi 'workalike' with many additional features
-brew "vim"
 # Executes a program periodically, showing output fullscreen
 brew "watch"
 # Internet file retriever
@@ -210,17 +193,15 @@ brew "wireguard-go"
 brew "wireguard-tools"
 # Compression and file packaging/archive utility
 brew "zip"
-# The next-generation plugin manager for zsh
-brew "zplug"
 # UNIX shell (command interpreter)
 brew "zsh"
-# A simple terminal UI for docker, written in Go
-brew "jesseduffield/lazydocker/lazydocker"
+brew "zoxide"
+brew "broot"
+brew "git-delta"
+brew "procs"
 # Maintained ctags implementation
 brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD", "with-jansson"]
 cask "cakebrew"
-cask "dozer"
-cask "firefox"
 cask "hammerspoon"
 cask "launchrocket"
 cask "qlcolorcode"

@@ -11,6 +11,10 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# autoload -Uz promptinit
+# promptinit
+# prompt powerlevel10k
+
 
 PREZMODIR="${HOME}/.zprezto/modules"
 # 延迟执行或加载zsh 命令或脚本
@@ -47,7 +51,7 @@ if [[ $(uname -s) == "Darwin" ]]; then
 
     # GNU cmd tools PATH for Mac:
     export PATH="/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/opt/python/bin/:${PATH}"
-    export PATH="/usr/local/sbin:/opt/local/bin:$HOME/.yarn/bin:~/.cargo/bin/:$PATH"
+    export PATH="/usr/local/sbin:$HOME/.yarn/bin:~/.cargo/bin/:$PATH"
     export MANPATH="/usr/local/man:/usr/local/share/man:$MANPATH"
     export MANPATH="/usr/local/opt/coreutils/share/man:/usr/local/opt/findutils/share/man:${MANPATH}"
 
@@ -114,11 +118,13 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && zsh-defer source "${HOME}/.it
 export NVM_DIR="/usr/local/opt/nvm"
 zsh-defer -c '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"'  # This loads nvm
 export NVM_LAZY_LOAD=true
-source "${PREZMODIR}/zsh-nvm/zsh-nvm.plugin.zsh"
+[ -f "${PREZMODIR}/zsh-nvm/zsh-nvm.plugin.zsh" ] && zsh-defer source "${PREZMODIR}/zsh-nvm/zsh-nvm.plugin.zsh"
 
-# zsh-z config:
+
 # zstyle ':prezto:load' pmodule-dirs $HOME/.zprezto-contrib
-source "${PREZMODIR}/zsh-z/zsh-z.plugin.zsh"
+# zsh-z config:
+# [ -f "${PREZMODIR}/zsh-z/zsh-z.plugin.zsh" ] && zsh-defer source "${PREZMODIR}/zsh-z/zsh-z.plugin.zsh"
+eval "$(zoxide init zsh)"
 
 
 ## 关于历史纪录的配置##############################################{{{
@@ -196,3 +202,5 @@ FD_OPTIONS="--follow --exclude .git --exclude .idea --exclude node_modules --exc
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="${HOME}/.sdkman"
 [[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
+
+source /Users/zhuchunyuan/.config/broot/launcher/bash/br

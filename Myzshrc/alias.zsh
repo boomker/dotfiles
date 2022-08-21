@@ -59,19 +59,19 @@
     alias adl="aria2c -x6 -c "
     alias ffbrowser="/Applications/Firefox.app/Contents/MacOS/firefox"
     alias sshconf="nvim ${HOME}/.ssh/config"
-    alias aliconf="nvim ${HOME}/gitrepos/Myzshrc/alias.zsh"
-    alias alsreload="source ${HOME}/gitrepos/Myzshrc/alias.zsh"
+    alias aliconf="nvim ${HOME}/gitrepos/dotfiles/Myzshrc/alias.zsh"
+    alias alsreload="source ${HOME}/gitrepos/dotfiles/Myzshrc/alias.zsh"
     alias zshreload="source ~/.zshrc"
-    alias zshconfig="nvim ${HOME}/gitrepos/Myzshrc/.zshrc"
-    alias vimconfig="nvim ${HOME}/gitrepos/Myvimrc/.vimrc"
-    alias tmuxconfig="nvim ${HOME}/gitrepos/Mytmuxconf/.tmux.conf"
+    alias zshconfig="nvim ${HOME}/gitrepos/dotfiles/Myzshrc/.zshrc"
+    alias vimconfig="nvim ${HOME}/gitrepos/dotfiles/Myvimrc/.vimrc"
+    alias tmuxconfig="nvim ${HOME}/gitrepos/dotfiles/.tmux.conf"
 
 #  alias for MacOS_Darwin
 if [[ $(uname -s) == "Darwin" ]] ; then
     alias -g PC=" |pbcopy"
     alias vim="nvim"
     alias vscode="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
-    alias zshconfig="nvim ${HOME}/gitrepos/Myzshrc/.zshrc"
+    alias zshconfig="nvim ${HOME}/gitrepos/dotfiles/Myzshrc/.zshrc"
     alias hostsconfg="sudo vim /etc/hosts"
     alias brin="brew install "
     alias brci="brew cask install "
@@ -200,11 +200,11 @@ fi
         fi
     }
 
-    ffv() {
+    ffn() {
         fd "$1" |fzf --preview '(bat --style=numbers --color=always {}) 2> /dev/null | head -100'|xargs nvim -o
     }
 
-    frv() {
+    fwn() {
         local line
         line=$(
             rg --no-heading --column --smart-case "$1" | cut -d: -f1,2,3 |
@@ -225,10 +225,6 @@ fi
                 ))'
         ) && nvim "$(cut -d':' -f1 <<<"$line")" +$(cut -d':' -f2 <<<"$line")
     }
-
-    # git-openf() {
-    #     git remote get-url origin |xargs /Applications/Firefox.app/Contents/MacOS/firefox
-    # }
 
     git-home() {
         # git remote get-url origin |rargs open {}
@@ -265,10 +261,3 @@ fi
         echo "The $1 has been copied to the clipboard 😁"
         # osascript -e 'tell app "Finder" to set the clipboard to ( POSIX file "'$1'" )'
     }
-
-    sftw() {
-        fpath=$1
-        scp $fpath wxp_ubuntu:~/share/
-    }
-alias sibrestart='tail -4 runnow.sh  |cut -c2- |bash && bash runnow.sh'
-alias sibstop='tail -4 runnow.sh  |head -3 |cut -c2- |bash'
