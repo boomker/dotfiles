@@ -1,0 +1,111 @@
+host *
+    ServerAliveInterval 60
+    ServerAliveCountMax 30
+    TCPKeepAlive yes
+    # SendEnv LANG LC_*
+    # SendEnv TERM xterm-256color
+    # Compression yes
+    # ControlMaster auto
+    # ControlPersist yes
+    # ControlPath ~/.ssh/socks/%h-%p-%r
+
+# host github.com
+#     ProxyCommand nc -X 5 -x 127.0.0.1:1086 %h %p
+
+
+host bwgssr bwgvps
+    user root
+    # user shingo
+    # pingchas  cnanker..xiao1994
+    hostname 104.128.89.214
+    port 27797 
+    IdentityFile ~/.ssh/id_rsa
+    # password YQxALbr2fsgW
+
+host oldBuilder_CodeCheck
+    user builder
+    # user zhuchunyuan
+    hostname 172.26.187.6
+    port 22
+    IdentityFile ~/.ssh/id_rsa
+
+host macagent_onmac
+    user builder
+    hostname 172.26.184.9
+    port 22
+    IdentityFile ~/.ssh/id_rsa
+
+host xchungeMacMini
+    user newmacbuilder
+    # hostname 172.26.187.180
+    hostname 172.26.187.213
+    port 22
+    IdentityFile ~/.ssh/id_rsa
+
+host newbuildPacket
+    user newandroidbuilder
+    hostname 172.26.187.128
+    port 22
+    IdentityFile ~/.ssh/id_rsa
+
+host nginx_domainforward
+    user root
+    hostname 172.20.6.86
+    port 22
+    IdentityFile ~/.ssh/id_rsa
+
+host yxjserver
+    user yxjsever
+    hostname 172.26.184.11
+    port 22
+    IdentityFile ~/.ssh/id_rsa
+
+host ResourceCheckServer
+    user root
+    hostname 172.26.185.176
+    port 22
+    IdentityFile ~/.ssh/id_rsa
+
+host accountLog
+    user sandbox
+    hostname 47.93.23.11
+    port 22
+    IdentityFile ~/.ssh/id_rsa
+
+host version
+    user sandbox 
+    hostname 47.93.191.151
+    port 22
+    IdentityFile ~/.ssh/id_rsa
+    # password M54lxfw7dsV9w
+
+host work_mac
+     user zhuchunyuan
+     hostname 10.5.22.17
+     port 22
+     IdentityFile ~/.ssh/id_rsa
+
+host JumpServer_cli
+    user zhuchunyuan
+    hostname 172.20.6.79
+    port 2222
+    IdentityFile ~/.ssh/id_rsa 
+
+host JumpServer_Srv
+    user root
+    hostname 172.20.6.79
+    port 22
+    IdentityFile ~/.ssh/id_rsa 
+host *
+    ServerAliveInterval 60
+    ServerAliveCountMax 30
+    TCPKeepAlive yes
+
+Host jumpsrv
+    StrictHostKeyChecking no
+    User zhuchunyuan
+    # HostName 47.96.77.25
+    HostName sxqxinesuq-public.bastionhost.aliyuncs.com
+    Port 60022
+    IdentityFile /Users/boom/.ssh/id_rsa_zhuchunyuan
+    # UserKnownHostsFile /home/boom/.ssh/known_hosts

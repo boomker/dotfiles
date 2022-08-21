@@ -1,0 +1,184 @@
+let mapleader=";"
+set easymotion
+set surround
+" set multiple-cursors
+set argtextobj
+set textobj-indent
+set vim-paragraph-motion
+set ReplaceWithRegister
+set exchange
+set commentary
+set keep-english-in-normal
+set keep-english-in-normal-and-restore-in-insert
+
+" 共享系统粘贴板
+set clipboard+=unnamed
+set clipboard+=ideaput
+set ideajoin
+set ideamarks
+set ideastatusicon=gray
+set idearefactormode=keep
+
+" 显示当前模式
+set showmode
+" 打开行号
+set number
+" 打开相对行号
+" set relativenumber
+" 设置命令历史记录条数
+set history=2000
+" 关闭兼容vi
+set nocompatible
+" 开启语法高亮功能
+syntax enable
+" 允许用指定语法高亮配色方案替换默认方案
+syntax on
+" 模式搜索实时预览,增量搜索
+set incsearch
+" 设置搜索高亮
+set hlsearch
+set highlightedyank
+set ignorecase
+" 模式查找时智能忽略大小写
+set smartcase
+" vim自身命令行模式智能补全
+set wildmenu
+" 总是显示状态栏
+set laststatus=2
+" 显示光标当前位置
+set ruler
+" 高亮显示当前行/列
+set cursorline
+"set cursorcolumn
+" 禁止折行
+set nowrap
+" 将制表符扩展为空格
+set expandtab
+" 设置编辑时制表符占用空格数
+set tabstop=4
+" 设置格式化时制表符占用空格数
+set shiftwidth=4
+" 让 vim 把连续数量的空格视为一个制表符
+set softtabstop=4
+" 基于缩进或语法进行代码折叠
+set foldmethod=indent
+" set foldmethod=syntax
+" 启动 vim 时关闭折叠代码
+set nofoldenable
+" source ~/.vimrc
+
+sethandler <C-G> n-v:ide
+sethandler <C-M> n:ide
+
+nnoremap <silent> <Leader><space> :<C-u>nohlsearch<CR><C-l>
+nnoremap <CR> :
+nmap j gj
+nmap k gk
+nmap J gJ
+nmap H ^
+vmap H ^
+vmap L $
+nmap L $
+nmap Y y$
+nmap yL y$
+nmap yH y^
+nmap yj 2yy
+nmap y<CR> yG
+nmap tt ~
+nmap tj <Action>(MoveLineDown)
+nmap tk <Action>(MoveLineUp)
+nmap [<space> <Action>(EditorStartNewLineBefore)
+
+nmap d<CR> dG
+nmap dj 2dd
+nmap dk k2dd
+nmap dL d$
+nmap dH d^
+nmap '' ``zz
+nmap mm `.
+nmap zv zC
+nmap zl <Action>(ExpandAllToLevel1)
+noremap zm zM
+noremap zM zm
+noremap [[ {{
+noremap ]] }}
+nmap <leader>bn gt
+nmap <leader>bb gT
+" noremap <leader>vr "0p
+
+vnoremap < <gv
+vnoremap > >gv
+vnoremap v <Esc>
+
+
+map f <Plug>(easymotion-prefix)
+map fl <Plug>(easymotion-lineanywhere)
+map fa <Plug>(easymotion-jumptoanywhere)
+map ff <Plug>(easymotion-bd-w)
+" map <leader>e <Plug>(easymotion-f)
+" map <leader>f <Plug>(easymotion-s)
+
+" AceJump集成
+" nnoremap <leader>sJ :action AceAction<CR>
+" nnoremap <leader>sj :action AceTargetAction<CR>
+
+map <leader>sp <Action>(SelectInProjectView)
+map <leader>su <Action>(ShowUsages)
+map <Leader>si <Action>(QuickImplementations)
+map <Leader>sr <C-]>
+map <Leader>ca <Action>(ShowIntentionActions)
+" breakpoints
+map <leader>sb <Action>(ViewBreakpoints)
+map <leader>sh <Action>(Vcs.ShowTabbedFileHistory)
+map <leader>sl <Action>(LocalHistory.ShowHistory)
+nmap <leader>ja <Action>(JumpToLastChange)
+nmap <leader>jc <Action>(VcsShowNextChangeMarker)
+nmap <leader>jC <Action>(VcsShowPrevChangeMarker)
+nmap <leader>je <Action>(GotoNextError)
+nmap <leader>jw <Action>(GotoPreviousError)
+nmap <leader>jf <Action>(MethodDown)
+nmap <leader>jF <Action>(MethodUp)
+nmap <leader>js <Action>(GotoSuperMethod)
+nnoremap <leader>jl :action AceLineAction<CR>
+
+nmap <leader>gf <Action>(GotoFile)
+nmap <leader>gs <Action>(GotoSymbol)
+
+map <leader>rs <Action>(RenameElement)
+map <leader>ra <Action>(Refactorings.QuickListPopupAction)
+map <leader>rp <Action>(ManageRecentProjects)
+map <leader>rb <Action>(Debugger.RemoveAllBreakpointsInFile)
+map <leader>rc <Action>(PyRunFileInConsole)
+map <leader>rr <Action>(ChooseRunConfiguration)
+map <leader>dd <Action>(Debug)
+map <leader>ds <Action>(Stop)
+map <leader>dr <Action>(Resume)
+map <leader>di <action>(StepInto)
+map <leader>do <action>(StepOut)
+map <leader>db <Action>(ToggleLineBreakpoint)
+
+map <leader>dc <Action>(ChooseDebugConfiguration)
+
+" noremap <leader>x <ESC>:action StepOver<CR>
+" noremap <leader>c <ESC>:action SmartStepInto<CR>
+" noremap <leader>v <ESC>:action EvaluateExpression<CR>
+
+map <leader>em <Action>(HideActiveWindow)
+map <leader>ez <Action>(HideAllWindows)
+map <leader>fu <Action>(FindUsages)
+map <leader>fx <Action>(FindInPath)
+map <leader>fs <Action>(FileStructurePopup)
+map <leader>fh <Action>(MethodHierarchyPopupMenu)
+map <leader>fn <Action>(NewFile)
+
+map <leader>fr <Action>(ActivateRunToolWindow)
+map <leader>fd <Action>(ActivateDebugToolWindow)
+map <leader>fp <Action>(ActivateProblemsViewToolWindow)
+map <leader>fv <Action>(ActivateVersionControlToolWindow)
+map <leader>ft <Action>(ActivateTerminalToolWindow)
+map <leader>fc <Action>(ActivatePythonConsoleToolWindow)
+map <leader>fk <Action>(ActivateDatabaseToolWindow)
+
+
+" map <leader>a <Action>(Annotate)
+"https://github.com/JetBrains/ideavim/wiki/Emulated-plugins
