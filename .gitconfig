@@ -2,9 +2,6 @@
 [user]
 	name = zhuchunyan
 	email = zhuchunyuan@gaodun.com
-# Please adapt and uncomment the following lines:
-#	name = zhuchunyuan
-#	email = gaodun@GaodundeMacBook-Pro.local
 	
 [core]
     # detects filemode changes
@@ -50,6 +47,10 @@
     sl  = stash list
     sa  = stash apply
     sd  = stash drop
+    rc  = commit --amend --no-edit
+    rcm  = commit --amend -m
+    rbi  = rebase -i
+    rbm  = pull origin main --rebase
     lt = log --oneline -10 
     latest = log --oneline --all -10 
     lall = log --oneline --all

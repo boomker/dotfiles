@@ -36,12 +36,17 @@
     alias sei="sed -i "
     alias sen="sed -n "
     alias ssh="TERM=xterm-256color ssh"
+    alias gcun="git config --global user.name "
+    alias gcum="git config --global user.email "
     alias gcl="git clone "
     alias gaa="git add ."
     alias gcm="git commit -m "
+    alias grc="git commit --amend --no-edit "
+    alias gbi="git rebase -i "
+    alias gbm="git pull origin main --rebase"
     alias gpo="git push origin ||git push -u origin"
     # alias giff="git-icdiff"
-    alias gdf="git diff"
+    alias gdc="git diff"
     alias gco="git checkout "
     alias gsb="git switch "
     alias gnb="git switch -c "
@@ -226,19 +231,20 @@ fi
         ) && nvim "$(cut -d':' -f1 <<<"$line")" +$(cut -d':' -f2 <<<"$line")
     }
 
-    git-home() {
+    ggh() {
         # git remote get-url origin |rargs open {}
 		ori_url=$(git remote get-url origin)
 		if [[ -z `echo $ori_url |grep '@'` ]]; then
 			open $ori_url
 		else
-			new_url=${ori_url/git::@}
-			open $new_url
+			# new_url=${ori_url/git::@}
+            new_url=$(echo ${ori_url} |awk -F'@' '{print $2}' |sed 's#m:#m/#g')
+			open https://$new_url
 		fi
 
     }
 
-    gce() {
+    gcd() {
         repoUrl=$1
         [[ ${repoUrl: -3} != git ]] && repoUrl="${repoUrl}.git"
         repoName=$(echo ${repoUrl} |awk -F'[/.]+' '{print $(NF-1)}')

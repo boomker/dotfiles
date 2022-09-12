@@ -73,17 +73,6 @@ fi
     export VIM="/usr/local/opt/neovim/share/nvim"
     export VIMFILES="${HOME}/.nvim/vimfiles"
     export VIMRUNTIME="${HOME}/.nvim/runtime"
-# if [[ $(uname -s) == "Linux" ]]; then
-    # export VIM="/usr/local/share/vim"
-    # export VIMFILES="${VIM}/vimfiles"
-    # export VIMRUNTIME="/usr/local/share/vim/vim80"
-# else
-    # export VIM="/usr/local/opt/vim/share/vim"
-    # export VIMFILES="${VIM}/vimfiles"
-    # export VIMRUNTIME="${VIM}/vim80"
-    # # export VIM="/usr/local/opt/neovim/share/nvim"                 # for neovim on MacOS_Darwin
-    # # export VIMRUNTIME="/usr/local/opt/neovim/share/nvim/runtime"
-# fi
 # }}}
 
 
@@ -101,17 +90,27 @@ fi
   zsh-defer source ~/.alias.zsh
 
 
-# ------fzf configuration----------
+# ------fzf & fd & bat configuration----------
   [ -f ~/.fzf.zsh ] && zsh-defer source ~/.fzf.zsh
+    export BAT_THEME="TwoDark"
+    export FD_OPTIONS="--follow --exclude .git --exclude .idea --exclude node_modules --exclude venv"
     export FZF_DEFAULT_COMMAND="fd --type f --type l ${FD_OPTIONS}"
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
     export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
-    export FZF_CTRL_T_OPTS="--preview '(bat --style=numbers --color= \
-        always {} ||highlight -O ansi -l {} || cat {}) 2> /dev/null | head -100'"
+    export FZF_CTRL_T_OPTS="--preview '(bat --style=numbers --color=always {}) 2> /dev/null | head -100'"
     export FZF_DEFAULT_OPTS='--height 70% --reverse --border'
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="${HOME}/.sdkman"
+[[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && zsh-defer source "${HOME}/.sdkman/bin/sdkman-init.sh"
+
+# broot configure
+[ -f "${HOME}/.config/broot/launcher/bash/br" ] && zsh-defer source ${HOME}/.config/broot/launcher/bash/br
+
 
 # iterm2_shell_integration configuration:
 test -e "${HOME}/.iterm2_shell_integration.zsh" && zsh-defer source "${HOME}/.iterm2_shell_integration.zsh"
+
 
 # nvm config:
 # curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
@@ -126,6 +125,20 @@ export NVM_LAZY_LOAD=true
 # [ -f "${PREZMODIR}/zsh-z/zsh-z.plugin.zsh" ] && zsh-defer source "${PREZMODIR}/zsh-z/zsh-z.plugin.zsh"
 eval "$(zoxide init zsh)"
 
+
+# 设置使用代理
+  alias setproxy="export https_proxy=http://127.0.0.1:7890; \
+      export http_proxy=http://127.0.0.1:7890; \
+      export all_proxy=socks5://127.0.0.1:7890"
+
+# 设置取消使用代理
+    alias unsetproxy="unset http_proxy; unset https_proxy; \
+    unset all_proxy; echo 'Unset proxy successfully'"
+
+
+# Emacs风格 键绑定
+bindkey -e
+bindkey '^u' backward-kill-line
 
 ## 关于历史纪录的配置##############################################{{{
     # 历史纪录条目数量
@@ -153,10 +166,6 @@ eval "$(zoxide init zsh)"
     export HISTFILE=~/.zshistory  # ensure history file visibility
 ## }}}
 
-# Emacs风格 键绑定
-bindkey -e
-bindkey '^u' backward-kill-line
-
 # 以下字符视为单词的一部分
 WORDCHARS='*?_-[]~=&;!#$%^(){}<>'
 
@@ -182,25 +191,3 @@ setopt MENU_COMPLETE
     zstyle ':completion:*:warnings' format $'\e[01;31m -- No Matches Found --\e[0m'
     zstyle ':completion:*:corrections' format $'\e[01;32m -- %d (errors: %e) --\e[0m'
 # }}}
-
-
-export BAT_THEME="TwoDark"
-
-FD_OPTIONS="--follow --exclude .git --exclude .idea --exclude node_modules --exclude venv"
-
-
-# 设置使用代理
-  alias setproxy="export https_proxy=http://127.0.0.1:7890; \
-      export http_proxy=http://127.0.0.1:7890; \
-      export all_proxy=socks5://127.0.0.1:7890"
-
-# 设置取消使用代理
-    alias unsetproxy="unset http_proxy; unset https_proxy; \
-    unset all_proxy; echo 'Unset proxy successfully'"
-
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="${HOME}/.sdkman"
-[[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
-
-source /Users/zhuchunyuan/.config/broot/launcher/bash/br
