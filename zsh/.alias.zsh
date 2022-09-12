@@ -7,7 +7,7 @@
     alias -g T=" |tail"
     alias -g L=" |less"
     alias -g N=" |nl "
-    alias -g F=" |fzf"
+    alias -g F=" |fzf --ansi"
     alias -g J=" |jq ."
     alias -g B=" |bat "
     alias -g C=" |cut "
@@ -64,11 +64,11 @@
     alias adl="aria2c -x6 -c "
     alias ffbrowser="/Applications/Firefox.app/Contents/MacOS/firefox"
     alias sshconf="nvim ${HOME}/.ssh/config"
-    alias aliconf="nvim ${HOME}/gitrepos/dotfiles/Myzshrc/alias.zsh"
-    alias alsreload="source ${HOME}/gitrepos/dotfiles/Myzshrc/alias.zsh"
+    alias aliconf="nvim ${HOME}/gitrepos/dotfiles/zsh/alias.zsh"
+    alias alsreload="source ${HOME}/gitrepos/dotfiles/zsh/alias.zsh"
     alias zshreload="source ~/.zshrc"
-    alias zshconfig="nvim ${HOME}/gitrepos/dotfiles/Myzshrc/.zshrc"
-    alias vimconfig="nvim ${HOME}/gitrepos/dotfiles/Myvimrc/.vimrc"
+    alias zshconfig="nvim ${HOME}/gitrepos/dotfiles/zsh/.zshrc"
+    alias vimconfig="nvim ${HOME}/gitrepos/dotfiles/nvim/.vimrc"
     alias tmuxconfig="nvim ${HOME}/gitrepos/dotfiles/.tmux.conf"
 
 #  alias for MacOS_Darwin
@@ -76,7 +76,7 @@ if [[ $(uname -s) == "Darwin" ]] ; then
     alias -g PC=" |pbcopy"
     alias vim="nvim"
     alias vscode="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
-    alias zshconfig="nvim ${HOME}/gitrepos/dotfiles/Myzshrc/.zshrc"
+    alias zshconfig="nvim ${HOME}/gitrepos/dotfiles/zsh/.zshrc"
     alias hostsconfg="sudo vim /etc/hosts"
     alias brin="brew install "
     alias brci="brew cask install "
@@ -206,14 +206,14 @@ fi
     }
 
     ffn() {
-        fd "$1" |fzf --preview '(bat --style=numbers --color=always {}) 2> /dev/null | head -100'|xargs nvim -o
+        fd -H "$1" |fzf --preview-window=right:75%:wrap --preview '(bat --style=numbers --color=always {}) 2> /dev/null | head -100'|xargs nvim -o
     }
 
     fwn() {
         local line
         line=$(
-            rg --no-heading --column --smart-case "$1" | cut -d: -f1,2,3 |
-                fzf --preview-window=right:65%:wrap --preview \
+            rg --hidden --glob='!.git' --no-heading --column --smart-case "$1" | cut -d: -f1,2,3 |
+                fzf --preview-window=right:75%:wrap --preview \
                     'bat --terminal-width ${$(($(tput cols) * 0.75 - 2))%.*} --color always \
             "$(echo {}  | cut -d: -f1 )" \
             -H  $(echo {} | cut -d: -f2)  \

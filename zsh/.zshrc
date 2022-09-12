@@ -93,11 +93,11 @@ fi
 # ------fzf & fd & bat configuration----------
   [ -f ~/.fzf.zsh ] && zsh-defer source ~/.fzf.zsh
     export BAT_THEME="TwoDark"
-    export FD_OPTIONS="--follow --exclude .git --exclude .idea --exclude node_modules --exclude venv"
+    export FD_OPTIONS="--follow -H --exclude .git --exclude .idea --exclude node_modules --exclude venv"
     export FZF_DEFAULT_COMMAND="fd --type f --type l ${FD_OPTIONS}"
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
     export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
-    export FZF_CTRL_T_OPTS="--preview '(bat --style=numbers --color=always {}) 2> /dev/null | head -100'"
+    export FZF_CTRL_T_OPTS="--preview-window=right:70%:wrap --preview '(bat --style=numbers --color=always {}) 2> /dev/null | head -100'"
     export FZF_DEFAULT_OPTS='--height 70% --reverse --border'
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
