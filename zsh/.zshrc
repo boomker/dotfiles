@@ -93,7 +93,7 @@ fi
 # ------fzf & fd & bat configuration----------
   [ -f ~/.fzf.zsh ] && zsh-defer source ~/.fzf.zsh
     export BAT_THEME="TwoDark"
-    export FD_OPTIONS="--follow -H --exclude .git --exclude .idea --exclude node_modules --exclude venv"
+    export FD_OPTIONS="--follow --exclude .git --exclude .idea --exclude node_modules --exclude venv"
     export FZF_DEFAULT_COMMAND="fd --type f --type l ${FD_OPTIONS}"
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
     export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
@@ -123,7 +123,7 @@ export NVM_LAZY_LOAD=true
 # zstyle ':prezto:load' pmodule-dirs $HOME/.zprezto-contrib
 # zsh-z config:
 # [ -f "${PREZMODIR}/zsh-z/zsh-z.plugin.zsh" ] && zsh-defer source "${PREZMODIR}/zsh-z/zsh-z.plugin.zsh"
-eval "$(zoxide init zsh)"
+[[ -e $(which zoxide) ]] && eval "$(zoxide init zsh)"
 
 
 # 设置使用代理

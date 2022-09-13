@@ -35,14 +35,14 @@
     alias wl="wc -l"
     alias sei="sed -i "
     alias sen="sed -n "
-    alias ssh="TERM=xterm-256color ssh"
+    # alias ssh="TERM=xterm-256color ssh"
     alias gcun="git config --global user.name "
     alias gcum="git config --global user.email "
     alias gcl="git clone "
     alias gaa="git add ."
     alias gcm="git commit -m "
     alias grc="git commit --amend --no-edit "
-    alias gbi="git rebase -i "
+    alias gir="git rebase -i "
     alias gbm="git pull origin main --rebase"
     alias gpo="git push origin ||git push -u origin"
     # alias giff="git-icdiff"
@@ -52,6 +52,8 @@
     alias gnb="git switch -c "
     alias grep="egrep -i --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}"
     alias dfh="df -Th"
+    alias fdh="fd -H"
+    alias fda="fd -H '.*' "
     # alias duhl="du -ah --max-depth=1 "
     # alias trel="tree -L 1 "
     # alias pip3="python3 -m pip"
@@ -64,8 +66,8 @@
     alias adl="aria2c -x6 -c "
     alias ffbrowser="/Applications/Firefox.app/Contents/MacOS/firefox"
     alias sshconf="nvim ${HOME}/.ssh/config"
-    alias aliconf="nvim ${HOME}/gitrepos/dotfiles/zsh/alias.zsh"
-    alias alsreload="source ${HOME}/gitrepos/dotfiles/zsh/alias.zsh"
+    alias aliconf="nvim ${HOME}/gitrepos/dotfiles/zsh/.alias.zsh"
+    alias alsreload="source ${HOME}/gitrepos/dotfiles/zsh/.alias.zsh"
     alias zshreload="source ~/.zshrc"
     alias zshconfig="nvim ${HOME}/gitrepos/dotfiles/zsh/.zshrc"
     alias vimconfig="nvim ${HOME}/gitrepos/dotfiles/nvim/.vimrc"
@@ -80,12 +82,11 @@ if [[ $(uname -s) == "Darwin" ]] ; then
     alias hostsconfg="sudo vim /etc/hosts"
     alias brin="brew install "
     alias brci="brew cask install "
+    alias brho="brew home "
     alias echo="gecho"
-    # alias cpf="gcp -f "
-    # alias cpr="gcp -ar "
     alias cp="gcp"
-    alias mv="gmv -f "
-    alias mkdir="gmkdir -pv "
+    alias mv="gmv"
+    alias mkdir="gmkdir -v "
     # alias man="gman"
     alias ls="exa --color=automatic"
     alias l="exa --git --icons --color=automatic --git-ignore"
@@ -206,7 +207,17 @@ fi
     }
 
     ffn() {
-        fd -H "$1" |fzf --preview-window=right:75%:wrap --preview '(bat --style=numbers --color=always {}) 2> /dev/null | head -100'|xargs nvim -o
+        fd -H "$1" |fzf --preview-window=right:75%:wrap --preview \
+            '(bat --style=numbers --color=always {}) 2> /dev/null | head -100'|xargs nvim -o
+    }
+
+    fif() {
+        if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
+        rg --hidden --glob='!.git' --smart-case --files-with-matches --no-heading --no-column --no-messages "$1" |
+            fzf --preview-window=right:75%:wrap --preview \
+            "(bat --style=numbers --color=always {}) 2> /dev/null |\
+                rg  --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' ||\
+                rg  --ignore-case --pretty --context 10 '$1' {}"
     }
 
     fwn() {
@@ -249,6 +260,22 @@ fi
         [[ ${repoUrl: -3} != git ]] && repoUrl="${repoUrl}.git"
         repoName=$(echo ${repoUrl} |awk -F'[/.]+' '{print $(NF-1)}')
         git clone $repoUrl && cd ${repoName}
+    }
+
+    fsb() {
+        local branches branch
+        branches=$(git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format="%(refname:short)") &&
+        branch=$(echo "$branches" |fzf-tmux -r 50%  +m) &&
+        git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+    }
+
+    # fcs - get git commit sha
+    # example usage: git rebase -i `fcs`
+    fcs() {
+        local commits commit
+        commits=$(git log --color=always --pretty=oneline --abbrev-commit --reverse) &&
+        commit=$(echo "$commits" | fzf --tac +s +m -e --ansi --reverse) &&
+        echo -n $(echo "$commit" | sed "s/ .*//")
     }
 
 # for macos
