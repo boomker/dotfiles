@@ -47,8 +47,8 @@
     sl  = stash list
     sa  = stash apply
     sd  = stash drop
-    rc  = commit --amend --no-edit
-    rcm  = commit --amend -m
+    ac  = commit --amend --no-edit
+    uc  = commit --amend -m
     rbi  = rebase -i
     rbm  = pull origin main --rebase
     lt = log --oneline -10 

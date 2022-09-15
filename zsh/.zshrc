@@ -139,31 +139,51 @@ export NVM_LAZY_LOAD=true
 # Emacs风格 键绑定
 bindkey -e
 bindkey '^u' backward-kill-line
+# bindkey '^e' autosuggest-accept
+export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(
+    end-of-line
+    vi-end-of-line
+    vi-add-eol
+)
+
+
+ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(
+    forward-char
+    forward-word
+    emacs-forward-word
+    vi-forward-word
+    vi-forward-word-end
+    vi-forward-blank-word
+    vi-forward-blank-word-end
+    vi-find-next-char
+    vi-find-next-char-skip
+)
+
 
 ## 关于历史纪录的配置##############################################{{{
     # 历史纪录条目数量
-    export HISTSIZE=10000
-
-    # 注销后保存的历史纪录条目数量
-    export SAVEHIST=10000
-
-    # 以附加的方式写入历史纪录
-    setopt INC_APPEND_HISTORY
-
-    # 如果连续输入的命令相同，历史纪录中只保留一个
-    setopt HIST_IGNORE_DUPS
-
-    # 为历史纪录中的命令添加时间戳
-    setopt EXTENDED_HISTORY
-
-    #启用 cd 命令的历史纪录，cd -[TAB]进入历史路径
-    setopt AUTO_PUSHD
-
-    #相同的历史路径只保留一个
-    setopt PUSHD_IGNORE_DUPS
-
-    # 历史纪录文件
-    export HISTFILE=~/.zshistory  # ensure history file visibility
+    # export HISTSIZE=10000
+    #
+    # # 注销后保存的历史纪录条目数量
+    # export SAVEHIST=10000
+    #
+    # # 以附加的方式写入历史纪录
+    # setopt INC_APPEND_HISTORY
+    #
+    # # 如果连续输入的命令相同，历史纪录中只保留一个
+    # setopt HIST_IGNORE_DUPS
+    #
+    # # 为历史纪录中的命令添加时间戳
+    # setopt EXTENDED_HISTORY
+    #
+    # #启用 cd 命令的历史纪录，cd -[TAB]进入历史路径
+    # setopt AUTO_PUSHD
+    #
+    # #相同的历史路径只保留一个
+    # setopt PUSHD_IGNORE_DUPS
+    #
+    # # 历史纪录文件
+    # export HISTFILE=~/.zshistory  # ensure history file visibility
 ## }}}
 
 # 以下字符视为单词的一部分
