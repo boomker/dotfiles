@@ -33,7 +33,7 @@ zstyle ':prezto:load' pmodule \
   'history' \
   'directory' \
   'spectrum' \
-  'utility' \
+  'gnu-utility' \
   'completion' \
   'prompt' \
   'autosuggestions' \

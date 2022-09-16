@@ -12,7 +12,7 @@
     alias -g B=" |bat "
     alias -g C=" |cut "
     alias -g X=" |rargs"
-    # alias -g X=" |xargs"
+    alias -g GX=" |xargs"
     alias -g P=" |parallel"
     alias -g U=" |uniq"
     alias -g S=" |sort"
@@ -20,10 +20,8 @@
     alias -g W=" |wc -l"
     alias -g CT=" |column -t"
     alias -g AT=" |as-tree"
-    alias zft="z_replacement"
+    # alias zft="z_replacement"
     # alias zip="zip -r "
-    # alias pps="ptipython3"
-    alias ips="ipython3"
     alias idf="icdiff -r -N"
     alias diff="delta "
     # 可以递归对比两目录的差异，包括文件内容的差异
@@ -36,29 +34,60 @@
     alias sei="sed -i "
     alias sen="sed -n "
     # alias ssh="TERM=xterm-256color ssh"
+
+    # Git
+    alias gaa="git add ."
     alias gcun="git config --global user.name "
     alias gcum="git config --global user.email "
-    alias gcl="git clone --filter=blob:none "
-    alias gaa="git add ."
     alias gcm="git commit -m "
-    alias guc="git commit --amend "
-    alias gac="git commit --amend --no-edit"
-    alias gst="git status "
-    alias gss="git status --short"
-    alias gir="git rebase -i "
-    alias gbm="git pull origin main --rebase"
-    alias gpo="git push origin ||git push -u origin"
-    # alias giff="git-icdiff"
-    alias gdc="git diff"
+    alias gcu="git commit --amend "
+    alias gca="git commit --amend --no-edit"
+
+    alias grbi="git rebase -i "
+    alias grba='git rebase --abort'
+    alias grbc='git rebase --continue'
+    alias grbs='git rebase --skip'
+
+    alias gcl="git clone "
+    alias gfc="git clone --filter=blob:none "
+    alias gfrm="git pull origin main --rebase"
+
+    alias gsms='git submodule sync --recursive'
+    alias gsmu='git submodule update --init --recursive'
+
+    alias grmv='git remote --verbose'
+    alias grma='git remote add'
+    alias grmr='git remote rm'
+    alias grmsu='git remote set-url'
+
+    alias gpo="git push ||git push -u origin"
+    alias gpf="git push -f"
+    alias gpso='git push --set-upstream origin '
+
+
+    alias glt="git log --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset' -10"
+    alias gla="git log --all --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset' -10"
+
+    alias gdf="git diff "
+
     alias gco="git checkout "
     alias gsb="git switch "
     alias gnb="git switch -c "
-    alias grep="egrep -i --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}"
-    alias dfh="df -Th"
+    alias gdb='git branch --delete'
+
+    alias gst="git status "
+    alias gws="git status --short"
+    alias gwr='git reset --hard'
+    alias gwc='git clean -dfx'
+
+    alias gss='git stash'
+    alias gsa='git stash apply'
+    alias gsd='git stash drop'
+    alias gsl='git stash list'
+
     alias fdh="fd -H"
     alias fda="fd -H '.*' "
-    # alias duhl="du -ah --max-depth=1 "
-    # alias trel="tree -L 1 "
+
     # alias pip3="python3 -m pip"
     # alias piu="python3 -m pip uninstall "
     alias piu="pip3 uninstall "
@@ -66,60 +95,42 @@
     # alias pii="python3 -m pip install "
     alias pus="pip3 install --upgrade pip"
     # alias pypi="/usr/local/opt/pypy3/bin/pip"
+
     alias adl="aria2c -x6 -c "
-    alias ffbrowser="/Applications/Firefox.app/Contents/MacOS/firefox"
-    alias sshconf="nvim ${HOME}/.ssh/config"
+    # alias ffb="/Applications/Firefox.app/Contents/MacOS/firefox"
+    alias zshconfig="nvim ${HOME}/gitrepos/dotfiles/zsh/.zshrc"
+    alias zshreload="source ~/.zshrc"
     alias aliconf="nvim ${HOME}/gitrepos/dotfiles/zsh/.alias.zsh"
     alias alsreload="source ${HOME}/gitrepos/dotfiles/zsh/.alias.zsh"
-    alias zshreload="source ~/.zshrc"
-    alias zshconfig="nvim ${HOME}/gitrepos/dotfiles/zsh/.zshrc"
-    alias vimconfig="nvim ${HOME}/gitrepos/dotfiles/nvim/.vimrc"
     alias tmuxconfig="nvim ${HOME}/gitrepos/dotfiles/.tmux.conf"
+    alias sshconf="nvim ${HOME}/.ssh/config"
+    # alias vimconfig="nvim ${HOME}/gitrepos/dotfiles/nvim/.vimrc"
 
 #  alias for MacOS_Darwin
 if [[ $(uname -s) == "Darwin" ]] ; then
     alias -g PC=" |pbcopy"
+    alias e="nvim"
     alias vim="nvim"
+    alias o="open"
     alias vscode="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
-    alias zshconfig="nvim ${HOME}/gitrepos/dotfiles/zsh/.zshrc"
     alias hostsconfg="sudo vim /etc/hosts"
     alias brin="brew install "
     alias brci="brew install --cask "
     alias brho="brew home "
-    alias echo="gecho"
-    alias cp="gcp"
-    alias mv="gmv"
-    alias mkdir="gmkdir -v "
-    # alias man="gman"
     alias ls="exa --color=automatic"
     alias l="exa --git --icons --color=automatic --git-ignore"
     alias ll="exa -abghl --git --icons --color=automatic --git-ignore"
     alias lt="ll --tree --level=2 -I='.git'"
+
+    alias mkdir="gmkdir -pv "
     alias tailf="gtail -f"
-    alias nl="gnl"
-    alias du="gdu"
-    # alias duts="du -ch |tail -1"
-    # alias xargs="rargs"
-    alias find="gfind"
-    alias locate="glocate"
-    # alias updatedb="gupdatedb"
-    alias grep="grep -i --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}"
-    # alias grep="rg"
-    alias date="gdate"
-    alias cut="gcut"
-    alias sed="gsed"
-    alias sort="gsort"
-    alias stat="gstat"
-    alias uniq="guniq"
-    alias awk="gawk"
-    alias df="gdf"
-    alias tr="gtr"
-    alias mdsum="gmd5sum"
-    alias readlink="greadlink"
+    alias grep="egrep -i --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}"
+    alias dfh="gdf -Th"
     alias lstcp="lsof -nP -iTCP"
     # alias ping="prettyping"
-    alias pps="$(which ptipython)"
-    alias ips="$(which ipython)"
+    # alias pps="ptipython3"
+    alias ips="ipython3"
+    alias kubectl="kubecolor"
 else
     # alias for *unix
     alias open="xdg-open"
@@ -132,9 +143,9 @@ fi
 
 
 # common func
-    function aama() {
-        ansible all -b -m "$1" -a "$2"
-    }
+    # function aama() {
+    #     ansible all -b -m "$1" -a "$2"
+    # }
 
     function cpb()  {
         cp "$1" "$1-$(date +%F_%H_%M_%S).bak"
@@ -169,11 +180,6 @@ fi
         egrep -v "^(#|$)" "$1"
     }
 
-    tpaf()
-    {
-        tree -p "$1" |awk '/\[-/{print $NF}'
-    }
-
     transfer() {
         curl --progress-bar --upload-file "$1" https://transfer.sh/$(basename "$1") | tee /dev/null;
     }
@@ -183,11 +189,11 @@ fi
         [[ -n $TmSID ]] && tmux attach -t $TmSID || tmux
     }
 
-    z_replacement()
-    {
-        [ $# -gt 0 ] && _z "$*" && return
-        cd "$(_z -l 2>&1 | fzf-tmux +s --tac --query "$*" | sed 's/^[0-9,.]* *//')"
-    }
+    # z_replacement()
+    # {
+    #     [ $# -gt 0 ] && _z "$*" && return
+    #     cd "$(_z -l 2>&1 | fzf-tmux +s --tac --query "$*" | sed 's/^[0-9,.]* *//')"
+    # }
 
     # 用来快速跳转到 tmux 其他窗格
     fjpane() {
@@ -267,9 +273,9 @@ fi
 
     fsb() {
         local branches branch
-        branches=$(git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format="%(refname:short)") &&
-        branch=$(echo "$branches" |fzf-tmux -r 50%  +m) &&
-        git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+        branches=$(git for-each-ref --count=30 --sort=-committerdate --format="%(refname:short)") &&
+        branch=$(echo "$branches" |fzf-tmux -d 50%  +m) &&
+        git switch $(echo "$branch" | sed "s/.* //" | sed -r "s#(origin|remotes)/([^/]*/)?##")
     }
 
     # fcs - get git commit sha
@@ -288,12 +294,6 @@ fi
 
     # cpoy file to clipboard
     cftc() {
-        dirname=$(dirname "$1")
-        filename=$(basename "$1")
-        cd ${dirname}
-        dir=$(pwd)
-        osascript -e 'tell app "Finder" to set the clipboard to ( POSIX file "'${dir}/${filename}'" )'
-        cd -
+        osascript -e 'tell app "Finder" to set the clipboard to ( POSIX file "'$1'" )'
         echo "The $1 has been copied to the clipboard 😁"
-        # osascript -e 'tell app "Finder" to set the clipboard to ( POSIX file "'$1'" )'
     }

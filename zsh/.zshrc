@@ -211,3 +211,9 @@ setopt MENU_COMPLETE
     zstyle ':completion:*:warnings' format $'\e[01;31m -- No Matches Found --\e[0m'
     zstyle ':completion:*:corrections' format $'\e[01;32m -- %d (errors: %e) --\e[0m'
 # }}}
+
+
+# export LESSOPEN="| $(which highlight) %s --out-format xterm256 -l --force -s solarized-light --no-trailing-nl"
+# export LESS=" -R"
+# alias less='less -m -N -g -i -J --line-numbers --underline-special'
+# alias more='less'
