@@ -16,10 +16,10 @@ fi
 # prompt powerlevel10k
 
 
-PREZMODIR="${HOME}/.zprezto/modules"
+export PREZCUSMODIR="$HOME/.zprezto-contrib"
 # 延迟执行或加载zsh 命令或脚本
-# git clone https://github.com/romkatv/zsh-defer.git ${PREZMODIR}/
-source ${PREZMODIR}/zsh-defer/zsh-defer.plugin.zsh
+# git clone https://github.com/romkatv/zsh-defer.git ${PREZCUSMODIR}/
+source ${PREZCUSMODIR}/zsh-defer/zsh-defer.plugin.zsh
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -94,7 +94,7 @@ fi
   [ -f ~/.fzf.zsh ] && zsh-defer source ~/.fzf.zsh
     export BAT_THEME="TwoDark"
     export FD_OPTIONS="--follow --exclude .git --exclude .idea --exclude node_modules --exclude venv"
-    export FZF_DEFAULT_COMMAND="fd --type f --type l ${FD_OPTIONS}"
+    export FZF_DEFAULT_COMMAND="fd -H --type f --type l ${FD_OPTIONS}"
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
     export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
     export FZF_CTRL_T_OPTS="--preview-window=right:70%:wrap --preview '(bat --style=numbers --color=always {}) 2> /dev/null | head -100'"
@@ -117,12 +117,11 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && zsh-defer source "${HOME}/.it
 export NVM_DIR="/usr/local/opt/nvm"
 zsh-defer -c '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"'  # This loads nvm
 export NVM_LAZY_LOAD=true
-[ -f "${PREZMODIR}/zsh-nvm/zsh-nvm.plugin.zsh" ] && zsh-defer source "${PREZMODIR}/zsh-nvm/zsh-nvm.plugin.zsh"
+[ -f "${PREZCUSMODIR}/zsh-nvm/zsh-nvm.plugin.zsh" ] && zsh-defer source "${PREZCUSMODIR}/zsh-nvm/zsh-nvm.plugin.zsh"
 
 
-# zstyle ':prezto:load' pmodule-dirs $HOME/.zprezto-contrib
 # zsh-z config:
-# [ -f "${PREZMODIR}/zsh-z/zsh-z.plugin.zsh" ] && zsh-defer source "${PREZMODIR}/zsh-z/zsh-z.plugin.zsh"
+# [ -f "${PREZCUSMODIR}/zsh-z/zsh-z.plugin.zsh" ] && zsh-defer source "${PREZCUSMODIR}/zsh-z/zsh-z.plugin.zsh"
 [[ -e $(which zoxide) ]] && eval "$(zoxide init zsh)"
 
 
@@ -139,15 +138,13 @@ export NVM_LAZY_LOAD=true
 # Emacs风格 键绑定
 bindkey -e
 bindkey '^u' backward-kill-line
-# bindkey '^e' autosuggest-accept
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(
     end-of-line
     vi-end-of-line
     vi-add-eol
 )
 
-
-ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(
+export ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(
     forward-char
     forward-word
     emacs-forward-word
@@ -160,58 +157,8 @@ ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(
 )
 
 
-## 关于历史纪录的配置##############################################{{{
-    # 历史纪录条目数量
-    # export HISTSIZE=10000
-    #
-    # # 注销后保存的历史纪录条目数量
-    # export SAVEHIST=10000
-    #
-    # # 以附加的方式写入历史纪录
-    # setopt INC_APPEND_HISTORY
-    #
-    # # 如果连续输入的命令相同，历史纪录中只保留一个
-    # setopt HIST_IGNORE_DUPS
-    #
-    # # 为历史纪录中的命令添加时间戳
-    # setopt EXTENDED_HISTORY
-    #
-    # #启用 cd 命令的历史纪录，cd -[TAB]进入历史路径
-    # setopt AUTO_PUSHD
-    #
-    # #相同的历史路径只保留一个
-    # setopt PUSHD_IGNORE_DUPS
-    #
-    # # 历史纪录文件
-    # export HISTFILE=~/.zshistory  # ensure history file visibility
-## }}}
-
 # 以下字符视为单词的一部分
 WORDCHARS='*?_-[]~=&;!#$%^(){}<>'
-
-## 开启此选项，补全时会直接选中菜单项
-setopt MENU_COMPLETE
-
-# 修正大小写
-    zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
-
-# 错误校正 {{{
-    zstyle ':completion:*' completer _complete _match _approximate
-    zstyle ':completion:*:match:*' original only
-    zstyle ':completion:*:approximate:*' max-errors 1 numeric
-# }}}
-
-## 补全类型提示分组 {{{
-    zstyle ':completion:*:matches' group 'yes'
-    zstyle ':completion:*' group-name ''
-    zstyle ':completion:*:options' description 'yes'
-    zstyle ':completion:*:options' auto-description '%d'
-    zstyle ':completion:*:descriptions' format $'\e[01;33m -- %d --\e[0m'
-    zstyle ':completion:*:messages' format $'\e[01;35m -- %d --\e[0m'
-    zstyle ':completion:*:warnings' format $'\e[01;31m -- No Matches Found --\e[0m'
-    zstyle ':completion:*:corrections' format $'\e[01;32m -- %d (errors: %e) --\e[0m'
-# }}}
-
 
 # export LESSOPEN="| $(which highlight) %s --out-format xterm256 -l --force -s solarized-light --no-trailing-nl"
 # export LESS=" -R"

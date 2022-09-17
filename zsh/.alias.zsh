@@ -120,6 +120,7 @@ if [[ $(uname -s) == "Darwin" ]] ; then
     alias ls="exa --color=automatic"
     alias l="exa --git --icons --color=automatic --git-ignore"
     alias ll="exa -abghl --git --icons --color=automatic --git-ignore"
+    alias la="exa -abghl --git --icons --color=automatic"
     alias lt="ll --tree --level=2 -I='.git'"
 
     alias mkdir="gmkdir -pv "
@@ -215,11 +216,6 @@ fi
         fi
     }
 
-    ffn() {
-        fd -H "$1" |fzf --preview-window=right:75%:wrap --preview \
-            '(bat --style=numbers --color=always {}) 2> /dev/null | head -100'|xargs nvim -o
-    }
-
     fif() {
         if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
         rg --hidden --glob='!.git' --smart-case --files-with-matches --no-heading --no-column --no-messages "$1" |
@@ -227,6 +223,11 @@ fi
             "(bat --style=numbers --color=always {}) 2> /dev/null |\
                 rg  --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' ||\
                 rg  --ignore-case --pretty --context 10 '$1' {}"
+    }
+
+    ffn() {
+        fd -H "$1" |fzf --preview-window=right:75%:wrap --preview \
+            '(bat --style=numbers --color=always {}) 2> /dev/null | head -100'|xargs nvim -o
     }
 
     fwn() {
@@ -251,6 +252,22 @@ fi
         ) && nvim "$(cut -d':' -f1 <<<"$line")" +$(cut -d':' -f2 <<<"$line")
     }
 
+    fsb() {
+        local branches branch
+        branches=$(git for-each-ref --count=30 --sort=-committerdate --format="%(refname:short)") &&
+        branch=$(echo "$branches" |fzf-tmux -d 50%  +m) &&
+        git switch $(echo "$branch" | sed "s/.* //" | sed -r "s#(origin|remotes)/([^/]*/)?##")
+    }
+
+    # fcs - get git commit sha
+    # example usage: git rebase -i `fcs`
+    fcs() {
+        local commits commit
+        commits=$(git log --color=always --pretty=oneline --abbrev-commit --reverse) &&
+        commit=$(echo "$commits" | fzf --tac +s +m -e --ansi --reverse) &&
+        echo -n $(echo "$commit" | sed "s/ .*//")
+    }
+
     ggh() {
         # git remote get-url origin |rargs open {}
 		ori_url=$(git remote get-url origin)
@@ -271,23 +288,7 @@ fi
         git clone $repoUrl && cd ${repoName}
     }
 
-    fsb() {
-        local branches branch
-        branches=$(git for-each-ref --count=30 --sort=-committerdate --format="%(refname:short)") &&
-        branch=$(echo "$branches" |fzf-tmux -d 50%  +m) &&
-        git switch $(echo "$branch" | sed "s/.* //" | sed -r "s#(origin|remotes)/([^/]*/)?##")
-    }
-
-    # fcs - get git commit sha
-    # example usage: git rebase -i `fcs`
-    fcs() {
-        local commits commit
-        commits=$(git log --color=always --pretty=oneline --abbrev-commit --reverse) &&
-        commit=$(echo "$commits" | fzf --tac +s +m -e --ansi --reverse) &&
-        echo -n $(echo "$commit" | sed "s/ .*//")
-    }
-
-# for macos
+    # for zip archive
     function zipgrep() {
         zipinfo -t -1 -M "$2" |grep "$1"
     }
@@ -297,3 +298,14 @@ fi
         osascript -e 'tell app "Finder" to set the clipboard to ( POSIX file "'$1'" )'
         echo "The $1 has been copied to the clipboard 😁"
     }
+
+    # fzf function fcs-widget
+    fcs-widget() {
+        local result;
+        result=$(fcs)
+        zle reset-prompt
+        LBUFFER+=$result
+    }
+
+    zle -N fcs-widget
+    bindkey '^x^s' fcs-widget
