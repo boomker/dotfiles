@@ -203,7 +203,7 @@ fi
         current_pane=$(tmux display-message -p '#I:#P')
         current_window=$(tmux display-message -p '#I')
 
-        target=$(echo "$panes" | grep -v "$current_pane" | fzf +m --reverse) || return
+        target=$(echo "$panes" | grep -v "$current_pane" | fzf +m --tac) || return
 
         target_window=$(echo $target | awk 'BEGIN{FS=":|-"} {print$1}')
         target_pane=$(echo $target | awk 'BEGIN{FS=":|-"} {print$2}' | cut -c 1)
@@ -219,7 +219,7 @@ fi
     fif() {
         if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
         rg --hidden --glob='!.git' --smart-case --files-with-matches --no-heading --no-column --no-messages "$1" |
-            fzf --preview-window=right:75%:wrap --preview \
+            fzf -m --preview-window=right:75%:wrap --preview \
             "(bat --style=numbers --color=always {}) 2> /dev/null |\
                 rg  --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' ||\
                 rg  --ignore-case --pretty --context 10 '$1' {}"
@@ -263,10 +263,29 @@ fi
     # example usage: git rebase -i `fcs`
     fcs() {
         local commits commit
-        commits=$(git log --color=always --pretty=oneline --abbrev-commit --reverse) &&
-        commit=$(echo "$commits" | fzf --tac +s +m -e --ansi --reverse) &&
+        commits=$(git log --color=always --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset') &&
+        commit=$(echo "$commits" | fzf --tac -m -e --ansi ) &&
         echo -n $(echo "$commit" | sed "s/ .*//")
     }
+
+    fgd() {
+        local file_name
+        file_name=$(git status --short |awk '/M/{print $2}' |fzf --preview-window=right:75%:wrap --preview \
+            '(bat --style=numbers --color=always {}) 2> /dev/null | head -100') &&
+        git diff HEAD "$file_name"
+    }
+
+    # fzf function fcs-widget
+    fcs-widget() {
+        local result;
+        result=$(fcs)
+        zle reset-prompt
+        LBUFFER+=$result
+    }
+
+    # example usage: git diff <C-X><C-S>
+    zle -N fcs-widget
+    bindkey '^x^s' fcs-widget
 
     ggh() {
         # git remote get-url origin |rargs open {}
@@ -299,13 +318,3 @@ fi
         echo "The $1 has been copied to the clipboard 😁"
     }
 
-    # fzf function fcs-widget
-    fcs-widget() {
-        local result;
-        result=$(fcs)
-        zle reset-prompt
-        LBUFFER+=$result
-    }
-
-    zle -N fcs-widget
-    bindkey '^x^s' fcs-widget
