@@ -1,7 +1,7 @@
 ## alias config:
 
 ## common alias:
-    alias -g G=" |egrep -i"
+    alias -g G=" |grep -iE"
     alias -g R=" |rg -S"
     alias -g H=" |head"
     alias -g T=" |tail"
@@ -80,7 +80,8 @@
     alias gwr='git reset --hard'
     alias gwc='git clean -dfx'
 
-    alias gss='git stash'
+    alias gss='scmpuff_status'
+    alias gsh='git stash'
     alias gsa='git stash apply'
     alias gsd='git stash drop'
     alias gsl='git stash list'
@@ -125,7 +126,7 @@ if [[ $(uname -s) == "Darwin" ]] ; then
 
     alias mkdir="gmkdir -pv "
     alias tailf="gtail -f"
-    alias grep="egrep -i --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}"
+    alias grep="grep -iE --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}"
     alias dfh="gdf -Th"
     alias lstcp="lsof -nP -iTCP"
     # alias ping="prettyping"
@@ -178,7 +179,7 @@ fi
 
 
     function gvbc() {
-        egrep -v "^(#|$)" "$1"
+        grep -Ev "^(#|$)" "$1"
     }
 
     transfer() {
@@ -259,6 +260,13 @@ fi
         git switch $(echo "$branch" | sed "s/.* //" | sed -r "s#(origin|remotes)/([^/]*/)?##")
     }
 
+    fgd() {
+        local file_name
+        file_name=$(git status --short |awk '/M/{print $2}' |fzf --preview-window=right:75%:wrap --preview \
+            '(bat --style=numbers --color=always {}) 2> /dev/null | head -100') &&
+        git diff HEAD "$file_name"
+    }
+
     # fcs - get git commit sha
     # example usage: git rebase -i `fcs`
     fcs() {
@@ -266,13 +274,6 @@ fi
         commits=$(git log --color=always --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset') &&
         commit=$(echo "$commits" | fzf --tac -m -e --ansi ) &&
         echo -n $(echo "$commit" | sed "s/ .*//")
-    }
-
-    fgd() {
-        local file_name
-        file_name=$(git status --short |awk '/M/{print $2}' |fzf --preview-window=right:75%:wrap --preview \
-            '(bat --style=numbers --color=always {}) 2> /dev/null | head -100') &&
-        git diff HEAD "$file_name"
     }
 
     # fzf function fcs-widget

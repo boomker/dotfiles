@@ -51,7 +51,7 @@ if [[ $(uname -s) == "Darwin" ]]; then
 
     # GNU cmd tools PATH for Mac:
     export PATH="/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/opt/python/bin/:${PATH}"
-    export PATH="/usr/local/sbin:$HOME/.yarn/bin:~/.cargo/bin/:$PATH"
+    export PATH="/usr/local/sbin:$HOME/.yarn/bin:~/.cargo/bin/:${HOME}/.iterm2:$PATH"
     export MANPATH="/usr/local/man:/usr/local/share/man:$MANPATH"
     export MANPATH="/usr/local/opt/coreutils/share/man:/usr/local/opt/findutils/share/man:${MANPATH}"
 
@@ -77,7 +77,7 @@ fi
 
 
 # JDK/Tomcat Path {{{
-    export JAVA_HOME=/usr/local/opt/java11
+    export JAVA_HOME=/usr/local/opt/java
     # export TOMCAT_HOME=/opt/tomcat8
     # export CATALINA_HOME=$TOMCAT_HOME
     export CLASSPATH=.:${JAVA_HOME}/libexec/openjdk.jdk/Contents/Home/lib
@@ -97,8 +97,10 @@ fi
     export FZF_DEFAULT_COMMAND="fd -H --type f --type l ${FD_OPTIONS}"
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
     export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
-    export FZF_CTRL_T_OPTS="--preview-window=right:70%:wrap --preview '(bat --style=numbers --color=always {}) 2> /dev/null | head -100'"
-    export FZF_DEFAULT_OPTS='--height 70% --reverse --border'
+    export FZF_CTRL_T_OPTS="--preview-window=right:70%:wrap --preview \
+    '(bat --style=numbers --color=always {}) 2> /dev/null | head -100'"
+    # export FZF_DEFAULT_OPTS='--height 70% --reverse --border'
+
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="${HOME}/.sdkman"
@@ -160,7 +162,9 @@ export ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(
 # 以下字符视为单词的一部分
 WORDCHARS='*?_-[]~=&;!#$%^(){}<>'
 
+eval "$(scmpuff init -s --aliases=false)"
 # export LESSOPEN="| $(which highlight) %s --out-format xterm256 -l --force -s solarized-light --no-trailing-nl"
 # export LESS=" -R"
 # alias less='less -m -N -g -i -J --line-numbers --underline-special'
 # alias more='less'
+
