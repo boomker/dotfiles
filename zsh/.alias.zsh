@@ -3,6 +3,7 @@
 ## common alias:
     alias -g G=" |grep -iE"
     alias -g R=" |rg -S"
+    alias -g BR=" |batgrep -S"
     alias -g H=" |head"
     alias -g T=" |tail"
     alias -g L=" |less"
@@ -13,20 +14,21 @@
     alias -g C=" |cut "
     alias -g X=" |rargs"
     alias -g GX=" |xargs"
-    alias -g P=" |parallel"
+    alias -g P=" |peco"
+    # alias -g P=" |parallel"
     alias -g U=" |uniq"
     alias -g S=" |sort"
     alias -g Y=" |tee"
     alias -g W=" |wc -l"
     alias -g CT=" |column -t"
     alias -g AT=" |as-tree"
-    # alias zft="z_replacement"
+    alias bathelp='bat --plain --language=help'
     # alias zip="zip -r "
     alias idf="icdiff -r -N"
     alias diff="delta "
     # 可以递归对比两目录的差异，包括文件内容的差异
     alias auq="awk '!U[\$0]++' "
-    # awk 去重+合并文件内容(相当于两文件的并集，两文件去重后再合并)，而且能保证文件内容顺序
+    # awk 去重+合并文件内容(相当于两文件的并集，两文件去重后再合并), 而且能保证文件内容顺序
     alias l.="ls -d .* --color=auto"
     alias ls="ls -p --width=80 --color=auto"
     alias ll="ls -rtlh"
@@ -80,7 +82,7 @@
     alias gwr='git reset --hard'
     alias gwc='git clean -dfx'
 
-    alias gss='scmpuff_status'
+    alias gss='eval "$(scmpuff init -s --aliases=false)" && scmpuff_status'
     alias gsh='git stash'
     alias gsa='git stash apply'
     alias gsd='git stash drop'
@@ -114,14 +116,14 @@ if [[ $(uname -s) == "Darwin" ]] ; then
     alias vim="nvim"
     alias o="open"
     alias vscode="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
-    alias hostsconfg="sudo vim /etc/hosts"
+    alias hostsconf="sudo vim /etc/hosts"
     alias brin="brew install "
     alias brci="brew install --cask "
     alias brho="brew home "
     alias ls="exa --color=automatic"
     alias l="exa --git --icons --color=automatic --git-ignore"
-    alias ll="exa -abghl --git --icons --color=automatic --git-ignore"
-    alias la="exa -abghl --git --icons --color=automatic"
+    alias ll="exa -abghlF --color-scale --group-directories-first --git --icons --color=automatic --git-ignore"
+    alias la="exa -abghlF --color-scale --group-directories-first --git --icons --color=automatic"
     alias lt="ll --tree --level=2 -I='.git'"
 
     alias mkdir="gmkdir -pv "
@@ -149,6 +151,15 @@ fi
     #     ansible all -b -m "$1" -a "$2"
     # }
 
+    function zpupdate() {
+        cd $ZPREZTODIR && git pull ||exit
+        git submodule sync --recursive
+        git submodule update --init --recursive
+    }
+
+    function help() {
+        "$@" --help 2>&1 | bathelp
+    }
     function cpb()  {
         cp "$1" "$1-$(date +%F_%H_%M_%S).bak"
     }
@@ -191,11 +202,6 @@ fi
         [[ -n $TmSID ]] && tmux attach -t $TmSID || tmux
     }
 
-    # z_replacement()
-    # {
-    #     [ $# -gt 0 ] && _z "$*" && return
-    #     cd "$(_z -l 2>&1 | fzf-tmux +s --tac --query "$*" | sed 's/^[0-9,.]* *//')"
-    # }
 
     # 用来快速跳转到 tmux 其他窗格
     fjpane() {
@@ -217,39 +223,24 @@ fi
         fi
     }
 
-    fif() {
-        if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
-        rg --hidden --glob='!.git' --smart-case --files-with-matches --no-heading --no-column --no-messages "$1" |
-            fzf -m --preview-window=right:75%:wrap --preview \
-            "(bat --style=numbers --color=always {}) 2> /dev/null |\
-                rg  --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' ||\
-                rg  --ignore-case --pretty --context 10 '$1' {}"
-    }
-
-    ffn() {
-        fd -H "$1" |fzf --preview-window=right:75%:wrap --preview \
-            '(bat --style=numbers --color=always {}) 2> /dev/null | head -100'|xargs nvim -o
-    }
-
     fwn() {
-        local line
+        local line rg_cmd initial_query
+        rg_cmd="rg --hidden --glob='!.git' --line-number --no-heading --color=always --column --smart-case "
+        initial_query="${*:-}"
         line=$(
-            rg --hidden --glob='!.git' --no-heading --column --smart-case "$1" | cut -d: -f1,2,3 |
-                fzf --preview-window=right:75%:wrap --preview \
-                    'bat --terminal-width ${$(($(tput cols) * 0.75 - 2))%.*} --color always \
-            "$(echo {}  | cut -d: -f1 )" \
-            -H  $(echo {} | cut -d: -f2)  \
-            -r  $((\
-                    $((\
-                        $(echo {} | cut -d: -f2)-8 \
-                    ))>0 \
-                    ? $((\
-                        $(echo {} | cut -d: -f2)-8 \
-                    )) \
-                    : 0\
-                )):$((\
-                    $(echo {} | cut -d: -f2)+$(tput lines)/2-1\
-                ))'
+        FZF_DEFAULT_COMMAND="$rg_cmd $(printf %q "$initial_query")" \
+            fzf --ansi \
+            --color "hl:-1:underline,hl+:-1:underline:reverse" \
+            --disabled --query "$initial_query" \
+            --info=inline \
+            --bind "change:reload:sleep 0.1; $rg_cmd {q} || true" \
+            --bind "ctrl-f:unbind(change,ctrl-f)+change-prompt(2. fzf> )+enable-search+clear-query+rebind(ctrl-r)" \
+            --bind "ctrl-r:unbind(ctrl-r)+change-prompt(1. ripgrep> )+disable-search+reload($rg_cmd {q} || true)+rebind(change,ctrl-f)" \
+            --prompt '1. Ripgrep> ' \
+            --header '[ CTRL-R (Ripgrep mode) | CTRL-F (fzf mode) ]' \
+            --delimiter=':' \
+            --preview-window='up,60%,border-bottom,+{2}+3/3,~3' \
+            --preview 'bat --color=always {1} --highlight-line {2}' \
         ) && nvim "$(cut -d':' -f1 <<<"$line")" +$(cut -d':' -f2 <<<"$line")
     }
 
@@ -260,33 +251,49 @@ fi
         git switch $(echo "$branch" | sed "s/.* //" | sed -r "s#(origin|remotes)/([^/]*/)?##")
     }
 
-    fgd() {
-        local file_name
-        file_name=$(git status --short |awk '/M/{print $2}' |fzf --preview-window=right:75%:wrap --preview \
-            '(bat --style=numbers --color=always {}) 2> /dev/null | head -100') &&
-        git diff HEAD "$file_name"
+    fgwd() {
+        local width
+        width=$(($(tmux display-message -p '#{window_width}') * 92 / 100 ))
+        git diff --name-only --relative --diff-filter=d |fzf --ansi --preview-window="down:70%:wrap" \
+            --preview "batdiff --delta --color --context=8 --terminal-width=$width {}"
     }
 
-    # fcs - get git commit sha
-    # example usage: git rebase -i `fcs`
-    fcs() {
-        local commits commit
-        commits=$(git log --color=always --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset') &&
-        commit=$(echo "$commits" | fzf --tac -m -e --ansi ) &&
-        echo -n $(echo "$commit" | sed "s/ .*//")
+    fgs() {
+        local commits commit logFormat
+
+        curBranch="git branch --show-current"
+        logFormat="--pretty=format:'%Cred%h%Creset | %Cblue%cn%Creset | %Cgreen%ai%Creset |%C(yellow)%d%Creset %n%CgreenCommitMsg:%Creset [ %s ]%n'"
+        commits="git log --color=always --pretty=format:'%Cred%h%Creset | %Cblue%cn%Creset | %Cgreen%cr%Creset | %s | %d'"
+        commit=$(
+            bash -c "$commits" |\
+            fzf -m -e --ansi \
+            --prompt "$(bash -c $curBranch) commits:> " \
+            --info=inline \
+            --color "hl:underline,hl+:underline" \
+            --header '[ CTRL-D (diffview) | CTRL-A (toggle all branches) | CTRL-E (without merges) | CTRL-V (change preview) | CTRL-X (toggle preview) | CTRL-R (reload) ]' \
+            --bind "ctrl-r:change-prompt($(bash -c $curBranch) commits(current)> )+reload($commits || true)" \
+            --bind "ctrl-a:change-prompt($(bash -c $curBranch) commits(all)> )+reload($commits --all --source || true)" \
+            --bind "ctrl-e:change-prompt($(bash -c $curBranch) commits(no-merge)> )+reload($commits --no-merges || true)" \
+            --bind "ctrl-d:execute:(bash -c 'git show {1} >/dev/tty')" \
+            --bind "ctrl-v:change-preview-window(down:30%,border-top|hidden|)" \
+            --bind "ctrl-x:toggle-preview" \
+            --preview-window=up:70%:wrap --preview \
+            "git show --name-status --color=always $logFormat {1}"
+        )
+        [[ -n $commit ]] && echo $(cut -d' ' -f1 <<<"$commit")
     }
 
-    # fzf function fcs-widget
-    fcs-widget() {
+    # example usage: git rebase -i `fgs`
+    fgs-widget() {
         local result;
-        result=$(fcs)
+        result=$(fgs)
         zle reset-prompt
         LBUFFER+=$result
     }
 
     # example usage: git diff <C-X><C-S>
-    zle -N fcs-widget
-    bindkey '^x^s' fcs-widget
+    zle -N fgs-widget
+    bindkey '^x^x' fgs-widget
 
     ggh() {
         # git remote get-url origin |rargs open {}

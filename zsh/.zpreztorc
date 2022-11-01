@@ -37,44 +37,52 @@ zstyle ':prezto:load' pmodule \
   'gnu-utility' \
   'completion' \
   'prompt' \
-  'fzf-tab' \
   'autosuggestions' \
   'history-substring-search' \
-  'syntax-highlighting'
+  'fast-syntax-highlighting' \
+  'fzf-tab'
+  # 'zsh-notify'
 
+# fzf-tab
+    zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+    zstyle ':fzf-tab:*' fzf-flags --ansi
+    # set descriptions format to enable group support
+    zstyle ':completion:*:descriptions' format '[%d]'
+    # set list-colors to enable filename colorizing
+    zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+    zstyle ':fzf-tab:complete:git-log:*' fzf-preview 'git log --color=always $word' # don't work
+    # zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview 'git diff $word | delta'
 
-zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-# set descriptions format to enable group support
-zstyle ':completion:*:descriptions' format '[%d]'
-# set list-colors to enable filename colorizing
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-# disable sort when completing `git checkout`
-zstyle ':completion:*:git-checkout:*' sort false
-# zstyle ':fzf-tab:complete:git-log:argument-rest' fzf-preview 'git log --color=always $word'
+    # disable sort when completing `git checkout`
+    zstyle ':completion:*:git-checkout:*' sort false
 
-# preview directory's content with exa when completing cd
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
-zstyle ':fzf-tab:complete:z:*' fzf-preview 'exa -1 --color=always $realpath'
-zstyle ':fzf-tab:complete:bat:*' fzf-preview '[[ -f $realpath ]] && bat --color=always $realpath'
-# zstyle ':fzf-tab:complete:bat:*' fzf-flags --preview-window=right:60%:wrap --height ${FZF_TMUX_HEIGHT:-60%} 
-# use input as query string when completing zlua
-zstyle ':fzf-tab:complete:_zlua:*' query-string input
-# give a preview of commandline arguments when completing `kill`
-zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
-zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview 'ps -p $word -o command -w -w |tail -1'
-zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down:3:wrap
-# zstyle ':fzf-tab:complete:tldr:argument-1' fzf-preview 'tldr --color always $word'
-zstyle ':fzf-tab:complete:brew-(install|uninstall|search|info):*-argument-rest' fzf-preview 'brew info $word'
+    # preview directory's content with exa when completing cd
+    zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -a1 --icons --color=always $realpath'
+    # zstyle ':fzf-tab:complete:z:*' fzf-preview 'exa -ahl --no-permissions --octal-permissions --no-user --time-style=iso --icons --color=always  --tree --level=2  -I=".git*" $realpath'
+    # zstyle ':fzf-tab:complete:z:*' fzf-flags --preview-window=right:70%:wrap
+    # zstyle ':fzf-tab:complete:z:*' popup-pad 30 0
+    # zstyle ':fzf-tab:complete:bat:argument-rest' fzf-preview '[[ -f $realpath ]] && bat --color=always $realpath || exa -ahl --no-permissions --no-user --time-style=iso --icons --color=always --tree --level=2  -I=".git*" $realpath'
+    # zstyle ':fzf-tab:complete:bat:*' fzf-flags --preview-window=right:60%:wrap --height ${FZF_TMUX_HEIGHT:-60%} 
 
-# zstyle ':fzf-tab:complete:z:*' popup-pad 30 0
-zstyle ':fzf-tab:*' fzf-min-height 10
-# apply to all command
-zstyle ':fzf-tab:*' popup-min-size 70 30
-# only apply to 'diff'
-zstyle ':fzf-tab:complete:diff:*' popup-min-size 80 18
-# zstyle ':fzf-tab:*' fzf-bindings 'ctrl-j:accept' 'ctrl-a:toggle-all'
-# switch group using `,` and `.`
-zstyle ':fzf-tab:*' switch-group ',' '.'
+    # use input as query string when completing zlua
+    zstyle ':fzf-tab:complete:_zlua:*' query-string input
+    # give a preview of commandline arguments when completing `kill`
+    zstyle ':completion:*:*:*:*:processes' command 'ps -u $USER -o pid,user,comm -w -w'
+    zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview '[[ $group =~ "process" ]] && ps -p $word -o command -w -w |tail -1'
+    zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down:3:wrap
+    # zstyle ':fzf-tab:complete:tldr:argument-1' fzf-preview 'tldr --color always $word'
+    zstyle ':fzf-tab:complete:brew-(install|uninstall|search|info):*-argument-rest' fzf-preview 'brew info $word'
+    # zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'man $word'
+
+    zstyle ':fzf-tab:*' fzf-min-height 10
+    # apply to all command
+    zstyle ':fzf-tab:*' popup-min-size 50 16
+    # only apply to 'diff'
+    zstyle ':fzf-tab:complete:diff:*' popup-min-size 60 20
+    # zstyle ':fzf-tab:*' fzf-bindings 'ctrl-j:accept' 'ctrl-a:toggle-all'
+    # switch group using `,` and `.`
+    zstyle ':fzf-tab:*' switch-group ',' '.'
+
 
 # Autosuggestions
 #

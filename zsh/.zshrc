@@ -92,14 +92,18 @@ fi
 
 # ------fzf & fd & bat configuration----------
   [ -f ~/.fzf.zsh ] && zsh-defer source ~/.fzf.zsh
-    export BAT_THEME="TwoDark"
+    export BAT_THEME="Monokai Extended Origin"
     export FD_OPTIONS="--follow --exclude .git --exclude .idea --exclude node_modules --exclude venv"
     export FZF_DEFAULT_COMMAND="fd -H --type f --type l ${FD_OPTIONS}"
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-    export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
+    export FZF_ALT_C_OPTS="--preview-window=right:70%:wrap --preview \
+        '(exa -ahlF --color-scale --group-directories-first  --icons \
+        --color=always --tree --level=2  -I=\".git*\" {}) 2>/dev/null |head -20'"
+
     export FZF_CTRL_T_OPTS="--preview-window=right:70%:wrap --preview \
-    '(bat --style=numbers --color=always {}) 2> /dev/null | head -100'"
-    # export FZF_DEFAULT_OPTS='--height 70% --reverse --border'
+        '(bat --style=numbers --color=always --line-range=:100 {}) 2> /dev/null'"
+    export FZF_DEFAULT_OPTS="--ansi --height 70% --reverse \
+        --border --tiebreak=begin --bind end:preview-down,home:preview-up,ctrl-a:select-all+accept"
 
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
@@ -139,7 +143,7 @@ export NVM_LAZY_LOAD=true
 
 # Emacs风格 键绑定
 bindkey -e
-bindkey '^u' backward-kill-line
+# bindkey '^u' backward-kill-line
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(
     end-of-line
     vi-end-of-line
@@ -158,13 +162,92 @@ export ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(
     vi-find-next-char-skip
 )
 
+# edit command line like in bash (zsh has 'fc' but it has to execute the command first)
+# autoload -z edit-command-line
+# zle -N edit-command-line
+# bindkey "^X^E" edit-command-line
+
+# Use Ctrl-x,Ctrl-v to get the output of the last command
+insert-last-command-output() {
+    LBUFFER+="$(eval $history[$((HISTCMD-1))])"
+}
+zle -N insert-last-command-output
+bindkey "^X^V" insert-last-command-output
+
+# Ctrl-x,Ctrl-w copies to global pasteboard as well as zsh clipboard
+pb-copy-region-as-kill () {
+    zle copy-region-as-kill
+    print -rn $CUTBUFFER | pbcopy
+  }
+zle -N pb-copy-region-as-kill
+bindkey -e '^x^w' pb-copy-region-as-kill
+
+# Ctrl-x Ctrl-d copies to global pasteboard as well as zsh clipboard - is this overkill?
+pb-kill-buffer () {
+    zle kill-buffer
+    print -rn $CUTBUFFER | pbcopy
+  }
+zle -N pb-kill-buffer
+bindkey -e '^x^d' pb-kill-buffer
+
+# ------ Ctrl-u
+pb-backward-kill-line () {
+    zle backward-kill-line
+    print -rn $CUTBUFFER | pbcopy
+}
+zle -N pb-backward-kill-line
+bindkey -e '^u' pb-backward-kill-line
+
+# ------ Ctrl-k
+pb-kill-line () {
+    zle kill-line
+    print -rn $CUTBUFFER | pbcopy
+  }
+zle -N pb-kill-line
+bindkey -e '^k' pb-kill-line
+
 
 # 以下字符视为单词的一部分
-WORDCHARS='*?_-[]~=&;!#$%^(){}<>'
+WORDCHARS='*?[]~&;!#$%^(){}<>'
 
-eval "$(scmpuff init -s --aliases=false)"
-# export LESSOPEN="| $(which highlight) %s --out-format xterm256 -l --force -s solarized-light --no-trailing-nl"
+# eval "$(scmpuff init -s --aliases=false)"
+# export LESSOPEN="| $(which highlight) --out-format xterm256 -l --force -s solarized-light --no-trailing-nl"
 # export LESS=" -R"
 # alias less='less -m -N -g -i -J --line-numbers --underline-special'
 # alias more='less'
+
+[ -f "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh" ] && zsh-defer source "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh"
+
+# notify
+    zstyle ":notify:*" command-complete-timeout 15
+    zstyle ':notify:*' expire-time 2500
+    zstyle ":notify:*" enable-on-ssh yes
+    # zstyle ":notify:*" error-icon "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Blokkade.png/240px-Blokkade.png"
+    zstyle ":notify:*" error-sound "Sosumi"
+    zstyle ":notify:*" error-title "⛔️ errored in #{time_elapsed}"
+    # zstyle ":notify:*" success-icon "https://upload.wikimedia.org/wikipedia/commons/a/a6/Green_approved.png"
+    zstyle ":notify:*" success-sound "Blow"
+    zstyle ":notify:*" success-title "✅ finished in #{time_elapsed}"
+
+
+# fzf-tab config:
+# zstyle ':fzf-tab:*' fzf-flags --ansi
+# zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format "%F{yellow}--- %d%f"
+
+zstyle ':fzf-tab:complete:bat:argument-rest' fzf-preview '[[ -f $realpath ]] && \
+    bat --color=always $realpath || \
+    exa -ahlF --color-scale --group-directories-first --no-permissions --no-user \
+    --time-style=iso --icons --color=always --tree --level=2  -I=".git*" $realpath'
+zstyle ':fzf-tab:complete:bat:argument-rest' fzf-flags --preview-window=right:70%:wrap
+
+zstyle ':fzf-tab:complete:z:*' fzf-preview 'exa -ahlF --color-scale --group-directories-first \
+    --no-permissions --octal-permissions --no-user --time-style=iso --icons --color=always \
+    --tree --level=2  -I=".git*" $realpath'
+zstyle ':fzf-tab:complete:z:*' fzf-flags --preview-window=right:70%:wrap
+
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+# man 2 select
+zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'MANWIDTH=$FZF_PREVIEW_COLUMNS \
+    man $word 2>/dev/null |bat -l man --color=always'
 
