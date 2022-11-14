@@ -1,7 +1,7 @@
 # This is Git's per-user configuration file.
 [user]
 	name = zhuchunyan
-	email = zhuchunyuan@gaodun.com
+	email = gmboomker@gmail.com
 	
 [core]
     # detects filemode changes
@@ -51,9 +51,11 @@
     uc  = commit --amend -m
     rbi  = rebase -i
     rbm  = pull origin main --rebase
-    lt = log --oneline -10 
-    latest = log --oneline --all -10 
-    lall = log --oneline --all
+    lt = log --oneline -10 --pretty=format:'%C(bold red)%h%Creset -%C(bold green)%d %C(bold yellow)%s %Creset- %C(red)%cd %Creset- %C(dim green)%an' --date=format:'%Y-%m-%d %H:%M:%S'
+    latest = log --oneline --all -10 --pretty=format:'%C(bold red)%h%Creset -%C(bold green)%d %C(bold yellow)%s %Creset- %C(red)%cd %Creset- %C(dim green)%an' --date=format:'%Y-%m-%d %H:%M:%S'
+    lall = log --oneline --all --pretty=format:'%C(bold red)%h%Creset -%C(bold green)%d %C(bold yellow)%s %Creset- %C(red)%cd %Creset- %C(dim green)%an' --date=format:'%Y-%m-%d %H:%M:%S'
+    root = rev-parse --show-toplevel
+    smupdate = submodule update --rebase --init --recursive
 
 [color]
     ui     = auto
@@ -89,3 +91,5 @@
 
 [help]
 	autocorrect = 1
+[init]
+	defaultBranch = main

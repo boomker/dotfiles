@@ -77,7 +77,7 @@ endif
     highlight SpellLocal term=underline cterm=underline
 
 
-set nocompatible                                      "禁用 Vi 兼容模式
+" set nocompatible                                      "禁用 Vi 兼容模式
 set shortmess=atI                                     "去掉欢迎界面
 set guioptions-=m                                     "去掉菜单栏"
 set guioptions-=e                                     "去掉标签栏"
@@ -178,8 +178,9 @@ noremap mm `.
 noremap <silent> <expr> j (v:count == 0 ? 'gjzz' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gkzz' : 'k')
 nnoremap [<space>  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[
+            " let cmd = 'put  =repeat(nr2char(10), v:count1)|silent ''[-'
 nnoremap ]<space>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
-
+                      " 'put!=repeat(nr2char(10), v:count1)|silent '']+'
 " select last paste in visual mode
 nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
 nmap gp <Plug>(GitGutterPrevHunk)

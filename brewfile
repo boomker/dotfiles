@@ -21,6 +21,8 @@ brew "aria2"
 brew "bash"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+brew "bat-extras"
+
 # Fish completion for brew-cask
 brew "brew-cask-completion"
 # Change macOS display brightness from the command-line

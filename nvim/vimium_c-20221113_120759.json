@@ -1,14 +1,15 @@
 {
 	"name": "Vimium C",
-	"@time": "2021/10/6 上午11:08:45",
-	"time": 1633489725693,
+	"@time": "2022/11/13 12:07:59",
+	"time": 1668312479639,
 	"environment": {
-		"extension": "1.92.4",
+		"extension": "1.99.5",
 		"platform": "mac",
-		"chrome": 93
+		"chromium": "107"
 	},
+	"grabBackFocus": true,
 	"keyMappings": [
-		"#! no-check",
+		"#!no-check",
 		"# Insert your preferred key mappings here.",
 		"unmap x",
 		"unmap l",
@@ -18,17 +19,18 @@
 		"map d removeTab",
 		"map u restoreTab",
 		"map i scrollFullPageUp",
-		"map o Vomnibar.activateInNewTab",
+		"# map o Vomnibar.activateInNewTab",
+		"map o Vomnibar.activateInNewTab engines=10",
 		"map P openCopiedUrlInCurrentTab",
 		"map p openCopiedUrlInNewTab",
 		"map b Vomnibar.activateBookmarksInNewTab",
 		"map B Vomnibar.activateBookmarks",
-		"map t Vomnibar.activateTabSelection",
+		"# map t Vomnibar.activateTabSelection",
+		"map t Vomnibar.activateTabs",
 		"map ' Marks.activate",
 		"map . goNext",
-		"map f LinkHints.activateModeToOpenInNewTab",
-		"map ;f LinkHints.activateMode",
-		"map F LinkHints.activateModeWithQueue",
+		"map f LinkHints.activateOpenInNewTab",
+		"map F LinkHints.activateWithQueue",
 		"map zh scrollToLeft",
 		"map zl scrollToRight",
 		"map z, moveTabLeft",
@@ -45,10 +47,11 @@
 		"map li focusInput",
 		"map ld togglePinTab",
 		"map ls visitPreviousTab",
-		"map lx LinkHints.activateMode action=\"copy-text\"",
+		"map lc LinkHints.activate action=\"copy-text\"",
 		"map lm toggleMuteTab",
 		""
 	],
-	"linkHintCharacters": "fdkljuion;hserwc",
-	"searchUrl": "https://www.google.com/search?q=$s Google"
+	"linkHintCharacters": "fdjkls;nmoiuherwc",
+	"searchUrl": "https://www.google.com/search?q=$s Google",
+	"vimSync": true
 }

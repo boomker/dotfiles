@@ -22,28 +22,44 @@
     alias -g W=" |wc -l"
     alias -g CT=" |column -t"
     alias -g AT=" |as-tree"
+    alias -g NE="2> /dev/null"
+    alias -g NUL="> /dev/null 2>&1"
+
     alias bathelp='bat --plain --language=help'
+    alias cpsp="cp -rp --parents "
     # alias zip="zip -r "
     alias idf="icdiff -r -N"
-    alias diff="delta "
     # 可以递归对比两目录的差异，包括文件内容的差异
-    alias auq="awk '!U[\$0]++' "
+    alias diff="delta "
     # awk 去重+合并文件内容(相当于两文件的并集，两文件去重后再合并), 而且能保证文件内容顺序
+    alias auq="awk '!U[\$0]++' "
     alias l.="ls -d .* --color=auto"
     alias ls="ls -p --width=80 --color=auto"
     alias ll="ls -rtlh"
     alias wl="wc -l"
     alias sei="sed -i "
     alias sen="sed -n "
+
+    alias sre='sudo $(fc -ln -1)'
     # alias ssh="TERM=xterm-256color ssh"
 
     # Git
+    alias drcwt="git --git-dir=${HOME}/gitrepos/.dotrcfiles.git/ "
+    alias gib="git init --bare "
+    alias gcb="git clone --bare "
+
+    alias glsf="git ls-files -- . ':!:*.git*'"
     alias gaa="git add ."
     alias gcun="git config --global user.name "
     alias gcum="git config --global user.email "
     alias gcm="git commit -m "
     alias gcu="git commit --amend "
     alias gca="git commit --amend --no-edit"
+    alias gcig="git check-ignore -v"
+
+    alias ggcp='git cherry-pick'
+    alias gcpa='git cherry-pick --abort'
+    alias gcpc='git cherry-pick --continue'
 
     alias grbi="git rebase -i "
     alias grba='git rebase --abort'
@@ -80,7 +96,7 @@
     alias gst="git status "
     alias gws="git status --short"
     alias gwr='git reset --hard'
-    alias gwc='git clean -dfx'
+    alias gwc='git clean -df'
 
     alias gss='eval "$(scmpuff init -s --aliases=false)" && scmpuff_status'
     alias gsh='git stash'
@@ -90,6 +106,7 @@
 
     alias fdh="fd -H"
     alias fda="fd -H '.*' "
+    alias rgh="rg -. --glob='!.git*' "
 
     # alias pip3="python3 -m pip"
     # alias piu="python3 -m pip uninstall "
@@ -111,6 +128,16 @@
 
 #  alias for MacOS_Darwin
 if [[ $(uname -s) == "Darwin" ]] ; then
+
+    # 设置使用代理
+    # alias setproxy="export https_proxy=http://127.0.0.1:7890; \
+    #     export http_proxy=http://127.0.0.1:7890; \
+    #     export all_proxy=socks5://127.0.0.1:7890"
+
+    # 设置取消使用代理
+    alias unsetproxy="unset http_proxy; unset https_proxy; \
+        unset all_proxy; echo 'Unset proxy successfully'"
+
     alias -g PC=" |pbcopy"
     alias e="nvim"
     alias vim="nvim"
@@ -124,11 +151,14 @@ if [[ $(uname -s) == "Darwin" ]] ; then
     alias l="exa --git --icons --color=automatic --git-ignore"
     alias ll="exa -abghlF --color-scale --group-directories-first --git --icons --color=automatic --git-ignore"
     alias la="exa -abghlF --color-scale --group-directories-first --git --icons --color=automatic"
-    alias lt="ll --tree --level=2 -I='.git'"
+    # alias lt="ll --tree --level=2 -I='.git'"
 
+    alias rm="trash"
+    alias rmls="trash-list"
+    alias rmrs="trash-restore"
     alias mkdir="gmkdir -pv "
     alias tailf="gtail -f"
-    alias grep="grep -iE --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}"
+    # alias grep="grep -iE --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}"
     alias dfh="gdf -Th"
     alias lstcp="lsof -nP -iTCP"
     # alias ping="prettyping"
@@ -150,6 +180,9 @@ fi
     # function aama() {
     #     ansible all -b -m "$1" -a "$2"
     # }
+    function help() {
+        "$@" --help 2>&1 | bathelp
+    }
 
     function zpupdate() {
         cd $ZPREZTODIR && git pull ||exit
@@ -157,8 +190,87 @@ fi
         git submodule update --init --recursive
     }
 
-    function help() {
-        "$@" --help 2>&1 | bathelp
+    function brih() {
+        local token
+        token=$(brew search "$1" | fzf-tmux --query="$1" +m --preview 'brew info {}')
+
+        if [ "x$token" != "x" ]; then
+            echo "(I)nstall or open the (h)omepage of $token"
+            read -r input
+            if [ "$input" = "i" ] || [ "$input" = "I" ]; then
+                brew install "$token"
+            fi
+            if [ "$input" = "h" ] || [ "$input" = "H" ]; then
+                brew home "$token"
+            fi
+        fi
+    }
+
+    function lt ()
+    {
+        [[ "${1}" == -l ]] && {
+            exa_extra_parameter=("-bghlF" "--group-directories-first" "--git")
+            shift
+        } || exa_extra_parameter=("")
+
+        if [[  $# == 1 ]]; then
+            [[ -d $1 ]] && {
+                level="2" 
+                directory="$1"
+            } || {
+                level="${1}"
+                directory=""
+            }
+        fi 
+
+
+        [[ $# == 2 ]] && directory="${2}"
+
+        exa_default_parameter=("-a" "--color-scale" "--icons" "--color=automatic" "--tree" "--level=${level:-2}" '-I='.git'')
+        exa_parameter=(${exa_default_parameter[@]} ${exa_extra_parameter[@]})
+        exa  "${exa_parameter[@]}" "${directory:-.}"
+    }
+
+    function gswt ()
+    {
+        [[ "$#" < 2 ]] && echo 'require 2 path parameters' && exit
+        # git --git-dir="${HOME}/gitrepos/.dotrcfiles.git/" --work-tree="${HOME}/gitrepos/awesome-dotfiles"
+        git --git-dir="${1}" --work-tree="${2}" 
+    }
+
+    function gswtcm ()
+    {
+        [[ "$#" < 2 ]] && echo 'require 2 path parameters' && exit
+        # git --git-dir="${HOME}/gitrepos/.dotrcfiles.git/" --work-tree="${HOME}/gitrepos/awesome-dotfiles"
+        git --git-dir="${1}" --work-tree="${2}" commit -m 
+    }
+
+    function gswtca ()
+    {
+        [[ "$#" < 2 ]] && echo 'require 2 path parameters' && exit
+        # git --git-dir="${HOME}/gitrepos/.dotrcfiles.git/" --work-tree="${HOME}/gitrepos/awesome-dotfiles"
+        git --git-dir="${1}" --work-tree="${2}" commit -a 
+    }
+
+    function gswtau ()
+    {
+        [[ "$#" < 2 ]] && echo 'require 2 path parameters' && exit
+        # git --git-dir="${HOME}/gitrepos/.dotrcfiles.git/" --work-tree="${HOME}/gitrepos/awesome-dotfiles"
+        git --git-dir="${1}" --work-tree="${2}" add -u 
+    }
+
+    function gswtcnuf ()
+    {
+        [[ "$#" < 2 ]] && echo 'require 2 path parameters' && exit
+        # git --git-dir="${HOME}/gitrepos/.dotrcfiles.git/" --work-tree="${HOME}/gitrepos/awesome-dotfiles"
+        git --git-dir="${1}" --work-tree="${2}" config --local status.showUntrackedFiles no
+    }
+
+    function setproxy ()
+    {
+        export https_proxy=http://127.0.0.1:${1:-7890}; \
+            http_proxy=http://127.0.0.1:${1:-7890};\
+            all_proxy=socks5://127.0.0.1:${1:-7890}
     }
     function cpb()  {
         cp "$1" "$1-$(date +%F_%H_%M_%S).bak"
@@ -178,6 +290,13 @@ fi
 
     function mkdf() {
         _Fn="$(basename $1)";_Dn="$(dirname $1)";mkdir -p "$_Dn" && touch "${_Dn}"/"${_Fn}"
+    }
+
+    # FZF file and cd to its directory
+    fcd() {
+        [[ -n "$1" ]] && file="$1" || file=$(fd --type file --follow | fzf)
+
+        [[ -n $file ]] && dir=$(dirname "$file" 2>/dev/null) && cd "$dir"
     }
 
     function tca()  {
@@ -225,7 +344,7 @@ fi
 
     fwn() {
         local line rg_cmd initial_query
-        rg_cmd="rg --hidden --glob='!.git' --line-number --no-heading --color=always --column --smart-case "
+        rg_cmd="rg --hidden --glob='!.git*' --line-number --no-heading --color=always --column --smart-case "
         initial_query="${*:-}"
         line=$(
         FZF_DEFAULT_COMMAND="$rg_cmd $(printf %q "$initial_query")" \
@@ -244,19 +363,6 @@ fi
         ) && nvim "$(cut -d':' -f1 <<<"$line")" +$(cut -d':' -f2 <<<"$line")
     }
 
-    fsb() {
-        local branches branch
-        branches=$(git for-each-ref --count=30 --sort=-committerdate --format="%(refname:short)") &&
-        branch=$(echo "$branches" |fzf-tmux -d 50%  +m) &&
-        git switch $(echo "$branch" | sed "s/.* //" | sed -r "s#(origin|remotes)/([^/]*/)?##")
-    }
-
-    fgwd() {
-        local width
-        width=$(($(tmux display-message -p '#{window_width}') * 92 / 100 ))
-        git diff --name-only --relative --diff-filter=d |fzf --ansi --preview-window="down:70%:wrap" \
-            --preview "batdiff --delta --color --context=8 --terminal-width=$width {}"
-    }
 
     fgs() {
         local commits commit logFormat
@@ -270,11 +376,11 @@ fi
             --prompt "$(bash -c $curBranch) commits:> " \
             --info=inline \
             --color "hl:underline,hl+:underline" \
-            --header '[ CTRL-D (diffview) | CTRL-A (toggle all branches) | CTRL-E (without merges) | CTRL-V (change preview) | CTRL-X (toggle preview) | CTRL-R (reload) ]' \
+            --header '[ CTRL-D (diffview) | ALT-A (toggle all branches) | CTRL-E (without merges) | CTRL-V (change preview) | CTRL-X (toggle preview) | CTRL-R (reload) ]' \
             --bind "ctrl-r:change-prompt($(bash -c $curBranch) commits(current)> )+reload($commits || true)" \
-            --bind "ctrl-a:change-prompt($(bash -c $curBranch) commits(all)> )+reload($commits --all --source || true)" \
+            --bind "alt-a:change-prompt($(bash -c $curBranch) commits(all)> )+reload($commits --all || true)" \
             --bind "ctrl-e:change-prompt($(bash -c $curBranch) commits(no-merge)> )+reload($commits --no-merges || true)" \
-            --bind "ctrl-d:execute:(bash -c 'git show {1} >/dev/tty')" \
+            --bind "ctrl-d:execute(git show {1}  >/dev/tty)" \
             --bind "ctrl-v:change-preview-window(down:30%,border-top|hidden|)" \
             --bind "ctrl-x:toggle-preview" \
             --preview-window=up:70%:wrap --preview \
@@ -308,6 +414,11 @@ fi
 
     }
 
+    gcr() {
+        proj_root=$(git rev-parse --show-toplevel)
+        [[ -n ${proj_root} ]] && cd ${proj_root}
+    }
+
     gcd() {
         repoUrl=$1
         [[ ${repoUrl: -3} != git ]] && repoUrl="${repoUrl}.git"
@@ -320,7 +431,7 @@ fi
         zipinfo -t -1 -M "$2" |grep "$1"
     }
 
-    # cpoy file to clipboard
+    # copy file to clipboard
     cftc() {
         osascript -e 'tell app "Finder" to set the clipboard to ( POSIX file "'$1'" )'
         echo "The $1 has been copied to the clipboard 😁"
