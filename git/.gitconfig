@@ -24,7 +24,7 @@
 [delta]
     features = kingfisher
     navigate = true  # use n and N to move between diff sections
-	side-by-side = true
+	# side-by-side = true
 	line-numbers = true
 
 [rebase]

@@ -129,11 +129,6 @@
 #  alias for MacOS_Darwin
 if [[ $(uname -s) == "Darwin" ]] ; then
 
-    # 设置使用代理
-    # alias setproxy="export https_proxy=http://127.0.0.1:7890; \
-    #     export http_proxy=http://127.0.0.1:7890; \
-    #     export all_proxy=socks5://127.0.0.1:7890"
-
     # 设置取消使用代理
     alias unsetproxy="unset http_proxy; unset https_proxy; \
         unset all_proxy; echo 'Unset proxy successfully'"
@@ -147,11 +142,13 @@ if [[ $(uname -s) == "Darwin" ]] ; then
     alias brin="brew install "
     alias brci="brew install --cask "
     alias brho="brew home "
+    alias lsflags="/bin/ls -lO "
     alias ls="exa --color=automatic"
     alias l="exa --git --icons --color=automatic --git-ignore"
     alias ll="exa -abghlF --color-scale --group-directories-first --git --icons --color=automatic --git-ignore"
     alias la="exa -abghlF --color-scale --group-directories-first --git --icons --color=automatic"
     # alias lt="ll --tree --level=2 -I='.git'"
+    alias plp="plutil -p "
 
     alias rm="trash"
     alias rmls="trash-list"
@@ -185,14 +182,15 @@ fi
     }
 
     function zpupdate() {
-        cd $ZPREZTODIR && git pull ||exit
+        cd $ZPREZTODIR && git pull ||break 2>/dev/null
         git submodule sync --recursive
         git submodule update --init --recursive
+        cd -
     }
 
     function brih() {
         local token
-        token=$(brew search "$1" | fzf-tmux --query="$1" +m --preview 'brew info {}')
+        token=$(brew search "$1" | fzf-tmux --query="$1" -m --preview 'brew info {}')
 
         if [ "x$token" != "x" ]; then
             echo "(I)nstall or open the (h)omepage of $token"
@@ -233,35 +231,35 @@ fi
 
     function gswt ()
     {
-        [[ "$#" < 2 ]] && echo 'require 2 path parameters' && exit
+        [[ "$#" < 2 ]] && echo 'require 2 path parameters' && break 2>/dev/null
         # git --git-dir="${HOME}/gitrepos/.dotrcfiles.git/" --work-tree="${HOME}/gitrepos/awesome-dotfiles"
         git --git-dir="${1}" --work-tree="${2}" 
     }
 
     function gswtcm ()
     {
-        [[ "$#" < 2 ]] && echo 'require 2 path parameters' && exit
+        [[ "$#" < 2 ]] && echo 'require 2 path parameters' && break 2>/dev/null
         # git --git-dir="${HOME}/gitrepos/.dotrcfiles.git/" --work-tree="${HOME}/gitrepos/awesome-dotfiles"
         git --git-dir="${1}" --work-tree="${2}" commit -m 
     }
 
     function gswtca ()
     {
-        [[ "$#" < 2 ]] && echo 'require 2 path parameters' && exit
+        [[ "$#" < 2 ]] && echo 'require 2 path parameters' && break 2>/dev/null
         # git --git-dir="${HOME}/gitrepos/.dotrcfiles.git/" --work-tree="${HOME}/gitrepos/awesome-dotfiles"
         git --git-dir="${1}" --work-tree="${2}" commit -a 
     }
 
     function gswtau ()
     {
-        [[ "$#" < 2 ]] && echo 'require 2 path parameters' && exit
+        [[ "$#" < 2 ]] && echo 'require 2 path parameters' && break 2>/dev/null
         # git --git-dir="${HOME}/gitrepos/.dotrcfiles.git/" --work-tree="${HOME}/gitrepos/awesome-dotfiles"
         git --git-dir="${1}" --work-tree="${2}" add -u 
     }
 
     function gswtcnuf ()
     {
-        [[ "$#" < 2 ]] && echo 'require 2 path parameters' && exit
+        [[ "$#" < 2 ]] && echo 'require 2 path parameters' && break 2>/dev/null
         # git --git-dir="${HOME}/gitrepos/.dotrcfiles.git/" --work-tree="${HOME}/gitrepos/awesome-dotfiles"
         git --git-dir="${1}" --work-tree="${2}" config --local status.showUntrackedFiles no
     }
@@ -292,13 +290,6 @@ fi
         _Fn="$(basename $1)";_Dn="$(dirname $1)";mkdir -p "$_Dn" && touch "${_Dn}"/"${_Fn}"
     }
 
-    # FZF file and cd to its directory
-    fcd() {
-        [[ -n "$1" ]] && file="$1" || file=$(fd --type file --follow | fzf)
-
-        [[ -n $file ]] && dir=$(dirname "$file" 2>/dev/null) && cd "$dir"
-    }
-
     function tca()  {
         tar -czvf "$1.tar.gz" "$1"
     }
@@ -307,23 +298,34 @@ fi
         ps -ef |rg "$1" |rg -vw "rg"
     }
 
-
     function gvbc() {
         grep -Ev "^(#|$)" "$1"
     }
 
-    transfer() {
+    function transfer() {
         curl --progress-bar --upload-file "$1" https://transfer.sh/$(basename "$1") | tee /dev/null;
     }
 
-    tm(){
+    function tm(){
         TmSID=$(tmux list-sessions |cut -d':' -f1)
-        [[ -n $TmSID ]] && tmux attach -t $TmSID || tmux
+        [[ -n $TmSID ]] && tmux attach -t "☯️ " || tmux new -s "☯️ "
     }
 
+    function sdf ()
+    {
+        [[ "${#@}" < 3 ]] && echo 'require 3 args, example: <PATTERN> [REPLACE] files[file1 ...]' && break 2>/dev/null
+        /bin/ls -1 "${@:3}" |sad "$1" "$2"
+    }
+
+    # FZF file and cd to it's directory
+    function fcd() {
+        [[ -n "$1" ]] && file="$1" || file=$(fd --type file --follow | fzf)
+
+        [[ -n $file ]] && dir=$(dirname "$file" 2>/dev/null) && cd "$dir"
+    }
 
     # 用来快速跳转到 tmux 其他窗格
-    fjpane() {
+    function fjpane() {
         local panes current_window current_pane target target_window target_pane
         panes=$(tmux list-panes -s -F '#I:#P - #{pane_current_path} #{pane_current_command}')
         current_pane=$(tmux display-message -p '#I:#P')
@@ -342,7 +344,7 @@ fi
         fi
     }
 
-    fwn() {
+    function fwn() {
         local line rg_cmd initial_query
         rg_cmd="rg --hidden --glob='!.git*' --line-number --no-heading --color=always --column --smart-case "
         initial_query="${*:-}"
@@ -363,8 +365,7 @@ fi
         ) && nvim "$(cut -d':' -f1 <<<"$line")" +$(cut -d':' -f2 <<<"$line")
     }
 
-
-    fgs() {
+    function fgs() {
         local commits commit logFormat
 
         curBranch="git branch --show-current"
@@ -376,11 +377,12 @@ fi
             --prompt "$(bash -c $curBranch) commits:> " \
             --info=inline \
             --color "hl:underline,hl+:underline" \
-            --header '[ CTRL-D (diffview) | ALT-A (toggle all branches) | CTRL-E (without merges) | CTRL-V (change preview) | CTRL-X (toggle preview) | CTRL-R (reload) ]' \
+            --header "[ CTRL-D (diffview) | CTRL-A (toggle all branches) | CTRL-E (without merges)
+                        CTRL-V (change preview) | CTRL-X (toggle preview) | CTRL-R (reload) ]" \
             --bind "ctrl-r:change-prompt($(bash -c $curBranch) commits(current)> )+reload($commits || true)" \
-            --bind "alt-a:change-prompt($(bash -c $curBranch) commits(all)> )+reload($commits --all || true)" \
+            --bind "ctrl-a:change-prompt($(bash -c $curBranch) commits(all)> )+reload($commits --all || true)" \
             --bind "ctrl-e:change-prompt($(bash -c $curBranch) commits(no-merge)> )+reload($commits --no-merges || true)" \
-            --bind "ctrl-d:execute(git show {1}  >/dev/tty)" \
+            --bind "ctrl-d:execute(git show {1} |delta -s >/dev/tty)" \
             --bind "ctrl-v:change-preview-window(down:30%,border-top|hidden|)" \
             --bind "ctrl-x:toggle-preview" \
             --preview-window=up:70%:wrap --preview \
@@ -401,7 +403,7 @@ fi
     zle -N fgs-widget
     bindkey '^x^x' fgs-widget
 
-    ggh() {
+    function ggh() {
         # git remote get-url origin |rargs open {}
 		ori_url=$(git remote get-url origin)
 		if [[ -z `echo $ori_url |grep '@'` ]]; then
@@ -414,12 +416,12 @@ fi
 
     }
 
-    gcr() {
+    function gcr() {
         proj_root=$(git rev-parse --show-toplevel)
         [[ -n ${proj_root} ]] && cd ${proj_root}
     }
 
-    gcd() {
+    function gcd() {
         repoUrl=$1
         [[ ${repoUrl: -3} != git ]] && repoUrl="${repoUrl}.git"
         repoName=$(echo ${repoUrl} |awk -F'[/.]+' '{print $(NF-1)}')
@@ -432,7 +434,7 @@ fi
     }
 
     # copy file to clipboard
-    cftc() {
+    function cftc() {
         osascript -e 'tell app "Finder" to set the clipboard to ( POSIX file "'$1'" )'
         echo "The $1 has been copied to the clipboard 😁"
     }

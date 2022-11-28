@@ -44,7 +44,7 @@ if [[ $- =~ i ]]; then
 
     # zsh-notify
     [ -f "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh" ] && [[ -n ${TERM_PROGRAM} ]] && \
-        source "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh"
+        [[ ${TERM_PROGRAM} != 'vscode' ]] && source "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh"
 
     # zsh-autopair
     [ -f "${PREZCUSMODIR}/zsh-autopair/autopair.zsh" ] && [[ -n ${TERM_PROGRAM} ]] && \
@@ -119,7 +119,7 @@ fi
 
 
 # ------fzf & fd & bat configuration----------
-    export BAT_THEME="Monokai Extended Origin"
+    export BAT_THEME="Catppuccin-mocha"
     export FD_OPTIONS="--follow --exclude .git --exclude .idea --exclude node_modules --exclude venv"
     export FZF_DEFAULT_COMMAND="fd -H --type f --type l ${FD_OPTIONS}"
     export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
@@ -219,7 +219,7 @@ bindkey -e '^xs' sudo-command-line
     zstyle ':notify:*' command-complete-timeout 15
     zstyle ':notify:*' enable-on-ssh yes
     zstyle ':notify:*' check-focus no
-    zstyle ':notify:*' blacklist-regex 'git|man'
+    zstyle ':notify:*' blacklist-regex 'git|man|vim|nvim|neovim|help|glow'
     # zstyle ':notify:*' notifier "/usr/local/bin/noti"
     zstyle ':notify:*' error-icon "https://s1.ax1x.com/2022/11/06/xXY9o9.png"
     zstyle ':notify:*' error-sound "Bubble"
