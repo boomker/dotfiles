@@ -405,7 +405,8 @@ fi
 
     function ggh() {
         # git remote get-url origin |rargs open {}
-		ori_url=$(git remote get-url origin)
+        remote_ori=$(git status --short --branch|awk -F'[./]+' '/^#/{print $(NF-1)}')
+		ori_url=$(git remote get-url ${remote_ori})
 		if [[ -z `echo $ori_url |grep '@'` ]]; then
 			open $ori_url
 		else

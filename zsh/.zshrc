@@ -215,7 +215,7 @@ zle -N sudo-command-line
 bindkey -e '^xs' sudo-command-line
 
 
-# notify
+# zsh-notify config
     zstyle ':notify:*' command-complete-timeout 15
     zstyle ':notify:*' enable-on-ssh yes
     zstyle ':notify:*' check-focus no
@@ -229,40 +229,38 @@ bindkey -e '^xs' sudo-command-line
     zstyle ':notify:*' success-title "✅ finished in #{time_elapsed}"
     zstyle ':notify:*' always-notify-on-failure no
 
-
 # fzf-tab config:
-# zstyle ':fzf-tab:*' fzf-flags --ansi
-# zstyle ':completion:*' group-name ''
-zstyle ':completion:*:descriptions' format "%F{yellow}--- %d%f"
+    # zstyle ':fzf-tab:*' fzf-flags --ansi
+    # zstyle ':completion:*' group-name ''
+    zstyle ':completion:*:descriptions' format "%F{yellow}--- %d%f"
 
-zstyle ':fzf-tab:complete:bat:argument-rest' fzf-preview '[[ -f $realpath ]] && \
-    bat --color=always $realpath || \
-    exa -ahlF --color-scale --group-directories-first --no-permissions --no-user \
-    --time-style=iso --icons --color=always --tree --level=2  -I=".git*" $realpath'
-zstyle ':fzf-tab:complete:bat:argument-rest' fzf-flags --preview-window=right:70%:wrap
+    zstyle ':fzf-tab:complete:bat:argument-rest' fzf-preview '[[ -f $realpath ]] && \
+        bat --color=always $realpath || \
+        exa -ahlF --color-scale --group-directories-first --no-permissions --no-user \
+        --time-style=iso --icons --color=always --tree --level=2  -I=".git*" $realpath'
+    zstyle ':fzf-tab:complete:bat:argument-rest' fzf-flags --preview-window=right:70%:wrap
 
-zstyle ':fzf-tab:complete:z:*' fzf-preview 'exa -ahlF --color-scale --group-directories-first \
-    --no-permissions --octal-permissions --no-user --time-style=iso --icons --color=always \
-    --tree --level=2  -I=".git*" $realpath'
-zstyle ':fzf-tab:complete:z:*' fzf-flags --preview-window=right:70%:wrap
+    zstyle ':fzf-tab:complete:z:*' fzf-preview 'exa -ahlF --color-scale --group-directories-first \
+        --no-permissions --octal-permissions --no-user --time-style=iso --icons --color=always \
+        --tree --level=2  -I=".git*" $realpath'
+    zstyle ':fzf-tab:complete:z:*' fzf-flags --preview-window=right:70%:wrap
 
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-# man 2 select
-zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'MANWIDTH=$FZF_PREVIEW_COLUMNS \
-    man $word |bat -l man --color=always'
+    export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+    # man 2 select
+    zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'MANWIDTH=$FZF_PREVIEW_COLUMNS \
+        man $word |bat -l man --color=always'
 
-# zstyle ':fzf-tab:complete:tldr:*' fzf-preview 'tldr --color always $word'
+    # preview directory's content with exa when completing cd
+    zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -a1 --icons --color=always $realpath'
 
-# preview directory's content with exa when completing cd
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -a1 --icons --color=always $realpath'
+    # use input as query string when completing zlua
+    zstyle ':fzf-tab:complete:_zlua:*' query-string input
 
-# use input as query string when completing zlua
-zstyle ':fzf-tab:complete:_zlua:*' query-string input
+    # give a preview of commandline arguments when completing `kill`
+    zstyle ':completion:*:*:*:*:processes' command 'ps -u $USER -o pid,user,comm -w -w'
+    zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview '[[ $group =~ "process" ]] && ps \
+        -p $word -o command -w -w |tail -1'
+    zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down:3:wrap
 
-# give a preview of commandline arguments when completing `kill`
-zstyle ':completion:*:*:*:*:processes' command 'ps -u $USER -o pid,user,comm -w -w'
-zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview '[[ $group =~ "process" ]] && ps \
-    -p $word -o command -w -w |tail -1'
-zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down:3:wrap
-
-zstyle ':fzf-tab:complete:brew-(install|uninstall|search|info):*-argument-rest' fzf-preview 'brew info $word'
+    # brew
+    zstyle ':fzf-tab:complete:brew-(install|uninstall|search|info):*-argument-rest' fzf-preview 'brew info $word'
