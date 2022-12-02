@@ -26,11 +26,12 @@
     alias -g NUL="> /dev/null 2>&1"
 
     alias bathelp='bat --plain --language=help'
-    alias cpsp="cp -rp --parents "
-    # alias zip="zip -r "
-    alias idf="icdiff -r -N"
-    # 可以递归对比两目录的差异，包括文件内容的差异
+    alias cpfp="cp -rp --parents "
     alias diff="delta "
+    # 可以递归对比两目录的差异，包括文件内容的差异
+    alias idf="icdiff -r -N"
+    alias bdf="batdiff --color --delta --context=3 "
+    alias bgrep="batgrep --hidden --glob='!.git' --color --smart-case "
     # awk 去重+合并文件内容(相当于两文件的并集，两文件去重后再合并), 而且能保证文件内容顺序
     alias auq="awk '!U[\$0]++' "
     alias l.="ls -d .* --color=auto"
@@ -39,7 +40,7 @@
     alias wl="wc -l"
     alias sei="sed -i "
     alias sen="sed -n "
-
+    # switch root exec
     alias sre='sudo $(fc -ln -1)'
     # alias ssh="TERM=xterm-256color ssh"
 
@@ -125,6 +126,7 @@
     alias tmuxconfig="nvim ${HOME}/gitrepos/dotfiles/.tmux.conf"
     alias sshconf="nvim ${HOME}/.ssh/config"
     # alias vimconfig="nvim ${HOME}/gitrepos/dotfiles/nvim/.vimrc"
+    # alias zip="zip -r "
 
 #  alias for MacOS_Darwin
 if [[ $(uname -s) == "Darwin" ]] ; then

@@ -14,7 +14,7 @@
 
 ### Git
 * tools: scmpuff, delta
-* alias: gss, gsb, gsh, gsd, glt etc.
+* alias: gss, fgs, glt etc.
 
 
 ### Tools

@@ -201,6 +201,10 @@ brew "zoxide"
 brew "broot"
 brew "git-delta"
 brew "procs"
+brew "sad"
+brew "websocat"
+brew "jc"
+
 # Maintained ctags implementation
 brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD", "with-jansson"]
 cask "cakebrew"
