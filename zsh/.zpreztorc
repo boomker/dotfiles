@@ -47,7 +47,8 @@ zstyle ':prezto:load' pmodule \
     zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
     zstyle ':fzf-tab:*' fzf-flags --ansi
     # set descriptions format to enable group support
-    zstyle ':completion:*:descriptions' format '[%d]'
+    zstyle ':completion:*:*:*:*:*' menu yes select
+
     # set list-colors to enable filename colorizing
     zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 

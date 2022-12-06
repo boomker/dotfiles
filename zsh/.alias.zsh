@@ -21,19 +21,19 @@
     alias -g Y=" |tee"
     alias -g W=" |wc -l"
     alias -g CT=" |column -t"
-    alias -g AT=" |as-tree"
     alias -g NE="2> /dev/null"
     alias -g NUL="> /dev/null 2>&1"
 
-    alias bathelp='bat --plain --language=help'
-    alias cpfp="cp -rp --parents "
-    alias diff="delta "
-    # 可以递归对比两目录的差异，包括文件内容的差异
-    alias idf="icdiff -r -N"
-    alias bdf="batdiff --color --delta --context=3 "
-    alias bgrep="batgrep --hidden --glob='!.git' --color --smart-case "
     # awk 去重+合并文件内容(相当于两文件的并集，两文件去重后再合并), 而且能保证文件内容顺序
     alias auq="awk '!U[\$0]++' "
+    alias bhelp='bat --plain --language=help'
+    alias bch='_f(){pls show "$1"};_f'
+    alias fch="tldr --list |sed -r \"s/('|\[|\])//g;s/, /\n/g\" |fzf --ansi --preview 'tldr {}'"
+    alias bgrep="batgrep --hidden --glob='!.git' --color --smart-case "
+    alias cprp="cp -rp --parents "
+    alias bdf="batdiff --color --delta --context=3 "
+    alias diff="delta "
+    alias dfs="delta -s"
     alias l.="ls -d .* --color=auto"
     alias ls="ls -p --width=80 --color=auto"
     alias ll="ls -rtlh"
@@ -45,7 +45,7 @@
     # alias ssh="TERM=xterm-256color ssh"
 
     # Git
-    alias drcwt="git --git-dir=${HOME}/gitrepos/.dotrcfiles.git/ "
+    # alias drcwt="git --git-dir=${HOME}/gitrepos/.dotrcfiles.git/ "
     alias gib="git init --bare "
     alias gcb="git clone --bare "
 
@@ -83,7 +83,6 @@
     alias gpf="git push -f"
     alias gpso='git push --set-upstream origin '
 
-
     alias glt="git log --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset' -10"
     alias gla="git log --all --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset' -10"
 
@@ -109,16 +108,11 @@
     alias fda="fd -H '.*' "
     alias rgh="rg -. --glob='!.git*' "
 
-    # alias pip3="python3 -m pip"
-    # alias piu="python3 -m pip uninstall "
     alias piu="pip3 uninstall "
     alias pii="pip3 install "
-    # alias pii="python3 -m pip install "
     alias pus="pip3 install --upgrade pip"
-    # alias pypi="/usr/local/opt/pypy3/bin/pip"
 
     alias adl="aria2c -x6 -c "
-    # alias ffb="/Applications/Firefox.app/Contents/MacOS/firefox"
     alias zshconfig="nvim ${HOME}/gitrepos/dotfiles/zsh/.zshrc"
     alias zshreload="source ~/.zshrc"
     alias aliconf="nvim ${HOME}/gitrepos/dotfiles/zsh/.alias.zsh"
@@ -179,6 +173,7 @@ fi
     # function aama() {
     #     ansible all -b -m "$1" -a "$2"
     # }
+
     function help() {
         "$@" --help 2>&1 | bathelp
     }
@@ -188,6 +183,9 @@ fi
         git submodule sync --recursive
         git submodule update --init --recursive
         cd -
+        for i in $(\ls -1d $PREZCUSMODIR/*); do
+            git -C $i pull
+        done
     }
 
     function brih() {
@@ -272,6 +270,7 @@ fi
             http_proxy=http://127.0.0.1:${1:-7890};\
             all_proxy=socks5://127.0.0.1:${1:-7890}
     }
+
     function cpb()  {
         cp "$1" "$1-$(date +%F_%H_%M_%S).bak"
     }
@@ -324,6 +323,18 @@ fi
         [[ -n "$1" ]] && file="$1" || file=$(fd --type file --follow | fzf)
 
         [[ -n $file ]] && dir=$(dirname "$file" 2>/dev/null) && cd "$dir"
+    }
+
+    function ftl ()
+    {
+        local initial_query
+        initial_query="${*:-}"
+        tldr --list |sed -r "s/('|\[|\])//g;s/, /\n/g" |\
+            fzf --ansi \
+            --info=inline \
+            --query "${initial_query}" \
+            --preview-window='right:76%:wrap' \
+            --preview 'tldr {}'
     }
 
     # 用来快速跳转到 tmux 其他窗格
@@ -401,7 +412,7 @@ fi
         LBUFFER+=$result
     }
 
-    # example usage: git diff <C-X><C-S>
+    # example usage: git diff <C-X><C-X>
     zle -N fgs-widget
     bindkey '^x^x' fgs-widget
 

@@ -134,8 +134,10 @@ fi
         '(exa -ahlF --color-scale --group-directories-first  --icons \
         --color=always --tree --level=2  -I=\".git*\" {}) 2>/dev/null |head -20'"
 
-    export FZF_DEFAULT_OPTS="--ansi --height 70% --reverse \
-        --border --tiebreak=begin --bind end:preview-down,home:preview-up,alt-a:select-all+accept"
+    export FZF_DEFAULT_OPTS=" --exact --multi --ansi --height 70% --reverse --border --tiebreak=begin \
+        --bind end:preview-down,home:preview-up,?:toggle-preview \
+        --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort',alt-a:select-all+accept"
+
 
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
@@ -160,6 +162,11 @@ export ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(
     forward-word
     emacs-forward-word
 )
+
+setopt auto_menu         # show completion menu on successive tab press
+setopt complete_in_word
+setopt always_to_end
+setopt globdots          # Include hidden files. or: _comp_options+=(globdots)
 
 # edit command line like in bash (zsh has 'fc' but it has to execute the command first)
 # autoload -z edit-command-line
@@ -232,18 +239,12 @@ bindkey -e '^xs' sudo-command-line
 # fzf-tab config:
     # zstyle ':fzf-tab:*' fzf-flags --ansi
     # zstyle ':completion:*' group-name ''
-    zstyle ':completion:*:descriptions' format "%F{yellow}--- %d%f"
-
-    zstyle ':fzf-tab:complete:bat:argument-rest' fzf-preview '[[ -f $realpath ]] && \
-        bat --color=always $realpath || \
+    zstyle ':fzf-tab:complete:(bat|exa|ls):argument-rest' fzf-preview '\
+        [[ -f $realpath && ! $word =~ ".git*" ]] && \
+        bat  --style=numbers,header --color=always $realpath || \
         exa -ahlF --color-scale --group-directories-first --no-permissions --no-user \
         --time-style=iso --icons --color=always --tree --level=2  -I=".git*" $realpath'
-    zstyle ':fzf-tab:complete:bat:argument-rest' fzf-flags --preview-window=right:70%:wrap
-
-    zstyle ':fzf-tab:complete:z:*' fzf-preview 'exa -ahlF --color-scale --group-directories-first \
-        --no-permissions --octal-permissions --no-user --time-style=iso --icons --color=always \
-        --tree --level=2  -I=".git*" $realpath'
-    zstyle ':fzf-tab:complete:z:*' fzf-flags --preview-window=right:70%:wrap
+    zstyle ':fzf-tab:complete:(bat|exa|ls):argument-rest' fzf-flags --preview-window=right:70%:wrap
 
     export MANPAGER="sh -c 'col -bx | bat -l man -p'"
     # man 2 select
