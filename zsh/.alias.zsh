@@ -3,7 +3,9 @@
 ## common alias:
     alias -g G=" |grep -iE"
     alias -g R=" |rg -S"
-    alias -g BR=" |batgrep -S"
+    alias -g BG=" |batgrep -S"
+    alias -g BH=" |bat --plain --language=help"
+    alias -g BS=" |bat --plain --language=bash"
     alias -g H=" |head"
     alias -g T=" |tail"
     alias -g L=" |less"
@@ -169,16 +171,14 @@ else
 fi
 
 
-# common func
-    # function aama() {
-    #     ansible all -b -m "$1" -a "$2"
-    # }
+# shell funcs
 
     function help() {
-        "$@" --help 2>&1 | bathelp
+        "$@" --help 2>&1 |bat --plain --language=help
     }
 
     function zpupdate() {
+        zprezto-update
         cd $ZPREZTODIR && git pull ||break 2>/dev/null
         git submodule sync --recursive
         git submodule update --init --recursive
@@ -188,9 +188,9 @@ fi
         done
     }
 
-    function brih() {
+    function fbih() {
         local token
-        token=$(brew search "$1" | fzf-tmux --query="$1" -m --preview 'brew info {}')
+        token=$(brew search "$1" | fzf-tmux --query="$1" -m -e --preview 'brew info {}')
 
         if [ "x$token" != "x" ]; then
             echo "(I)nstall or open the (h)omepage of $token"
@@ -200,6 +200,29 @@ fi
             fi
             if [ "$input" = "h" ] || [ "$input" = "H" ]; then
                 brew home "$token"
+            fi
+        fi
+    }
+
+    function fbuh()
+    {
+        local initial_query token
+        local -a pickers
+        initial_query="${*:-}"
+        token=$(brew outdated |awk '$0 !~ /pin/{print $1}' | \
+            fzf-tmux \
+            --query="$initial_query" \
+            -m -e \
+            --preview 'brew info {}')
+        pickers=($(echo "${token}" |tr "\n" " "))
+        if [ "x$pickers" != "x" ]; then
+            echo "(u)pgrade or open the (h)omepage of $pickers"
+            read -r input
+            if [ "$input" = "u" ] || [ "$input" = "U" ]; then
+                brew upgrade "${pickers[@]}"
+            fi
+            if [ "$input" = "h" ] || [ "$input" = "H" ]; then
+                brew home "${pickers[@]}"
             fi
         fi
     }
@@ -233,35 +256,10 @@ fi
     {
         [[ "$#" < 2 ]] && echo 'require 2 path parameters' && break 2>/dev/null
         # git --git-dir="${HOME}/gitrepos/.dotrcfiles.git/" --work-tree="${HOME}/gitrepos/awesome-dotfiles"
-        git --git-dir="${1}" --work-tree="${2}" 
-    }
-
-    function gswtcm ()
-    {
-        [[ "$#" < 2 ]] && echo 'require 2 path parameters' && break 2>/dev/null
-        # git --git-dir="${HOME}/gitrepos/.dotrcfiles.git/" --work-tree="${HOME}/gitrepos/awesome-dotfiles"
-        git --git-dir="${1}" --work-tree="${2}" commit -m 
-    }
-
-    function gswtca ()
-    {
-        [[ "$#" < 2 ]] && echo 'require 2 path parameters' && break 2>/dev/null
-        # git --git-dir="${HOME}/gitrepos/.dotrcfiles.git/" --work-tree="${HOME}/gitrepos/awesome-dotfiles"
-        git --git-dir="${1}" --work-tree="${2}" commit -a 
-    }
-
-    function gswtau ()
-    {
-        [[ "$#" < 2 ]] && echo 'require 2 path parameters' && break 2>/dev/null
-        # git --git-dir="${HOME}/gitrepos/.dotrcfiles.git/" --work-tree="${HOME}/gitrepos/awesome-dotfiles"
-        git --git-dir="${1}" --work-tree="${2}" add -u 
-    }
-
-    function gswtcnuf ()
-    {
-        [[ "$#" < 2 ]] && echo 'require 2 path parameters' && break 2>/dev/null
-        # git --git-dir="${HOME}/gitrepos/.dotrcfiles.git/" --work-tree="${HOME}/gitrepos/awesome-dotfiles"
         git --git-dir="${1}" --work-tree="${2}" config --local status.showUntrackedFiles no
+        git --git-dir="${1}" --work-tree="${2}" commit -m 
+        # git --git-dir="${1}" --work-tree="${2}" commit -a 
+        git --git-dir="${1}" --work-tree="${2}" add -u 
     }
 
     function setproxy ()
@@ -280,7 +278,8 @@ fi
     }
 
     function mdac() {
-        mkdir "$1" && cd "$1"
+        # mkdir "$1" && cd "$1"
+        mkdir --parents "$@" && cd "$_" || exit;
     }
 
     function rmwd() {
@@ -312,7 +311,7 @@ fi
         [[ -n $TmSID ]] && tmux attach -t "☯️ " || tmux new -s "☯️ "
     }
 
-    function sdf ()
+    function sdf()
     {
         [[ "${#@}" < 3 ]] && echo 'require 3 args, example: <PATTERN> [REPLACE] files[file1 ...]' && break 2>/dev/null
         /bin/ls -1 "${@:3}" |sad "$1" "$2"
@@ -325,7 +324,7 @@ fi
         [[ -n $file ]] && dir=$(dirname "$file" 2>/dev/null) && cd "$dir"
     }
 
-    function ftl ()
+    function ftl()
     {
         local initial_query
         initial_query="${*:-}"
@@ -442,7 +441,7 @@ fi
         git clone $repoUrl && cd ${repoName}
     }
 
-    # for zip archive
+    # grep for zip archive
     function zipgrep() {
         zipinfo -t -1 -M "$2" |grep "$1"
     }
@@ -453,3 +452,44 @@ fi
         echo "The $1 has been copied to the clipboard 😁"
     }
 
+    # Update project dependencies
+    depu() {
+        # Git submodules
+        if [ -e .gitmodules ]; then
+            printf "Updating Git submodules for %s...\n\n" "${PWD##*/}"
+            git submodule update --init --remote --rebase --recursive
+        fi
+
+        # npm
+        if [ -e package-lock.json ]; then
+            printf "Updating npm dependencies for %s...\n\n" "${PWD##*/}"
+            npm update
+            npm outdated
+        fi
+
+        # Go
+        if [ -e go.mod ]; then
+            printf "Updating Go dependencies for %s...\n\n" "${PWD##*/}"
+            go get -t -u ./...
+            go mod tidy
+        fi
+
+        # Rust
+        if [ -e Cargo.toml ]; then
+            printf "Updating Cargo dependencies for %s...\n\n" "${PWD##*/}"
+            cargo update
+        fi
+
+        # Python
+        if [ -e poetry.lock ]; then
+            printf "Updating Python dependencies for %s...\n\n" "${PWD##*/}"
+            poetry update
+            poetry show --outdated
+        fi
+
+        # Terraform
+        if [ -e .terraform.lock.hcl ]; then
+            printf "Updating Terraform dependencies for %s...\n\n" "${PWD##*/}"
+            terraform init -upgrade
+        fi
+    }
