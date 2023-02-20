@@ -26,6 +26,17 @@
     alias -g NE="2> /dev/null"
     alias -g NUL="> /dev/null 2>&1"
 
+    # woo! echo 'foo bar baz' | COL2
+    alias -g COL1="awk '{ print \$1 }'"
+    alias -g COL2="awk '{ print \$2 }'"
+    alias -g COL3="awk '{ print \$3 }'"
+    alias -g COL4="awk '{ print \$4 }'"
+    alias -g COL5="awk '{ print \$5 }'"
+    alias -g COL6="awk '{ print \$6 }'"
+    alias -g COL7="awk '{ print \$7 }'"
+    alias -g COL8="awk '{ print \$8 }'"
+    alias -g COL9="awk '{ print \$9 }'"
+
     # awk 去重+合并文件内容(相当于两文件的并集，两文件去重后再合并), 而且能保证文件内容顺序
     alias auq="awk '!U[\$0]++' "
     alias bhelp='bat --plain --language=help'
@@ -58,11 +69,13 @@
     alias gcm="git commit -m "
     alias gcu="git commit --amend "
     alias gca="git commit --amend --no-edit"
+    alias gce="git commit --allow-empty"
     alias gcig="git check-ignore -v"
 
-    alias ggcp='git cherry-pick'
+    alias gcpn='git cherry-pick'
     alias gcpa='git cherry-pick --abort'
     alias gcpc='git cherry-pick --continue'
+    alias gcps="git cherry-pick --skip"
 
     alias grbi="git rebase -i "
     alias grba='git rebase --abort'
@@ -95,12 +108,12 @@
     alias gnb="git switch -c "
     alias gdb='git branch --delete'
 
+    alias gss='eval "$(scmpuff init -s --aliases=false)" && scmpuff_status'
     alias gst="git status "
     alias gws="git status --short"
     alias gwr='git reset --hard'
     alias gwc='git clean -df'
 
-    alias gss='eval "$(scmpuff init -s --aliases=false)" && scmpuff_status'
     alias gsh='git stash'
     alias gsa='git stash apply'
     alias gsd='git stash drop'
@@ -151,10 +164,11 @@ if [[ $(uname -s) == "Darwin" ]] ; then
     alias rm="trash"
     alias rmls="trash-list"
     alias rmrs="trash-restore"
+    alias rmcl="trash-empty"
     alias mkdir="gmkdir -pv "
     alias tailf="gtail -f"
     # alias grep="grep -iE --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}"
-    alias dfh="gdf -Th"
+    alias dfh="/usr/local/bin/gdf -Th"
     alias lstcp="lsof -nP -iTCP"
     # alias ping="prettyping"
     # alias pps="ptipython3"
