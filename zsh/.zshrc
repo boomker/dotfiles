@@ -124,9 +124,9 @@ fi
     export FZF_DEFAULT_COMMAND="fd -H --type f --type l ${FD_OPTIONS}"
     export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 
-        # --bind 'ctrl-v:execute-silent(${EDITOR:-vscode} {})+cancel' \
     export FZF_CTRL_T_OPTS="
         --bind 'ctrl-y:execute-silent(printf {} | cut -f 2- |pbcopy)+accept' \
+        --bind 'alt-e:become(nvim {} > /dev/tty)+abort' \
         --preview-window=right:70%:wrap --preview \
         '(bat --style=numbers --color=always --line-range=:100 {} ) 2>/dev/null'"
 
@@ -136,8 +136,8 @@ fi
 
     export FZF_DEFAULT_OPTS=" --exact --multi --ansi --height 70% --reverse --border --tiebreak=begin \
         --bind end:preview-down,home:preview-up,?:toggle-preview \
-        --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort',alt-a:select-all+accept"
-
+        --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' \
+        --bind 'alt-a:select-all+accept'"
 
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
@@ -181,20 +181,20 @@ zle -N insert-last-command-output
 bindkey "^X^V" insert-last-command-output
 
 # Ctrl-x,Ctrl-w copies to global pasteboard as well as zsh clipboard
-pb-copy-region-as-kill() {
+pb-cut-word-region() {
     zle copy-region-as-kill
     print -rn $CUTBUFFER | pbcopy
 }
-zle -N pb-copy-region-as-kill
-bindkey -e '^x^w' pb-copy-region-as-kill
+zle -N pb-cut-word-region
+bindkey -e '^x^w' pb-cut-word-region
 
 # Ctrl-x Ctrl-d copies to global pasteboard as well as zsh clipboard - is this overkill?
-pb-kill-buffer() {
+pb-kill-buffer-line() {
     zle kill-buffer
     print -rn $CUTBUFFER | pbcopy
 }
-zle -N pb-kill-buffer
-bindkey -e '^x^d' pb-kill-buffer
+zle -N pb-kill-buffer-line
+bindkey -e '^x^d' pb-kill-buffer-line
 
 # ------ Ctrl-u
 pb-backward-kill-line() {
@@ -205,12 +205,12 @@ zle -N pb-backward-kill-line
 bindkey -e '^u' pb-backward-kill-line
 
 # ------ Ctrl-k
-pb-kill-line() {
+pb-forward-kill-line() {
     zle kill-line
     print -rn $CUTBUFFER | pbcopy
 }
-zle -N pb-kill-line
-bindkey -e '^k' pb-kill-line
+zle -N pb-forward-kill-line
+bindkey -e '^k' pb-forward-kill-line
 
 # ------ Ctrl-xs
 sudo-command-line() {

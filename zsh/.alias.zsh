@@ -72,7 +72,7 @@
     alias gce="git commit --allow-empty"
     alias gcig="git check-ignore -v"
 
-    alias gcpn='git cherry-pick'
+    alias gcpn='git cherry-pick -x -m 1 '
     alias gcpa='git cherry-pick --abort'
     alias gcpc='git cherry-pick --continue'
     alias gcps="git cherry-pick --skip"
@@ -96,6 +96,7 @@
 
     alias gpo="git push ||git push -u origin"
     alias gpf="git push -f"
+    alias gpsu='git push --set-upstream '
     alias gpso='git push --set-upstream origin '
 
     alias glt="git log --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset' -10"
@@ -108,6 +109,7 @@
     alias gnb="git switch -c "
     alias gdb='git branch --delete'
 
+    alias grs="git restore "
     alias gss='eval "$(scmpuff init -s --aliases=false)" && scmpuff_status'
     alias gst="git status "
     alias gws="git status --short"
@@ -202,6 +204,7 @@ fi
         done
     }
 
+    # fzf with brew install
     function fbih() {
         local token
         token=$(brew search "$1" | fzf-tmux --query="$1" -m -e --preview 'brew info {}')
@@ -218,8 +221,8 @@ fi
         fi
     }
 
-    function fbuh()
-    {
+    # fzf with brew upgrade
+    function fbuh() {
         local initial_query token
         local -a pickers
         initial_query="${*:-}"
@@ -241,8 +244,8 @@ fi
         fi
     }
 
-    function lt ()
-    {
+    # exa(ls) with `tree` of option
+    function lt () {
         [[ "${1}" == -l ]] && {
             exa_extra_parameter=("-bghlF" "--group-directories-first" "--git")
             shift
@@ -266,8 +269,8 @@ fi
         exa  "${exa_parameter[@]}" "${directory:-.}"
     }
 
-    function gswt ()
-    {
+    # git set work-tree
+    function gswt () {
         [[ "$#" < 2 ]] && echo 'require 2 path parameters' && break 2>/dev/null
         # git --git-dir="${HOME}/gitrepos/.dotrcfiles.git/" --work-tree="${HOME}/gitrepos/awesome-dotfiles"
         git --git-dir="${1}" --work-tree="${2}" config --local status.showUntrackedFiles no
@@ -276,8 +279,7 @@ fi
         git --git-dir="${1}" --work-tree="${2}" add -u 
     }
 
-    function setproxy ()
-    {
+    function setproxy () {
         export https_proxy=http://127.0.0.1:${1:-7890}; \
             http_proxy=http://127.0.0.1:${1:-7890};\
             all_proxy=socks5://127.0.0.1:${1:-7890}
@@ -320,13 +322,14 @@ fi
         curl --progress-bar --upload-file "$1" https://transfer.sh/$(basename "$1") | tee /dev/null;
     }
 
+    # tmux start or resotre sessions
     function tm(){
         TmSID=$(tmux list-sessions |cut -d':' -f1)
         [[ -n $TmSID ]] && tmux attach -t "☯️ " || tmux new -s "☯️ "
     }
 
-    function sdf()
-    {
+    # sad(sed) files(eg. file1 file2)
+    function sdf() {
         [[ "${#@}" < 3 ]] && echo 'require 3 args, example: <PATTERN> [REPLACE] files[file1 ...]' && break 2>/dev/null
         /bin/ls -1 "${@:3}" |sad "$1" "$2"
     }
@@ -338,8 +341,8 @@ fi
         [[ -n $file ]] && dir=$(dirname "$file" 2>/dev/null) && cd "$dir"
     }
 
-    function ftl()
-    {
+    # tldr with fzf
+    function ftl() {
         local initial_query
         initial_query="${*:-}"
         tldr --list |sed -r "s/('|\[|\])//g;s/, /\n/g" |\
@@ -350,7 +353,7 @@ fi
             --preview 'tldr {}'
     }
 
-    # 用来快速跳转到 tmux 其他窗格
+    # goto other pane in tmux
     function fjpane() {
         local panes current_window current_pane target target_window target_pane
         panes=$(tmux list-panes -s -F '#I:#P - #{pane_current_path} #{pane_current_command}')
@@ -370,6 +373,7 @@ fi
         fi
     }
 
+    # fzf find file that contain KW and nvim edit it
     function fwn() {
         local line rg_cmd initial_query
         rg_cmd="rg --hidden --glob='!.git*' --line-number --no-heading --color=always --column --smart-case "
@@ -391,6 +395,7 @@ fi
         ) && nvim "$(cut -d':' -f1 <<<"$line")" +$(cut -d':' -f2 <<<"$line")
     }
 
+    # fzf browser/pick git commit and show file diff
     function fgs() {
         local commits commit logFormat
 
@@ -429,6 +434,7 @@ fi
     zle -N fgs-widget
     bindkey '^x^x' fgs-widget
 
+    # goto git homepage
     function ggh() {
         # git remote get-url origin |rargs open {}
         remote_ori=$(git status --short --branch|awk -F'[./]+' '/^#/{print $(NF-1)}')
@@ -440,14 +446,15 @@ fi
             new_url=$(echo ${ori_url} |awk -F'@' '{print $2}' |sed 's#m:#m/#g')
 			open https://$new_url
 		fi
-
     }
 
+    # goto git_root
     function gcr() {
         proj_root=$(git rev-parse --show-toplevel)
         [[ -n ${proj_root} ]] && cd ${proj_root}
     }
 
+    # git clone and cd repo(dirname)
     function gcd() {
         repoUrl=$1
         [[ ${repoUrl: -3} != git ]] && repoUrl="${repoUrl}.git"
@@ -467,7 +474,7 @@ fi
     }
 
     # Update project dependencies
-    depu() {
+    function depu() {
         # Git submodules
         if [ -e .gitmodules ]; then
             printf "Updating Git submodules for %s...\n\n" "${PWD##*/}"
