@@ -62,7 +62,6 @@
     alias gib="git init --bare "
     alias gcb="git clone --bare "
 
-    alias glsf="git ls-files -- . ':!:*.git*'"
     alias gaa="git add ."
     alias gcun="git config --global user.name "
     alias gcum="git config --global user.email "
@@ -121,8 +120,11 @@
     alias gsd='git stash drop'
     alias gsl='git stash list'
 
-    alias fdh="fd -H"
+    alias gbf='git ls-tree -r --name-only '
+    alias gli="git ls-files --others -i --exclude-standard"
+
     alias fda="fd -H '.*' "
+    alias fdi="fd --no-ignore-vcs --type=f "
     alias rgh="rg -. --glob='!.git*' "
 
     alias piu="pip3 uninstall "
