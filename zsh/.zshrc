@@ -80,13 +80,17 @@ if [[ $(uname -s) == "Darwin" ]]; then
     # HomeBrew more fast conf:
     #export HOMEBREW_GITHUB_API_TOKEN=""
     export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-    # export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
+    export HOMEBREW_API_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api"
+    export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles"
+    export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
+    export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
+    export HOMEBREW_PIP_INDEX_URL="https://pypi.tuna.tsinghua.edu.cn/simple"
 
     # GNU cmd tools PATH for Mac:
-    export PATH="/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/opt/python/bin:${PATH}"
-    export PATH="/usr/local/sbin:${HOME}/.yarn/bin:${HOME}/.cargo/bin:${HOME}/go/bin:$PATH"
+    export PATH="/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin:${PATH}"
+    export PATH="${HOME}/.yarn/bin:${HOME}/.cargo/bin:${HOME}/go/bin:$PATH"
     export MANPATH="/usr/local/man:/usr/local/share/man:${MANPATH}"
-    export MANPATH="/usr/local/opt/coreutils/share/man:/usr/local/opt/findutils/share/man:${MANPATH}"
+    export MANPATH="/usr/local/opt/coreutils/share/man:${MANPATH}"
 
 fi
 ## }}}
