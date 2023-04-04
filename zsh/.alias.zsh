@@ -1,28 +1,30 @@
 ## alias config:
 
 ## common alias:
-    alias -g G=" |grep -iE"
-    alias -g R=" |rg -S"
-    alias -g BG=" |batgrep -S"
-    alias -g BH=" |bat --plain --language=help"
-    alias -g BS=" |bat --plain --language=bash"
-    alias -g H=" |head"
-    alias -g T=" |tail"
-    alias -g L=" |less"
-    alias -g N=" |nl "
-    alias -g F=" |fzf --ansi"
-    alias -g J=" |jq ."
-    alias -g B=" |bat "
-    alias -g C=" |cut "
-    alias -g X=" |rargs"
-    alias -g GX=" |xargs"
-    alias -g P=" |peco"
-    # alias -g P=" |parallel"
-    alias -g U=" |uniq"
-    alias -g S=" |sort"
-    alias -g Y=" |tee"
-    alias -g W=" |wc -l"
-    alias -g CT=" |column -t"
+    alias -g G="   grep -iE"
+    alias -g R="   rg -S"
+    alias -g H="   head"
+    alias -g T="   tail"
+    alias -g L="   less"
+    alias -g N="   nl "
+    alias -g F="   fzf --ansi --preview-window=right:70%:wrap --preview "
+    alias -g FU="  fzf --ansi --preview-window=up:70%:wrap --preview "
+    alias -g J="   jq ."
+    alias -g B="   bat "
+    alias -g BG="  batgrep -S"
+    alias -g BH="  bat --plain --language=help"
+    alias -g BS="  bat --plain --language=bash"
+    alias -g C="   choose "
+    alias -g D="   delta -s"
+    alias -g RX="  rargs"
+    alias -g X="   xargs"
+    alias -g P="   peco"
+    # alias -g P=" parallel"
+    alias -g U="   uniq"
+    alias -g S="   sort"
+    alias -g Y="   tee"
+    alias -g W="   wc -l"
+    alias -g CT="  column -t"
     alias -g NE="2> /dev/null"
     alias -g NUL="> /dev/null 2>&1"
 
@@ -36,6 +38,17 @@
     alias -g COL7="awk '{ print \$7 }'"
     alias -g COL8="awk '{ print \$8 }'"
     alias -g COL9="awk '{ print \$9 }'"
+
+    # alias -g C0="|choose 0"
+    alias -g C1=" choose 0"
+    alias -g C2=" choose 1"
+    alias -g C3=" choose 2"
+    alias -g C4=" choose 3"
+    alias -g C5=" choose 4"
+    alias -g C6=" choose 5"
+    alias -g C7=" choose 6"
+    alias -g C8=" choose 7"
+    alias -g C9=" choose 8"
 
     # awk 去重+合并文件内容(相当于两文件的并集，两文件去重后再合并), 而且能保证文件内容顺序
     alias auq="awk '!U[\$0]++' "
@@ -56,6 +69,7 @@
     # switch root exec
     alias sre='sudo $(fc -ln -1)'
     # alias ssh="TERM=xterm-256color ssh"
+    alias gpm="glow -p "
 
     # Git
     # alias drcwt="git --git-dir=${HOME}/gitrepos/.dotrcfiles.git/ "
@@ -98,10 +112,12 @@
     alias gpsu='git push --set-upstream '
     alias gpso='git push --set-upstream origin '
 
+    alias glp="git log --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset' "
     alias glt="git log --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset' -10"
-    alias gla="git log --all --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset' -10"
+    alias gla="git log --all --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset' -20"
 
     alias gdf="git diff "
+    # git diff HEAD~24 HEAD --name-only    # 查看变更文件列表
 
     alias gco="git checkout "
     alias gsb="git switch "
@@ -122,14 +138,18 @@
 
     alias gbf='git ls-tree -r --name-only '
     alias gli="git ls-files --others -i --exclude-standard"
+    # ------ git aliases ---------
 
     alias fda="fd -H '.*' "
     alias fdi="fd --no-ignore-vcs --type=f "
+    alias rg="rg --smart-case --glob='!.git*' "
     alias rgh="rg -. --glob='!.git*' "
 
     alias piu="pip3 uninstall "
     alias pii="pip3 install "
     alias pus="pip3 install --upgrade pip"
+    alias pda="pdm add "
+    alias pdr="pdm run "
 
     alias adl="aria2c -x6 -c "
     alias zshconfig="nvim ${HOME}/gitrepos/dotfiles/zsh/.zshrc"
@@ -313,7 +333,7 @@ fi
     }
 
     function psr()  {
-        ps -ef |rg "$1" |rg -vw "rg"
+        ps -ef |rg -S "$1" |rg -vw "rg"
     }
 
     function gvbc() {
@@ -398,7 +418,7 @@ fi
     }
 
     # fzf browser/pick git commit and show file diff
-    function fgs() {
+    function fgc() {
         local commits commit logFormat
 
         curBranch="git branch --show-current"
@@ -424,17 +444,17 @@ fi
         [[ -n $commit ]] && echo $(cut -d' ' -f1 <<<"$commit")
     }
 
-    # example usage: git rebase -i `fgs`
-    fgs-widget() {
+    # example usage: git rebase -i `fgc`
+    fgc-widget() {
         local result;
-        result=$(fgs)
+        result=$(fgc)
         zle reset-prompt
         LBUFFER+=$result
     }
 
     # example usage: git diff <C-X><C-X>
-    zle -N fgs-widget
-    bindkey '^x^x' fgs-widget
+    zle -N fgc-widget
+    bindkey '^x^x' fgc-widget
 
     # goto git homepage
     function ggh() {
@@ -448,6 +468,30 @@ fi
             new_url=$(echo ${ori_url} |awk -F'@' '{print $2}' |sed 's#m:#m/#g')
 			open https://$new_url
 		fi
+    }
+
+    function gcfl() {
+        local change_commits_count=$(git status |awk 'NR==2{print $(NF-1)}')
+        if [[ ${change_commits_count} =~ [0-9]+ ]] then
+            git diff HEAD~${change_commits_count} HEAD --name-only
+        else
+            git diff HEAD --name-only
+        fi
+    }
+
+    function fgdf() {
+        curBranch=$(git branch --show-current)
+        remote_ori=$1
+        if [[ ${remote_ori} == "" ]] then
+            branch=${curBranch}
+        elif [[ ${remote_ori} == "ori" ]] then
+            branch="origin"/"${curBranch}"
+        else
+            branch=${remote_ori:-origin}"/"${curBranch}
+        fi
+        # echo ${branch}
+
+        gcfl |fzf --ansi --preview-window=up:70%:wrap --preview  "git diff ${branch:-${curBranch}} -- {} |delta"
     }
 
     # goto git_root

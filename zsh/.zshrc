@@ -2,7 +2,7 @@
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  [[ $- =~ i ]] && source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    [[ $- =~ i ]] && source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 
@@ -124,6 +124,7 @@ fi
 
 # ------fzf & fd & bat configuration----------
     export BAT_THEME="Catppuccin-mocha"
+    export BATDIFF_USE_DELTA=true
     export FD_OPTIONS="--follow --exclude .git --exclude .idea --exclude node_modules --exclude venv"
     export FZF_DEFAULT_COMMAND="fd -H --type f --type l ${FD_OPTIONS}"
     export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
@@ -179,7 +180,7 @@ setopt globdots          # Include hidden files. or: _comp_options+=(globdots)
 
 # Use Ctrl-x,Ctrl-v to get the output of the last command
 insert-last-command-output() {
-    LBUFFER+="$(eval $history[$((HISTCMD-1))])"
+LBUFFER+="$(eval ${history[$((HISTCMD-1))]})"
 }
 zle -N insert-last-command-output
 bindkey "^X^V" insert-last-command-output
