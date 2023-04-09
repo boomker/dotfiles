@@ -7,7 +7,8 @@
     alias -g T="   tail"
     alias -g L="   less"
     alias -g N="   nl "
-    alias -g F="   fzf --ansi --preview-window=right:70%:wrap --preview "
+    alias -g F="   fzf --ansi "
+    alias -g FR="  fzf --ansi --preview-window=right:70%:wrap --preview "
     alias -g FU="  fzf --ansi --preview-window=up:70%:wrap --preview "
     alias -g J="   jq ."
     alias -g B="   bat "
@@ -113,11 +114,12 @@
     alias gpso='git push --set-upstream origin '
 
     alias glp="git log --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset' "
+    # etc. glp -n, glp 7f1b6b0..8724539
     alias glt="git log --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset' -10"
     alias gla="git log --all --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset' -20"
 
     alias gdf="git diff "
-    # git diff HEAD~24 HEAD --name-only    # 查看变更文件列表
+    # etc. git diff HEAD~24 HEAD --name-only    # 查看变更文件列表
 
     alias gco="git checkout "
     alias gsb="git switch "
