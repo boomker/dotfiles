@@ -473,18 +473,23 @@ fi
     }
 
     function gcfl() {
+        local opt="$1"
         local change_commits_count=$(git status |awk 'NR==2{print $(NF-1)}')
-        if [[ ${change_commits_count} =~ [0-9]+ ]] then
+        local local_changed=$(git diff HEAD --name-only |wc -l)
+        [[ ${opt} == "ori" ]] && local_changed=0
+        if [[ ${change_commits_count} =~ [0-9]+ ]] &&  [[ ${local_changed} == 0 ]] then
             git diff HEAD~${change_commits_count} HEAD --name-only
         else
+            [[ ${local_changed} == 0 ]] && echo "nothing..."
             git diff HEAD --name-only
         fi
     }
 
     function fgdf() {
-        curBranch=$(git branch --show-current)
         remote_ori=$1
-        if [[ ${remote_ori} == "" ]] then
+        local curBranch=$(git branch --show-current)
+        local local_changed=$(git diff HEAD --name-only |wc -l)
+        if [[ ${remote_ori} == "" ]] && [[ ${local_changed} > 0 ]] then
             branch=${curBranch}
         elif [[ ${remote_ori} == "ori" ]] then
             branch="origin"/"${curBranch}"
@@ -493,7 +498,7 @@ fi
         fi
         # echo ${branch}
 
-        gcfl |fzf --ansi --preview-window=up:70%:wrap --preview  "git diff ${branch:-${curBranch}} -- {} |delta"
+        gcfl "${remote_ori}" |fzf --ansi --preview-window=up:70%:wrap --preview  "git diff ${branch:-${curBranch}} -- {} |delta"
     }
 
     # goto git_root

@@ -63,6 +63,8 @@ fi
 ## --------------User configuration--------------
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
+export LC_ALL='C'
+export XDG_CONFIG_HOME="$HOME/.config"
 HIST_STAMPS="mm/dd/yyyy"
 
 # 以下字符视为单词的一部分
