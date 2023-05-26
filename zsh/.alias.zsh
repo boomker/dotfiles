@@ -2,7 +2,7 @@
 
 ## common alias:
     alias -g G="   grep -iE"
-    alias -g R="   rg -S"
+    alias -g R="   rg "
     alias -g H="   head"
     alias -g T="   tail"
     alias -g L="   less"
@@ -355,7 +355,7 @@ fi
     # sad(sed) files(eg. file1 file2)
     function sdf() {
         [[ "${#@}" < 3 ]] && echo 'require 3 args, example: <PATTERN> [REPLACE] files[file1 ...]' && break 2>/dev/null
-        /bin/ls -1 "${@:3}" |sad "$1" "$2"
+        /bin/ls -1 "${@:3}" |sad -k "$1" "$2"
     }
 
     # FZF file and cd to it's directory
@@ -489,6 +489,8 @@ fi
         remote_ori=$1
         local curBranch=$(git branch --show-current)
         local local_changed=$(git diff HEAD --name-only |wc -l)
+        local proj_root=$(git rev-parse --show-toplevel)
+
         if [[ ${remote_ori} == "" ]] && [[ ${local_changed} > 0 ]] then
             branch=${curBranch}
         elif [[ ${remote_ori} == "ori" ]] then
@@ -498,7 +500,8 @@ fi
         fi
         # echo ${branch}
 
-        gcfl "${remote_ori}" |fzf --ansi --preview-window=up:70%:wrap --preview  "git diff ${branch:-${curBranch}} -- {} |delta"
+        gcfl "${remote_ori}" |fzf --ansi --preview-window=up:70%:wrap --preview  \
+            "git diff ${branch:-${curBranch}} -- "${proj_root}/"{} |delta"
     }
 
     # goto git_root

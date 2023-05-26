@@ -63,7 +63,7 @@ fi
 ## --------------User configuration--------------
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
-export LC_ALL='C'
+# export LC_ALL='C'
 export XDG_CONFIG_HOME="$HOME/.config"
 HIST_STAMPS="mm/dd/yyyy"
 
@@ -214,7 +214,7 @@ bindkey -e '^u' pb-backward-kill-line
 # ------ Ctrl-k
 pb-forward-kill-line() {
     zle kill-line
-    print -rn $CUTBUFFER | pbcopy
+    print -rn "${CUTBUFFER}" | pbcopy
 }
 zle -N pb-forward-kill-line
 bindkey -e '^k' pb-forward-kill-line

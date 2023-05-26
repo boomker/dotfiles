@@ -43,6 +43,95 @@
                         ]
                     },
                     {
+                        "description": "Change ⌃+⬅️ --> ⌥+⬅️ | caps_lock/control + Left to option + Left.",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "left_arrow",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_arrow",
+                                        "modifiers": [
+                                            "left_option"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Change ⌃+➡️ --> ⌥+➡️ | caps_lock/control + Right to option + Right.",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "right_arrow",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_arrow",
+                                        "modifiers": [
+                                            "left_option"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Change ⌃+u(模拟终端 Control+u) --> ^+⇧+⬅️ => ⌘+x .",
+                        "manipulators": [
+                            {
+
+                                "conditions": [
+                                    {
+                                        "type": "frontmost_application_unless",
+                                        "bundle_identifiers": [
+                                            "com.googlecode.iterm2",
+                                            "com.jetbrains.pycharm"
+                                        ]
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "u",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_arrow",
+                                        "modifiers": [
+                                            "left_command",
+                                            "left_shift"
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "x",
+                                        "modifiers": [
+                                            "left_command"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Change semicolon to control if pressed with other keys.",
                         "manipulators": [
                             {
@@ -106,7 +195,7 @@
                         ]
                     },
                     {
-                        "description": "Tap Shift_L (⇧) → Switch input source (F15)  |  短按左 Shift (⇧) → 切换输入法",
+                        "description": "Tap Shift_R (⇧) → Switch input source (F15)  |  短按右 Shift (⇧) → 切换输入法",
                         "manipulators": [
                             {
                                 "from": {
@@ -288,20 +377,6 @@
                     },
                     "ignore": true,
                     "manipulate_caps_lock_led": false,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
-                },
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "identifiers": {
-                        "is_keyboard": true,
-                        "is_pointing_device": true,
-                        "product_id": 2311,
-                        "vendor_id": 7847
-                    },
-                    "ignore": true,
-                    "manipulate_caps_lock_led": true,
                     "simple_modifications": [],
                     "treat_as_built_in_keyboard": false
                 },
