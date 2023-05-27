@@ -99,8 +99,13 @@
                                     {
                                         "type": "frontmost_application_unless",
                                         "bundle_identifiers": [
-                                            "com.googlecode.iterm2",
-                                            "com.jetbrains.pycharm"
+                                            "^com\\.apple\\.Terminal$",
+                                            "^com\\.neovide\\.neovide$",
+                                            "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.microsoft\\.VSCode$",
+                                            "^com\\.jetbrains\\.pycharm$",
+                                            "^org\\.alacritty$"
+
                                         ]
                                     }
                                 ],
