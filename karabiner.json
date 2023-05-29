@@ -1,5 +1,6 @@
 {
     "global": {
+        "ask_for_confirmation_before_quitting": true,
         "check_for_updates_on_startup": true,
         "show_in_menu_bar": true,
         "show_profile_name_in_menu_bar": false,
@@ -11,8 +12,8 @@
                 "parameters": {
                     "basic.simultaneous_threshold_milliseconds": 50,
                     "basic.to_delayed_action_delay_milliseconds": 500,
-                    "basic.to_if_alone_timeout_milliseconds": 1000,
-                    "basic.to_if_held_down_threshold_milliseconds": 500,
+                    "basic.to_if_alone_timeout_milliseconds": 800,
+                    "basic.to_if_held_down_threshold_milliseconds": 800,
                     "mouse_motion_to_scroll.speed": 100
                 },
                 "rules": [
@@ -43,61 +44,11 @@
                         ]
                     },
                     {
-                        "description": "Change ⌃+⬅️ --> ⌥+⬅️ | caps_lock/control + Left to option + Left.",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "left_arrow",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "control"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "left_arrow",
-                                        "modifiers": [
-                                            "left_option"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Change ⌃+➡️ --> ⌥+➡️ | caps_lock/control + Right to option + Right.",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "right_arrow",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "control"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "right_arrow",
-                                        "modifiers": [
-                                            "left_option"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "Change ⌃+u(模拟终端 Control+u) --> ^+⇧+⬅️ => ⌘+x .",
                         "manipulators": [
                             {
-
                                 "conditions": [
                                     {
-                                        "type": "frontmost_application_unless",
                                         "bundle_identifiers": [
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.neovide\\.neovide$",
@@ -105,8 +56,8 @@
                                             "^com\\.microsoft\\.VSCode$",
                                             "^com\\.jetbrains\\.pycharm$",
                                             "^org\\.alacritty$"
-
-                                        ]
+                                        ],
+                                        "type": "frontmost_application_unless"
                                     }
                                 ],
                                 "from": {
@@ -155,7 +106,7 @@
                                 ],
                                 "to_if_alone": [
                                     {
-                                        "hold_down_milliseconds": 200,
+                                        "hold_down_milliseconds": 250,
                                         "key_code": "semicolon"
                                     }
                                 ],
@@ -186,7 +137,7 @@
                                 ],
                                 "to_if_alone": [
                                     {
-                                        "hold_down_milliseconds": 100,
+                                        "hold_down_milliseconds": 250,
                                         "key_code": "spacebar"
                                     }
                                 ],
@@ -254,7 +205,7 @@
                                 ],
                                 "to_if_alone": [
                                     {
-                                        "hold_down_milliseconds": 100,
+                                        "hold_down_milliseconds": 250,
                                         "key_code": "caps_lock"
                                     }
                                 ],
@@ -270,6 +221,299 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                        "description": "Ctrl + Arrow Keys to Option + Arrow Keys",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "up_arrow",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "up_arrow",
+                                        "modifiers": [
+                                            "option"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "down_arrow",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "down_arrow",
+                                        "modifiers": [
+                                            "option"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "left_arrow",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_arrow",
+                                        "modifiers": [
+                                            "option"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "right_arrow",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_arrow",
+                                        "modifiers": [
+                                            "option"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Ctrl + Shift + Arrow Keys to Option + Shift + Arrow Keys",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "up_arrow",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "control",
+                                            "shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "up_arrow",
+                                        "modifiers": [
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "down_arrow",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "control",
+                                            "shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "down_arrow",
+                                        "modifiers": [
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "left_arrow",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "control",
+                                            "shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_arrow",
+                                        "modifiers": [
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "right_arrow",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "control",
+                                            "shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_arrow",
+                                        "modifiers": [
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Ctrl + BS/Del Keys to Option + BS/Del Keys",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "delete_or_backspace",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "delete_or_backspace",
+                                        "modifiers": [
+                                            "option"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "delete_forward",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "delete_forward",
+                                        "modifiers": [
+                                            "option"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "delete_or_backspace",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "control",
+                                            "shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "delete_forward",
+                                        "modifiers": [
+                                            "option"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Ctrl + h to Option + left_Arrow Keys",
+                        "manipulators": [{
+                            "conditions": [
+                                {
+                                    "bundle_identifiers": [
+                                        "^com\\.apple\\.Terminal$",
+                                        "^com\\.googlecode\\.iterm2$",
+                                        "^org\\.alacritty$"
+                                    ],
+                                    "type": "frontmost_application_unless"
+                                }
+                            ],
+                            "type": "basic",
+                            "from": {
+                                "key_code": "h",
+                                "modifiers": {
+                                    "mandatory": ["control"]
+                                }
+                            },
+                            "to": [
+                                {
+                                    "key_code": "left_arrow",
+                                    "modifiers": [
+                                        "option"
+                                    ]
+                                }
+                            ]
+                        }]
+                    },
+                    {
+                        "description": "Ctrl + l to Option + right_Arrow Keys",
+                        "manipulators": [{
+                            "conditions": [
+                                {
+                                    "bundle_identifiers": [
+                                        "^com\\.apple\\.Terminal$",
+                                        "^com\\.googlecode\\.iterm2$",
+                                        "^org\\.alacritty$"
+                                    ],
+                                    "type": "frontmost_application_unless"
+                                }
+                            ],
+                            "type": "basic",
+                            "from": {
+                                "key_code": "l",
+                                "modifiers": {
+                                    "mandatory": ["control"]
+                                }
+                            },
+                            "to": [
+                                {
+                                    "key_code": "right_arrow",
+                                    "modifiers": [
+                                        "option"
+                                    ]
+                                }
+                            ]
+                        }]
                     }
                 ]
             },
@@ -395,6 +639,20 @@
                         "vendor_id": 7847
                     },
                     "ignore": false,
+                    "manipulate_caps_lock_led": true,
+                    "simple_modifications": [],
+                    "treat_as_built_in_keyboard": false
+                },
+                {
+                    "disable_built_in_keyboard_if_exists": false,
+                    "fn_function_keys": [],
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": true,
+                        "product_id": 2311,
+                        "vendor_id": 7847
+                    },
+                    "ignore": true,
                     "manipulate_caps_lock_led": true,
                     "simple_modifications": [],
                     "treat_as_built_in_keyboard": false

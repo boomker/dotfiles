@@ -10,7 +10,7 @@ import:
 window:
   startup_mode: Maximized
   decorations: buttonless
-  opacity: 0.85
+  opacity: 0.92
 
 # Display tabs using this many cells
 tabspaces: 4
