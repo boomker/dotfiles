@@ -98,7 +98,9 @@
 
     alias gcl="git clone "
     alias gfc="git clone --filter=blob:none "
-    alias gfrm="git pull origin main --rebase"
+    alias gpom="git pull origin main || git pull origin master"
+    alias gpum="git pull upstream main"
+    alias gprm="git pull origin main --rebase"
 
     alias gsms='git submodule sync --recursive'
     alias gsmu='git submodule update --init --recursive'

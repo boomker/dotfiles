@@ -10,7 +10,7 @@ import:
 window:
   startup_mode: Maximized
   decorations: buttonless
-  opacity: 0.92
+  opacity: 0.93
 
 # Display tabs using this many cells
 tabspaces: 4
@@ -35,7 +35,7 @@ font:
   size: 16
 
 env:
-  TERM: xterm-256color
+  TERM: alacritty
 
 shell:
   program: /usr/local/bin/zsh
@@ -45,6 +45,8 @@ shell:
     - -c
     - "tmux new-session -A -D -s main"
 
+selection:
+  save_to_clipboard: true
 # Key bindings
 # A list with all available `key` names can be found here:
 # https://docs.rs/glutin/*/glutin/enum.VirtualKeyCode.html#variants
