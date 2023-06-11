@@ -39,6 +39,7 @@
     alias -g COL7="awk '{ print \$7 }'"
     alias -g COL8="awk '{ print \$8 }'"
     alias -g COL9="awk '{ print \$9 }'"
+    alias -g COL0="awk '{ print \$NF }'"
 
     # alias -g C0="|choose 0"
     alias -g C1=" choose 0"
@@ -61,6 +62,7 @@
     alias bdf="batdiff --color --delta --context=3 "
     alias diff="delta "
     alias dfs="delta -s"
+    alias dog="dig +noall +nocmd +answer "
     alias l.="ls -d .* --color=auto"
     alias ls="ls -p --width=80 --color=auto"
     alias ll="ls -rtlh"
@@ -502,7 +504,7 @@ fi
         fi
         # echo ${branch}
 
-        gcfl "${remote_ori}" |fzf --ansi --preview-window=up:70%:wrap --preview  \
+        gcfl "${remote_ori}" |fzf --ansi --preview-window=up:70%:wrap --preview \
             "git diff ${branch:-${curBranch}} -- "${proj_root}/"{} |delta"
     }
 

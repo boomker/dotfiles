@@ -1,15 +1,15 @@
 # This is Git's per-user configuration file.
 [user]
-	name = zhuchunyan
-	email = gmboomker@gmail.com
-	
+    name = zhuchunyan
+    email = gmboomker@gmail.com
+
 [core]
     # detects filemode changes
     filemode = true
-	pager = delta
+    pager = delta
     # defaults to $VISUAL or $EDITOR which is set in .bash.d/env.sh
     editor = nvim
-	ignorecase = false
+    ignorecase = false
     # global .gitignore
     excludesfile = ~/.gitignore
     # stops unicode chars coming out as \xxx and double quoted filenames in git status (used in .bash.d/git.sh git_rm_untracked function)
@@ -24,13 +24,14 @@
 [delta]
     features = kingfisher
     navigate = true  # use n and N to move between diff sections
-	# side-by-side = true
-	line-numbers = true
+    # side-by-side = true
+    line-numbers = true
+    true-color = always
 
 [rebase]
-	autoStash = true
+    autoStash = true
 [pull]
-	rebase = true
+    rebase = true
 [merge]
     conflictstyle = diff3
 
@@ -90,15 +91,16 @@
     nobranch    = red blink
 
 [help]
-	autocorrect = 1
+    autocorrect = 1
 [init]
-	defaultBranch = main
+    defaultBranch = main
 [http]
-	proxy = http://127.0.0.1:7890
+    proxy = http://127.0.0.1:7890
+    postBuffer = 524288000
 [https]
-	proxy = http://127.0.0.1:7890
+    proxy = http://127.0.0.1:7890
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true

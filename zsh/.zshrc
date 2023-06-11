@@ -89,8 +89,8 @@ if [[ $(uname -s) == "Darwin" ]]; then
     export HOMEBREW_PIP_INDEX_URL="https://pypi.tuna.tsinghua.edu.cn/simple"
 
     # GNU cmd tools PATH for Mac:
-    export PATH="/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin:${PATH}"
     export PATH="${HOME}/.yarn/bin:${HOME}/.cargo/bin:${HOME}/go/bin:$PATH"
+    export PATH="/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin:${PATH}"
     export MANPATH="/usr/local/man:/usr/local/share/man:${MANPATH}"
     export MANPATH="/usr/local/opt/coreutils/share/man:${MANPATH}"
 
@@ -98,17 +98,8 @@ fi
 ## }}}
 
 
-## ssh keygen location {{{
- # if [[ -d ~/.ssh ]]; then
-    export SSH_KEY_PATH="~/.ssh/id_rsa"
-# else
-    # mkdir ~/{.ssh,.z}
-    # export SSH_KEY_PATH="~/.ssh/id_rsa"
-# fi
-# }}}
-
 ## ------------VIM environment path config----------------- {{{
-    export EDITOR="$(which nvim)"
+    export EDITOR="nvim"
     export VIM="/usr/local/opt/neovim/share/nvim"
     export VIMRUNTIME="${HOME}/.nvim/runtime"
 # }}}
@@ -125,7 +116,7 @@ fi
 
 
 # ------fzf & fd & bat configuration----------
-    export BAT_THEME="Catppuccin-mocha"
+    export BAT_THEME="Coldark-Dark"
     export BATDIFF_USE_DELTA=true
     export FD_OPTIONS="--follow --exclude .git --exclude .idea --exclude node_modules --exclude venv"
     export FZF_DEFAULT_COMMAND="fd -H --type f --type l ${FD_OPTIONS}"
@@ -190,7 +181,7 @@ bindkey "^X^V" insert-last-command-output
 # Ctrl-x,Ctrl-w copies to global pasteboard as well as zsh clipboard
 pb-cut-word-region() {
     zle copy-region-as-kill
-    print -rn $CUTBUFFER | pbcopy
+    printf $CUTBUFFER | pbcopy
 }
 zle -N pb-cut-word-region
 bindkey -e '^x^w' pb-cut-word-region
@@ -198,7 +189,7 @@ bindkey -e '^x^w' pb-cut-word-region
 # Ctrl-x Ctrl-d copies to global pasteboard as well as zsh clipboard - is this overkill?
 pb-kill-buffer-line() {
     zle kill-buffer
-    print -rn $CUTBUFFER | pbcopy
+    printf $CUTBUFFER | pbcopy
 }
 zle -N pb-kill-buffer-line
 bindkey -e '^x^d' pb-kill-buffer-line
@@ -206,7 +197,7 @@ bindkey -e '^x^d' pb-kill-buffer-line
 # ------ Ctrl-u
 pb-backward-kill-line() {
     zle backward-kill-line
-    print -rn $CUTBUFFER | pbcopy
+    printf $CUTBUFFER | pbcopy
 }
 zle -N pb-backward-kill-line
 bindkey -e '^u' pb-backward-kill-line
@@ -214,7 +205,7 @@ bindkey -e '^u' pb-backward-kill-line
 # ------ Ctrl-k
 pb-forward-kill-line() {
     zle kill-line
-    print -rn "${CUTBUFFER}" | pbcopy
+    printf "${CUTBUFFER}" | pbcopy
 }
 zle -N pb-forward-kill-line
 bindkey -e '^k' pb-forward-kill-line
@@ -233,7 +224,7 @@ bindkey -e '^xs' sudo-command-line
     zstyle ':notify:*' command-complete-timeout 15
     zstyle ':notify:*' enable-on-ssh yes
     zstyle ':notify:*' check-focus no
-    zstyle ':notify:*' blacklist-regex 'git|man|vim|nvim|neovim|help|glow'
+    zstyle ':notify:*' blacklist-regex 'git|man|vim|nvim|neovim|help|glow|bat'
     # zstyle ':notify:*' notifier "/usr/local/bin/noti"
     zstyle ':notify:*' error-icon "https://s1.ax1x.com/2022/11/06/xXY9o9.png"
     zstyle ':notify:*' error-sound "Bubble"
@@ -248,7 +239,7 @@ bindkey -e '^xs' sudo-command-line
     # zstyle ':completion:*' group-name ''
     zstyle ':fzf-tab:complete:(bat|exa|ls):argument-rest' fzf-preview '\
         [[ -f $realpath && ! $word =~ ".git*" ]] && \
-        bat  --style=numbers,header --color=always $realpath || \
+        bat --theme=Coldark-Dark --style=numbers,header --color=always $realpath || \
         exa -ahlF --color-scale --group-directories-first --no-permissions --no-user \
         --time-style=iso --icons --color=always --tree --level=2  -I=".git*" $realpath'
     zstyle ':fzf-tab:complete:(bat|exa|ls):argument-rest' fzf-flags --preview-window=right:70%:wrap
