@@ -74,7 +74,7 @@ elif [[ $# -gt 1 ]]; then
       remote=$2
       path=/tree/$branch
       ;;
-    file) path=/blob/$branch/$2 ;;
+    file) path=/blob/$branch/$(git rev-parse --show-prefix)$2 ;;
     tag)  path=/releases/tag/$2 ;;
     *)    exit 1 ;;
   esac
@@ -104,7 +104,8 @@ if [[ $- =~ i ]]; then
 _fzf_git_fzf() {
   fzf-tmux -p80%,80% -- \
     --layout=reverse --multi --height=50% --min-height=20 --border \
-    --color='header:italic:underline' \
+    --border-label-pos=2 \
+    --color='header:italic:underline,label:blue' \
     --preview-window='right,50%,border-left' \
     --bind='ctrl-v:change-preview-window(down,70%,border-top|hidden|)' "$@"
 }
@@ -116,7 +117,7 @@ _fzf_git_check() {
     return 1
 }
 
-__fzf_git=${BASH_SOURCE[0]:-${(%):-%x}}
+__fzf_git=${BASH_SOURCE[0]:-${%:-%x}}
 __fzf_git=$(readlink -f "$__fzf_git" 2> /dev/null || /usr/bin/ruby --disable-gems -e 'puts File.expand_path(ARGV.first)' "$__fzf_git" 2> /dev/null)
 
 if [[ -z $_fzf_git_cat ]]; then
@@ -144,7 +145,7 @@ _fzf_git_files() {
   _fzf_git_check || return
   git diff --name-only --relative --diff-filter=d |
   _fzf_git_fzf -m --ansi --nth 2..,.. \
-    --prompt '📁 Files> ' \
+    --border-label '📁 Files' \
     --header $'CTRL-O (open in browser) ╱ ALT-E (open in editor[vim]) / ALT-c (open in vscode)\n\n' \
     --bind "ctrl-o:execute-silent:bash $__fzf_git file {-1}" \
     --bind "alt-e:execute:${EDITOR:-vim} {-1} > /dev/tty" \
@@ -158,7 +159,7 @@ _fzf_git_branches() {
   _fzf_git_check || return
   bash "$__fzf_git" branches |
   _fzf_git_fzf --ansi \
-    --prompt '🌲 Branches> ' \
+    --border-label '🌲 Branches' \
     --header-lines 2 \
     --tiebreak begin \
     --preview-window down,border-top,40% \
@@ -176,7 +177,7 @@ _fzf_git_tags() {
   _fzf_git_check || return
   git tag --sort -version:refname |
   _fzf_git_fzf --preview-window right,70% \
-    --prompt '📛 Tags> ' \
+    --border-label '📛 Tags' \
     --header $'CTRL-O (open in browser)\n\n' \
     --bind "ctrl-o:execute-silent:bash $__fzf_git tag {}" \
     --preview 'git show --color=always {}' "$@"
@@ -187,7 +188,7 @@ _fzf_git_hashes() {
   _fzf_git_check || return
   git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always |
   _fzf_git_fzf --ansi --no-sort --bind 'ctrl-s:toggle-sort' \
-    --prompt '🍡 Hashes> ' \
+    --border-label '🍡 Hashes' \
     --header $'CTRL-O (open in browser) ╱ CTRL-D (diff) ╱ CTRL-S (toggle sort)\n\n' \
     --bind "ctrl-o:execute-silent:bash $__fzf_git commit {}" \
     --bind 'ctrl-d:execute:grep -o "[a-f0-9]\{7,\}" <<< {} | head -n 1 | xargs git diff > /dev/tty' \
@@ -204,7 +205,7 @@ _fzf_git_remotes() {
   _fzf_git_check || return
   bash "$__fzf_git" all-branches |awk '$1 ~ /\//{print $0}'|
   _fzf_git_fzf --tac \
-    --prompt '📡 Remotes> ' \
+    --border-label '📡 Remotes' \
     --header $'CTRL-O (open in browser)\n\n' \
     --bind "ctrl-o:execute-silent:bash $__fzf_git remote {1}" \
     --preview-window right,70% \
@@ -216,7 +217,7 @@ _fzf_git_remotes() {
 _fzf_git_stashes() {
   _fzf_git_check || return
   git stash list | _fzf_git_fzf \
-    --prompt '🥡 Stashes> ' \
+    --border-label '🥡 Stashes' \
     --header $'CTRL-X (drop stash)\n\n' \
     --bind 'ctrl-x:execute-silent(git stash drop {1})+reload(git stash list)' \
     --preview-window up,70%,border-bottom \
@@ -230,7 +231,7 @@ _fzf_git_each_ref() {
   bash "$__fzf_git" refs | _fzf_git_fzf --ansi \
     --nth 2,2.. \
     --tiebreak begin \
-    --prompt '☘️  Each ref> ' \
+    --border-label '☘️  Each ref' \
     --header-lines 2 \
     --preview-window down,border-top,40% \
     --color hl:underline,hl+:underline \
@@ -256,8 +257,9 @@ if [[ -n "${BASH_VERSION:-}" ]]; then
 elif [[ -n "${ZSH_VERSION:-}" ]]; then
   __fzf_git_join() {
     local item
-    while read item; do
-      echo -n "${(q)item} "
+    while read -r item; do
+      echo -n "${item} "
+      # echo -n "${(q)item} "
     done
   }
 

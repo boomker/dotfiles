@@ -1,7 +1,7 @@
 # This is Git's per-user configuration file.
 [user]
-    name = zhuchunyan
-    email = gmboomker@gmail.com
+	name = Shingo
+	email = boomker@users.noreply.github.com
 
 [core]
     # detects filemode changes
@@ -99,8 +99,5 @@
     postBuffer = 524288000
 [https]
     proxy = http://127.0.0.1:7890
-[filter "lfs"]
-    clean = git-lfs clean -- %f
-    smudge = git-lfs smudge -- %f
-    process = git-lfs filter-process
-    required = true
+[http "https://github.com"]
+	proxy = socks5://127.0.0.1:7890

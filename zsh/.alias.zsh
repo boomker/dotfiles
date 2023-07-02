@@ -101,7 +101,7 @@
     alias gcl="git clone "
     alias gfc="git clone --filter=blob:none "
     alias gpom="git pull origin main || git pull origin master"
-    alias gpum="git pull upstream main"
+    alias gpum="git pull upstream main || git pull upstream master"
     alias gprm="git pull origin main --rebase"
 
     alias gsms='git submodule sync --recursive'
@@ -381,6 +381,9 @@ fi
             --preview 'tldr {}'
     }
 
+    function fjtpane() {
+        tmux select-window -t $(echo $(tmux list-windows |fzf-tmux -p) |choose 0 -f ':')
+    }
     # goto other pane in tmux
     function fjpane() {
         local panes current_window current_pane target target_window target_pane
@@ -396,8 +399,7 @@ fi
         if [[ $current_window -eq $target_window ]]; then
             tmux select-pane -t ${target_window}.${target_pane}
         else
-            tmux select-pane -t ${target_window}.${target_pane} &&
-            tmux select-window -t $target_window
+            tmux select-pane -t ${target_window}.${target_pane} && tmux select-window -t $target_window
         fi
     }
 
@@ -462,6 +464,27 @@ fi
     zle -N fgc-widget
     bindkey '^x^x' fgc-widget
 
+    fzf-man-widget() {
+    bman="gman {1} | col -bx | bat --language=man --plain --color always --theme=\"Monokai Extended\""
+    gman -k . | sort \
+    | awk -v cyan=$(tput setaf 6) -v blue=$(tput setaf 4) -v res=$(tput sgr0) -v bld=$(tput bold) '{ $1=cyan bld $1; $2=res blue;} 1' \
+    | fzf  \
+        -q "$1" \
+        --ansi \
+        --tiebreak=begin \
+        --prompt=' Man > '  \
+        --preview-window '50%,rounded,<50(up,85%,border-bottom)' \
+        --preview "${bman}" \
+        --bind "enter:execute(gman {1})" \
+        --bind "alt-c:+change-preview(cht.sh {1})+change-prompt(ﯽ Cheat > )" \
+        --bind "alt-m:+change-preview(${bman})+change-prompt( Man > )" \
+        --bind "alt-t:+change-preview(tldr {1}))+change-prompt(ﳁ TLDR > )"
+      zle reset-prompt
+    }
+    # `Ctrl-H` keybinding to launch the widget (this widget works only on zsh, don't know how to do it on bash and fish (additionaly pressing`ctrl-backspace` will trigger the widget to be executed too because both share the same keycode)
+    zle -N fzf-man-widget
+    bindkey '^x^m' fzf-man-widget
+
     # goto git homepage
     function ggh() {
         # git remote get-url origin |rargs open {}
@@ -502,10 +525,10 @@ fi
         else
             branch=${remote_ori:-origin}"/"${curBranch}
         fi
-        # echo ${branch}
 
-        gcfl "${remote_ori}" |fzf --ansi --preview-window=up:70%:wrap --preview \
-            "git diff ${branch:-${curBranch}} -- "${proj_root}/"{} |delta"
+        gcfl "${remote_ori}" |fzf --ansi --scrollbar=▌▐ --preview-window=up:70%:wrap --preview \
+            "batdiff --delta --color --context=1 ${proj_root}/{}"
+            # "git diff ${branch:-${curBranch}} -- "${proj_root}/"{} |delta"
     }
 
     # goto git_root

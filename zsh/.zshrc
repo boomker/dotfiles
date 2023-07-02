@@ -1,8 +1,8 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-    [[ $- =~ i ]] && source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${%:-%n}.zsh" ]]; then
+    [[ $- =~ i ]] && source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${%:-%n}.zsh"
 fi
 
 
@@ -90,7 +90,7 @@ if [[ $(uname -s) == "Darwin" ]]; then
 
     # GNU cmd tools PATH for Mac:
     export PATH="${HOME}/.yarn/bin:${HOME}/.cargo/bin:${HOME}/go/bin:$PATH"
-    export PATH="/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin:${PATH}"
+    # export PATH="/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin:${PATH}"
     export MANPATH="/usr/local/man:/usr/local/share/man:${MANPATH}"
     export MANPATH="/usr/local/opt/coreutils/share/man:${MANPATH}"
 
@@ -122,6 +122,13 @@ fi
     export FZF_DEFAULT_COMMAND="fd -H --type f --type l ${FD_OPTIONS}"
     export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 
+    export FZF_CTRL_R_OPTS="
+        --preview 'echo {}' --preview-window up:3:hidden:wrap
+        --bind 'ctrl-/:toggle-preview'
+        --bind 'ctrl-t:track+clear-query'
+        --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+        --color header:italic
+        --header 'Press CTRL-Y to copy command into clipboard'"
     export FZF_CTRL_T_OPTS="
         --bind 'ctrl-y:execute-silent(printf {} | cut -f 2- |pbcopy)+accept' \
         --bind 'alt-e:become(nvim {} > /dev/tty)+abort' \
@@ -181,7 +188,7 @@ bindkey "^X^V" insert-last-command-output
 # Ctrl-x,Ctrl-w copies to global pasteboard as well as zsh clipboard
 pb-cut-word-region() {
     zle copy-region-as-kill
-    printf $CUTBUFFER | pbcopy
+    gecho  $CUTBUFFER | pbcopy
 }
 zle -N pb-cut-word-region
 bindkey -e '^x^w' pb-cut-word-region
@@ -189,7 +196,7 @@ bindkey -e '^x^w' pb-cut-word-region
 # Ctrl-x Ctrl-d copies to global pasteboard as well as zsh clipboard - is this overkill?
 pb-kill-buffer-line() {
     zle kill-buffer
-    printf $CUTBUFFER | pbcopy
+    gecho  $CUTBUFFER | pbcopy
 }
 zle -N pb-kill-buffer-line
 bindkey -e '^x^d' pb-kill-buffer-line
@@ -197,7 +204,7 @@ bindkey -e '^x^d' pb-kill-buffer-line
 # ------ Ctrl-u
 pb-backward-kill-line() {
     zle backward-kill-line
-    printf $CUTBUFFER | pbcopy
+    gecho  $CUTBUFFER | pbcopy
 }
 zle -N pb-backward-kill-line
 bindkey -e '^u' pb-backward-kill-line
@@ -205,7 +212,7 @@ bindkey -e '^u' pb-backward-kill-line
 # ------ Ctrl-k
 pb-forward-kill-line() {
     zle kill-line
-    printf "${CUTBUFFER}" | pbcopy
+    gecho "${CUTBUFFER}" | pbcopy
 }
 zle -N pb-forward-kill-line
 bindkey -e '^k' pb-forward-kill-line
@@ -263,3 +270,4 @@ bindkey -e '^xs' sudo-command-line
 
     # brew
     zstyle ':fzf-tab:complete:brew-(install|uninstall|search|info):*-argument-rest' fzf-preview 'brew info $word'
+    zstyle ':fzf-tab:complete:brew-(install|uninstall|search|info):argument-rest' fzf-flags --preview-window=right:70%:wrap
