@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 #===============================================================================
-#   Author: Wenxuan
-#    Email: wenxuangm@gmail.com
-#  Created: 2018-04-06 12:12
+#   Author: Boomker
+#    Email: gmboomker@gmail.com
+#  Created: 2023-07-03 12:12
 #===============================================================================
 get_fzf_options() {
     local fzf_options
-    local fzf_default_options='-d 35% -m -0 --no-preview --no-border'
-    fzf_options="$(tmux show -gqv '@fzf-url-fzf-options')"
+    local fzf_default_options='-w75% -h75% -m -e -0 --border --ansi --preview-window=up:70%:wrap --preview "tmux capture-pane -pJS -20 -t {1}"'
+    # fzf_options="$(tmux show -gqv '@fzf-tmux-pane-jump-option')"
     [ -n "$fzf_options" ] && echo "$fzf_options" || echo "$fzf_default_options"
 }
 
@@ -18,11 +18,9 @@ fzf_filter() {
 select_window() {
     tmux select-pane -t "$@" && tmux select-window -t "${@%%.*}"
 }
+items=$(tmux list-panes -s -F '#I.#P - #W - #T #{pane_current_path} #{pane_current_command}' |column -t)
 
-# items=$(tmux list-panes -s -F '#I:#P - #{pane_current_path} #{pane_current_command}')
-items=$(tmux list-panes -s -F '#I:#P - #W |#{pane_current_path} |#{pane_current_command}' |column -t)
-
-fzf_filter <<< "$items"  |awk -F'[ :]+' '{print $1"."$2}'| \
+fzf_filter <<< "$items"  |awk '{print $1}'| \
     while read -r chosen; do
         select_window "$chosen" &>"/tmp/tmux-$(id -u)-sel_pane.log"
     done

@@ -162,7 +162,7 @@
     alias zshreload="source ~/.zshrc"
     alias aliconf="nvim ${HOME}/gitrepos/dotfiles/zsh/.alias.zsh"
     alias alsreload="source ${HOME}/gitrepos/dotfiles/zsh/.alias.zsh"
-    alias tmuxconfig="nvim ${HOME}/gitrepos/dotfiles/.tmux.conf"
+    alias tmuxconfig="nvim ${HOME}/gitrepos/dotfiles/term_tmux/.tmux.conf"
     alias sshconf="nvim ${HOME}/.ssh/config"
     # alias vimconfig="nvim ${HOME}/gitrepos/dotfiles/nvim/.vimrc"
     # alias zip="zip -r "
@@ -269,6 +269,30 @@ fi
             if [ "$input" = "h" ] || [ "$input" = "H" ]; then
                 brew home "${pickers[@]}"
             fi
+        fi
+    }
+
+    function ftsh() {
+        local initial_query token
+        local -a pickers
+        initial_query="${*:-}"
+        token=$(awk 'NR==FNR&&$1~/^Host/{print $2};{if(NR!=FNR&&$1~/[0-9.]+/){print $1}}' ~/.ssh/config ~/.ssh/known_hosts |\
+            rg -v 'localhost|:' |sort -u | \
+            fzf-tmux \
+            --query="$initial_query" \
+            -w60% -h60% -m -e -0 --border --ansi
+            )
+        pickers=($(echo "${token}" |tr "\n" " "))
+        if [ "x$token" != "x" ] && [[ "${#pickers}" == 1 ]]; then
+            if [[ "${token}" =~ ^[0-9.]+ ]] then
+                tssh root@"${token}"
+            else
+                tssh "${token}"
+            fi
+        else
+            for i in "${pickers[@]}";do
+                [[ "${i}" =~ ^[0-9.]+ ]] && tmux new-window "tssh root@$i" || tmux new-window -t "$i" "tssh $i"
+            done
         fi
     }
 
