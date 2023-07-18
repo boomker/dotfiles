@@ -291,7 +291,7 @@ fi
             fi
         else
             for i in "${pickers[@]}";do
-                [[ "${i}" =~ ^[0-9.]+ ]] && tmux new-window "tssh root@$i" || tmux new-window -t "$i" "tssh $i"
+                [[ "${i}" =~ ^[0-9.]+ ]] && tmux new-window "tssh root@$i" || tmux new-window -n "$i" "tssh $i"
             done
         fi
     }
