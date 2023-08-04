@@ -257,7 +257,7 @@ fi
         token=$(brew outdated |awk '$0 !~ /pin/{print $1}' | \
             fzf-tmux \
             --query="$initial_query" \
-            -m -e \
+            -m -e -1 --cycle \
             --preview 'brew info {}')
         pickers=($(echo "${token}" |tr "\n" " "))
         if [ "x$pickers" != "x" ]; then
@@ -280,7 +280,7 @@ fi
             rg -v 'localhost|:' |sort -u | \
             fzf-tmux \
             --query="$initial_query" \
-            -w60% -h60% -m -e -0 --border --ansi
+            -w60% -h60% -m -e -0 -1 --cycle --border --ansi
             )
         pickers=($(echo "${token}" |tr "\n" " "))
         if [ "x$token" != "x" ] && [[ "${#pickers}" == 1 ]]; then
@@ -398,7 +398,7 @@ fi
         local initial_query
         initial_query="${*:-}"
         tldr --list |sed -r "s/('|\[|\])//g;s/, /\n/g" |\
-            fzf --ansi \
+            fzf --ansi -e -0 -1 --cycle \
             --info=inline \
             --query "${initial_query}" \
             --preview-window='right:76%:wrap' \
@@ -551,8 +551,7 @@ fi
         fi
 
         gcfl "${remote_ori}" |fzf --ansi --scrollbar=▌▐ --preview-window=up:70%:wrap --preview \
-            "batdiff --delta --color --context=1 ${proj_root}/{}"
-            # "git diff ${branch:-${curBranch}} -- "${proj_root}/"{} |delta"
+            "[[ "x${remote_ori}" == 'x' ]] && batdiff --delta --color --context=1 ${proj_root}/{} || git diff ${branch:-${curBranch}} -- ${proj_root}/{} |delta"
     }
 
     # goto git_root

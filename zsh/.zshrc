@@ -251,6 +251,9 @@ bindkey -e '^xs' sudo-command-line
         --time-style=iso --icons --color=always --tree --level=2  -I=".git*" $realpath'
     zstyle ':fzf-tab:complete:(bat|exa|ls):argument-rest' fzf-flags --preview-window=right:70%:wrap
 
+    zstyle ':fzf-tab:complete:(bat|exa|ls):argument-rest' fzf-preview \
+        'bat --theme=Coldark-Dark --style=numbers,header --color=always $realpath'
+
     export MANPAGER="sh -c 'col -bx | bat -l man -p'"
     # man 2 select
     zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'MANWIDTH=$FZF_PREVIEW_COLUMNS \

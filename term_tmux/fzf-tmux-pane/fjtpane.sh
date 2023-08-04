@@ -6,7 +6,7 @@
 #===============================================================================
 get_fzf_options() {
     local fzf_options
-    local fzf_default_options='-w75% -h75% -m -e -0 --border --ansi --preview-window=up:70%:wrap --preview "tmux capture-pane -pJS -20 -t {1}"'
+    local fzf_default_options='-w75% -h75% -m -e -0 --cycle --border --ansi --preview-window=up:70%:wrap --preview "tmux capture-pane -pJS -20 -t {1}"'
     # fzf_options="$(tmux show -gqv '@fzf-tmux-pane-jump-option')"
     [ -n "$fzf_options" ] && echo "$fzf_options" || echo "$fzf_default_options"
 }
