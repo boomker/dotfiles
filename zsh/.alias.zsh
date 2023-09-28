@@ -532,7 +532,8 @@ fi
             git diff HEAD~${change_commits_count} HEAD --name-only
         else
             [[ ${local_changed} == 0 ]] && echo "nothing..."
-            git diff HEAD --name-only
+            # git diff HEAD --name-only
+            git status --short |gawk '/M/{print $2}'
         fi
     }
 
@@ -551,7 +552,7 @@ fi
         fi
 
         gcfl "${remote_ori}" |fzf --ansi --scrollbar=▌▐ --preview-window=up:70%:wrap --preview \
-            "[[ "x${remote_ori}" == 'x' ]] && batdiff --delta --color --context=1 ${proj_root}/{} || git diff ${branch:-${curBranch}} -- ${proj_root}/{} |delta"
+            "[[ "x${remote_ori}" == 'x' ]] && batdiff --delta --color --context=1 {} || git diff ${branch:-${curBranch}} -- ${proj_root}/{} |delta"
     }
 
     # goto git_root

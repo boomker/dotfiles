@@ -18,15 +18,16 @@
 [interactive]
     diffFilter = delta --color-only
 
-# [include]
-#     path = /Users/gaodun/.local/share/delta/themes.gitconfig
+[include]
+    path = /Users/zhuchunyuan/.config/delta/themes.gitconfig
 
 [delta]
-    features = kingfisher
+    features = mantis-shrimp
     navigate = true  # use n and N to move between diff sections
-    # side-by-side = true
+    side-by-side = false
     line-numbers = true
     true-color = always
+    tabs = 4
 
 [rebase]
     autoStash = true
