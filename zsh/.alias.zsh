@@ -184,10 +184,10 @@ if [[ $(uname -s) == "Darwin" ]] ; then
     alias brci="brew install --cask "
     alias brho="brew home "
     alias lsflags="/bin/ls -lO "
-    alias ls="exa --color=automatic"
-    alias l="exa --git --icons --color=automatic --git-ignore"
-    alias ll="exa -abghlF --color-scale --group-directories-first --git --icons --color=automatic --git-ignore"
-    alias la="exa -abghlF --color-scale --group-directories-first --git --icons --color=automatic"
+    alias ls="eza --color=automatic"
+    alias l="eza --git --icons --color=automatic --git-ignore"
+    alias ll="eza -abghlF --color-scale --group-directories-first --git --icons --color=automatic --git-ignore"
+    alias la="eza -abghlF --color-scale --group-directories-first --git --icons --color=automatic"
     # alias lt="ll --tree --level=2 -I='.git'"
     alias plp="plutil -p "
 
@@ -296,12 +296,12 @@ fi
         fi
     }
 
-    # exa(ls) with `tree` of option
+    # eza(ls) with `tree` of option
     function lt () {
         [[ "${1}" == -l ]] && {
-            exa_extra_parameter=("-bghlF" "--group-directories-first" "--git")
+            eza_extra_parameter=("-bghlF" "--group-directories-first" "--git")
             shift
-        } || exa_extra_parameter=("")
+        } || eza_extra_parameter=("")
 
         if [[  $# == 1 ]]; then
             [[ -d $1 ]] && {
@@ -316,9 +316,9 @@ fi
 
         [[ $# == 2 ]] && directory="${2}"
 
-        exa_default_parameter=("-a" "--color-scale" "--icons" "--color=automatic" "--tree" "--level=${level:-2}" '-I='.git'')
-        exa_parameter=(${exa_default_parameter[@]} ${exa_extra_parameter[@]})
-        exa  "${exa_parameter[@]}" "${directory:-.}"
+        eza_default_parameter=("-a" "--color-scale" "--icons" "--color=automatic" "--tree" "--level=${level:-2}" '-I='.git'')
+        eza_parameter=(${eza_default_parameter[@]} ${eza_extra_parameter[@]})
+        eza  "${eza_parameter[@]}" "${directory:-.}"
     }
 
     # git set work-tree

@@ -1,0 +1,293 @@
+import = [
+    "/Users/zhuchunyuan/.config/alacritty/catppuccin/catppuccin-frappe.toml",
+]
+live_config_reload = true
+
+[env]
+TERM = "alacritty"
+
+[font]
+size = 16
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[font.bold_italic]
+family = "JetBrainsMono Nerd Font"
+style = "Bold Italic"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Italic"
+
+[font.normal]
+family = "JetBrainsMonoNL Nerd Font"
+style = "Regular"
+
+[hints]
+alphabet = "jklfdsaiohgurewpq"
+
+[[hints.enabled]]
+command = "open"
+hyperlinks = true
+post_processing = true
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-<>\"\\s{-}\\^⟨⟩`]+"
+
+[hints.enabled.binding]
+key = "O"
+mods = "Command|Shift"
+
+[hints.enabled.mouse]
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u0007"
+key = "F"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0007x"
+key = "X"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0007u"
+key = "U"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0007n"
+key = "N"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0007N"
+key = "W"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0007|"
+key = "R"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u001Bd"
+key = "D"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;5C"
+key = "S"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;5D"
+key = "B"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0007c"
+key = "C"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0007,"
+key = "Comma"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0007c?"
+key = "Slash"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "ResetFontSize"
+key = "Key0"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Equals"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "DecreaseFontSize"
+key = "Minus"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "ToggleViMode"
+key = "Space"
+mode = "~Search"
+mods = "Shift|Command"
+
+[[keyboard.bindings]]
+action = "ScrollToBottom"
+key = "Space"
+mode = "Vi|~Search"
+mods = "Shift|Command"
+
+[[keyboard.bindings]]
+key = "N"
+mods = "Command|Shift"
+
+[keyboard.bindings.command]
+args = ["msg", "create-window", "-e", "/usr/local/bin/zsh"]
+program = "/usr/local/bin/alacritty"
+
+[[keyboard.bindings]]
+chars = "\u0007j"
+key = "J"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0007k"
+key = "K"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0007l"
+key = "L"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0007h"
+key = "Left"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0007j"
+key = "Down"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0007k"
+key = "Up"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0007:"
+key = "I"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0007o"
+key = "o"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0007l"
+key = "Right"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0007H"
+key = "H"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0007J"
+key = "J"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0007K"
+key = "K"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0007L"
+key = "L"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0007H"
+key = "Left"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0007J"
+key = "Down"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0007K"
+key = "Up"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0007L"
+key = "Right"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+chars = "\u00071"
+key = "Key1"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00072"
+key = "Key2"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00073"
+key = "Key3"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00074"
+key = "Key4"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00075"
+key = "Key5"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00076"
+key = "Key6"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00077"
+key = "Key7"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00078"
+key = "Key8"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00079"
+key = "Key9"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "ReceiveChar"
+key = "Back"
+
+[mouse]
+hide_when_typing = true
+bindings = [
+    { mouse = "Left", mods = "Control", action = "ExpandSelection" },
+    { mouse = "Middle", action = "PasteSelection" },
+]
+
+[selection]
+save_to_clipboard = true
+semantic_escape_chars = ",│`|:/\"' ()[]{}<>=-.\t"
+
+[shell]
+args = ["--login", "-c", "tmux new-session -A -D -s main"]
+program = "/usr/local/bin/zsh"
+
+[window]
+opacity = 0.9
+decorations = "buttonless"
+startup_mode = "Maximized"
+padding = { x = 3, y = 0 }
+dynamic_padding = true

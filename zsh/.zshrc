@@ -67,6 +67,8 @@ export LANG=en_US.UTF-8
 export XDG_CONFIG_HOME="$HOME/.config"
 HIST_STAMPS="mm/dd/yyyy"
 
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
 # 以下字符视为单词的一部分
 WORDCHARS='*?[]~&;!#$%^(){}<>'
 
@@ -90,6 +92,7 @@ if [[ $(uname -s) == "Darwin" ]]; then
 
     # GNU cmd tools PATH for Mac:
     export PATH="${HOME}/.yarn/bin:${HOME}/.cargo/bin:${HOME}/go/bin:$PATH"
+    export PATH="/usr/local/opt/openjdk/bin:$PATH"
     # export PATH="/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin:${PATH}"
     export MANPATH="/usr/local/man:/usr/local/share/man:${MANPATH}"
     export MANPATH="/usr/local/opt/coreutils/share/man:${MANPATH}"
@@ -136,7 +139,7 @@ fi
         '(bat --style=numbers --color=always --line-range=:100 {} ) 2>/dev/null'"
 
     export FZF_ALT_C_OPTS="--preview-window=right:70%:wrap --preview \
-        '(exa -ahlF --color-scale --group-directories-first  --icons \
+        '(eza -ahlF --color-scale --group-directories-first  --icons \
         --color=always --tree --level=2  -I=\".git*\" {}) 2>/dev/null |head -20'"
 
     export FZF_DEFAULT_OPTS=" --exact --multi --ansi --height 70% --reverse --border --tiebreak=begin \
@@ -242,25 +245,13 @@ bindkey -e '^xs' sudo-command-line
     zstyle ':notify:*' always-notify-on-failure no
 
 # fzf-tab config:
-    # zstyle ':fzf-tab:*' fzf-flags --ansi
-    # zstyle ':completion:*' group-name ''
-    zstyle ':fzf-tab:complete:(bat|exa|ls):argument-rest' fzf-preview '\
-        [[ -f $realpath && ! $word =~ ".git*" ]] && \
-        bat --theme=Coldark-Dark --style=numbers,header --color=always $realpath || \
-        exa -ahlF --color-scale --group-directories-first --no-permissions --no-user \
-        --time-style=iso --icons --color=always --tree --level=2  -I=".git*" $realpath'
-    zstyle ':fzf-tab:complete:(bat|exa|ls):argument-rest' fzf-flags --preview-window=right:70%:wrap
 
-    zstyle ':fzf-tab:complete:(bat|exa|ls):argument-rest' fzf-preview \
+    zstyle ':fzf-tab:complete:bat:argument-rest' fzf-preview \
         'bat --theme=Coldark-Dark --style=numbers,header --color=always $realpath'
+    zstyle ':fzf-tab:complete:bat:argument-rest' fzf-flags --preview-window=right:70%:wrap
 
-    export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-    # man 2 select
-    zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'MANWIDTH=$FZF_PREVIEW_COLUMNS \
-        man $word |bat -l man --color=always'
-
-    # preview directory's content with exa when completing cd
-    zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -a1 --icons --color=always $realpath'
+    # preview directory's content with eza when completing cd
+    zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -a1 --icons --color=always $realpath'
 
     # use input as query string when completing zlua
     zstyle ':fzf-tab:complete:_zlua:*' query-string input
