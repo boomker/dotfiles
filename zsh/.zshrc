@@ -30,23 +30,25 @@ if [[ $- =~ i ]]; then
     # alias.zsh conf:
     [ -f ~/.alias.zsh ]  && zsh-defer source ~/.alias.zsh
     [ -f ~/.fzf.zsh ] && zsh-defer source ~/.fzf.zsh
-    [ -f "${HOME}/.fzf-git.sh" ] && zsh-defer source "${HOME}/.fzf-git.sh"
+    #[ -f "${HOME}/.fzf-git.sh" ] && zsh-defer source "${HOME}/.fzf-git.sh"
 
     # nvm config:
     # curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-    export NVM_DIR="/usr/local/opt/nvm"
-    zsh-defer -c '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"'  # This loads nvm
-    export NVM_LAZY_LOAD=true
-    [ -f "${PREZCUSMODIR}/zsh-nvm/zsh-nvm.plugin.zsh" ] && zsh-defer source "${PREZCUSMODIR}/zsh-nvm/zsh-nvm.plugin.zsh"
+    #export NVM_DIR="/usr/local/opt/nvm"
+    #zsh-defer -c '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"'  # This loads nvm
+    #export NVM_LAZY_LOAD=true
+    #[ -f "${PREZCUSMODIR}/zsh-nvm/zsh-nvm.plugin.zsh" ] && zsh-defer source "${PREZCUSMODIR}/zsh-nvm/zsh-nvm.plugin.zsh"
 
     # zoxide config:
     [[ -e $(which zoxide) ]] && eval "$(zoxide init zsh)"
 
     # zsh-notify
+    # git@github.com:marzocchi/zsh-notify.git
     [ -f "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh" ] && [[ -n ${TERM_PROGRAM} ]] && \
         [[ ${TERM_PROGRAM} != 'vscode' ]] && source "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh"
 
     # zsh-autopair
+    # git@github.com:hlissner/zsh-autopair.git
     [ -f "${PREZCUSMODIR}/zsh-autopair/autopair.zsh" ] && [[ -n ${TERM_PROGRAM} ]] && \
         source "${PREZCUSMODIR}/zsh-autopair/autopair.zsh" && autopair-init
 
@@ -74,25 +76,22 @@ WORDCHARS='*?[]~&;!#$%^(){}<>'
 
 ## configure pyvenv, Homebrew, PATH(GNU CLI tools), catalog ,git on MacOS {{{
 if [[ $(uname -s) == "Darwin" ]]; then
-    # pyenv &&pyenv-virtualenv configuration:
-    # export PYENV_ROOT="/usr/local/opt/pyenv"
-    # export VIRTUALENV_ROOT="/usr/local/opt/pyenv-virtualenv"
-    # export PATH="${PYENV_ROOT}/bin:${VIRTUALENV_ROOT}/bin:$PATH"
-    # eval "$(pyenv init -)"
-    # eval "$(pyenv virtualenv-init -)"
+    export PIPX_HOME="/usr/local/opt/pipx"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
 
-    # HomeBrew more fast conf:
-    #export HOMEBREW_GITHUB_API_TOKEN=""
-    export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-    export HOMEBREW_API_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api"
-    export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles"
-    export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
-    export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
-    export HOMEBREW_PIP_INDEX_URL="https://pypi.tuna.tsinghua.edu.cn/simple"
+    ## HomeBrew more fast conf:
+    # export HOMEBREW_GITHUB_API_TOKEN=""
+    # export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+    # export HOMEBREW_API_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api"
+    # export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles"
+    # export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
+    # export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
+    # export HOMEBREW_PIP_INDEX_URL="https://pypi.tuna.tsinghua.edu.cn/simple"
 
     # GNU cmd tools PATH for Mac:
     export PATH="${HOME}/.yarn/bin:${HOME}/.cargo/bin:${HOME}/go/bin:$PATH"
-    export PATH="/usr/local/opt/openjdk/bin:$PATH"
+    export PATH="${HOME}/.local/bin:/usr/local/opt/openjdk/bin:$PATH"
     # export PATH="/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin:${PATH}"
     export MANPATH="/usr/local/man:/usr/local/share/man:${MANPATH}"
     export MANPATH="/usr/local/opt/coreutils/share/man:${MANPATH}"
@@ -108,13 +107,13 @@ fi
 # }}}
 
 
-# JDK/Tomcat Path {{{
-    export JAVA_HOME=/usr/local/opt/java
+# -------------JDK/Tomcat Path---------------------------- {{{
+    # export JAVA_HOME=/usr/local/opt/java
     # export TOMCAT_HOME=/opt/tomcat8
     # export CATALINA_HOME=$TOMCAT_HOME
-    export CLASSPATH=.:${JAVA_HOME}/libexec/openjdk.jdk/Contents/Home/lib
+    # export CLASSPATH=.:${JAVA_HOME}/libexec/openjdk.jdk/Contents/Home/lib
     # export CLASSPATH=.:${JAVA_HOME}/lib:${CATALINA_HOME}/lib
-    export PATH=${JAVA_HOME}/bin:$PATH
+    # export PATH=${JAVA_HOME}/bin:$PATH
 # }}}
 
 

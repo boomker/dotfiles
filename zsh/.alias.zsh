@@ -516,10 +516,12 @@ fi
 		ori_url=$(git remote get-url ${remote_ori:-'origin'})
 		if [[ -z `echo $ori_url |grep '@'` ]]; then
 			open $ori_url
+            [[ $? != 0 ]] && open -a "Google Chrome" $ori_url
 		else
 			# new_url=${ori_url/git::@}
             new_url=$(echo ${ori_url} |awk -F'@' '{print $2}' |sed 's#m:#m/#g')
 			open https://$new_url
+            [[ $? != 0 ]] && open -a "Google Chrome" https://$new_url
 		fi
     }
 
@@ -527,13 +529,15 @@ fi
         local opt="$1"
         local change_commits_count=$(git status |awk 'NR==2{print $(NF-1)}')
         local local_changed=$(git diff HEAD --name-only |wc -l)
-        [[ ${opt} == "ori" ]] && local_changed=0
-        if [[ ${change_commits_count} =~ [0-9]+ ]] &&  [[ ${local_changed} == 0 ]] then
+        if [[ ${opt} == "local" ]] then
+            [[ ${local_changed} == 0 ]] && echo "nothing..."
+            git status --short |gawk '/M/{print $2}'
+		elif [[ ${change_commits_count} =~ [0-9]+ ]] then
             git diff HEAD~${change_commits_count} HEAD --name-only
         else
             [[ ${local_changed} == 0 ]] && echo "nothing..."
-            # git diff HEAD --name-only
-            git status --short |gawk '/M/{print $2}'
+            git status --short |gawk '{print $2}'
+            # git status --short |gawk '/M/{print $2}'
         fi
     }
 
@@ -541,18 +545,19 @@ fi
         remote_ori=$1
         local curBranch=$(git branch --show-current)
         local local_changed=$(git diff HEAD --name-only |wc -l)
+        local change_commits_count=$(git status |awk 'NR==2{print $(NF-1)}')
         local proj_root=$(git rev-parse --show-toplevel)
 
-        if [[ ${remote_ori} == "" ]] && [[ ${local_changed} > 0 ]] then
+        if [[ ${remote_ori} == "" ]] && [[ ${local_changed} > 0 ]] && [[ ${change_commits_count} =~ [a-z]+ ]] then
             branch=${curBranch}
-        elif [[ ${remote_ori} == "ori" ]] then
+        elif [[ ${remote_ori} == "local" ]] then
             branch="origin"/"${curBranch}"
         else
-            branch=${remote_ori:-origin}"/"${curBranch}
+            branch=${remote_ori:-origin}"/"${curBranch}"~${change_commits_count}"
         fi
 
         gcfl "${remote_ori}" |fzf --ansi --scrollbar=▌▐ --preview-window=up:70%:wrap --preview \
-            "[[ "x${remote_ori}" == 'x' ]] && batdiff --delta --color --context=1 {} || git diff ${branch:-${curBranch}} -- ${proj_root}/{} |delta"
+            "[[ "x${remote_ori}" == 'x' ]] && git diff ${branch:-${curBranch}} -- ${proj_root}/{} |delta || batdiff --delta --color --context=1 {}"
     }
 
     # goto git_root
@@ -572,12 +577,6 @@ fi
     # grep for zip archive
     function zipgrep() {
         zipinfo -t -1 -M "$2" |grep "$1"
-    }
-
-    # copy file to clipboard
-    function cftc() {
-        osascript -e 'tell app "Finder" to set the clipboard to ( POSIX file "'$1'" )'
-        echo "The $1 has been copied to the clipboard 😁"
     }
 
     # Update project dependencies

@@ -1,5 +1,5 @@
 import = [
-    "/Users/zhuchunyuan/.config/alacritty/catppuccin/catppuccin-frappe.toml",
+    "/Users/cy.zhu/.config/alacritty/themes/catppuccin-frappe.toml",
 ]
 live_config_reload = true
 
@@ -133,7 +133,8 @@ key = "N"
 mods = "Command|Shift"
 
 [keyboard.bindings.command]
-args = ["msg", "create-window", "-e", "/usr/local/bin/zsh"]
+args = ["msg", "create-window", "-e", "/bin/zsh"]
+# args = ["msg", "create-window", "-e", "/usr/local/bin/zsh"]
 program = "/usr/local/bin/alacritty"
 
 [[keyboard.bindings]]
@@ -283,7 +284,8 @@ semantic_escape_chars = ",│`|:/\"' ()[]{}<>=-.\t"
 
 [shell]
 args = ["--login", "-c", "tmux new-session -A -D -s main"]
-program = "/usr/local/bin/zsh"
+program = "/bin/zsh"
+# program = "/usr/local/bin/zsh"
 
 [window]
 opacity = 0.9
