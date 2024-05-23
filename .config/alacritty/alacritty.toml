@@ -1,5 +1,5 @@
 import = [
-    "/Users/cy.zhu/.config/alacritty/themes/catppuccin-frappe.toml",
+    "~/.config/alacritty/themes/catppuccin-frappe.toml",
 ]
 live_config_reload = true
 

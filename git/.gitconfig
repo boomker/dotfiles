@@ -19,7 +19,7 @@
     diffFilter = delta --color-only
 
 [include]
-    path = /Users/zhuchunyuan/.config/delta/themes.gitconfig
+    path = /Users/cyzhu/.config/delta/themes.gitconfig
 
 [delta]
     features = mantis-shrimp
@@ -96,10 +96,10 @@
 [init]
     defaultBranch = main
 [http "https://github.com"]
-    proxy = http://127.0.0.1:1080
+    proxy = http://127.0.0.1:1087
     postBuffer = 524288000
 [https "https://github.com"]
-    proxy = http://127.0.0.1:1080
+    proxy = http://127.0.0.1:1087
 [http "https://github.com"]
 	proxy = socks5://127.0.0.1:1080
 [filter "lfs"]
