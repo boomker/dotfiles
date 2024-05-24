@@ -19,8 +19,6 @@ if [[ $- =~ i ]]; then
 
 	# alias.zsh conf:
 	[ -f ~/.alias.zsh ] && zsh-defer source ~/.alias.zsh
-	[ -f ~/.fzf.zsh ] && zsh-defer source ~/.fzf.zsh
-	#[ -f "${HOME}/.fzf-git.sh" ] && zsh-defer source "${HOME}/.fzf-git.sh"
 
 	# nvm config:
 	# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
@@ -30,7 +28,12 @@ if [[ $- =~ i ]]; then
 	#[ -f "${PREZCUSMODIR}/zsh-nvm/zsh-nvm.plugin.zsh" ] && zsh-defer source "${PREZCUSMODIR}/zsh-nvm/zsh-nvm.plugin.zsh"
 
 	# zoxide config:
-	[[ -e $(which zoxide) ]] && eval "$(zoxide init zsh)"
+	[[ -e $(which zoxide) ]] && zsh-defer eval "$(zoxide init zsh)"
+
+	[[ -e $(which atuin) ]] && zsh-defer eval "$(atuin init zsh)"
+
+	FZF_CTRL_R_COMMAND= source <(fzf --zsh)
+	#[ -f "${HOME}/.fzf-git.sh" ] && zsh-defer source "${HOME}/.fzf-git.sh"
 
 	# zsh-notify
 	# git@github.com:marzocchi/zsh-notify.git
@@ -109,13 +112,13 @@ export FD_OPTIONS="--follow --exclude .git --exclude .idea --exclude node_module
 export FZF_DEFAULT_COMMAND="fd -H --type f --type l ${FD_OPTIONS}"
 export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 
-export FZF_CTRL_R_OPTS="
-        --preview 'echo {}' --preview-window up:3:hidden:wrap
-        --bind 'ctrl-/:toggle-preview'
-        --bind 'ctrl-t:track+clear-query'
-        --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
-        --color header:italic
-        --header 'Press CTRL-Y to copy command into clipboard'"
+# export FZF_CTRL_R_OPTS="
+#         --preview 'echo {}' --preview-window up:3:hidden:wrap
+#         --bind 'ctrl-/:toggle-preview'
+#         --bind 'ctrl-t:track+clear-query'
+#         --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+#         --color header:italic
+#         --header 'Press CTRL-Y to copy command into clipboard'"
 export FZF_CTRL_T_OPTS="
         --bind 'ctrl-y:execute-silent(printf {} | cut -f 2- |pbcopy)+accept' \
         --bind 'alt-e:become(nvim {} > /dev/tty)+abort' \

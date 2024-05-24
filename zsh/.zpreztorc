@@ -120,7 +120,7 @@ zstyle ':prezto:module:gnu-utility' prefix 'g'
 #
 
 # Set the file to save the history in when an interactive shell exits.
-zstyle ':prezto:module:history' histfile "${ZDOTDIR:-$HOME}/.zsh_history"
+zstyle ':prezto:module:history' histfile "${ZDOTDIR:-$HOME}/.cache/prezto/shell/.zsh_history"
 
 # Set the maximum  number  of  events  stored  in  the  internal history list.
 zstyle ':prezto:module:history' histsize 10000
