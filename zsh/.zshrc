@@ -30,7 +30,7 @@ if [[ $- =~ i ]]; then
 	# zoxide config:
 	[[ -e $(which zoxide) ]] && zsh-defer eval "$(zoxide init zsh)"
 
-	[[ -e $(which atuin) ]] && zsh-defer eval "$(atuin init zsh)"
+	[[ -e $(which atuin) ]] && zsh-defer eval "$(atuin init zsh --disable-up-arrow)"
 
 	FZF_CTRL_R_COMMAND= source <(fzf --zsh)
 	#[ -f "${HOME}/.fzf-git.sh" ] && zsh-defer source "${HOME}/.fzf-git.sh"
