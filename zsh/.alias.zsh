@@ -15,7 +15,7 @@ alias -g B="   bat "
 alias -g BG="  batgrep -S"
 alias -g BH="  bat --plain --language=help"
 alias -g BS="  bat --plain --language=bash"
-alias -g C="   choose "
+alias -g C="   hck "
 alias -g D="   delta -s"
 alias -g RX="  rargs"
 alias -g X="   xargs"
@@ -41,16 +41,15 @@ alias -g COL8="awk '{ print \$8 }'"
 alias -g COL9="awk '{ print \$9 }'"
 alias -g COL0="awk '{ print \$NF }'"
 
-# alias -g C0="|choose 0"
-alias -g C1=" choose 0"
-alias -g C2=" choose 1"
-alias -g C3=" choose 2"
-alias -g C4=" choose 3"
-alias -g C5=" choose 4"
-alias -g C6=" choose 5"
-alias -g C7=" choose 6"
-alias -g C8=" choose 7"
-alias -g C9=" choose 8"
+alias -g C1=" hck -f 1"
+alias -g C2=" hck -f 2"
+alias -g C3=" hck -f 3"
+alias -g C4=" hck -f 4"
+alias -g C5=" hck -f 5"
+alias -g C6=" hck -f 6"
+alias -g C7=" hck -f 7"
+alias -g C8=" hck -f 8"
+alias -g C9=" hck -f 9"
 
 # awk 去重+合并文件内容(相当于两文件的并集，两文件去重后再合并), 而且能保证文件内容顺序
 alias auq="awk '!U[\$0]++' "
@@ -406,7 +405,7 @@ function ftl() {
 }
 
 function fjtpane() {
-	tmux select-window -t $(echo $(tmux list-windows | fzf-tmux -p) | choose 0 -f ':')
+	tmux select-window -t $(echo $(tmux list-windows | fzf-tmux -p) | hck -f 1 -d:)
 }
 # goto other pane in tmux
 function fjpane() {
