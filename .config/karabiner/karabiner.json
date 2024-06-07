@@ -151,37 +151,6 @@
                         ]
                     },
                     {
-                        "description": "Tap Shift_R (⇧) → Switch input source (F15)  |  短按右 Shift (⇧) → 切换输入法",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "right_shift",
-                                    "modifiers": {
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "right_shift"
-                                    }
-                                ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "f15"
-                                    }
-                                ],
-                                "to_if_held_down": [
-                                    {
-                                        "key_code": "right_shift"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "Tap Control_L (⌃) → CapsLock (⇪); Hold Control_L (⌃) → Super Key (⌃⌥⌘)",
                         "manipulators": [
                             {
@@ -223,14 +192,14 @@
                         ]
                     },
                     {
-                        "description": "Ctrl + Arrow Keys to Option + Arrow Keys",
+                        "description": "left_control + Arrow Keys to Option + Arrow Keys",
                         "manipulators": [
                             {
                                 "from": {
                                     "key_code": "up_arrow",
                                     "modifiers": {
                                         "mandatory": [
-                                            "control"
+                                            "left_control"
                                         ]
                                     }
                                 },
@@ -249,7 +218,7 @@
                                     "key_code": "down_arrow",
                                     "modifiers": {
                                         "mandatory": [
-                                            "control"
+                                            "left_control"
                                         ]
                                     }
                                 },
@@ -268,7 +237,7 @@
                                     "key_code": "left_arrow",
                                     "modifiers": {
                                         "mandatory": [
-                                            "control"
+                                            "left_control"
                                         ]
                                     }
                                 },
@@ -287,7 +256,7 @@
                                     "key_code": "right_arrow",
                                     "modifiers": {
                                         "mandatory": [
-                                            "control"
+                                            "left_control"
                                         ]
                                     }
                                 },
@@ -304,14 +273,14 @@
                         ]
                     },
                     {
-                        "description": "Ctrl + Shift + Arrow Keys to Option + Shift + Arrow Keys",
+                        "description": "left_control + Shift + Arrow Keys to Option + Shift + Arrow Keys",
                         "manipulators": [
                             {
                                 "from": {
                                     "key_code": "up_arrow",
                                     "modifiers": {
                                         "mandatory": [
-                                            "control",
+                                            "left_control",
                                             "shift"
                                         ]
                                     }
@@ -332,7 +301,7 @@
                                     "key_code": "down_arrow",
                                     "modifiers": {
                                         "mandatory": [
-                                            "control",
+                                            "left_control",
                                             "shift"
                                         ]
                                     }
@@ -353,7 +322,7 @@
                                     "key_code": "left_arrow",
                                     "modifiers": {
                                         "mandatory": [
-                                            "control",
+                                            "left_control",
                                             "shift"
                                         ]
                                     }
@@ -374,7 +343,7 @@
                                     "key_code": "right_arrow",
                                     "modifiers": {
                                         "mandatory": [
-                                            "control",
+                                            "left_control",
                                             "shift"
                                         ]
                                     }
@@ -456,7 +425,7 @@
                         ]
                     },
                     {
-                        "description": "Ctrl + h to Option + left_Arrow Keys",
+                        "description": "left_control + h to Option + left_Arrow Keys",
                         "manipulators": [
                             {
                                 "conditions": [
@@ -474,7 +443,7 @@
                                     "key_code": "h",
                                     "modifiers": {
                                         "mandatory": [
-                                            "control"
+                                            "left_control"
                                         ]
                                     }
                                 },
@@ -491,7 +460,7 @@
                         ]
                     },
                     {
-                        "description": "Ctrl + l to Option + right_Arrow Keys",
+                        "description": "left_control + l to Option + right_Arrow Keys",
                         "manipulators": [
                             {
                                 "conditions": [
@@ -510,7 +479,7 @@
                                     "key_code": "l",
                                     "modifiers": {
                                         "mandatory": [
-                                            "control"
+                                            "left_control"
                                         ]
                                     }
                                 },
@@ -4786,7 +4755,9 @@
                 {
                     "disable_built_in_keyboard_if_exists": false,
                     "fn_function_keys": [],
+                    "game_pad_swap_sticks": false,
                     "identifiers": {
+                        "is_game_pad": false,
                         "is_keyboard": true,
                         "is_pointing_device": false,
                         "product_id": 65535,
@@ -4794,6 +4765,13 @@
                     },
                     "ignore": false,
                     "manipulate_backslash_led": true,
+                    "manipulate_caps_lock_led": true,
+                    "mouse_flip_horizontal_wheel": false,
+                    "mouse_flip_vertical_wheel": false,
+                    "mouse_flip_x": false,
+                    "mouse_flip_y": false,
+                    "mouse_swap_wheels": false,
+                    "mouse_swap_xy": false,
                     "simple_modifications": [
                         {
                             "from": {
@@ -4841,7 +4819,9 @@
                 {
                     "disable_built_in_keyboard_if_exists": false,
                     "fn_function_keys": [],
+                    "game_pad_swap_sticks": false,
                     "identifiers": {
+                        "is_game_pad": false,
                         "is_keyboard": true,
                         "is_pointing_device": false,
                         "product_id": 597,
@@ -4849,13 +4829,22 @@
                     },
                     "ignore": false,
                     "manipulate_backslash_led": true,
+                    "manipulate_caps_lock_led": true,
+                    "mouse_flip_horizontal_wheel": false,
+                    "mouse_flip_vertical_wheel": false,
+                    "mouse_flip_x": false,
+                    "mouse_flip_y": false,
+                    "mouse_swap_wheels": false,
+                    "mouse_swap_xy": false,
                     "simple_modifications": [],
                     "treat_as_built_in_keyboard": false
                 },
                 {
                     "disable_built_in_keyboard_if_exists": false,
                     "fn_function_keys": [],
+                    "game_pad_swap_sticks": false,
                     "identifiers": {
+                        "is_game_pad": false,
                         "is_keyboard": true,
                         "is_pointing_device": false,
                         "product_id": 610,
@@ -4863,13 +4852,22 @@
                     },
                     "ignore": false,
                     "manipulate_backslash_led": true,
+                    "manipulate_caps_lock_led": true,
+                    "mouse_flip_horizontal_wheel": false,
+                    "mouse_flip_vertical_wheel": false,
+                    "mouse_flip_x": false,
+                    "mouse_flip_y": false,
+                    "mouse_swap_wheels": false,
+                    "mouse_swap_xy": false,
                     "simple_modifications": [],
                     "treat_as_built_in_keyboard": false
                 },
                 {
                     "disable_built_in_keyboard_if_exists": false,
                     "fn_function_keys": [],
+                    "game_pad_swap_sticks": false,
                     "identifiers": {
+                        "is_game_pad": false,
                         "is_keyboard": false,
                         "is_pointing_device": true,
                         "product_id": 610,
@@ -4877,13 +4875,22 @@
                     },
                     "ignore": true,
                     "manipulate_backslash_led": false,
+                    "manipulate_caps_lock_led": false,
+                    "mouse_flip_horizontal_wheel": false,
+                    "mouse_flip_vertical_wheel": false,
+                    "mouse_flip_x": false,
+                    "mouse_flip_y": false,
+                    "mouse_swap_wheels": false,
+                    "mouse_swap_xy": false,
                     "simple_modifications": [],
                     "treat_as_built_in_keyboard": false
                 },
                 {
                     "disable_built_in_keyboard_if_exists": false,
                     "fn_function_keys": [],
+                    "game_pad_swap_sticks": false,
                     "identifiers": {
+                        "is_game_pad": false,
                         "is_keyboard": false,
                         "is_pointing_device": true,
                         "product_id": 49271,
@@ -4891,13 +4898,22 @@
                     },
                     "ignore": true,
                     "manipulate_backslash_led": false,
+                    "manipulate_caps_lock_led": false,
+                    "mouse_flip_horizontal_wheel": false,
+                    "mouse_flip_vertical_wheel": false,
+                    "mouse_flip_x": false,
+                    "mouse_flip_y": false,
+                    "mouse_swap_wheels": false,
+                    "mouse_swap_xy": false,
                     "simple_modifications": [],
                     "treat_as_built_in_keyboard": false
                 },
                 {
                     "disable_built_in_keyboard_if_exists": false,
                     "fn_function_keys": [],
+                    "game_pad_swap_sticks": false,
                     "identifiers": {
+                        "is_game_pad": false,
                         "is_keyboard": true,
                         "is_pointing_device": false,
                         "product_id": 2311,
@@ -4905,13 +4921,22 @@
                     },
                     "ignore": false,
                     "manipulate_backslash_led": true,
+                    "manipulate_caps_lock_led": true,
+                    "mouse_flip_horizontal_wheel": false,
+                    "mouse_flip_vertical_wheel": false,
+                    "mouse_flip_x": false,
+                    "mouse_flip_y": false,
+                    "mouse_swap_wheels": false,
+                    "mouse_swap_xy": false,
                     "simple_modifications": [],
                     "treat_as_built_in_keyboard": false
                 },
                 {
                     "disable_built_in_keyboard_if_exists": false,
                     "fn_function_keys": [],
+                    "game_pad_swap_sticks": false,
                     "identifiers": {
+                        "is_game_pad": false,
                         "is_keyboard": true,
                         "is_pointing_device": true,
                         "product_id": 2311,
@@ -4919,13 +4944,22 @@
                     },
                     "ignore": true,
                     "manipulate_backslash_led": true,
+                    "manipulate_caps_lock_led": true,
+                    "mouse_flip_horizontal_wheel": false,
+                    "mouse_flip_vertical_wheel": false,
+                    "mouse_flip_x": false,
+                    "mouse_flip_y": false,
+                    "mouse_swap_wheels": false,
+                    "mouse_swap_xy": false,
                     "simple_modifications": [],
                     "treat_as_built_in_keyboard": false
                 },
                 {
                     "disable_built_in_keyboard_if_exists": false,
                     "fn_function_keys": [],
+                    "game_pad_swap_sticks": false,
                     "identifiers": {
+                        "is_game_pad": false,
                         "is_keyboard": false,
                         "is_pointing_device": true,
                         "product_id": 20499,
@@ -4933,6 +4967,13 @@
                     },
                     "ignore": true,
                     "manipulate_backslash_led": false,
+                    "manipulate_caps_lock_led": false,
+                    "mouse_flip_horizontal_wheel": false,
+                    "mouse_flip_vertical_wheel": false,
+                    "mouse_flip_x": false,
+                    "mouse_flip_y": false,
+                    "mouse_swap_wheels": false,
+                    "mouse_swap_xy": false,
                     "simple_modifications": [],
                     "treat_as_built_in_keyboard": false
                 }
@@ -4944,7 +4985,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "display_brightness_decrement"
+                            "key_code": "f1"
                         }
                     ]
                 },
@@ -4954,7 +4995,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "display_brightness_increment"
+                            "key_code": "f2"
                         }
                     ]
                 },
@@ -4964,7 +5005,7 @@
                     },
                     "to": [
                         {
-                            "apple_vendor_keyboard_key_code": "mission_control"
+                            "key_code": "f3"
                         }
                     ]
                 },
@@ -4974,7 +5015,7 @@
                     },
                     "to": [
                         {
-                            "apple_vendor_keyboard_key_code": "spotlight"
+                            "key_code": "f4"
                         }
                     ]
                 },
@@ -4984,7 +5025,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "dictation"
+                            "key_code": "f5"
                         }
                     ]
                 },
@@ -5004,7 +5045,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "rewind"
+                            "key_code": "f7"
                         }
                     ]
                 },
@@ -5014,7 +5055,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "play_or_pause"
+                            "key_code": "f8"
                         }
                     ]
                 },
@@ -5024,7 +5065,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "fast_forward"
+                            "key_code": "f9"
                         }
                     ]
                 },
@@ -5034,7 +5075,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "mute"
+                            "key_code": "f10"
                         }
                     ]
                 },
@@ -5044,7 +5085,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "volume_decrement"
+                            "key_code": "f11"
                         }
                     ]
                 },
@@ -5054,7 +5095,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "volume_increment"
+                            "key_code": "f12"
                         }
                     ]
                 }
