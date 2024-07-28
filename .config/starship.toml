@@ -11,11 +11,12 @@ $directory\
 [](fg:#769ff0 bg:#394260)\
 $git_branch\
 $git_status\
-[](fg:#394260)\
+[](fg:#394260 bg:#212736)\
 $nodejs\
 $rust\
 $golang\
 $python\
+[](fg:#212736 bg:#6373a2)\
 $time\
 [](fg:#6373a2)\
 \n$character"""
@@ -23,7 +24,7 @@ $time\
 [username]
 style_user = 'white bold'
 style_root = 'black bold'
-format = ' 👨[ $user]($style)'
+format = ' 👨[ $user]($style) '
 disabled = false
 show_always = true
 # aliases = { "corpuser034g" = "matchai" }
@@ -34,7 +35,8 @@ symbol = '🔴 '
 success_symbol = '🟢 SUCCESS'
 map_symbol = true
 disabled = false
-format = '[[ $symbol$signal_name ](fg:#769ff0 bg:black)]($style)'
+# format = '[[ $symbol$signal_name ](fg:#769ff0 bg:black)]($style)'
+format = '[[ $symbol$common_meaning$signal_name$maybe_int ](fg:#769ff0 bg:black)]($style)'
 
 [directory]
 style = "fg:#e3e5e5 bg:#769ff0"
@@ -85,8 +87,9 @@ format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
 [python]
 symbol = '🐍 '
-style = "fg:#d3eb86 bg:#212736"
-pyenv_version_name = true
+style = "bg:#212736"
+format = '[[ ${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )](fg:#769ff0 bg:#212736)]($style)'
+pyenv_version_name = false
 
 [php]
 symbol = ""
