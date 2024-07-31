@@ -7,8 +7,6 @@ if [[ $- =~ i ]]; then
 		source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 	fi
 
-	# prompt
-	[[ -e $(which starship) ]] && eval "$(starship init zsh)"
 	export PREZCUSMODIR="$HOME/.zprezto-contrib"
 
 	# 延迟执行或加载zsh 命令或脚本
@@ -27,9 +25,16 @@ if [[ $- =~ i ]]; then
 	#export NVM_LAZY_LOAD=true
 	#[ -f "${PREZCUSMODIR}/zsh-nvm/zsh-nvm.plugin.zsh" ] && zsh-defer source "${PREZCUSMODIR}/zsh-nvm/zsh-nvm.plugin.zsh"
 
+	# prompt
+	[[ -e $(which starship) ]] && zsh-defer eval "$(starship init zsh)"
+
 	# zoxide config:
 	[[ -e $(which zoxide) ]] && zsh-defer eval "$(zoxide init zsh)"
 
+	# Git status
+	[[ -e $(which scmpuff) ]] && zsh-defer eval "$(scmpuff init -s)"
+
+	# shell history search
 	[[ -e $(which atuin) ]] && zsh-defer eval "$(atuin init zsh --disable-up-arrow)"
 
 	FZF_CTRL_R_COMMAND= source <(fzf --zsh)
@@ -46,10 +51,6 @@ if [[ $- =~ i ]]; then
 		source "${PREZCUSMODIR}/zsh-autopair/autopair.zsh" && autopair-init
 
 fi
-
-# autoload -Uz promptinit
-# promptinit
-# prompt powerlevel10k
 
 # Customize to your needs...
 
@@ -72,7 +73,6 @@ if [[ $(uname -s) == "Darwin" ]]; then
 	# eval "$(pyenv virtualenv-init -)"
 
 	## HomeBrew more fast conf:
-	# export HOMEBREW_GITHUB_API_TOKEN=""
 	# export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 	# export HOMEBREW_API_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api"
 	# export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles"
@@ -83,7 +83,6 @@ if [[ $(uname -s) == "Darwin" ]]; then
 	# GNU cmd tools PATH for Mac:
 	export PATH="${HOME}/.yarn/bin:${HOME}/.cargo/bin:${HOME}/go/bin:$PATH"
 	export PATH="${HOME}/.local/bin:/usr/local/opt/openjdk/bin:$PATH"
-	# export PATH="/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin:${PATH}"
 	export MANPATH="/usr/local/man:/usr/local/share/man:${MANPATH}"
 	export MANPATH="/usr/local/opt/coreutils/share/man:${MANPATH}"
 
@@ -108,7 +107,13 @@ export VIMRUNTIME="${HOME}/.nvim/runtime"
 # ------fzf & fd & bat configuration----------
 export BAT_THEME="Coldark-Dark"
 export BATDIFF_USE_DELTA=true
-export FD_OPTIONS="--follow --exclude .git --exclude .idea --exclude node_modules --exclude venv"
+
+export FD_OPTIONS="
+	--follow
+	--exclude venv
+	--exclude .git
+	--exclude .idea
+	--exclude node_modules "
 export FZF_DEFAULT_COMMAND="fd -H --type f --type l ${FD_OPTIONS}"
 export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 
@@ -119,6 +124,7 @@ export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 #         --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
 #         --color header:italic
 #         --header 'Press CTRL-Y to copy command into clipboard'"
+
 export FZF_CTRL_T_OPTS="
         --bind 'ctrl-y:execute-silent(printf {} | cut -f 2- |pbcopy)+accept' \
         --bind 'alt-e:become(nvim {} > /dev/tty)+abort' \
@@ -146,7 +152,7 @@ export FZF_DEFAULT_OPTS=" --exact --multi --ansi --height 70% --reverse --border
 
 # Emacs风格 键绑定
 bindkey -e
-# bindkey '^u' backward-kill-line
+
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(
 	end-of-line
 )

@@ -20,7 +20,7 @@ alias -g D="   delta -s"
 alias -g RX="  rargs"
 alias -g X="   xargs"
 alias -g P="   peco"
-# alias -g P=" parallel"
+alias -g RP="  rust-parallel"
 alias -g U="   uniq"
 alias -g S="   sort"
 alias -g Y="   tee"
@@ -51,30 +51,33 @@ alias -g C7=" hck -f 7"
 alias -g C8=" hck -f 8"
 alias -g C9=" hck -f 9"
 
-# awk 去重+合并文件内容(相当于两文件的并集，两文件去重后再合并), 而且能保证文件内容顺序
-alias auq="awk '!U[\$0]++' "
-alias bhelp='bat --plain --language=help'
-alias bch='_f(){pls show "$1"};_f'
-alias fch="tldr --list |sed -r \"s/('|\[|\])//g;s/, /\n/g\" |fzf --ansi --preview 'tldr {}'"
-alias bgrep="batgrep --hidden --glob='!.git' --color --smart-case "
+alias adl="aria2c -x6 -c "
+alias auq="awk '!U[\$0]++' " # 去重, 按原始文件内容顺序
 alias cprp="cp -rp --parents "
-alias bdf="batdiff --color --delta --context=3 "
-alias diff="delta "
-alias dfs="delta -s"
-alias dog="dig +noall +nocmd +answer "
+alias ll="ls -rtlh"
 alias l.="ls -d .* --color=auto"
 alias ls="ls -p --width=80 --color=auto"
-alias ll="ls -rtlh"
+alias bdf="batdiff --color --delta --context=3 "
 alias wl="wc -l"
+alias diff="delta "
 alias sei="sed -i "
 alias sen="sed -n "
-# switch root exec
-alias sre='sudo $(fc -ln -1)'
-# alias ssh="TERM=xterm-256color ssh"
+alias sre='sudo $(fc -ln -1)' # switch root exec
+# alias xssh="TERM=xterm-256color ssh"
+
+# Linux help tools:
+alias psh='pls show '
+alias nqh='navi --query '
+
+# network
+alias pting="prettyping"
+alias lstcp="lsof -nP -iTCP"
+alias dog="dig +noall +nocmd +answer "
+
+# markdown
 alias gpm="glow -p "
 
 # Git
-# alias drcwt="git --git-dir=${HOME}/gitrepos/.dotrcfiles.git/ "
 alias gib="git init --bare "
 alias gcb="git clone --bare "
 
@@ -85,7 +88,6 @@ alias gcm="git commit -m "
 alias gcu="git commit --amend "
 alias gca="git commit --amend --no-edit"
 alias gce="git commit --allow-empty"
-alias gcig="git check-ignore -v"
 
 alias gcpn='git cherry-pick -x -m 1 '
 alias gcpa='git cherry-pick --abort'
@@ -109,15 +111,15 @@ alias gsmu='git submodule update --init --recursive'
 alias grmv='git remote --verbose'
 alias grma='git remote add'
 alias grmr='git remote rm'
-alias grmsu='git remote set-url'
+alias grms='git remote set-url'
 
 alias gpo="git push ||git push -u origin"
 alias gpf="git push -f"
 alias gpsu='git push --set-upstream '
 alias gpso='git push --set-upstream origin '
 
+# example: glp -n, glp 7f1b6b0..8724539
 alias glp="git log --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset' "
-# etc. glp -n, glp 7f1b6b0..8724539
 alias glt="git log --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset' -10"
 alias gla="git log --all --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset' -20"
 
@@ -126,11 +128,13 @@ alias gdf="git diff "
 
 alias gco="git checkout "
 alias gsb="git switch "
-alias gnb="git switch -c "
-alias gdb='git branch --delete'
+alias gbs="git switch "
+alias gbn="git switch -c "
+alias gbv="git branch -v "
+alias gbd='git branch --delete'
 
 alias grs="git restore "
-alias gss='eval "$(scmpuff init -s --aliases=false)" && scmpuff_status'
+alias gss="scmpuff_status"
 alias gst="git status "
 alias gws="git status --short"
 alias gwr='git reset --hard'
@@ -141,54 +145,75 @@ alias gsa='git stash apply'
 alias gsd='git stash drop'
 alias gsl='git stash list'
 
-alias gbf='git ls-tree -r --name-only '
-alias gli="git ls-files --others -i --exclude-standard"
+alias gcig="git check-ignore -v"
+alias guiu='git update-index --assume-unchanged '
+
+# alias gltf='git ls-tree -r --name-only '
+alias glui="git ls-files -o -i --exclude-standard"
 # ------ git aliases ---------
 
+# fd, rg
 alias fda="fd -H '.*' "
 alias fdi="fd --no-ignore-vcs --type=f "
+
 alias rg="rg --smart-case --glob='!.git*' "
 alias rgh="rg -. --glob='!.git*' "
 
+## python tools:
+alias ips="ipython3"
+
+# pip
 alias piu="pip3 uninstall "
 alias pii="pip3 install "
 alias pus="pip3 install --upgrade pip"
+
+# uv
+alias upis="uv pip install "
+alias upui="uv pip uninstall "
+alias upur="uv pip install -Ur requirements.txt"
+alias uvpt="uv venv --prompt "
+
+# pdm
 alias pda="pdm add "
 alias pdr="pdm run "
 
-alias adl="aria2c -x6 -c "
-alias zshconfig="nvim ${HOME}/gitrepos/dotfiles/zsh/.zshrc"
+# zsh, tmux, ssh, hosts conf
 alias zshreload="source ~/.zshrc"
-alias aliconf="nvim ${HOME}/gitrepos/dotfiles/zsh/.alias.zsh"
-alias alsreload="source ${HOME}/gitrepos/dotfiles/zsh/.alias.zsh"
-alias tmuxconfig="nvim ${HOME}/gitrepos/dotfiles/term_tmux/.tmux.conf"
+alias hostsconf="sudo vim /etc/hosts"
 alias sshconf="nvim ${HOME}/.ssh/config"
-# alias vimconfig="nvim ${HOME}/gitrepos/dotfiles/nvim/.vimrc"
-# alias zip="zip -r "
+alias zshconfig="nvim ${HOME}/gitrepos/dotfiles/zsh/.zshrc"
+alias aliconf="nvim ${HOME}/gitrepos/dotfiles/zsh/.alias.zsh"
+alias tmuxconfig="nvim ${HOME}/gitrepos/dotfiles/term_tmux/.tmux.conf"
+
+# 设置取消使用代理
+alias unsetproxy="
+	unset http_proxy;
+	unset https_proxy;
+	unset all_proxy;
+	echo 'Unset proxy successfully'"
 
 #  alias for MacOS_Darwin
 if [[ $(uname -s) == "Darwin" ]]; then
 
-	# 设置取消使用代理
-	alias unsetproxy="unset http_proxy; unset https_proxy; \
-        unset all_proxy; echo 'Unset proxy successfully'"
-
 	alias -g PC=" |pbcopy"
+
+	alias o="open"
 	alias e="nvim"
 	alias vim="nvim"
-	alias o="open"
-	alias vscode="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
-	alias hostsconf="sudo vim /etc/hosts"
+	alias plp="plutil -p "
+	alias brho="brew home "
+	alias brif="brew info "
 	alias brin="brew install "
 	alias brci="brew install --cask "
-	alias brho="brew home "
+	alias vscode="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
+
 	alias lsflags="/bin/ls -lO "
 	alias ls="eza --color=automatic"
 	alias l="eza --git --icons --color=automatic --git-ignore"
-	alias ll="eza -abghlF --color-scale --group-directories-first --git --icons --color=automatic --git-ignore"
-	alias la="eza -abghlF --color-scale --group-directories-first --git --icons --color=automatic"
-	alias plp="plutil -p "
-
+	alias ll="eza -abghlF --color-scale --group-directories-first \
+		--git --icons --color=automatic --git-ignore"
+	alias la="eza -abghlF --color-scale --group-directories-first \
+		--git --icons --color=automatic"
 	alias rm="trash"
 	alias rmls="trash-list"
 	alias rmrs="trash-restore"
@@ -196,10 +221,6 @@ if [[ $(uname -s) == "Darwin" ]]; then
 	alias mkdir="gmkdir -pv "
 	alias tailf="gtail -f"
 	alias dfh="/usr/local/bin/gdf -Th"
-	alias lstcp="lsof -nP -iTCP"
-	# alias ping="prettyping"
-	alias ips="ipython3"
-	alias kubectl="kubecolor"
 else
 	# alias for *unix
 	alias open="xdg-open"
@@ -218,12 +239,12 @@ function help() {
 
 function zpupdate() {
 	zprezto-update
-	cd $ZPREZTODIR && git pull || break 2>/dev/null
-	git submodule sync --recursive
-	git submodule update --init --recursive
-	cd -
-	for i in $(\ls -1d $PREZCUSMODIR/*); do
-		git -C $i pull
+	git -C ${ZPREZTODIR} pull || break 2>/dev/null
+	git -C ${ZPREZTODIR} submodule sync --recursive
+	git -C ${ZPREZTODIR} submodule update --init --recursive
+	for i in $(\ls -1d ${PREZCUSMODIR}/*); do
+		echo -e "${i}: \n"
+		git -C $i pull --rebase
 	done
 }
 
@@ -596,7 +617,7 @@ function depu() {
 	# Go
 	if [ -e go.mod ]; then
 		printf "Updating Go dependencies for %s...\n\n" "${PWD##*/}"
-		go get -t -u ./...
+		# go get -t -u ./...
 		go mod tidy
 	fi
 

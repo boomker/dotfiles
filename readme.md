@@ -1,33 +1,40 @@
 ## dotfiles
 
 ### Zsh
-* framework: prezto
-* theme: powerlevel10k
-* plugins: fzf-tab, autosuggestions, history-substring-search, syntax-highlighting, zsh-nvm, gnu-utility
 
+- framework: prezto
+- theme: powerlevel10k
+- plugins: fzf-tab, autosuggestions, history-substring-search, syntax-highlighting, zsh-nvm, gnu-utility
 
 ### Tmux
-* keybindstyle: vi
-* theme: dracula
-* plugins: tpm, tmux-resurrect, tmux-continuum, extrakto
 
+- keybindstyle: vi
+- theme: dracula
+- plugins: tpm, tmux-resurrect, tmux-continuum, extrakto
 
 ### Git
-* tools: scmpuff, delta
-* alias: gss, fgs, glt etc.
 
+- tools: scmpuff, delta
+- alias: gss, fgs, glt etc.
 
 ### Tools
-* exa
-* bat
-* broot
-* fd
-* fzf
-* rg
-* zoxide(z)
-* scmpuff
-* lazygit
-* tldr
-* pls
-* glow
-* peco
+
+- fd
+- rg
+- uv
+- bat
+- eza
+- fzf
+- pls
+- navi
+- tldr
+- glow
+- peco
+- vfox
+- yazi
+- amber
+- broot
+- delta
+- zoxide
+- scmpuff
+- lazygit
