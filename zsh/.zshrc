@@ -9,6 +9,9 @@ if [[ $- =~ i ]]; then
 
 	export PREZCUSMODIR="$HOME/.zprezto-contrib"
 
+	# prompt
+	[[ -e $(which starship) ]] && eval "$(starship init zsh)"
+
 	# 延迟执行或加载zsh 命令或脚本
 	# git clone https://github.com/romkatv/zsh-defer.git ${PREZCUSMODIR}/
 	if [[ -f "${PREZCUSMODIR}/zsh-defer/zsh-defer.plugin.zsh" ]]; then
@@ -25,8 +28,8 @@ if [[ $- =~ i ]]; then
 	#export NVM_LAZY_LOAD=true
 	#[ -f "${PREZCUSMODIR}/zsh-nvm/zsh-nvm.plugin.zsh" ] && zsh-defer source "${PREZCUSMODIR}/zsh-nvm/zsh-nvm.plugin.zsh"
 
-	# prompt
-	[[ -e $(which starship) ]] && zsh-defer eval "$(starship init zsh)"
+	# direnv
+	[ -f ~/.alias.zsh ] && zsh-defer eval "$(direnv hook zsh)"
 
 	# zoxide config:
 	[[ -e $(which zoxide) ]] && zsh-defer eval "$(zoxide init zsh)"
@@ -256,3 +259,12 @@ zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=do
 # brew
 zstyle ':fzf-tab:complete:brew-(install|uninstall|search|info):*-argument-rest' fzf-preview 'brew info $word'
 zstyle ':fzf-tab:complete:brew-(install|uninstall|search|info):argument-rest' fzf-flags --preview-window=right:70%:wrap
+
+# bun completions
+[ -s "/Users/cyzhu/.bun/_bun" ] && source "/Users/cyzhu/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+. "$HOME/.cargo/env"
