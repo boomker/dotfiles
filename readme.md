@@ -3,22 +3,23 @@
 ### Zsh
 
 - framework: prezto
-- theme: powerlevel10k
+- theme: startship
 - plugins: fzf-tab, autosuggestions, history-substring-search, syntax-highlighting, zsh-nvm, gnu-utility
 
 ### Tmux
 
-- keybindstyle: vi
+- keybindstyle: emacs
 - theme: dracula
 - plugins: tpm, tmux-resurrect, tmux-continuum, extrakto
 
 ### Git
 
-- tools: scmpuff, delta
-- alias: gss, fgs, glt etc.
+- tools: scmpuff, delta, lazygit
+- alias: gs, fgc, glt, fgdf etc.
 
 ### Tools
 
+- cb
 - fd
 - rg
 - uv
