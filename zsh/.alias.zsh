@@ -344,7 +344,6 @@ function gswt() {
     [[ "$#" < 2 ]] && echo 'require 2 path parameters' && break 2>/dev/null
     # git --git-dir="${HOME}/gitrepos/.dotrcfiles.git/" --work-tree="${HOME}/gitrepos/awesome-dotfiles"
     git --git-dir="${1}" --work-tree="${2}" config --local status.showUntrackedFiles no
-    git --git-dir="${1}" --work-tree="${2}" commit -m
     # git --git-dir="${1}" --work-tree="${2}" commit -a
     git --git-dir="${1}" --work-tree="${2}" add -u
 }
@@ -426,12 +425,12 @@ function ftl() {
             --preview 'tldr {}'
 }
 
-function fjtpane() {
+function fjtwindow() {
     tmux select-window -t $(echo $(tmux list-windows | fzf-tmux -p) | hck -f 1 -d:)
 }
 
 # goto other pane in tmux
-function fjpane() {
+function fjtpane() {
     local panes current_window current_pane target target_window target_pane
     panes=$(tmux list-panes -s -F '#I:#P - #{pane_current_path} #{pane_current_command}')
     current_pane=$(tmux display-message -p '#I:#P')
@@ -478,20 +477,21 @@ function fgc() {
     curBranch="git branch --show-current"
     logFmt="--pretty=format:'%Cred%h%Creset | %Cblue%cn%Creset | %Cgreen%ai%Creset |%C(yellow)%d%Creset %n%CgreenCommitMsg:%Creset [ %s ]%n'"
     commits="git log --color=always --pretty=format:'%Cred%h%Creset | %Cblue%cn%Creset | %Cgreen%cr%Creset | %s | %d'"
+    header="[ CTRL-D (diffview) | CTRL-A (toggle all branches) | CTRL-E (without merges) |
+              CTRL-R (reload)   | CTRL-V (change preview)      | CTRL-X (toggle preview) ]"
     commit=$(
         bash -c "$commits" |
             fzf -m -e --ansi \
                 --prompt "$(bash -c $curBranch) commits:> " \
                 --info=inline \
+                --header ${header//    / } \
                 --color "hl:underline,hl+:underline" \
-                --header "[ CTRL-D (diffview) | CTRL-A (toggle all branches) | CTRL-E (without merges)
-                        CTRL-V (change preview) | CTRL-X (toggle preview) | CTRL-R (reload) ]" \
+                --bind "ctrl-x:toggle-preview" \
+                --bind "ctrl-d:execute(git show {1} |delta -s >/dev/tty)" \
+                --bind "ctrl-v:change-preview-window(down:30%,border-top|hidden|)" \
                 --bind "ctrl-r:change-prompt($(bash -c $curBranch) commits(current)> )+reload($commits || true)" \
                 --bind "ctrl-a:change-prompt($(bash -c $curBranch) commits(all)> )+reload($commits --all || true)" \
                 --bind "ctrl-e:change-prompt($(bash -c $curBranch) commits(no-merge)> )+reload($commits --no-merges || true)" \
-                --bind "ctrl-d:execute(git show {1} |delta -s >/dev/tty)" \
-                --bind "ctrl-v:change-preview-window(down:30%,border-top|hidden|)" \
-                --bind "ctrl-x:toggle-preview" \
                 --preview-window=up:70%:wrap --preview \
                 "git show --name-status --color=always $logFmt {1}"
     )
@@ -527,7 +527,6 @@ fzf-man-widget() {
             --bind "alt-t:+change-preview(tldr {1}))+change-prompt(ﳁ TLDR > )"
     zle reset-prompt
 }
-# `Ctrl-H` keybinding to launch the widget (this widget works only on zsh, don't know how to do it on bash and fish (additionaly pressing`ctrl-backspace` will trigger the widget to be executed too because both share the same keycode)
 zle -N fzf-man-widget
 bindkey '^x^m' fzf-man-widget
 

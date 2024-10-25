@@ -56,7 +56,7 @@ bindings = [
 
     { chars = "\u0007w", key = "W", mods = "Command" },
 
-    # { chars = "\u0007w", key = "P", mods = "Command" },
+    { chars = "\u0007P", key = "P", mods = "Command" },
 
     { chars = "\u0007o", key = "O", mods = "Command" },
 
