@@ -1,7 +1,3 @@
-import = [
-    "~/.config/alacritty/themes/catppuccin-frappe.toml",
-]
-live_config_reload = true
 
 [env]
 TERM = "alacritty"
@@ -32,244 +28,130 @@ alphabet = "jklfdsaiohgurewpq"
 command = "open"
 hyperlinks = true
 post_processing = true
+mouse = { mods = "Command", enabled = true }
+binding = { key = "U", mods = "Control|Shift" }
 regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-<>\"\\s{-}\\^⟨⟩`]+"
 
-[hints.enabled.binding]
-key = "O"
-mods = "Command|Shift"
+[keyboard]
+bindings = [
+    { chars = "\u001Bf", key = "F", mods = "Command" },
 
-[hints.enabled.mouse]
-mods = "Control"
+    { chars = "\u001Bb", key = "B", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u0007"
-key = "F"
-mods = "Command"
+    { chars = "\u001Bd", key = "D", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u0007x"
-key = "X"
-mods = "Command"
+    { chars = "\u0007g", key = "G", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u0007u"
-key = "U"
-mods = "Command"
+    { chars = "\u0007f", key = "Y", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u0007n"
-key = "N"
-mods = "Command"
+    { chars = "\u0007c", key = "C", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u0007N"
-key = "W"
-mods = "Command"
+    { chars = "\u0007m", key = "M", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u0007|"
-key = "R"
-mods = "Command"
+    { chars = "\u0007e", key = "E", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u001Bd"
-key = "D"
-mods = "Command"
+    { chars = "\u0007u", key = "U", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u001B[1;5C"
-key = "S"
-mods = "Command"
+    { chars = "\u0007i", key = "I", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u001B[1;5D"
-key = "B"
-mods = "Command"
+    { chars = "\u0007w", key = "W", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u0007c"
-key = "C"
-mods = "Command"
+    # { chars = "\u0007w", key = "P", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u0007,"
-key = "Comma"
-mods = "Command"
+    { chars = "\u0007o", key = "O", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u0007c?"
-key = "Slash"
-mods = "Command"
+    { chars = "\u0007n", key = "N", mods = "Command" },
 
-[[keyboard.bindings]]
-action = "ResetFontSize"
-key = "Key0"
-mods = "Command"
+    { chars = "\u0007z", key = "Z", mods = "Command" },
 
-[[keyboard.bindings]]
-action = "IncreaseFontSize"
-key = "Equals"
-mods = "Command"
+    { chars = "\u0007|", key = "T", mods = "Command" },
 
-[[keyboard.bindings]]
-action = "DecreaseFontSize"
-key = "Minus"
-mods = "Command"
+    { chars = "\u0007-", key = "S", mods = "Command" },
 
-[[keyboard.bindings]]
-action = "ToggleViMode"
-key = "Space"
-mode = "~Search"
-mods = "Shift|Command"
+    { chars = "\u0007&", key = "X", mods = "Command" },
 
-[[keyboard.bindings]]
-action = "ScrollToBottom"
-key = "Space"
-mode = "Vi|~Search"
-mods = "Shift|Command"
+    { chars = "\u0007,", key = "Comma", mods = "Command" },
 
-[[keyboard.bindings]]
-key = "N"
-mods = "Command|Shift"
+    { chars = "\u0007}", key = "Period", mods = "Command" },
 
-[keyboard.bindings.command]
-args = ["msg", "create-window", "-e", "/bin/zsh"]
-# args = ["msg", "create-window", "-e", "/usr/local/bin/zsh"]
-program = "/usr/local/bin/alacritty"
+    { chars = "\u0007c?", key = "Slash", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u0007j"
-key = "J"
-mods = "Command"
+    { chars = "\u0007k", key = "K", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u0007k"
-key = "K"
-mods = "Command"
+    { chars = "\u0007j", key = "J", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u0007l"
-key = "L"
-mods = "Command"
+    # { chars = "\u0007h", key = "H", mods = "Command" },
+    { chars = "\u0007h", key = "R", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u0007h"
-key = "Left"
-mods = "Command"
+    { chars = "\u0007l", key = "L", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u0007j"
-key = "Down"
-mods = "Command"
+    { chars = "\u0007k", key = "Up", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u0007k"
-key = "Up"
-mods = "Command"
+    { chars = "\u0007j", key = "Down", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u0007:"
-key = "I"
-mods = "Command"
+    { chars = "\u0007h", key = "Left", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u0007o"
-key = "o"
-mods = "Command"
+    { chars = "\u0007l", key = "Right", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u0007l"
-key = "Right"
-mods = "Command"
+    { chars = "\u0007K", key = "K", mods = "Command|Shift" },
 
-[[keyboard.bindings]]
-chars = "\u0007H"
-key = "H"
-mods = "Command|Shift"
+    { chars = "\u0007J", key = "J", mods = "Command|Shift" },
 
-[[keyboard.bindings]]
-chars = "\u0007J"
-key = "J"
-mods = "Command|Shift"
+    { chars = "\u0007H", key = "H", mods = "Command|Shift" },
 
-[[keyboard.bindings]]
-chars = "\u0007K"
-key = "K"
-mods = "Command|Shift"
+    { chars = "\u0007L", key = "L", mods = "Command|Shift" },
 
-[[keyboard.bindings]]
-chars = "\u0007L"
-key = "L"
-mods = "Command|Shift"
+    { chars = "\u0007K", key = "Up", mods = "Command|Shift" },
 
-[[keyboard.bindings]]
-chars = "\u0007H"
-key = "Left"
-mods = "Command|Shift"
+    { chars = "\u0007J", key = "Down", mods = "Command|Shift" },
 
-[[keyboard.bindings]]
-chars = "\u0007J"
-key = "Down"
-mods = "Command|Shift"
+    { chars = "\u0007H", key = "Left", mods = "Command|Shift" },
 
-[[keyboard.bindings]]
-chars = "\u0007K"
-key = "Up"
-mods = "Command|Shift"
+    { chars = "\u0007L", key = "Right", mods = "Command|Shift" },
 
-[[keyboard.bindings]]
-chars = "\u0007L"
-key = "Right"
-mods = "Command|Shift"
+    # { chars = "\u00070", key = "Key0", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u00071"
-key = "Key1"
-mods = "Command"
+    { chars = "\u00071", key = "Key1", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u00072"
-key = "Key2"
-mods = "Command"
+    { chars = "\u00072", key = "Key2", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u00073"
-key = "Key3"
-mods = "Command"
+    { chars = "\u00073", key = "Key3", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u00074"
-key = "Key4"
-mods = "Command"
+    { chars = "\u00074", key = "Key4", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u00075"
-key = "Key5"
-mods = "Command"
+    { chars = "\u00075", key = "Key5", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u00076"
-key = "Key6"
-mods = "Command"
+    { chars = "\u00076", key = "Key6", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u00077"
-key = "Key7"
-mods = "Command"
+    { chars = "\u00077", key = "Key7", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u00078"
-key = "Key8"
-mods = "Command"
+    { chars = "\u00078", key = "Key8", mods = "Command" },
 
-[[keyboard.bindings]]
-chars = "\u00079"
-key = "Key9"
-mods = "Command"
+    { chars = "\u00079", key = "Key9", mods = "Command" },
 
-[[keyboard.bindings]]
-action = "ReceiveChar"
-key = "Back"
+    { action = "ReceiveChar", key = "Back" },
+
+    { action = "ResetFontSize", key = "Key0", mods = "Command" },
+
+    { action = "IncreaseFontSize", key = "Plus", mods = "Command" },
+
+    { action = "DecreaseFontSize", key = "Minus", mods = "Command" },
+
+    { action = "SearchBackward", key = "S", mode = "~Search", mods = "Shift|Command" },
+
+    { action = "ScrollToBottom", key = "B", mode = "Vi|~Search", mods = "Shift|Command" },
+
+    { action = "ToggleViMode", key = "Space", mode = "~Vi|~Search", mods = "Shift|Command" },
+
+    { key = "N", mods = "Command|Shift", command = { program = "/usr/local/bin/alacritty", args = [
+        "msg",
+        "create-window",
+        "-e",
+        "/bin/zsh",
+        # "/usr/local/bin/zsh"
+    ] } },
+
+]
 
 [mouse]
 hide_when_typing = true
@@ -282,14 +164,24 @@ bindings = [
 save_to_clipboard = true
 semantic_escape_chars = ",│`|:/\"' ()[]{}<>=-.\t"
 
-[shell]
+[window]
+padding = { x = 3, y = 0 }
+opacity = 0.9
+dynamic_padding = true
+decorations = "buttonless"
+startup_mode = "Maximized"
+option_as_alt = "OnlyLeft"
+
+[scrolling]
+multiplier = 6
+
+[general]
+live_config_reload = true
+import = ["./themes/catppuccin-frappe.toml"]
+
+[terminal]
+
+[terminal.shell]
 args = ["--login", "-c", "tmux new-session -A -D -s main"]
 program = "/bin/zsh"
 # program = "/usr/local/bin/zsh"
-
-[window]
-opacity = 0.9
-decorations = "buttonless"
-startup_mode = "Maximized"
-padding = { x = 3, y = 0 }
-dynamic_padding = true
