@@ -54,13 +54,13 @@ bindings = [
 
     { chars = "\u0007i", key = "I", mods = "Command" },
 
-    { chars = "\u0007w", key = "W", mods = "Command" },
-
     { chars = "\u0007P", key = "P", mods = "Command" },
 
     { chars = "\u0007o", key = "O", mods = "Command" },
 
     { chars = "\u0007n", key = "N", mods = "Command" },
+
+    { chars = "\u0007W", key = "W", mods = "Command" },
 
     { chars = "\u0007z", key = "Z", mods = "Command" },
 
