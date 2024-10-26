@@ -28,8 +28,8 @@ alphabet = "jklfdsaiohgurewpq"
 command = "open"
 hyperlinks = true
 post_processing = true
-mouse = { mods = "Command", enabled = true }
-binding = { key = "U", mods = "Control|Shift" }
+mouse = { mods = "Command|Shift", enabled = true }
+binding = { key = "U", mods = "Control|Command" }
 regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-<>\"\\s{-}\\^⟨⟩`]+"
 
 [keyboard]
@@ -44,7 +44,7 @@ bindings = [
 
     { chars = "\u0007f", key = "Y", mods = "Command" },
 
-    { chars = "\u0007c", key = "C", mods = "Command" },
+    { chars = "\u0007y", key = "C", mods = "Command" },
 
     { chars = "\u0007m", key = "M", mods = "Command" },
 
