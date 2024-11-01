@@ -40,34 +40,34 @@ zstyle ':prezto:load' pmodule \
   'gnu-utility' \
   'completion' \
   'autosuggestions' \
-  'history-substring-search' \
   'syntax-highlighting' \
   'fzf-tab'
   # 'prompt' \
   # 'zsh-notify'
+  # 'history-substring-search' \
 
 # fzf-tab
-    zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-    zstyle ':fzf-tab:*' fzf-flags --ansi
-    # set descriptions format to enable group support
-    zstyle ':completion:*:*:*:*:*' menu yes select
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+zstyle ':fzf-tab:*' fzf-flags --ansi
+# set descriptions format to enable group support
+zstyle ':completion:*:*:*:*:*' menu yes select
 
-    # set list-colors to enable filename colorizing
-    zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
-    # disable sort when completing `git checkout`
-    # zstyle ':completion:*:git-checkout:*' sort false
-    # zstyle ':fzf-tab:complete:git-log:*' fzf-preview "git log --color=always ${word%% *}"
-    # zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview 'git diff $word | delta'
+# disable sort when completing `git checkout`
+# zstyle ':completion:*:git-checkout:*' sort false
+# zstyle ':fzf-tab:complete:git-log:*' fzf-preview "git log --color=always ${word%% *}"
+# zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview 'git diff $word | delta'
 
-    zstyle ':fzf-tab:*' fzf-min-height 10
-    # apply to all command
-    zstyle ':fzf-tab:*' popup-min-size 50 16
-    # only apply to 'diff'
-    zstyle ':fzf-tab:complete:diff:*' popup-min-size 60 20
-    # zstyle ':fzf-tab:*' fzf-bindings 'ctrl-j:accept' 'ctrl-a:toggle-all'
-    # switch group using `,` and `.`
-    zstyle ':fzf-tab:*' switch-group ',' '.'
+zstyle ':fzf-tab:*' fzf-min-height 10
+# apply to all command
+zstyle ':fzf-tab:*' popup-min-size 50 16
+# only apply to 'diff'
+zstyle ':fzf-tab:complete:diff:*' popup-min-size 60 20
+# zstyle ':fzf-tab:*' fzf-bindings 'ctrl-j:accept' 'ctrl-a:toggle-all'
+# switch group using `,` and `.`
+zstyle ':fzf-tab:*' switch-group ',' '.'
 
 
 #
@@ -106,7 +106,7 @@ zstyle ':prezto:module:editor' dot-expansion 'yes'
 #
 
 # Ignore submodules when they are 'dirty', 'untracked', 'all', or 'none'.
-zstyle ':prezto:module:git:status:ignore' submodules 'all'
+# zstyle ':prezto:module:git:status:ignore' submodules 'all'
 
 #
 # GNU Utility

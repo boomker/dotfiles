@@ -2,15 +2,16 @@
 
 if [[ $- =~ i ]]; then
 
+    export SHELL="/usr/local/bin/zsh"
     # Source Prezto.
     if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
         source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
     fi
 
-    export PREZCUSMODIR="$HOME/.zprezto-contrib"
-
     # prompt
     [[ -e $(which starship) ]] && eval "$(starship init zsh)"
+
+    export PREZCUSMODIR="$HOME/.zprezto-contrib"
 
     # 延迟执行或加载zsh 命令或脚本
     # git clone https://github.com/romkatv/zsh-defer.git ${PREZCUSMODIR}/
@@ -34,17 +35,17 @@ if [[ $- =~ i ]]; then
     [[ -e $(which zoxide) ]] && zsh-defer eval "$(zoxide init zsh)"
 
     # Git status
-    [[ -e $(which scmpuff) ]] && zsh-defer eval "$(scmpuff init -s)"
+    # [[ -e $(which scmpuff) ]] && zsh-defer eval "$(scmpuff init --shell="zsh")"
 
     # shell history search
-    [[ -e $(which atuin) ]] && zsh-defer eval "$(atuin init zsh --disable-up-arrow)"
+    # [[ -e $(which atuin) ]] && zsh-defer eval "$(atuin init zsh --disable-up-arrow)"
 
     #[ -f "${HOME}/.fzf-git.sh" ] && zsh-defer source "${HOME}/.fzf-git.sh"
 
     # zsh-notify
     # git@github.com:marzocchi/zsh-notify.git
     [ -f "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh" ] && [[ -n ${TERM_PROGRAM} ]] &&
-        [[ ${TERM_PROGRAM} != 'vscode' ]] && source "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh"
+        [[ ${TERM_PROGRAM} != 'vscode' ]] && zsh-defer source "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh"
 
     # zsh-autopair
     # git@github.com:hlissner/zsh-autopair.git
@@ -86,13 +87,11 @@ if [[ $(uname -s) == "Darwin" ]]; then
     # export HOMEBREW_PIP_INDEX_URL="https://pypi.tuna.tsinghua.edu.cn/simple"
 
     # GNU cmd tools PATH for Mac:
-    # eval "$(pyenv init -)"
-    # eval "$(pyenv virtualenv-init -)"
-    export PNPM_HOME="${HOME}/.pnpm"
-    export PIPX_HOME="${HOME}/.pipx"
-    export PATH="${HOME}/go/bin:$HOME/.bun/bin:${HOME}/.cargo/bin:$PATH"
-    export PATH="${HOME}/.local/bin:${HOME}/.version-fox/shims:$PATH"
-    export PIPX_DEFAULT_PYTHON="${HOME}/.version-fox/shims/python3"
+    export PNPM_HOME="$HOME/.pnpm"
+    export PIPX_HOME="$HOME/.pipx"
+    export PATH="$HOME/go/bin:$HOME/.bun/bin:$HOME/.cargo/bin:$PATH"
+    export PATH="$HOME/.local/bin:$HOME/.version-fox/shims:$PATH"
+    export PIPX_DEFAULT_PYTHON="$HOME/.version-fox/shims/python3"
     export MANPATH="/usr/local/man:/usr/local/share/man:${MANPATH}"
     export MANPATH="/usr/local/opt/coreutils/share/man:${MANPATH}"
 
@@ -119,12 +118,12 @@ export BAT_THEME="Coldark-Dark"
 export BATDIFF_USE_DELTA=true
 
 export FD_OPTIONS=" --follow \
-	--exclude .git \
-	--exclude .idea \
-	--exclude .venv \
-	--exclude node_modules"
+                    --exclude .git \
+                    --exclude .idea \
+                    --exclude .venv \
+                    --exclude node_modules"
 
-source <(fzf --zsh)
+# source <(fzf --zsh)
 export FZF_DEFAULT_COMMAND="fd -H --type f --type l ${FD_OPTIONS}"
 export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 
@@ -154,6 +153,11 @@ export FZF_DEFAULT_OPTS=" --exact --multi --ansi --height 70% --reverse --border
 # Emacs风格 键绑定
 bindkey -e
 
+setopt globdots  # Include hidden files. or: _comp_options+=(globdots)
+setopt auto_menu # show completion menu on successive tab press
+setopt always_to_end
+setopt complete_in_word
+
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(
     end-of-line
 )
@@ -164,24 +168,19 @@ export ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(
     emacs-forward-word
 )
 
-setopt auto_menu # show completion menu on successive tab press
-setopt complete_in_word
-setopt always_to_end
-setopt globdots # Include hidden files. or: _comp_options+=(globdots)
-
 # edit command line like in bash (zsh has 'fc' but it has to execute the command first)
 # autoload -z edit-command-line
 # zle -N edit-command-line
 # bindkey "^X^E" edit-command-line
 
-# Use Ctrl-x,Ctrl-v to get the output of the last command
+# Use Ctrl-x Ctrl-v to get the output of the last command
 insert-last-command-output() {
     LBUFFER+="$(eval ${history[$((HISTCMD - 1))]})"
 }
 zle -N insert-last-command-output
 bindkey "^X^V" insert-last-command-output
 
-# Ctrl-x,Ctrl-w copies to global pasteboard as well as zsh clipboard
+# Ctrl-x Ctrl-w copies word to global pasteboard
 pb-cut-word-region() {
     zle copy-region-as-kill
     gecho $CUTBUFFER | pbcopy
@@ -189,7 +188,7 @@ pb-cut-word-region() {
 zle -N pb-cut-word-region
 bindkey -e '^x^w' pb-cut-word-region
 
-# Ctrl-x Ctrl-d copies to global pasteboard as well as zsh clipboard - is this overkill?
+# Ctrl-x Ctrl-d copies line to global pasteboard
 pb-kill-buffer-line() {
     zle kill-buffer
     gecho $CUTBUFFER | pbcopy
@@ -213,7 +212,7 @@ pb-forward-kill-line() {
 zle -N pb-forward-kill-line
 bindkey -e '^k' pb-forward-kill-line
 
-# ------ Ctrl-xs
+# ------ Ctrl-xs, sudo
 sudo-command-line() {
     [[ -z $BUFFER ]] && zle up-history
     [[ $BUFFER != sudo\ * ]] && BUFFER="sudo $BUFFER"

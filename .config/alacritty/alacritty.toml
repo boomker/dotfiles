@@ -147,8 +147,8 @@ bindings = [
         "msg",
         "create-window",
         "-e",
-        "/bin/zsh",
-        # "/usr/local/bin/zsh"
+        # "/bin/zsh",
+        "/usr/local/bin/fish",
     ] } },
 
 ]
@@ -183,5 +183,5 @@ import = ["./themes/catppuccin-frappe.toml"]
 
 [terminal.shell]
 args = ["--login", "-c", "tmux new-session -A -D -s main"]
-program = "/bin/zsh"
-# program = "/usr/local/bin/zsh"
+program = "/usr/local/bin/zsh"
+# program = "/bin/zsh"
