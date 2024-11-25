@@ -153,7 +153,7 @@ alias glui="git ls-files -o -i --exclude-standard"
 # ------ git aliases end ---------
 
 # fd
-alias fda="fd -H '.*' "
+alias fda="fd --exclude='.git' -H '.*' "
 alias fdp="fd -tf -p -g"
 alias fdi="fd --no-ignore-vcs "
 

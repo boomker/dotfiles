@@ -1,7 +1,8 @@
 ## where to store your database, default is your system data directory
 ## linux/mac: ~/.local/share/atuin/history.db
 ## windows: %USERPROFILE%/.local/share/atuin/history.db
-db_path = "~/MEGA/MEGAsync/Softwares_Confs/Others/atuin/history.db"
+db_path = "~/.local/share/atuin/history.db"
+# db_path = "~/MEGA/MEGAsync/Softwares_Confs/Others/atuin/history.db"
 
 ## where to store your encryption key, default is your system data directory
 ## linux/mac: ~/.local/share/atuin/key
@@ -38,7 +39,7 @@ session_path = "~/.local/share/atuin/session"
 
 ## which search mode to use
 ## possible values: prefix, fulltext, fuzzy, skim
-# search_mode = "fuzzy"
+search_mode = "prefix"
 
 ## which filter mode to use
 ## possible values: global, host, session, directory
@@ -51,12 +52,12 @@ session_path = "~/.local/share/atuin/session"
 ## which filter mode to use when atuin is invoked from a shell up-key binding
 ## the accepted values are identical to those of "filter_mode"
 ## leave unspecified to use same mode set in "filter_mode"
-# filter_mode_shell_up_key_binding = "global"
+filter_mode_shell_up_key_binding = "directory"
 
 ## which search mode to use when atuin is invoked from a shell up-key binding
 ## the accepted values are identical to those of "search_mode"
 ## leave unspecified to use same mode set in "search_mode"
-# search_mode_shell_up_key_binding = "fuzzy"
+search_mode_shell_up_key_binding = "prefix"
 
 ## which style to use
 ## possible values: auto, full, compact

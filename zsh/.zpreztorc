@@ -56,9 +56,9 @@ zstyle ':completion:*:*:*:*:*' menu yes select
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # disable sort when completing `git checkout`
-# zstyle ':completion:*:git-checkout:*' sort false
-# zstyle ':fzf-tab:complete:git-log:*' fzf-preview "git log --color=always ${word%% *}"
-# zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview 'git diff $word | delta'
+zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':fzf-tab:complete:git-log:*' fzf-preview "git log --color=always ${word%% *}"
+zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview 'git diff $word | delta'
 
 zstyle ':fzf-tab:*' fzf-min-height 10
 # apply to all command
@@ -106,7 +106,7 @@ zstyle ':prezto:module:editor' dot-expansion 'yes'
 #
 
 # Ignore submodules when they are 'dirty', 'untracked', 'all', or 'none'.
-# zstyle ':prezto:module:git:status:ignore' submodules 'all'
+zstyle ':prezto:module:git:status:ignore' submodules 'all'
 
 #
 # GNU Utility
@@ -120,13 +120,13 @@ zstyle ':prezto:module:gnu-utility' prefix 'g'
 #
 
 # Set the file to save the history in when an interactive shell exits.
-zstyle ':prezto:module:history' histfile "${ZDOTDIR:-$HOME}/.cache/prezto/shell/.zsh_history"
+zstyle ':prezto:module:history' histfile "${ZDOTDIR:-$HOME}/.local/share/atuin/.zsh_history"
 
 # Set the maximum  number  of  events  stored  in  the  internal history list.
-zstyle ':prezto:module:history' histsize 10000
+zstyle ':prezto:module:history' histsize 100000
 
 # Set the maximum number of history events to save in the history file.
-zstyle ':prezto:module:history' savehist 10000
+zstyle ':prezto:module:history' savehist 100000
 
 #
 # History Substring Search
