@@ -28,7 +28,7 @@ alphabet = "jklfdsaiohgurewpq"
 command = "open"
 hyperlinks = true
 post_processing = true
-mouse = { mods = "Command|Shift", enabled = true }
+# mouse = { mods = "Command", enabled = true }
 binding = { key = "U", mods = "Control|Command" }
 regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-<>\"\\s{-}\\^⟨⟩`]+"
 
@@ -156,8 +156,8 @@ bindings = [
 [mouse]
 hide_when_typing = true
 bindings = [
-    { mouse = "Left", mods = "Control", action = "ExpandSelection" },
     { mouse = "Middle", action = "PasteSelection" },
+    { mouse = "Left", mods = "Command", action = "ExpandSelection" },
 ]
 
 [selection]

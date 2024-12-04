@@ -43,7 +43,7 @@ zstyle ':prezto:load' pmodule \
   'syntax-highlighting' \
   'fzf-tab'
   # 'prompt' \
-  # 'zsh-notify'
+  # 'zsh-notify' \
   # 'history-substring-search' \
 
 # fzf-tab

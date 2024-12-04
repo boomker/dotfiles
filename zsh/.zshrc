@@ -3,15 +3,15 @@
 if [[ $- =~ i ]]; then
 
     export SHELL="/usr/local/bin/zsh"
+    export PREZCUSMODIR="$HOME/.zprezto-contrib"
+
     # Source Prezto.
     if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
         source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
     fi
 
     # prompt
-    [[ -e $(which starship) ]] && eval "$(starship init zsh)"
-
-    export PREZCUSMODIR="$HOME/.zprezto-contrib"
+    [[ -e $(which starship) ]] && source ${PREZCUSMODIR}/user_plugins/starship_prompt.zsh
 
     # 延迟执行或加载zsh 命令或脚本
     # git clone https://github.com/romkatv/zsh-defer.git ${PREZCUSMODIR}/
@@ -26,31 +26,35 @@ if [[ $- =~ i ]]; then
     [ -f ~/.alias.zsh ] && zsh-defer source ~/.alias.zsh
 
     # bun completions
-    [ -s "~/.bun/_bun" ] && zsh-defer source "~/.bun/_bun"
+    # [ -s "~/.bun/_bun" ] && zsh-defer source "~/.bun/_bun"
 
     # direnv
-    [ -f ~/.alias.zsh ] && zsh-defer eval "$(direnv hook zsh)"
+    [ -f ~/.alias.zsh ] && zsh-defer source ${PREZCUSMODIR}/user_plugins/direnv.zsh
 
     # zoxide config:
-    [[ -e $(which zoxide) ]] && zsh-defer eval "$(zoxide init zsh)"
+    [[ -e $(which zoxide) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/zoxide.zsh
 
     # Git status
     # [[ -e $(which scmpuff) ]] && zsh-defer eval "$(scmpuff init --shell="zsh")"
 
     # shell history search
-    # [[ -e $(which atuin) ]] && zsh-defer eval "$(atuin init zsh --disable-up-arrow)"
+    export ATUIN_NOBIND="true"
+    bindkey '^q' atuin-search
+    [[ -e $(which atuin) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/atuin.zsh
+
+    [[ -e $(which fzf) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/fzf.zsh
 
     #[ -f "${HOME}/.fzf-git.sh" ] && zsh-defer source "${HOME}/.fzf-git.sh"
+
+    # zsh-autopair
+    # git@github.com:hlissner/zsh-autopair.git
+    # [ -f "${PREZCUSMODIR}/zsh-autopair/autopair.zsh" ] && [[ -n ${TERM_PROGRAM} ]] &&
+    #     source "${PREZCUSMODIR}/zsh-autopair/autopair.zsh" && autopair-init
 
     # zsh-notify
     # git@github.com:marzocchi/zsh-notify.git
     [ -f "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh" ] && [[ -n ${TERM_PROGRAM} ]] &&
-        [[ ${TERM_PROGRAM} != 'vscode' ]] && zsh-defer source "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh"
-
-    # zsh-autopair
-    # git@github.com:hlissner/zsh-autopair.git
-    [ -f "${PREZCUSMODIR}/zsh-autopair/autopair.zsh" ] && [[ -n ${TERM_PROGRAM} ]] &&
-        source "${PREZCUSMODIR}/zsh-autopair/autopair.zsh" && autopair-init
+        zsh-defer source "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh"
 
     #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
     # export SDKMAN_DIR="${HOME}/.sdkman"
@@ -65,15 +69,14 @@ fi
 
 ## --------------User configuration--------------
 # You may need to manually set your language environment
-export LANG=en_US.UTF-8
 # export LC_ALL='C'
+export LANG=en_US.UTF-8
 export XDG_CONFIG_HOME="$HOME/.config"
-HIST_STAMPS="mm/dd/yyyy"
-
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # 以下字符视为单词的一部分
 WORDCHARS='*?[]~&;!#$%^(){}<>'
+HIST_STAMPS="mm/dd/yyyy"
 
 ## configure pyvenv, Homebrew, PATH(GNU CLI tools), catalog ,git on MacOS {{{
 if [[ $(uname -s) == "Darwin" ]]; then
@@ -123,17 +126,17 @@ export FD_OPTIONS=" --follow \
                     --exclude .venv \
                     --exclude node_modules"
 
-# source <(fzf --zsh)
 export FZF_DEFAULT_COMMAND="fd -H --type f --type l ${FD_OPTIONS}"
 export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 
-# export FZF_CTRL_R_OPTS="
-#         --preview 'echo {}' --preview-window up:3:hidden:wrap
-#         --bind 'ctrl-/:toggle-preview'
-#         --bind 'ctrl-t:track+clear-query'
-#         --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
-#         --color header:italic
-#         --header 'Press CTRL-Y to copy command into clipboard'"
+export FZF_CTRL_R_OPTS="
+        --bind 'ctrl-/:toggle-preview'
+        --bind 'ctrl-x:track+clear-query'
+        --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+        --color header:italic
+        --wrap --wrap-sign $'\t↳ '
+        --preview 'echo {}' --preview-window up:3:hidden:wrap
+        --header 'Press CTRL-Y to copy command into clipboard; CTRL-x clear-query'"
 
 export FZF_CTRL_T_OPTS="
         --bind 'ctrl-y:execute-silent(printf {} | cut -f 2- |pbcopy)+accept' \
@@ -150,9 +153,6 @@ export FZF_DEFAULT_OPTS=" --exact --multi --ansi --height 70% --reverse --border
         --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' \
         --bind 'alt-a:select-all+accept'"
 
-# Emacs风格 键绑定
-bindkey -e
-
 setopt globdots  # Include hidden files. or: _comp_options+=(globdots)
 setopt auto_menu # show completion menu on successive tab press
 setopt always_to_end
@@ -167,6 +167,9 @@ export ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(
     forward-word
     emacs-forward-word
 )
+
+# Emacs风格键绑定
+bindkey -e
 
 # edit command line like in bash (zsh has 'fc' but it has to execute the command first)
 # autoload -z edit-command-line
@@ -220,17 +223,18 @@ sudo-command-line() {
 }
 zle -N sudo-command-line
 bindkey -e '^xs' sudo-command-line
+bindkey "^[[A" history-beginning-search-backward
 
 # zsh-notify config
-zstyle ':notify:*' command-complete-timeout 15
-zstyle ':notify:*' enable-on-ssh yes
 zstyle ':notify:*' check-focus no
-zstyle ':notify:*' blacklist-regex 'git|man|vim|nvim|neovim|help|bat'
+zstyle ':notify:*' enable-on-ssh yes
+zstyle ':notify:*' command-complete-timeout 15
 # zstyle ':notify:*' notifier "/usr/local/bin/noti"
-zstyle ':notify:*' error-icon "https://s1.ax1x.com/2022/11/06/xXY9o9.png"
 zstyle ':notify:*' error-sound "Bubble"
 zstyle ':notify:*' error-title "⛔️ errored in #{time_elapsed}"
-zstyle ":notify:*" success-icon "https://s1.ax1x.com/2022/11/06/xXYpdJ.png"
+zstyle ':notify:*' blacklist-regex 'git|man|vim|nvim|neovim|help|bat'
+# zstyle ':notify:*' error-icon "https://s1.ax1x.com/2022/11/06/xXY9o9.png"
+# zstyle ":notify:*" success-icon "https://s1.ax1x.com/2022/11/06/xXYpdJ.png"
 zstyle ':notify:*' success-sound "Crystal"
 zstyle ':notify:*' success-title "✅ finished in #{time_elapsed}"
 zstyle ':notify:*' always-notify-on-failure no
