@@ -52,7 +52,7 @@ alias -g C8=" hck -f 8"
 alias -g C9=" hck -f 9"
 
 alias adl="aria2c -x6 -c "
-alias auq="awk '!U[\$0]++' " # 去重, 按原始文件内容顺序
+alias auq="awk '!U[\$0]++' "
 alias cprp="cp -rp --parents "
 alias ll="ls -rtlh"
 alias l.="ls -d .* --color=auto"
@@ -78,18 +78,15 @@ alias dog="dig +noall +nocmd +answer "
 alias gpm="glow -p "
 
 # Git --------------------------
-alias gib="git init --bare "
-alias gcb="git clone --bare "
 
 alias gaa="git add ."
+alias gcm="git commit -m "
+alias gca="git commit --amend "
+alias gce="git commit --allow-empty"
 alias gcun="git config --global user.name "
 alias gcum="git config --global user.email "
-alias gcm="git commit -m "
-alias gcu="git commit --amend "
-alias gca="git commit --amend --no-edit"
-alias gce="git commit --allow-empty"
 
-alias gcpn='git cherry-pick -x -m 1 '
+alias gcpm='git cherry-pick -x -m 1 '
 alias gcpa='git cherry-pick --abort'
 alias gcpc='git cherry-pick --continue'
 alias gcps="git cherry-pick --skip"
@@ -100,31 +97,30 @@ alias grbc='git rebase --continue'
 alias grbs='git rebase --skip'
 
 alias gcl="git clone "
-alias gfc="git clone --filter=blob:none "
+alias gib="git init --bare "
+alias gcb="git clone --bare "
+alias gcbn="git clone --filter=blob:none "
+
 alias gpom="git pull origin main || git pull origin master"
 alias gpum="git pull upstream main || git pull upstream master"
 alias gprm="git pull origin main --rebase"
 
+alias gprf="git push -f"
+alias gpsu='git push --set-upstream '
+alias gpor="git push ||git push -u origin"
+
 alias gsms='git submodule sync --recursive'
 alias gsmu='git submodule update --init --recursive'
 
-alias grmv='git remote --verbose'
 alias grma='git remote add'
 alias grmr='git remote rm'
 alias grms='git remote set-url'
-
-alias gpo="git push ||git push -u origin"
-alias gpf="git push -f"
-alias gpsu='git push --set-upstream '
-alias gpso='git push --set-upstream origin '
+alias grmv='git remote --verbose'
 
 # example: glp -n, glp 7f1b6b0..8724539
 alias glp="git log --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset' "
 alias glt="git log --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset' -10"
 alias gla="git log --all --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset' -20"
-
-alias gdf="git diff "
-# etc. git diff HEAD~24 HEAD --name-only    # 查看变更文件列表
 
 alias gco="git checkout "
 alias gsb="git switch "
@@ -133,12 +129,13 @@ alias gbn="git switch -c "
 alias gbv="git branch -v "
 alias gbd='git branch --delete'
 
-alias grs="git restore "
 alias gss="scmpuff_status"
+alias grs="git restore "
 alias gst="git status "
 alias gws="git status --short"
 alias gwr='git reset --hard'
 alias gwc='git clean -df'
+alias gdf="git diff "
 
 alias gsh='git stash'
 alias gsa='git stash apply'
@@ -149,13 +146,12 @@ alias gcig="git check-ignore -v"
 alias guiu='git update-index --assume-unchanged '
 
 # alias gltf='git ls-tree -r --name-only '
-alias glui="git ls-files -o -i --exclude-standard"
+# alias glui="git ls-files -o -i --exclude-standard"
 # ------ git aliases end ---------
 
 # fd
-alias fda="fd --exclude='.git' -H '.*' "
-alias fdp="fd -tf -p -g"
-alias fdi="fd --no-ignore-vcs "
+alias fdh="fd --exclude='.git' -H '.*' "
+alias fdp="fd -tf -p -g "
 
 # rg
 alias rg="rg --smart-case --glob='!.git*' "
@@ -169,23 +165,21 @@ alias piu="pip3 uninstall "
 alias pii="pip3 install "
 alias pus="pip3 install --upgrade pip"
 
-# uv and vfox
+# uv
 alias upin="uv pip install "
 alias upui="uv pip uninstall "
 alias uvpt="uv venv --prompt "
 alias upur="uv pip install -Ur requirements.txt"
-# vfox switch python version
-alias vfsw="vfox ls python |fzf |gsed -r 's/[->v ]//g' |xargs -I% vfox use python@%"
 
 # zsh, tmux, ssh, hosts conf
 alias zshreload="source ~/.zshrc"
 alias hostsconf="sudo vim /etc/hosts"
 alias sshconf="nvim ${HOME}/.ssh/config"
-alias zshconfig="nvim ${HOME}/gitrepos/dotfiles/zsh/.zshrc"
+alias zshconf="nvim ${HOME}/gitrepos/dotfiles/zsh/.zshrc"
 alias aliconf="nvim ${HOME}/gitrepos/dotfiles/zsh/.alias.zsh"
-alias tmuxconfig="nvim ${HOME}/gitrepos/dotfiles/term_tmux/.tmux.conf"
+alias tmuxconf="nvim ${HOME}/gitrepos/dotfiles/term_tmux/.tmux.conf"
 
-# 设置取消使用代理
+# undo proxy
 alias unsetproxy="
 	unset HTTP_PROXY;
 	unset HTTPS_PROXY;
@@ -205,7 +199,6 @@ if [[ $(uname -s) == "Darwin" ]]; then
     alias brif="brew info "
     alias brin="brew install "
     alias brci="brew install --cask "
-    alias vscode="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
 
     alias lsflags="/bin/ls -lO "
     alias ls="eza --color=automatic"
@@ -378,6 +371,11 @@ function mkdf() {
     mkdir -p "$_Dn" && touch "${_Dn}"/"${_Fn}"
 }
 
+# grep for zip archive
+function zipr() {
+    zipinfo -t -1 -M "$2" | rg "$1"
+}
+
 function tca() {
     tar -czvf "$1.tar.gz" "$1"
 }
@@ -394,43 +392,22 @@ function transfer() {
     curl --progress-bar --upload-file "$1" https://transfer.sh/$(basename "$1") | tee /dev/null
 }
 
-# tmux start or resotre sessions
-function tm() {
-    TmSID=$(tmux list-sessions | cut -d':' -f1)
-    [[ -n $TmSID ]] && tmux attach -t "☯️ " || tmux new -s "☯️ "
-}
-
-# sad(sed) files(eg. file1 file2)
-function sdf() {
-    [[ "${#@}" < 3 ]] && echo 'require 3 args, example: <PATTERN> [REPLACE] files[file1 ...]' && break 2>/dev/null
-    /bin/ls -1 "${@:3}" | sad -k "$1" "$2"
+# vfox switch python version
+function vfsw() {
+    python_versions=$(vfox ls python | fzf)
+    python_version=$(echo "$python_versions" | gsed -r 's/[->v ]//g')
+    [[ -n "${python_version}" ]] && vfox use python@"${python_version}"
 }
 
 # FZF file and cd to it's directory
 function fcd() {
-    [[ -n "$1" ]] && file="$1" || file=$(fd --type file --follow | fzf)
+    [[ -n "$1" ]] && file="$1" || file=$(fd --type file | fzf)
 
     [[ -n $file ]] && dir=$(dirname "$file" 2>/dev/null) && cd "$dir"
 }
 
-# tldr with fzf
-function ftl() {
-    local initial_query
-    initial_query="${*:-}"
-    tldr --list | sed -r "s/('|\[|\])//g;s/, /\n/g" |
-        fzf --ansi -e -0 -1 --cycle \
-            --info=inline \
-            --query "${initial_query}" \
-            --preview-window='right:76%:wrap' \
-            --preview 'tldr {}'
-}
-
-function fjtwindow() {
-    tmux select-window -t $(echo $(tmux list-windows | fzf-tmux -p) | hck -f 1 -d:)
-}
-
 # goto other pane in tmux
-function fjtpane() {
+function fjtp() {
     local panes current_window current_pane target target_window target_pane
     panes=$(tmux list-panes -s -F '#I:#P - #{pane_current_path} #{pane_current_command}')
     current_pane=$(tmux display-message -p '#I:#P')
@@ -498,52 +475,16 @@ function fgc() {
     [[ -n $commit ]] && echo $(cut -d' ' -f1 <<<"$commit")
 }
 
-# example usage: git rebase -i `fgc`
-fgc-widget() {
-    local result
-    result=$(fgc)
-    zle reset-prompt
-    LBUFFER+=$result
-}
-
-# example usage: git diff <C-X><C-X>
-zle -N fgc-widget
-bindkey '^x^x' fgc-widget
-
-fzf-man-widget() {
-    bman="gman {1} | col -bx | bat --language=man --plain --color always --theme=\"Monokai Extended\""
-    gman -k . | sort |
-        awk -v cyan=$(tput setaf 6) -v blue=$(tput setaf 4) -v res=$(tput sgr0) -v bld=$(tput bold) '{ $1=cyan bld $1; $2=res blue;} 1' |
-        fzf \
-            -q "$1" \
-            --ansi \
-            --tiebreak=begin \
-            --prompt=' Man > ' \
-            --preview-window '50%,rounded,<50(up,85%,border-bottom)' \
-            --preview "${bman}" \
-            --bind "enter:execute(gman {1})" \
-            --bind "alt-c:+change-preview(cht.sh {1})+change-prompt(ﯽ Cheat > )" \
-            --bind "alt-m:+change-preview(${bman})+change-prompt( Man > )" \
-            --bind "alt-t:+change-preview(tldr {1}))+change-prompt(ﳁ TLDR > )"
-    zle reset-prompt
-}
-zle -N fzf-man-widget
-bindkey '^x^m' fzf-man-widget
-
-# goto git repo homepage
-function ggh() {
-    # git remote get-url origin |rargs open {}
-    remote_ori=$(git status --short --branch | awk -F'[./]+' '/^#.*\.\.\./{print $(NF-1)}')
-    ori_url=$(git remote get-url ${remote_ori:-'origin'})
-    if [[ -z $(echo $ori_url | grep '@') ]]; then
-        open $ori_url
-        [[ $? != 0 ]] && open -a "Google Chrome" $ori_url
-    else
-        # new_url=${ori_url/git::@}
-        new_url=$(echo ${ori_url} | awk -F'@' '{print $2}' | sed 's#m:#m/#g')
-        open https://$new_url
-        [[ $? != 0 ]] && open -a "Google Chrome" https://$new_url
-    fi
+# tldr with fzf
+function ftl() {
+    local initial_query
+    initial_query="${*:-}"
+    tldr --list | sed -r "s/('|\[|\])//g;s/, /\n/g" |
+        fzf --ansi -e -0 -1 --cycle \
+            --info=inline \
+            --query "${initial_query}" \
+            --preview-window='right:76%:wrap' \
+            --preview 'tldr {}'
 }
 
 function gcfl() {
@@ -582,23 +523,34 @@ function fgdf() {
         "[[ "x${remote_ori}" == 'x' ]] && git diff ${branch:-${curBranch}} -- ${proj_root}/{} |delta || batdiff --delta --color --context=1 {}"
 }
 
+# goto git repo homepage
+function goph() {
+    # git remote get-url origin |rargs open {}
+    remote_ori=$(git status --short --branch | awk -F'[./]+' '/^#.*\.\.\./{print $(NF-1)}')
+    ori_url=$(git remote get-url ${remote_ori:-'origin'})
+    if [[ -z $(echo $ori_url | grep '@') ]]; then
+        open $ori_url
+        [[ $? != 0 ]] && open -a "Google Chrome" $ori_url
+    else
+        # new_url=${ori_url/git::@}
+        new_url=$(echo ${ori_url} | awk -F'@' '{print $2}' | sed 's#m:#m/#g')
+        open https://$new_url
+        [[ $? != 0 ]] && open -a "Google Chrome" https://$new_url
+    fi
+}
+
 # goto git project root
-function gcr() {
+function gcpr() {
     proj_root=$(git rev-parse --show-toplevel)
     [[ -n ${proj_root} ]] && cd ${proj_root}
 }
 
-# git clone and cd repo(dirname)
-function gcd() {
+# git clone and cd proj_root
+function gcpd() {
     repoUrl=$1
     [[ ${repoUrl: -3} != git ]] && repoUrl="${repoUrl}.git"
     repoName=$(echo ${repoUrl} | awk -F'[/.]+' '{print $(NF-1)}')
     git clone $repoUrl && cd ${repoName}
-}
-
-# grep for zip archive
-function zipgrep() {
-    zipinfo -t -1 -M "$2" | grep "$1"
 }
 
 # Update project dependencies
