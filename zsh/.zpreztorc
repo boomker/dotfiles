@@ -31,13 +31,13 @@ zstyle ':prezto:load' pmodule-dirs $HOME/.zprezto-contrib
 # The order matters.
 
 zstyle ':prezto:load' pmodule \
-  'environment' \
   'history' \
-  'gnu-utility' \
   'completion' \
+  'environment' \
+  'gnu-utility' \
   'autosuggestions' \
-  'auto-venv' \
   'fzf-tab' \
+  'auto-venv' \
   'zsh-defer' \
   'zsh-notify' \
   'zsh-autopair' \

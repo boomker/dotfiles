@@ -158,34 +158,32 @@ if [[ $- =~ i ]]; then
 
     ## fzf-tab config {{{
     zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-    zstyle ':fzf-tab:*' fzf-flags --ansi
-    # set descriptions format to enable group support
-    zstyle ':completion:*:*:*:*:*' menu yes select
 
-    # set list-colors to enable filename colorizing
-    zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-
-    # disable sort when completing `git checkout`
-    zstyle ':completion:*:git-checkout:*' sort false
-    zstyle ':fzf-tab:complete:git-log:*' fzf-preview "git log --color=always ${word%% *}"
-    zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview 'git diff $word | delta'
-
-    zstyle ':fzf-tab:*' fzf-min-height 10
-    # apply to all command
-    zstyle ':fzf-tab:*' popup-min-size 50 16
-    # switch group using `,` and `.`
     zstyle ':fzf-tab:*' switch-group ',' '.'
+    zstyle ':fzf-tab:*' fzf-min-height 30
+    zstyle ':fzf-tab:*' popup-min-size 60 30
+    zstyle ':fzf-tab:complete:diff:*' popup-min-size 80 30
     # zstyle ':fzf-tab:*' fzf-bindings 'ctrl-j:accept' 'ctrl-a:toggle-all'
+
+    zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+    zstyle ':completion:*:descriptions' format '[%d]'
+    # zstyle ':completion:*:*:*:*:*' menu yes select
+
+    # use input as query string when completing zlua
+    # zstyle ':fzf-tab:complete:_zlua:*' query-string input
+
+    # preview directory's content with eza when completing cd
+    zstyle ':fzf-tab:complete:z:*' popup-pad 30 0
+    zstyle ':fzf-tab:complete:z:*' fzf-preview 'eza -a1 --icons --color=always $realpath'
 
     zstyle ':fzf-tab:complete:bat:argument-rest' fzf-preview \
         'bat --theme=Coldark-Dark --style=numbers,header --color=always $realpath'
     zstyle ':fzf-tab:complete:bat:argument-rest' fzf-flags --preview-window=right:70%:wrap
 
-    # preview directory's content with eza when completing cd
-    zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -a1 --icons --color=always $realpath'
-
-    # use input as query string when completing zlua
-    zstyle ':fzf-tab:complete:_zlua:*' query-string input
+    # disable sort when completing `git checkout`
+    zstyle ':completion:*:git-checkout:*' sort false
+    zstyle ':fzf-tab:complete:git-log:*' fzf-preview "git log --color=always ${word%% *}"
+    zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview 'git diff $word | delta'
 
     # give a preview of commandline arguments when completing `kill`
     zstyle ':completion:*:*:*:*:processes' command 'ps -u $USER -o pid,user,comm -w -w'

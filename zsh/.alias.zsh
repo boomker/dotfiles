@@ -392,11 +392,13 @@ function transfer() {
     curl --progress-bar --upload-file "$1" https://transfer.sh/$(basename "$1") | tee /dev/null
 }
 
-# vfox switch python version
-function vfsw() {
-    python_versions=$(vfox ls python | fzf)
-    python_version=$(echo "$python_versions" | gsed -r 's/[->v ]//g')
-    [[ -n "${python_version}" ]] && vfox use python@"${python_version}"
+function yz() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
 }
 
 # FZF file and cd to it's directory
