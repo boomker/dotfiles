@@ -37,10 +37,10 @@ if [[ $- =~ i ]]; then
     export PREZCUSMODIR="$HOME/.zprezto-contrib"
 
     export PNPM_HOME="$HOME/.pnpm"
-    export PIPX_HOME="$HOME/.pipx"
+    # export PIPX_HOME="$HOME/.pipx"
     export PATH="$HOME/go/bin:$HOME/.bun/bin:$HOME/.cargo/bin:$PATH"
     export PATH="$HOME/.local/bin:$HOME/.version-fox/shims:$PATH"
-    export PIPX_DEFAULT_PYTHON="$HOME/.version-fox/shims/python3"
+    # export PIPX_DEFAULT_PYTHON="$HOME/.version-fox/shims/python3"
     export MANPATH="/usr/local/man:/usr/local/share/man:${MANPATH}"
     export MANPATH="/usr/local/opt/coreutils/share/man:${MANPATH}"
     ## }}}
@@ -60,10 +60,10 @@ if [[ $- =~ i ]]; then
     fi
 
     if (( $+commands[fd] )); then
-        export FD_OPTIONS=" \
-            --exclude .git \
-            --exclude .idea \
-            --exclude .venv \
+        export FD_OPTIONS="
+            --exclude .git
+            --exclude .idea
+            --exclude .venv
             --exclude node_modules"
     fi
 
@@ -80,19 +80,19 @@ if [[ $- =~ i ]]; then
             --header 'Press CTRL-Y to copy command into clipboard; CTRL-x clear-query'"
 
         export FZF_CTRL_T_OPTS="
-            --bind 'ctrl-y:execute-silent(printf {} | cut -f 2- |pbcopy)+accept' \
-            --bind 'alt-e:become(nvim {} > /dev/tty)+abort' \
-            --preview-window=right:70%:wrap --preview \
+            --bind 'ctrl-y:execute-silent(printf {} | cut -f 2- |pbcopy)+accept'
+            --bind 'alt-e:become(nvim {} > /dev/tty)+abort'
+            --preview-window=right:70%:wrap --preview
             '(bat --style=numbers --color=always --line-range=:100 {} ) 2>/dev/null'"
 
-        export FZF_ALT_C_OPTS="--preview-window=right:70%:wrap --preview \
-            '(eza -ahlF --color-scale --group-directories-first  --icons \
+        export FZF_ALT_C_OPTS="--preview-window=right:70%:wrap --preview
+            '(eza -ahlF --color-scale --group-directories-first  --icons
             --color=always --tree --level=2 -I=.git* {}) 2>/dev/null |head -20'"
 
-        export FZF_DEFAULT_OPTS=" \
-            --exact --multi --ansi --height 70% --reverse --border --tiebreak=begin \
-            --bind end:preview-down,home:preview-up,?:toggle-preview \
-            --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' \
+        export FZF_DEFAULT_OPTS="
+            -0 -1 --multi --height 70% --reverse --border --tiebreak=begin
+            --bind end:preview-down,home:preview-up,?:toggle-preview
+            --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort'
             --bind 'alt-a:select-all+accept'"
     fi
     ## }}}
@@ -142,92 +142,52 @@ if [[ $- =~ i ]]; then
     ## }}}
 
     ## zsh-notify config {{{
-    zstyle ':notify:*' check-focus no
     zstyle ':notify:*' enable-on-ssh yes
+    # zstyle ':notify:*' check-focus yes
     zstyle ':notify:*' command-complete-timeout 15
+    # zstyle ':notify:*' always-notify-on-failure yes
     # zstyle ':notify:*' notifier "/usr/local/bin/noti"
     zstyle ':notify:*' error-sound "Bubble"
     zstyle ':notify:*' error-title "⛔️ errored in #{time_elapsed}"
-    zstyle ':notify:*' blacklist-regex 'git|man|vim|nvim|neovim|help|bat'
     # zstyle ':notify:*' error-icon "https://s1.ax1x.com/2022/11/06/xXY9o9.png"
     # zstyle ":notify:*" success-icon "https://s1.ax1x.com/2022/11/06/xXYpdJ.png"
     zstyle ':notify:*' success-sound "Crystal"
     zstyle ':notify:*' success-title "✅ finished in #{time_elapsed}"
-    zstyle ':notify:*' always-notify-on-failure no
-    ## }}}
-
-    ## fzf-tab config {{{
-    zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-
-    zstyle ':fzf-tab:*' switch-group ',' '.'
-    zstyle ':fzf-tab:*' fzf-min-height 30
-    zstyle ':fzf-tab:*' popup-min-size 60 30
-    zstyle ':fzf-tab:complete:diff:*' popup-min-size 80 30
-    # zstyle ':fzf-tab:*' fzf-bindings 'ctrl-j:accept' 'ctrl-a:toggle-all'
-
-    zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-    zstyle ':completion:*:descriptions' format '[%d]'
-    # zstyle ':completion:*:*:*:*:*' menu yes select
-
-    # use input as query string when completing zlua
-    # zstyle ':fzf-tab:complete:_zlua:*' query-string input
-
-    # preview directory's content with eza when completing cd
-    zstyle ':fzf-tab:complete:z:*' popup-pad 30 0
-    zstyle ':fzf-tab:complete:z:*' fzf-preview 'eza -a1 --icons --color=always $realpath'
-
-    zstyle ':fzf-tab:complete:bat:argument-rest' fzf-preview \
-        'bat --theme=Coldark-Dark --style=numbers,header --color=always $realpath'
-    zstyle ':fzf-tab:complete:bat:argument-rest' fzf-flags --preview-window=right:70%:wrap
-
-    # disable sort when completing `git checkout`
-    zstyle ':completion:*:git-checkout:*' sort false
-    zstyle ':fzf-tab:complete:git-log:*' fzf-preview "git log --color=always ${word%% *}"
-    zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview 'git diff $word | delta'
-
-    # give a preview of commandline arguments when completing `kill`
-    zstyle ':completion:*:*:*:*:processes' command 'ps -u $USER -o pid,user,comm -w -w'
-    zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview \
-        '[[ $group =~ "process" ]] && ps -p $word -o command -w -w |tail -1'
-    zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down:3:wrap
+    zstyle ':notify:*' blacklist-regex 'git|man|vim|nvim|neovim|help|bat|yazi|fzf'
     ## }}}
 
     # API secret:
-    [ -f ~/.secrets ] && zsh-defer source ~/.secrets
+    [ -f ~/.secrets ] && source ~/.secrets
 
     # alias.zsh conf:
-    [ -f ~/.alias.zsh ] && zsh-defer source ~/.alias.zsh
+    [ -f ~/.alias.zsh ] && source ~/.alias.zsh
 
     # bun completions
-    # [ -s "~/.bun/_bun" ] && zsh-defer source "~/.bun/_bun"
+    # [ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
 
     # shell history search
     [[ -e $(which atuin) ]] && {
         export ATUIN_NOBIND="true"
         bindkey '^q' atuin-search
-        zsh-defer source ${PREZCUSMODIR}/user_plugins/atuin.zsh
+        source ${PREZCUSMODIR}/user_plugins/atuin.zsh
     }
 
     # fzf
-    [[ -e $(which fzf) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/fzf.zsh
+    [[ -e $(which fzf) ]] && source ${PREZCUSMODIR}/user_plugins/fzf.zsh
 
     # zoxide config:
-    [[ -e $(which zoxide) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/zoxide.zsh
+    [[ -e $(which zoxide) ]] && source ${PREZCUSMODIR}/user_plugins/zoxide.zsh
 
     # starship prompt
     [[ -e $(which starship) ]] && source ${PREZCUSMODIR}/user_plugins/starship_prompt.zsh
 
     # direnv
-    # [[ -e $(which direnv) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/direnv.zsh
+    # [[ -e $(which direnv) ]] && source ${PREZCUSMODIR}/user_plugins/direnv.zsh
 
     # Git status
-    # [[ -e $(which scmpuff) ]] && zsh-defer eval "$(scmpuff init --shell="zsh")"
+    # [[ -e $(which scmpuff) ]] &&  eval "$(scmpuff init --shell="zsh" --aliases=false)"
 
-    # [ -f "${HOME}/.fzf-git.sh" ] && zsh-defer source "${HOME}/.fzf-git.sh"
-
-    # zsh-autopair
-    # git@github.com:hlissner/zsh-autopair.git
-    [ -f "${PREZCUSMODIR}/zsh-autopair/autopair.zsh" ] && autopair-init
+    # [ -f "${HOME}/.fzf-git.sh" ] &&  source "${HOME}/.fzf-git.sh"
 
     # zsh-defer
     # git clone https://github.com/romkatv/zsh-defer.git
@@ -237,7 +197,20 @@ if [[ $- =~ i ]]; then
 
     # zsh-notify
     # git@github.com:marzocchi/zsh-notify.git
-    # [ -f "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh" ] && [[ -n ${TERM_PROGRAM} ]] &&
-    #     zsh-defer source "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh"
+    [[ -f "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh" ]] && {
+        source "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh"
+    }
+
+    # auto-venv
+    # git@github.com:Skylor-Tang/auto-venv.git
+    [[ -f "${PREZCUSMODIR}/auto-venv/auto-venv.plugin.zsh" ]] && {
+        source "${PREZCUSMODIR}/auto-venv/auto-venv.plugin.zsh"
+    }
+
+    # zsh-autopair
+    # git@github.com:hlissner/zsh-autopair.git
+    [[ -f "${PREZCUSMODIR}/zsh-autopair/autopair.zsh" ]] && {
+        source "${PREZCUSMODIR}/zsh-autopair/autopair.zsh" && autopair-init
+    }
 
 fi

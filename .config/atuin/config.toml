@@ -1,8 +1,7 @@
 ## where to store your database, default is your system data directory
 ## linux/mac: ~/.local/share/atuin/history.db
 ## windows: %USERPROFILE%/.local/share/atuin/history.db
-db_path = "~/.local/share/atuin/history.db"
-# db_path = "~/MEGA/MEGAsync/Softwares_Confs/Others/atuin/history.db"
+# db_path = "~/.history.db"
 
 ## where to store your encryption key, default is your system data directory
 ## linux/mac: ~/.local/share/atuin/key
@@ -12,7 +11,7 @@ db_path = "~/.local/share/atuin/history.db"
 ## where to store your auth session token, default is your system data directory
 ## linux/mac: ~/.local/share/atuin/session
 ## windows: %USERPROFILE%/.local/share/atuin/session
-session_path = "~/.local/share/atuin/session"
+# session_path = "~/.session"
 
 ## date format used, either "us" or "uk"
 # dialect = "us"
@@ -39,7 +38,7 @@ session_path = "~/.local/share/atuin/session"
 
 ## which search mode to use
 ## possible values: prefix, fulltext, fuzzy, skim
-search_mode = "fuzzy"
+# search_mode = "fuzzy"
 
 ## which filter mode to use
 ## possible values: global, host, session, directory
@@ -52,11 +51,13 @@ search_mode = "fuzzy"
 ## which filter mode to use when atuin is invoked from a shell up-key binding
 ## the accepted values are identical to those of "filter_mode"
 ## leave unspecified to use same mode set in "filter_mode"
+# filter_mode_shell_up_key_binding = "global"
 filter_mode_shell_up_key_binding = "directory"
 
 ## which search mode to use when atuin is invoked from a shell up-key binding
 ## the accepted values are identical to those of "search_mode"
 ## leave unspecified to use same mode set in "search_mode"
+# search_mode_shell_up_key_binding = "fuzzy"
 search_mode_shell_up_key_binding = "prefix"
 
 ## which style to use
@@ -72,7 +73,7 @@ search_mode_shell_up_key_binding = "prefix"
 
 ## enable or disable showing a preview of the selected command
 ## useful when the command is longer than the terminal width and is cut off
-show_preview = true
+# show_preview = true
 
 ## what to do when the escape key is pressed when searching
 ## possible values: return-original, return-query
@@ -189,16 +190,11 @@ enter_accept = false
 # common_prefix = ["sudo"]
 
 ## Set commands that will be completely ignored from stats
-ignored_commands = [
-  "z",
-  "cd",
-  "ls",
-  "ll",
-  "lt",
-  "vi",
-  "vim",
-  "nvim",
-]
+# ignored_commands = [
+#   "cd",
+#   "ls",
+#   "vi"
+# ]
 
 [keys]
 # Defaults to true. If disabled, using the up/down key won't exit the TUI when scrolled past the first/last entry.
@@ -209,3 +205,30 @@ ignored_commands = [
 # This ensures that sync v2 is enabled for new installs only
 # In a later release it will become the default across the board
 records = true
+
+[preview]
+## which preview strategy to use to calculate the preview height (respects max_preview_height).
+## possible values: auto, static
+## auto: length of the selected command.
+## static: length of the longest command stored in the history.
+# strategy = "auto"
+
+[daemon]
+## Enables using the daemon to sync. Requires the daemon to be running in the background. Start it with `atuin daemon`
+# enabled = false
+
+## How often the daemon should sync in seconds
+# sync_frequency = 300
+
+## The path to the unix socket used by the daemon (on unix systems)
+## linux/mac: ~/.local/share/atuin/atuin.sock
+## windows: Not Supported
+# socket_path = "~/.local/share/atuin/atuin.sock"
+
+## Use systemd socket activation rather than opening the given path (the path must still be correct for the client)
+## linux: false
+## mac/windows: Not Supported
+# systemd_socket = false
+
+## The port that should be used for TCP on non unix systems
+# tcp_port = 8889

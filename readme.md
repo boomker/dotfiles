@@ -4,7 +4,7 @@
 
 - framework: prezto
 - theme: startship
-- plugins: fzf-tab, autosuggestions, history-substring-search, syntax-highlighting, zsh-nvm, gnu-utility
+- plugins: fzf-tab, autosuggestions, history-substring-search, syntax-highlighting, gnu-utility
 
 ### Tmux
 
@@ -34,7 +34,6 @@
 - vfox
 - yazi
 - amber
-- broot
 - delta
 - zoxide
 - scmpuff
