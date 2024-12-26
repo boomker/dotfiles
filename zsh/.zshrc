@@ -153,14 +153,14 @@ if [[ $- =~ i ]]; then
     # zstyle ":notify:*" success-icon "https://s1.ax1x.com/2022/11/06/xXYpdJ.png"
     zstyle ':notify:*' success-sound "Crystal"
     zstyle ':notify:*' success-title "✅ finished in #{time_elapsed}"
-    zstyle ':notify:*' blacklist-regex 'git|man|vim|nvim|neovim|help|bat|yazi|fzf'
+    zstyle ':notify:*' blacklist-regex 'git|man|vim|nvim|neovim|help|bat|yazi|fzf|run-help'
     ## }}}
 
     # API secret:
     [ -f ~/.secrets ] && source ~/.secrets
 
     # alias.zsh conf:
-    [ -f ~/.alias.zsh ] && source ~/.alias.zsh
+    [ -f ~/.aliases.zsh ] && source ~/.aliases.zsh
 
     # bun completions
     # [ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
@@ -196,19 +196,16 @@ if [[ $- =~ i ]]; then
     # }
 
     # zsh-notify
-    # git@github.com:marzocchi/zsh-notify.git
     [[ -f "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh" ]] && {
         source "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh"
     }
 
     # auto-venv
-    # git@github.com:Skylor-Tang/auto-venv.git
     [[ -f "${PREZCUSMODIR}/auto-venv/auto-venv.plugin.zsh" ]] && {
         source "${PREZCUSMODIR}/auto-venv/auto-venv.plugin.zsh"
     }
 
     # zsh-autopair
-    # git@github.com:hlissner/zsh-autopair.git
     [[ -f "${PREZCUSMODIR}/zsh-autopair/autopair.zsh" ]] && {
         source "${PREZCUSMODIR}/zsh-autopair/autopair.zsh" && autopair-init
     }
