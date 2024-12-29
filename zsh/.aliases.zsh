@@ -176,8 +176,8 @@ alias zshreload="source ~/.zshrc"
 alias hostsconf="sudo vim /etc/hosts"
 alias sshconf="nvim ${HOME}/.ssh/config"
 alias zshconf="nvim ${HOME}/gitrepos/dotfiles/zsh/.zshrc"
-alias aliconf="nvim ${HOME}/gitrepos/dotfiles/zsh/.alias.zsh"
-alias tmuxconf="nvim ${HOME}/gitrepos/dotfiles/term_tmux/.tmux.conf"
+alias aliconf="nvim ${HOME}/gitrepos/dotfiles/zsh/.aliases.zsh"
+alias tmuxconf="nvim ${HOME}/gitrepos/dotfiles/tmux/.tmux.conf"
 
 # undo proxy
 alias unsetproxy="
@@ -393,12 +393,12 @@ function transfer() {
 }
 
 function yz() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		builtin cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
 }
 
 # FZF file and cd to it's directory
@@ -521,7 +521,7 @@ function fgdf() {
         branch=${remote_ori:-origin}"/"${curBranch}"~${change_commits_count}"
     fi
 
-    gcfl "${remote_ori}" | fzf --ansi --scrollbar=▌▐ --preview-window=up:70%:wrap --preview \
+    gcfl "${remote_ori}" | fzf --scrollbar=▌▐ --preview-window=up:70%:wrap --preview \
         "[[ "x${remote_ori}" == 'x' ]] && git diff ${branch:-${curBranch}} -- ${proj_root}/{} |delta || batdiff --delta --color --context=1 {}"
 }
 

@@ -34,9 +34,9 @@ regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|g
 
 [keyboard]
 bindings = [
-    { chars = "\u001Bf", key = "F", mods = "Command" },
+    # { chars = "\u001Bf", key = "F", mods = "Command" },
 
-    { chars = "\u001Bb", key = "B", mods = "Command" },
+    # { chars = "\u001Bb", key = "B", mods = "Command" },
 
     { chars = "\u001Bd", key = "D", mods = "Command" },
 
@@ -50,21 +50,23 @@ bindings = [
 
     { chars = "\u0007e", key = "E", mods = "Command" },
 
+    { chars = "\u0007n", key = "N", mods = "Command" },
+
     { chars = "\u0007u", key = "U", mods = "Command" },
 
-    { chars = "\u0007i", key = "I", mods = "Command" },
+    { chars = "\u0007t", key = "T", mods = "Command" },
 
     { chars = "\u0007P", key = "P", mods = "Command" },
 
-    { chars = "\u0007o", key = "O", mods = "Command" },
+    { chars = "\u0007r", key = "R", mods = "Command" },
 
-    { chars = "\u0007n", key = "N", mods = "Command" },
+    { chars = "\u0007o", key = "O", mods = "Command" },
 
     { chars = "\u0007W", key = "W", mods = "Command" },
 
     { chars = "\u0007z", key = "Z", mods = "Command" },
 
-    { chars = "\u0007|", key = "T", mods = "Command" },
+    { chars = "\u0007|", key = "I", mods = "Command" },
 
     { chars = "\u0007-", key = "S", mods = "Command" },
 
@@ -81,7 +83,7 @@ bindings = [
     { chars = "\u0007j", key = "J", mods = "Command" },
 
     # { chars = "\u0007h", key = "H", mods = "Command" },
-    { chars = "\u0007h", key = "R", mods = "Command" },
+    # { chars = "\u0007h", key = "R", mods = "Command" },
 
     { chars = "\u0007l", key = "L", mods = "Command" },
 
@@ -177,7 +179,7 @@ multiplier = 6
 
 [general]
 live_config_reload = true
-import = ["./themes/catppuccin-frappe.toml"]
+import = ["./themes/catppuccin-macchiato.toml"]
 
 [terminal]
 

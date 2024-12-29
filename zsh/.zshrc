@@ -38,8 +38,8 @@ if [[ $- =~ i ]]; then
 
     export PNPM_HOME="$HOME/.pnpm"
     # export PIPX_HOME="$HOME/.pipx"
+    export PATH="$HOME/.local/bin:$PATH"
     export PATH="$HOME/go/bin:$HOME/.bun/bin:$HOME/.cargo/bin:$PATH"
-    export PATH="$HOME/.local/bin:$HOME/.version-fox/shims:$PATH"
     # export PIPX_DEFAULT_PYTHON="$HOME/.version-fox/shims/python3"
     export MANPATH="/usr/local/man:/usr/local/share/man:${MANPATH}"
     export MANPATH="/usr/local/opt/coreutils/share/man:${MANPATH}"
@@ -90,7 +90,7 @@ if [[ $- =~ i ]]; then
             --color=always --tree --level=2 -I=.git* {}) 2>/dev/null |head -20'"
 
         export FZF_DEFAULT_OPTS="
-            -0 -1 --multi --height 70% --reverse --border --tiebreak=begin
+            -0 --cycle --multi --height 70% --reverse --border --tiebreak=begin
             --bind end:preview-down,home:preview-up,?:toggle-preview
             --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort'
             --bind 'alt-a:select-all+accept'"

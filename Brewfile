@@ -56,6 +56,8 @@ brew "pcre2"
 brew "python-packaging"
 # Core application library for C
 brew "glib"
+# Binary installation for rust projects
+brew "cargo-binstall"
 # Implementation of the Unicode BiDi algorithm
 brew "fribidi"
 # OpenType text shaping engine
@@ -140,6 +142,8 @@ brew "luarocks"
 brew "man-db"
 # Drop-in replacement for MySQL
 brew "mariadb"
+# Mac App Store command-line interface
+brew "mas"
 # Like sed, awk, cut, join & sort for name-indexed data such as CSV
 brew "miller"
 # Interactive cheatsheet tool for the command-line
@@ -182,6 +186,8 @@ brew "rsync"
 brew "ruff"
 # Safe, concurrent, practical language
 brew "rust"
+# Run commands in parallel with Rust's Tokio framework
+brew "rust-parallel"
 # Adds numbered shortcuts for common git commands
 brew "scmpuff"
 # 7-Zip is a file archiver with a high compression ratio
@@ -249,10 +255,8 @@ cask "iina"
 cask "jordanbaird-ice"
 # Keyboard customiser
 cask "karabiner-elements"
-# Open-source cross-platform alternative to AirDrop
-# cask "localsend"
 # Window manager
-# cask "loop"
+cask "loop"
 # Syncs files between computers and MEGA Cloud drives
 cask "megasync"
 # Provides updates to various Microsoft products
@@ -260,7 +264,7 @@ cask "microsoft-auto-update"
 # Multi-platform web browser
 cask "microsoft-edge"
 # Email client
-# cask "microsoft-outlook"
+cask "microsoft-outlook"
 # Neovim Client
 cask "neovide"
 # Music streaming platform
@@ -293,6 +297,7 @@ cask "visual-studio-code"
 cask "wezterm"
 # Gecko based web browser
 cask "zen-browser"
+mas "Picview", id: 6452016140
 vscode "alefragnani.bookmarks"
 vscode "bajdzis.vscode-database"
 vscode "batisteo.vscode-django"
