@@ -34,19 +34,19 @@ regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|g
 
 [keyboard]
 bindings = [
-    # { chars = "\u001Bf", key = "F", mods = "Command" },
+    { chars = "\u001Bf", key = "F", mods = "Command" },
 
-    # { chars = "\u001Bb", key = "B", mods = "Command" },
+    { chars = "\u001Bb", key = "B", mods = "Command" },
 
     { chars = "\u001Bd", key = "D", mods = "Command" },
 
     { chars = "\u0007g", key = "G", mods = "Command" },
 
-    { chars = "\u0007f", key = "Y", mods = "Command" },
+    # { chars = "\u0007f", key = "Y", mods = "Command" },
 
     { chars = "\u0007y", key = "C", mods = "Command" },
 
-    { chars = "\u0007m", key = "M", mods = "Command" },
+    { chars = "\u0007f", key = "M", mods = "Command" },
 
     { chars = "\u0007e", key = "E", mods = "Command" },
 
@@ -62,7 +62,7 @@ bindings = [
 
     { chars = "\u0007o", key = "O", mods = "Command" },
 
-    { chars = "\u0007W", key = "W", mods = "Command" },
+    { chars = "\u0007F", key = "W", mods = "Command" },
 
     { chars = "\u0007z", key = "Z", mods = "Command" },
 

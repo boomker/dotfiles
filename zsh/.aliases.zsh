@@ -14,7 +14,7 @@ alias -g J="   jq ."
 alias -g B="   bat "
 alias -g BG="  batgrep -S"
 alias -g BH="  bat --plain --language=help"
-alias -g BS="  bat --plain --language=bash"
+alias -g BB="  bat --plain --language=bash"
 alias -g C="   hck "
 alias -g D="   delta -s"
 alias -g RX="  rargs"
@@ -181,6 +181,8 @@ alias tmuxconf="nvim ${HOME}/gitrepos/dotfiles/tmux/.tmux.conf"
 
 # undo proxy
 alias unsetproxy="
+	unset http_proxy;
+	unset https_proxy;
 	unset HTTP_PROXY;
 	unset HTTPS_PROXY;
 	unset ALL_PROXY;
@@ -190,7 +192,6 @@ alias unsetproxy="
 if [[ $(uname -s) == "Darwin" ]]; then
 
     alias -g PC=" |pbcopy"
-
     alias o="open"
     alias e="nvim"
     alias vim="nvim"
@@ -236,7 +237,7 @@ function zpupdate() {
     git -C ${ZPREZTODIR} pull || break 2>/dev/null
     git -C ${ZPREZTODIR} submodule sync --recursive
     git -C ${ZPREZTODIR} submodule update --init --recursive
-    for i in $(\ls -1d ${PREZCUSMODIR}/*); do
+    for i in $(/bin/ls -1d ${PREZCUSMODIR}/*); do
         echo -e "${i}: \n"
         git -C $i pull --rebase
     done

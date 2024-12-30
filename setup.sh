@@ -1,19 +1,19 @@
 #!/bin/bash
 
 [[ -n $(lsof -nP -i :7890 -i :1080) ]] && echo 'proxy ok' || {
-    echo 'proxy fail' && exit
+	echo 'proxy fail' && exit
 }
 
 [[ -n $(lsof -nP -i :7890) ]] && {
-    export https_proxy=http://127.0.0.1:7890
-    export http_proxy=http://127.0.0.1:7890
-    export all_proxy=socks5://127.0.0.1:7890
+	export https_proxy=http://127.0.0.1:7890
+	export http_proxy=http://127.0.0.1:7890
+	export all_proxy=socks5://127.0.0.1:7890
 }
 
 [[ -n $(lsof -nP -i :1087) ]] && {
-    export http_proxy=http://127.0.0.1:1087
-    export https_proxy=http://127.0.0.1:1087
-    export ALL_PROXY=socks5://127.0.0.1:1080
+	export http_proxy=http://127.0.0.1:1087
+	export https_proxy=http://127.0.0.1:1087
+	export ALL_PROXY=socks5://127.0.0.1:1080
 }
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -32,23 +32,14 @@ git clone git@github.com:hlissner/zsh-autopair.git "${PREZCUSMODIR:-$HOME/.zprez
 
 git clone git@github.com:boomker/uvcode.git "${HOME}/gitrepos/uvcode"
 git clone git@github.com:boomker/dotfiles.git "${HOME}/gitrepos/dotfiles"
-# git clone git@github.com:boomker/spacehammer.git "${HOME}/gitrepos/spacehammer"
-[[ -d "${HOME}/gitrepos/spacehammer" ]] && {
-    mkdir -p "${HOME}/gitrepos/spacehammer"
-    cd "${HOME}/gitrepos/spacehammer"
-    git init && git config core.sparseCheckout true
-    echo "!/images/" >>.git/info/sparse-checkout
-    git remote add origin git@github.com:boomker/spacehammer.git
-    git pull origin main
-    cd -
-}
+git clone git@github.com:boomker/spacehammer.git "${HOME}/gitrepos/spacehammer"
 
 if [[ -d "${HOME}/gitrepos/dotfiles" ]]; then
-    ln -sv "${HOME}/gitrepos/dotfiles/zsh/.*" "${HOME}/"
-    ln -sv "${HOME}/gitrepos/dotfiles/git/.gitconfig" "${HOME}/"
-    ln -sv "${HOME}/gitrepos/dotfiles/tmux/.tmux.conf" "${HOME}/"
-    ln -sv "${HOME}/gitrepos/dotfiles/.config/*" "${HOME}/.config/"
-    cp -aR "${HOME}/gitrepos/dotfiles/zsh/*.zsh" "${PREZCUSMODIR:-$HOME/.zprezto-contrib}/user_plugins/"
+	ln -sv "${HOME}/gitrepos/dotfiles/zsh/.*" "${HOME}/"
+	ln -sv "${HOME}/gitrepos/dotfiles/git/.gitconfig" "${HOME}/"
+	ln -sv "${HOME}/gitrepos/dotfiles/tmux/.tmux.conf" "${HOME}/"
+	ln -sv "${HOME}/gitrepos/dotfiles/.config/*" "${HOME}/.config/"
+	cp -aR "${HOME}/gitrepos/dotfiles/zsh/*.zsh" "${PREZCUSMODIR:-$HOME/.zprezto-contrib}/user_plugins/"
 fi
 
 [[ -d "${HOME}/gitrepos/spacehammer" ]] && ln -sv "${HOME}/gitrepos/spacehammer" "${HOME}/.config/"
@@ -60,8 +51,8 @@ fi
 [[ -e $(which yazi) ]] && ya pack -i && ya pack -u
 
 sed -i '' \
-    -e '5s/==/=~/' \
-    -e '5s%Apple_Terminal%tmux|WezTerm|iTerm|Apple_Terminal%' \
-    "${PREZCUSMODIR:-$HOME/.zprezto-contrib}/zsh-notify/notify.plugin.zsh"
+	-e '5s/==/=~/' \
+	-e '5s%Apple_Terminal%tmux|ghostty|WezTerm|iTerm|Apple_Terminal%' \
+	"${PREZCUSMODIR:-$HOME/.zprezto-contrib}/zsh-notify/notify.plugin.zsh"
 
 ssh-keygen -t ed25519 -q -P ''

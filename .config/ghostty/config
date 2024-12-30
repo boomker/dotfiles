@@ -25,25 +25,30 @@ keybind = cmd+u=text:\x07u
 keybind = cmd+o=text:\x07o
 keybind = cmd+c=text:\x07y
 keybind = cmd+t=text:\x07t
-keybind = cmd+w=text:\x07w
 keybind = cmd+z=text:\x07z
 keybind = cmd+i=text:\x07|
 keybind = cmd+s=text:\x07-
 keybind = cmd+j=text:\x07j
 keybind = cmd+k=text:\x07k
 keybind = cmd+l=text:\x07l
-keybind = cmd+b=text:\x07h
+# keybind = cmd+h=text:\x07h
+keybind = cmd+x=text:\x07x
 keybind = cmd+r=text:\x07r
 keybind = cmd+e=text:\x07e
-keybind = cmd+w=text:\x07W
+keybind = cmd+w=text:\x07w
 keybind = cmd+p=text:\x07P
 keybind = cmd+d=text:\x1Bd
-keybind = cmd+f=text:\x07y?
-keybind = cmd+shift+m=text:\x07m
+keybind = cmd+b=text:\x1Bb
+keybind = cmd+f=text:\x1Bf
+keybind = cmd+opt+/=text:\x07y?
+keybind = cmd+shift+s=text:\x07f
+keybind = cmd+shift+f=text:\x07F
+keybind = cmd+shift+m=text:\x07M
 keybind = cmd+shift+j=text:\x07J
 keybind = cmd+shift+k=text:\x07K
 keybind = cmd+shift+h=text:\x07H
 keybind = cmd+shift+l=text:\x07L
+keybind = cmd+shift+t=toggle_quick_terminal
 
 macos-option-as-alt = true
 mouse-shift-capture = true
