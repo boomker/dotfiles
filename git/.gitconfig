@@ -96,12 +96,15 @@
 [init]
     defaultBranch = main
 [http "https://github.com"]
-    #; proxy = http://127.0.0.1:7890
+    # proxy = http://127.0.0.1:7890
+    proxy = http://127.0.0.1:1080
     postBuffer = 524288000
 [https "https://github.com"]
-    #; proxy = http://127.0.0.1:7890
+    # proxy = http://127.0.0.1:7890
+    proxy = https://127.0.0.1:1080
 [http "https://github.com"]
-    #; proxy = socks5://127.0.0.1:7890
+    # proxy = socks5://127.0.0.1:7890
+    proxy = socks5://127.0.0.1:1080
 [filter "lfs"]
 	process = git-lfs filter-process
 	required = true

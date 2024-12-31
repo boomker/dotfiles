@@ -52,22 +52,22 @@ if [[ $- =~ i ]]; then
     # }}}
 
     ## ------ Bat && fd & fzf configuration ---------- {{{
-    if (( $+commands[bat] )); then
-        export BAT_THEME="Coldark-Dark"
+    if [[ -n $(command -v bat) ]]; then
         export BATDIFF_USE_DELTA=true
+        export BAT_THEME="Catppuccin Mocha"
         export MANPAGER="sh -c 'col -bx | bat -l man -p'"
         export MANROFFOPT='-c'
     fi
 
-    if (( $+commands[fd] )); then
-        export FD_OPTIONS="
+    if [[ -n $(command -v fd) ]]; then
+        export FD_OPTIONS=" \
             --exclude .git
             --exclude .idea
             --exclude .venv
             --exclude node_modules"
     fi
 
-    if (( $+commands[fzf] )); then
+    if [[ -n $(command -v fzf) ]]; then
         export FZF_DEFAULT_COMMAND="fd -H --type f ${FD_OPTIONS}"
         export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
         export FZF_CTRL_R_OPTS="
@@ -143,66 +143,67 @@ if [[ $- =~ i ]]; then
 
     ## zsh-notify config {{{
     zstyle ':notify:*' enable-on-ssh yes
-    # zstyle ':notify:*' check-focus yes
     zstyle ':notify:*' command-complete-timeout 15
+    zstyle ':notify:*' error-sound "Bubble"
+    zstyle ':notify:*' success-sound "Crystal"
+    zstyle ':notify:*' error-title "⛔️ errored in #{time_elapsed}"
+    zstyle ':notify:*' success-title "✅ finished in #{time_elapsed}"
+    # zstyle ':notify:*' check-focus yes
     # zstyle ':notify:*' always-notify-on-failure yes
     # zstyle ':notify:*' notifier "/usr/local/bin/noti"
-    zstyle ':notify:*' error-sound "Bubble"
-    zstyle ':notify:*' error-title "⛔️ errored in #{time_elapsed}"
     # zstyle ':notify:*' error-icon "https://s1.ax1x.com/2022/11/06/xXY9o9.png"
     # zstyle ":notify:*" success-icon "https://s1.ax1x.com/2022/11/06/xXYpdJ.png"
-    zstyle ':notify:*' success-sound "Crystal"
-    zstyle ':notify:*' success-title "✅ finished in #{time_elapsed}"
-    zstyle ':notify:*' blacklist-regex 'git|man|vim|nvim|neovim|help|bat|yazi|fzf|run-help'
+    # zstyle ':notify:*' blacklist-regex 'man|vim|nvim|help|bat|yazi|fzf|run-help'
     ## }}}
 
-    # API secret:
-    [ -f ~/.secrets ] && source ~/.secrets
+    # zsh-defer
+    # git clone https://github.com/romkatv/zsh-defer.git
+    [[ -f "${PREZCUSMODIR}/zsh-defer/zsh-defer.plugin.zsh" ]] && {
+        source "${PREZCUSMODIR}/zsh-defer/zsh-defer.plugin.zsh"
+    }
 
-    # alias.zsh conf:
-    [ -f ~/.aliases.zsh ] && source ~/.aliases.zsh
+    # API secret:
+    [ -f ~/.secrets ] && zsh-defer source ~/.secrets
+
+    # aliases.zsh conf:
+    [ -f ~/.aliases.zsh ] && zsh-defer source ~/.aliases.zsh
 
     # bun completions
-    # [ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
+    # [ -s "~/.bun/_bun" ] && zsh-defer  source "~/.bun/_bun"
 
-    # shell history search
+    # atuin shell history search
     [[ -e $(which atuin) ]] && {
         export ATUIN_NOBIND="true"
         bindkey '^q' atuin-search
-        source ${PREZCUSMODIR}/user_plugins/atuin.zsh
+        zsh-defer source ${PREZCUSMODIR}/user_plugins/atuin.zsh
     }
 
     # fzf
-    [[ -e $(which fzf) ]] && source ${PREZCUSMODIR}/user_plugins/fzf.zsh
+    [[ -e $(which fzf) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/fzf.zsh
 
-    # zoxide config:
-    [[ -e $(which zoxide) ]] && source ${PREZCUSMODIR}/user_plugins/zoxide.zsh
+    # zoxide
+    [[ -e $(which zoxide) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/zoxide.zsh
 
     # starship prompt
     [[ -e $(which starship) ]] && source ${PREZCUSMODIR}/user_plugins/starship_prompt.zsh
 
-    # direnv
-    # [[ -e $(which direnv) ]] && source ${PREZCUSMODIR}/user_plugins/direnv.zsh
-
     # Git status
-    # [[ -e $(which scmpuff) ]] &&  eval "$(scmpuff init --shell="zsh" --aliases=false)"
+    # "$(scmpuff init --shell="zsh" --aliases=false)"
+    [[ -e $(which scmpuff) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/scmpuff.zsh
 
-    # [ -f "${HOME}/.fzf-git.sh" ] &&  source "${HOME}/.fzf-git.sh"
+    # direnv
+    # [[ -e $(which direnv) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/direnv.zsh
 
-    # zsh-defer
-    # git clone https://github.com/romkatv/zsh-defer.git
-    # [[ -f "${PREZCUSMODIR}/zsh-defer/zsh-defer.plugin.zsh" ]] && {
-    #     source "${PREZCUSMODIR}/zsh-defer/zsh-defer.plugin.zsh"
-    # }
+    # [ -f "${HOME}/.fzf-git.sh" ] && zsh-defer source "${HOME}/.fzf-git.sh"
 
     # zsh-notify
-    [[ -f "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh" ]] && {
-        source "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh"
-    }
+    # [[ -f "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh" ]] && {
+    #     zsh-defer source "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh"
+    # }
 
     # auto-venv
     [[ -f "${PREZCUSMODIR}/auto-venv/auto-venv.plugin.zsh" ]] && {
-        source "${PREZCUSMODIR}/auto-venv/auto-venv.plugin.zsh"
+        zsh-defer source "${PREZCUSMODIR}/auto-venv/auto-venv.plugin.zsh"
     }
 
     # zsh-autopair
