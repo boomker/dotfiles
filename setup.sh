@@ -20,16 +20,17 @@
 curl -sSL https://raw.githubusercontent.com/boomker/dotfiles/refs/heads/main/Brewfile
 [[ -e ./Brewfile ]] && brew bundle --file=./Brewfile
 
-mkidr -p "${HOME}/.zprezto-contrib/user_plugins" "${HOME}/.tmux/plugins"
+mkidr -p "${HOME}/.zprezto/contrib/user_plugins" "${HOME}/.tmux/plugins"
 
-export PREZCUSMODIR="$HOME/.zprezto-contrib"
+export PREZCUSMODIR="${HOME}/.zprezto/contrib"
 
 git clone https://github.com/tmux-plugins/tpm "${HOME}/.tmux/plugins/tpm"
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-git clone git@github.com:romkatv/zsh-defer.git "${PREZCUSMODIR:-$HOME/.zprezto-contrib}/zsh-defer"
-git clone git@github.com:marzocchi/zsh-notify.git "${PREZCUSMODIR:-$HOME/.zprezto-contrib}/zsh-notify"
-git clone git@github.com:Skylor-Tang/auto-venv.git "${PREZCUSMODIR:-$HOME/.zprezto-contrib}/auto-venv"
-git clone git@github.com:hlissner/zsh-autopair.git "${PREZCUSMODIR:-$HOME/.zprezto-contrib}/zsh-autopair"
+git clone git@github.com:Aloxaf/fzf-tab.git "${PREZCUSMODIR:-$HOME/.zprezto/contrib}/fzf-tab"
+git clone git@github.com:romkatv/zsh-defer.git "${PREZCUSMODIR:-$HOME/.zprezto/contrib}/zsh-defer"
+git clone git@github.com:marzocchi/zsh-notify.git "${PREZCUSMODIR:-$HOME/.zprezto/contrib}/zsh-notify"
+git clone git@github.com:Skylor-Tang/auto-venv.git "${PREZCUSMODIR:-$HOME/.zprezto/contrib}/auto-venv"
+git clone git@github.com:hlissner/zsh-autopair.git "${PREZCUSMODIR:-$HOME/.zprezto/contrib}/zsh-autopair"
 
 git clone git@github.com:boomker/uvcode.git "${HOME}/gitrepos/uvcode"
 git clone git@github.com:boomker/dotfiles.git "${HOME}/gitrepos/dotfiles"
@@ -41,7 +42,7 @@ if [[ -d "${HOME}/gitrepos/dotfiles" ]]; then
 	ln -sv "${HOME}/gitrepos/dotfiles/git/.gitconfig" "${HOME}/"
 	ln -sv "${HOME}/gitrepos/dotfiles/tmux/.tmux.conf" "${HOME}/"
 	ln -sv "${HOME}/gitrepos/dotfiles/tmux/fzf-tmux-pane" "${HOME}/.tmux/plugins/"
-	cp -aR "${HOME}/gitrepos/dotfiles/zsh/*.zsh" "${PREZCUSMODIR:-$HOME/.zprezto-contrib}/user_plugins/"
+	cp -aR "${HOME}/gitrepos/dotfiles/zsh/*.zsh" "${PREZCUSMODIR:-$HOME/.zprezto/contrib}/user_plugins/"
 fi
 
 [[ -d "${HOME}/gitrepos/spacehammer" ]] && ln -sv "${HOME}/gitrepos/spacehammer" "${HOME}/.config/"
@@ -55,6 +56,6 @@ fi
 sed -i '' \
 	-e '5s/==/=~/' \
 	-e '5s%Apple_Terminal%tmux|ghostty|WezTerm|iTerm|Apple_Terminal%' \
-	"${PREZCUSMODIR:-$HOME/.zprezto-contrib}/zsh-notify/notify.plugin.zsh"
+	"${PREZCUSMODIR:-$HOME/.zprezto/contrib}/zsh-notify/notify.plugin.zsh"
 
 ssh-keygen -t ed25519 -q -P ''

@@ -1,11 +1,10 @@
 # Fonts
 font-size = 16
 font-thicken = true
+bold-is-bright = true
 font-feature = calt,liga
 font-family = "JetBrainsMono Nerd Font Mono"
-font-family-bold = "JetBrainsMono NFM Bold"
-font-family-italic = "JetBrainsMono NFM Italic"
-font-family-bold-italic = "JetBrainsMono NFM Bold Italic"
+font-family = "MiSans"
 
 # Mouse
 cursor-style = block
@@ -59,9 +58,15 @@ window-save-state = always
 window-decoration = false
 window-padding-balance = true
 
-# Other
+quick-terminal-screen = mouse
+quick-terminal-position = center
+
+# clipboard
 copy-on-select = true
+clipboard-trim-trailing-spaces = true
+
+# Other
 shell-integration = zsh
-# custom-shader = shaders/water.glsl
+# custom-shader = shaders/sparks-from-fire.glsl
 
 initial-command = /usr/local/bin/zsh -l -c "tmux new-session -A -D -s  🚀"

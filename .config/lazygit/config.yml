@@ -4,7 +4,7 @@ gui:
     scrollHeight: 2
     scrollPastBottom: true
     mouseEvents: true
-    skipUnstageLineWarning: false
+    skipDiscardChangeWarning: false
     skipStashWarning: false
     sidePanelWidth: 0.3333
     expandFocusedSidePanel: false
@@ -126,7 +126,7 @@ keybinding:
         scrollDownMain-alt1: J
         scrollUpMain-alt2: <c-u>
         scrollDownMain-alt2: <c-d>
-        executeCustomCommand: ':'
+        executeShellCommand: ':'
         createRebaseOptionsMenu: m
         pushFiles: P
         pullFiles: p
@@ -222,11 +222,10 @@ keybinding:
         update: u
         bulkMenu: b
 os:
-    openCommand: open -- {{filename}}
-    openLinkCommand: open {{link}}
+    open: open -- {{filename}}
+    openLink: open {{link}}
 disableStartupPopups: false
 customCommands: []
 services: {}
 notARepository: prompt
 promptToReturnFromSubprocess: true
-

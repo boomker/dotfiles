@@ -14,3 +14,21 @@ sort_by = "alphabetical"
 tab_size = 2
 max_width = 2000
 max_height = 2000
+
+[plugin]
+prepend_previewers = [
+    { name = "*.md", run = "glow" },
+    { mime = "text/csv", run = "miller" },
+    # Archive previewer
+    { mime = "application/x-xz", run = "ouch" },
+    { mime = "application/*zip", run = "ouch" },
+    { mime = "application/x-tar", run = "ouch" },
+    { mime = "application/x-rar", run = "ouch" },
+    { mime = "application/x-bzip2", run = "ouch" },
+    { mime = "application/x-7z-compressed", run = "ouch" },
+]
+
+[opener]
+extract = [
+    { run = 'ouch d -y "$@"', desc = "Extract here with ouch", for = "unix" },
+]

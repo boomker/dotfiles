@@ -34,7 +34,7 @@ if [[ $- =~ i ]]; then
     ## configure pyvenv, Homebrew, PATH(GNU CLI tools), git on MacOS {{{
     # if [[ $(uname -s) == "Darwin" ]]; then fi
     export SHELL="/usr/local/bin/zsh"
-    export PREZCUSMODIR="$HOME/.zprezto-contrib"
+    export PREZCUSMODIR="$HOME/.zprezto/contrib"
 
     export PNPM_HOME="$HOME/.pnpm"
     # export PIPX_HOME="$HOME/.pipx"
@@ -141,21 +141,6 @@ if [[ $- =~ i ]]; then
     bindkey -e '^k' pb-forward-kill-line
     ## }}}
 
-    ## zsh-notify config {{{
-    zstyle ':notify:*' enable-on-ssh yes
-    zstyle ':notify:*' command-complete-timeout 15
-    zstyle ':notify:*' error-sound "Bubble"
-    zstyle ':notify:*' success-sound "Crystal"
-    zstyle ':notify:*' error-title "⛔️ errored in #{time_elapsed}"
-    zstyle ':notify:*' success-title "✅ finished in #{time_elapsed}"
-    # zstyle ':notify:*' check-focus yes
-    # zstyle ':notify:*' always-notify-on-failure yes
-    # zstyle ':notify:*' notifier "/usr/local/bin/noti"
-    # zstyle ':notify:*' error-icon "https://s1.ax1x.com/2022/11/06/xXY9o9.png"
-    # zstyle ":notify:*" success-icon "https://s1.ax1x.com/2022/11/06/xXYpdJ.png"
-    # zstyle ':notify:*' blacklist-regex 'man|vim|nvim|help|bat|yazi|fzf|run-help'
-    ## }}}
-
     # zsh-defer
     # git clone https://github.com/romkatv/zsh-defer.git
     [[ -f "${PREZCUSMODIR}/zsh-defer/zsh-defer.plugin.zsh" ]] && {
@@ -184,26 +169,26 @@ if [[ $- =~ i ]]; then
     # zoxide
     [[ -e $(which zoxide) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/zoxide.zsh
 
-    # starship prompt
-    [[ -e $(which starship) ]] && source ${PREZCUSMODIR}/user_plugins/starship_prompt.zsh
+    # [ -f "${HOME}/.fzf-git.sh" ] && zsh-defer source "${HOME}/.fzf-git.sh"
 
     # Git status
     # "$(scmpuff init --shell="zsh" --aliases=false)"
     [[ -e $(which scmpuff) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/scmpuff.zsh
 
+    # starship prompt
+    [[ -e $(which starship) ]] && source ${PREZCUSMODIR}/user_plugins/starship_prompt.zsh
+
     # direnv
     # [[ -e $(which direnv) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/direnv.zsh
-
-    # [ -f "${HOME}/.fzf-git.sh" ] && zsh-defer source "${HOME}/.fzf-git.sh"
-
-    # zsh-notify
-    # [[ -f "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh" ]] && {
-    #     zsh-defer source "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh"
-    # }
 
     # auto-venv
     [[ -f "${PREZCUSMODIR}/auto-venv/auto-venv.plugin.zsh" ]] && {
         zsh-defer source "${PREZCUSMODIR}/auto-venv/auto-venv.plugin.zsh"
+    }
+
+    # fzf-tab
+    [[ -f "${PREZCUSMODIR}/fzf-tab/fzf-tab.plugin.zsh" ]] && {
+        source "${PREZCUSMODIR}/fzf-tab/fzf-tab.plugin.zsh"
     }
 
     # zsh-autopair
@@ -211,4 +196,37 @@ if [[ $- =~ i ]]; then
         source "${PREZCUSMODIR}/zsh-autopair/autopair.zsh" && autopair-init
     }
 
+    # zsh-notify
+    # [[ -f "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh" ]] && {
+    #     zsh-defer source "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh"
+    # }
+
+    ## fzf-tab config {{{
+    zstyle -d ':completion:*' format
+    zstyle ':fzf-tab:*' fzf-min-height 10
+    zstyle ':fzf-tab:*' popup-min-size 60 30
+    zstyle ':fzf-tab:*' switch-group ',' '.'
+    zstyle ":fzf-tab:*" fzf-flags --color=bg+:23
+    zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+    zstyle ':fzf-tab:complete:cd:*' popup-pad 30 0
+    zstyle ':completion:*:descriptions' format '[%d]'
+    zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -a1 --icons --color=always $realpath'
+    zstyle ':fzf-tab:complete:bat:argument-rest' fzf-flags --preview-window=right:70%:wrap
+    zstyle ':fzf-tab:complete:bat:argument-rest' fzf-preview 'bat --style=numbers,header --color=always $realpath'
+    ## }}}
+
+    ## zsh-notify config {{{
+    zstyle ':notify:*' enable-on-ssh yes
+    zstyle ':notify:*' command-complete-timeout 15
+    zstyle ':notify:*' error-sound "Bubble"
+    zstyle ':notify:*' success-sound "Crystal"
+    zstyle ':notify:*' error-title "⛔️ errored in #{time_elapsed}"
+    zstyle ':notify:*' success-title "✅ finished in #{time_elapsed}"
+    # zstyle ':notify:*' check-focus yes
+    # zstyle ':notify:*' always-notify-on-failure yes
+    # zstyle ':notify:*' notifier "/usr/local/bin/noti"
+    # zstyle ':notify:*' error-icon "https://s1.ax1x.com/2022/11/06/xXY9o9.png"
+    # zstyle ":notify:*" success-icon "https://s1.ax1x.com/2022/11/06/xXYpdJ.png"
+    # zstyle ':notify:*' blacklist-regex 'man|vim|nvim|help|bat|yazi|fzf|run-help'
+    ## }}}
 fi

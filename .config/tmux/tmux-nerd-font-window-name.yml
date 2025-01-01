@@ -1,0 +1,18 @@
+config:
+  show-name: true       # show the window name with the icon (defaults to false)
+  fallback-icon: "⚡️"   # show when no definition is found
+  multi-pane-icon: ""  # show when window has multiple panes (blank by default)
+  icon-position: "left" # show the icon to the "left" or "right" of the window name (defaults to left)
+
+icons:
+  # zsh: "" # overwrite with your own symbol (Nerd Font icon, emoji, whatever!)
+  cmatrix: "🤯" # add new entries that aren't included
+  less: ""
+  yazi: "󰇥"
+  htop: "󰓅"
+  btop: "󰓅"
+  pypy: ""
+  pypy3: ""
+  python: ""
+  python3: ""
+  lazygit: ""

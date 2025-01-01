@@ -1,6 +1,6 @@
 
-[env]
-TERM = "alacritty"
+# [env]
+# TERM = "alacritty"
 
 [font]
 size = 16
