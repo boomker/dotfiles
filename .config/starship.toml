@@ -1,10 +1,13 @@
-command_timeout = 99999
+"$schema" = 'https://starship.rs/config-schema.json'
+command_timeout = 9999
 
 format = """
 [░▒▓](#a3aed2)\
 [  ](bg:#a3aed2 fg:#090c0c)\
 [](fg:#a3aed2)\
 $username\
+$hostname\
+[](fg:black)\
 $status\
 [](fg:black bg:#769ff0)\
 $directory\
@@ -12,48 +15,56 @@ $directory\
 $git_branch\
 $git_status\
 [](fg:#394260 bg:#212736)\
-$nodejs\
 $rust\
 $golang\
 $python\
-[](fg:#212736 bg:#6373a2)\
+$nodejs\
+[](fg:#212736 bg:#6c7086)\
+$cmd_duration\
+[](fg:#6c7086 bg:#6373a2)\
 $time\
 [](fg:#6373a2)\
 \n$character"""
 
 [username]
+show_always = true
 style_user = 'white bold'
 style_root = 'black bold'
-format = ' 👨[ $user]($style) '
-disabled = false
-show_always = true
+format = '[ 👨$user]($style) '
 # aliases = { "corpuser034g" = "matchai" }
 
+[hostname]
+ssh_only = false
+disabled = false
+trim_at = '.local'
+# aliases = { "cyzhu's MacBook Pro" = "MBP" }
+# detect_env_vars = ['!TMUX', 'SSH_CONNECTION']
+format = '[🌏 $hostname](bold red) '
+
 [status]
-style = "bg:black"
+disabled = false
+map_symbol = true
 symbol = '🔴 '
 success_symbol = '🟢 SUCCESS'
-map_symbol = true
-disabled = false
-# format = '[[ $symbol$signal_name ](fg:#769ff0 bg:black)]($style)'
-format = '[[ $symbol$common_meaning$signal_name$maybe_int ](fg:#769ff0 bg:black)]($style)'
+style = 'fg:#769ff0 bg:black'
+format = '[ $symbol$common_meaning$signal_name$maybe_int ]($style)'
 
 [directory]
-style = "fg:#e3e5e5 bg:#769ff0"
-format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
+style = "fg:#e3e5e5 bg:#769ff0"
+format = "[ $path ]($style)"
 
 [directory.substitutions]
-"Documents" = "󰈙 "
-"Downloads" = " "
 "Music" = " "
 "Pictures" = " "
+"Documents" = "󰈙 "
+"Downloads" = " "
 
 [git_branch]
 symbol = ""
-style = "bg:#394260"
-format = '[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)'
+style = 'fg:#769ff0 bg:#394260'
+format = '[ $symbol $branch ]($style)'
 
 [git_status]
 up_to_date = '✅'
@@ -65,10 +76,10 @@ stashed = '📦${count} '
 renamed = '👅${count} '
 deleted = '❌${count} '
 conflicted = '😮💨${count} '
-staged = '[🚀$count ](green)'
-style = "bg:#394260"
+staged = '[🚀$count ](green) '
 diverged = '😵⇕⇡${ahead_count}⇣${behind_count}'
-format = '[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)'
+style = 'fg:#769ff0 bg:#394260'
+format = '[($all_status$ahead_behind)]($style)'
 
 [nodejs]
 symbol = ""
@@ -87,17 +98,20 @@ format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
 [python]
 symbol = '🐍 '
-style = "bg:#212736"
-format = '[[ ${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )](fg:#769ff0 bg:#212736)]($style)'
 pyenv_version_name = false
-
-[php]
-symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = 'fg:#769ff0 bg:#212736'
+format = '[ ${symbol}${pyenv_prefix}(${version} )(\($virtualenv\))]($style)'
 
 [time]
 disabled = false
-time_format = "%R"                                      # Hour:Minute Format
-style = "bg:#6373a2"
-format = '[[  $time ](fg:#a0a9cb bg:#6373a2)]($style)'
+time_format = "%R"              # Hour:Minute Format
+style = 'fg:#a0a9cb bg:#6373a2'
+format = '[  $time ]($style)'
+
+[cmd_duration]
+min_time = 500
+show_notifications = true
+min_time_to_notify = 1500
+notification_timeout = 2000
+style = 'fg:yellow bg:#6c7086'
+format = '[ 💰$duration ]($style)'

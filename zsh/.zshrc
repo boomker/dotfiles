@@ -196,11 +196,6 @@ if [[ $- =~ i ]]; then
         source "${PREZCUSMODIR}/zsh-autopair/autopair.zsh" && autopair-init
     }
 
-    # zsh-notify
-    # [[ -f "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh" ]] && {
-    #     zsh-defer source "${PREZCUSMODIR}/zsh-notify/notify.plugin.zsh"
-    # }
-
     ## fzf-tab config {{{
     zstyle -d ':completion:*' format
     zstyle ':fzf-tab:*' fzf-min-height 10
@@ -215,18 +210,4 @@ if [[ $- =~ i ]]; then
     zstyle ':fzf-tab:complete:bat:argument-rest' fzf-preview 'bat --style=numbers,header --color=always $realpath'
     ## }}}
 
-    ## zsh-notify config {{{
-    zstyle ':notify:*' enable-on-ssh yes
-    zstyle ':notify:*' command-complete-timeout 15
-    zstyle ':notify:*' error-sound "Bubble"
-    zstyle ':notify:*' success-sound "Crystal"
-    zstyle ':notify:*' error-title "⛔️ errored in #{time_elapsed}"
-    zstyle ':notify:*' success-title "✅ finished in #{time_elapsed}"
-    # zstyle ':notify:*' check-focus yes
-    # zstyle ':notify:*' always-notify-on-failure yes
-    # zstyle ':notify:*' notifier "/usr/local/bin/noti"
-    # zstyle ':notify:*' error-icon "https://s1.ax1x.com/2022/11/06/xXY9o9.png"
-    # zstyle ":notify:*" success-icon "https://s1.ax1x.com/2022/11/06/xXYpdJ.png"
-    # zstyle ':notify:*' blacklist-regex 'man|vim|nvim|help|bat|yazi|fzf|run-help'
-    ## }}}
 fi

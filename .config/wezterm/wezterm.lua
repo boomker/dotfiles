@@ -57,7 +57,7 @@ config.font = wezterm.font_with_fallback({
 	family = "MiSans",
 	weight = "Regular",
 })
-config.font_size = 15
+config.font_size = 16
 
 config.window_decorations = "RESIZE"
 
@@ -86,12 +86,12 @@ config.keys = {
 	},
 	{
 		mods = "LEADER",
-		key = "|",
+		key = "i",
 		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 	},
 	{
 		mods = "LEADER",
-		key = "-",
+		key = "s",
 		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
 	},
 	{

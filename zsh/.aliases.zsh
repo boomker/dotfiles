@@ -183,9 +183,11 @@ alias tmuxconf="nvim ${HOME}/gitrepos/dotfiles/tmux/.tmux.conf"
 alias unsetproxy="
 	unset http_proxy;
 	unset https_proxy;
+	unset all_proxy;
 	unset HTTP_PROXY;
 	unset HTTPS_PROXY;
 	unset ALL_PROXY;
+    git config --global --unset https.proxy
 	echo 'Unset proxy successfully'"
 
 #  alias for MacOS_Darwin
@@ -344,8 +346,9 @@ function gswt() {
 
 function setproxy() {
     export https_proxy=http://127.0.0.1:${1:-7890}
-    http_proxy=http://127.0.0.1:${1:-7890}
-    all_proxy=socks5://127.0.0.1:${1:-7890}
+    export http_proxy=http://127.0.0.1:${1:-7890}
+    export all_proxy=socks5://127.0.0.1:${1:-7890}
+    git config --global https.proxy socks5://127.0.0.1:${1:-7890}
 }
 
 function cpb() {
@@ -522,7 +525,7 @@ function fgdf() {
         branch=${remote_ori:-origin}"/"${curBranch}"~${change_commits_count}"
     fi
 
-    gcfl "${remote_ori}" | fzf --scrollbar=▌▐ --preview-window=up:70%:wrap --preview \
+    gcfl "${remote_ori}" | fzf --scrollbar=▌�� --preview-window=up:70%:wrap --preview \
         "[[ "x${remote_ori}" == 'x' ]] && git diff ${branch:-${curBranch}} -- ${proj_root}/{} |delta || batdiff --delta --color --context=1 {}"
 }
 
