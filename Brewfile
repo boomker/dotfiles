@@ -1,13 +1,14 @@
 tap "daipeihust/tap"
+tap "danvergara/tools"
 tap "homebrew/bundle"
 tap "homebrew/services"
 tap "lihaoyun6/tap"
-tap "linux-china/tap"
 tap "localsend/localsend"
 tap "mrkai77/cask"
 tap "pot-app/tap"
 tap "umlx5h/tap"
 tap "v2raya/v2raya"
+tap "ybeapps/sourcegit"
 # Extremely Fast Compression algorithm
 brew "lz4"
 # General-purpose data compression with high compression ratio
@@ -30,8 +31,6 @@ brew "aria2"
 brew "atuin"
 # Bourne-Again SHell, a UNIX command interpreter
 brew "bash"
-# C library of Git core methods that is re-entrant and linkable
-brew "libgit2"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Bash scripts that integrate bat with various command-line tools
@@ -70,10 +69,14 @@ brew "chsrc"
 brew "clipboard"
 # Cross-platform make
 brew "cmake"
+# Console Matrix
+brew "cmatrix"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Load/unload environment variables based on $PWD
 brew "direnv"
+# Command-line DNS Client for Humans
+brew "doggo"
 # Pluggable and configurable code formatting platform written in Rust
 brew "dprint"
 # Disk Usage/Free Utility - a better 'df' alternative
@@ -98,12 +101,16 @@ brew "fx"
 brew "fzf"
 # GNU awk utility
 brew "gawk"
+# GNU compiler collection
+brew "gcc"
 # Distributed revision control system
 brew "git"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
 # Quickly rewrite git repository history
 brew "git-filter-repo"
+# Render markdown on the CLI
+brew "glow"
 # GNU implementation of the famous stream editor
 brew "gnu-sed"
 # Open source programming language to build simple/reliable/efficient software
@@ -129,6 +136,8 @@ brew "lazygit"
 # Common error values for all GnuPG components
 brew "libgpg-error"
 # C library of Git core methods that is re-entrant and linkable
+brew "libgit2"
+# C library of Git core methods that is re-entrant and linkable
 brew "libgit2@1.7"
 # Powerful, lightweight programming language
 brew "lua"
@@ -138,6 +147,8 @@ brew "librime"
 brew "luajit"
 # Package manager for the Lua programming language
 brew "luarocks"
+# Utility for directing compilation
+brew "make"
 # Unix documentation system
 brew "man-db"
 # Drop-in replacement for MySQL
@@ -202,8 +213,8 @@ brew "terminal-notifier"
 brew "tlrc"
 # Terminal multiplexer
 brew "tmux"
-# SSH Lightweight management tools
-brew "tssh"
+# Simple ssh client with trzsz ( trz / tsz ) support
+brew "trzsz-ssh"
 # Extremely fast Python package installer and resolver, written in Rust
 brew "uv"
 # Platform for building proxies to bypass network restrictions
@@ -220,14 +231,16 @@ brew "watchexec"
 brew "wget"
 # Blazing fast terminal file manager written in Rust, based on async I/O
 brew "yazi"
+# Process YAML, JSON, XML, CSV and properties documents from the CLI
+brew "yq"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
 # UNIX shell (command interpreter)
 brew "zsh"
 # Switch your input method through terminal
 brew "daipeihust/tap/im-select"
-# An efficient Awk-like language implementation by Rust with stdlib
-brew "linux-china/tap/zawk"
+# Interactive client for PostgreSQL and MySQL
+brew "danvergara/tools/dblab"
 # A Trash CLI manager written in Go
 brew "umlx5h/tap/gtrash"
 # Web-based GUI client of Project V
@@ -243,8 +256,9 @@ cask "easydict"
 # Screen colour temperature controller
 cask "flux"
 cask "font-jetbrains-mono-nerd-font"
-# Download accelerator and organiser
-cask "free-download-manager"
+cask "font-symbols-only-nerd-font"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
 # Utility to provide quick look previews for files that aren't natively supported
 cask "glance-chamburr"
 # Desktop automation application
@@ -283,6 +297,10 @@ cask "quickrecorder"
 cask "raycast"
 # GUI for rsync
 cask "rsyncui"
+# Open-source Git GUI client
+cask "sourcegit"
+# Rime input method engine
+cask "squirrel"
 # System monitor for the menu bar
 cask "stats"
 # Real time file synchronisation software
@@ -293,11 +311,10 @@ cask "telegram-desktop"
 cask "topit"
 # Open-source code editor
 cask "visual-studio-code"
-# GPU-accelerated cross-platform terminal emulator and multiplexer
-cask "wezterm"
 # Gecko based web browser
 cask "zen-browser"
 mas "Picview", id: 6452016140
+mas "QQ", id: 451108668
 vscode "alefragnani.bookmarks"
 vscode "bajdzis.vscode-database"
 vscode "batisteo.vscode-django"
@@ -329,11 +346,6 @@ vscode "ms-python.debugpy"
 vscode "ms-python.isort"
 vscode "ms-python.python"
 vscode "ms-python.vscode-pylance"
-vscode "ms-toolsai.jupyter"
-vscode "ms-toolsai.jupyter-keymap"
-vscode "ms-toolsai.jupyter-renderers"
-vscode "ms-toolsai.vscode-jupyter-cell-tags"
-vscode "ms-toolsai.vscode-jupyter-slideshow"
 vscode "ms-vscode-remote.remote-containers"
 vscode "ms-vscode-remote.remote-ssh"
 vscode "ms-vscode-remote.remote-ssh-edit"

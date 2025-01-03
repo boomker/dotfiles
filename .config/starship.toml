@@ -39,7 +39,7 @@ disabled = false
 trim_at = '.local'
 # aliases = { "cyzhu's MacBook Pro" = "MBP" }
 # detect_env_vars = ['!TMUX', 'SSH_CONNECTION']
-format = '[🌏 $hostname](bold red) '
+format = '[🌏$hostname](bold #090c0c) '
 
 [status]
 disabled = false
@@ -106,7 +106,7 @@ format = '[ ${symbol}${pyenv_prefix}(${version} )(\($virtualenv\))]($style)'
 disabled = false
 time_format = "%R"              # Hour:Minute Format
 style = 'fg:#a0a9cb bg:#6373a2'
-format = '[  $time ]($style)'
+format = '[ 🕒$time ]($style)'
 
 [cmd_duration]
 min_time = 500

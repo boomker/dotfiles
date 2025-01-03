@@ -15,7 +15,7 @@
 ### Git
 
 - tools: scmpuff, delta, lazygit
-- alias: gs, fgc, glt, fgdf etc.
+- alias: gss, fgc, glt, fgdf etc.
 
 ### Tools
 
@@ -23,10 +23,11 @@
 - fd
 - rg
 - uv
+- pls
 - bat
 - eza
 - fzf
-- pls
+- hck
 - navi
 - tldr
 - glow
@@ -35,6 +36,7 @@
 - yazi
 - amber
 - delta
+- huniq
 - zoxide
 - scmpuff
 - lazygit
