@@ -1,5 +1,6 @@
 tap "daipeihust/tap"
 tap "danvergara/tools"
+tap "hanshuaikang/nping"
 tap "homebrew/bundle"
 tap "homebrew/services"
 tap "lihaoyun6/tap"
@@ -8,6 +9,7 @@ tap "mrkai77/cask"
 tap "pot-app/tap"
 tap "umlx5h/tap"
 tap "v2raya/v2raya"
+tap "xo/xo"
 tap "ybeapps/sourcegit"
 # Extremely Fast Compression algorithm
 brew "lz4"
@@ -157,6 +159,8 @@ brew "mariadb"
 brew "mas"
 # Like sed, awk, cut, join & sort for name-indexed data such as CSV
 brew "miller"
+# Collection of tools that nobody wrote when UNIX was young
+brew "moreutils"
 # Interactive cheatsheet tool for the command-line
 brew "navi"
 # Parser generator tool and incremental parsing library
@@ -165,6 +169,8 @@ brew "tree-sitter"
 brew "unibilium"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
+# Open source visual route tracking CLI tool
+brew "nexttrace"
 # Port scanning utility for large networks
 brew "nmap"
 # Command-line Git information tool
@@ -239,12 +245,14 @@ brew "zoxide"
 brew "zsh"
 # Switch your input method through terminal
 brew "daipeihust/tap/im-select"
-# Interactive client for PostgreSQL and MySQL
-brew "danvergara/tools/dblab"
+# 🏎 Nping mean NB Ping, A Ping Tool in Rust with Real-Time Data and Visualizations
+brew "hanshuaikang/nping/nping"
 # A Trash CLI manager written in Go
 brew "umlx5h/tap/gtrash"
 # Web-based GUI client of Project V
 brew "v2raya/v2raya/v2raya"
+# universal command-line SQL client interface
+brew "xo/xo/usql"
 # GPU-accelerated terminal emulator
 cask "alacritty"
 # Enable Windows-like alt-tab
@@ -295,8 +303,6 @@ cask "pixpin"
 cask "quickrecorder"
 # Control your tools with a few keystrokes
 cask "raycast"
-# GUI for rsync
-cask "rsyncui"
 # Open-source Git GUI client
 cask "sourcegit"
 # Rime input method engine

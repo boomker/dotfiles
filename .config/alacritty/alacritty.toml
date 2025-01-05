@@ -169,9 +169,9 @@ semantic_escape_chars = ",│`|:/\"' ()[]{}<>=-.\t"
 opacity = 0.9
 dynamic_padding = true
 padding = { x = 3, y = 0 }
+option_as_alt = "Both"
 decorations = "buttonless"
 startup_mode = "Maximized"
-option_as_alt = "OnlyLeft"
 
 [scrolling]
 multiplier = 6

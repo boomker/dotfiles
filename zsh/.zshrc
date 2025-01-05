@@ -93,7 +93,7 @@ if [[ $- =~ i ]]; then
             -0 --cycle --multi --height 70% --reverse --border --tiebreak=begin
             --bind end:preview-down,home:preview-up,?:toggle-preview
             --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort'
-            --bind 'alt-a:select-all+accept'"
+            --bind 'alt-a:select-all'"
     fi
     ## }}}
 
@@ -142,7 +142,6 @@ if [[ $- =~ i ]]; then
     ## }}}
 
     # zsh-defer
-    # git clone https://github.com/romkatv/zsh-defer.git
     [[ -f "${PREZCUSMODIR}/zsh-defer/zsh-defer.plugin.zsh" ]] && {
         source "${PREZCUSMODIR}/zsh-defer/zsh-defer.plugin.zsh"
     }
@@ -168,8 +167,6 @@ if [[ $- =~ i ]]; then
 
     # zoxide
     [[ -e $(which zoxide) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/zoxide.zsh
-
-    # [ -f "${HOME}/.fzf-git.sh" ] && zsh-defer source "${HOME}/.fzf-git.sh"
 
     # Git status
     # "$(scmpuff init --shell="zsh" --aliases=false)"

@@ -20,6 +20,7 @@ alias -g D="   delta -s"
 alias -g RX="  rargs"
 alias -g X="   xargs"
 alias -g P="   peco"
+alias -g PC="  pbcopy"
 alias -g RP="  rust-parallel"
 alias -g U="   uniq"
 alias -g S="   sort"
@@ -79,6 +80,7 @@ alias gpm="glow -p "
 
 # Git --------------------------
 
+alias lg="lazygit"
 alias gaa="git add ."
 alias gcm="git commit -m "
 alias gca="git commit --amend "
@@ -101,9 +103,9 @@ alias gib="git init --bare "
 alias gcb="git clone --bare "
 alias gcbn="git clone --filter=blob:none "
 
+alias gprm="git pull origin main --rebase"
 alias gpom="git pull origin main || git pull origin master"
 alias gpum="git pull upstream main || git pull upstream master"
-alias gprm="git pull origin main --rebase"
 
 alias gprf="git push -f"
 alias gpsu='git push --set-upstream '
@@ -117,11 +119,6 @@ alias grmr='git remote rm'
 alias grms='git remote set-url'
 alias grmv='git remote --verbose'
 
-# example: glp -n, glp 7f1b6b0..8724539
-alias glp="git log --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset' "
-alias glt="git log --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset' -10"
-alias gla="git log --all --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset' -20"
-
 alias gco="git checkout "
 alias gsb="git switch "
 alias gbs="git switch "
@@ -130,12 +127,14 @@ alias gbv="git branch -v "
 alias gbd='git branch --delete'
 
 alias gss="scmpuff_status"
-alias grs="git restore "
 alias gst="git status "
 alias gws="git status --short"
 alias gwr='git reset --hard'
 alias gwc='git clean -df'
+
 alias gdf="git diff "
+alias grt="git restore "
+alias grs="git restore --stage"
 
 alias gsh='git stash'
 alias gsa='git stash apply'
@@ -144,6 +143,11 @@ alias gsl='git stash list'
 
 alias gcig="git check-ignore -v"
 alias guiu='git update-index --assume-unchanged '
+
+# example: glp -n, glp 7f1b6b0..8724539
+alias glp="git log --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset' "
+alias glt="git log --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset' -10"
+alias gla="git log --all --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset' -20"
 
 # alias gltf='git ls-tree -r --name-only '
 # alias glui="git ls-files -o -i --exclude-standard"
@@ -192,8 +196,6 @@ alias unsetproxy="
 
 #  alias for MacOS_Darwin
 if [[ $(uname -s) == "Darwin" ]]; then
-
-    alias -g PC=" |pbcopy"
     alias o="open"
     alias e="nvim"
     alias vim="nvim"
@@ -270,14 +272,16 @@ function fbuh() {
     token=$(brew outdated | awk '$0 !~ /pin/{print $1}' |
         fzf-tmux \
             --query="$initial_query" \
-            -m -e -1 --cycle \
+            -1 -m -e --cycle \
             --preview 'brew info {}')
     pickers=($(echo "${token}" | tr "\n" " "))
     if [ "x$pickers" != "x" ]; then
         echo "(u)pgrade or open the (h)omepage of $pickers"
         read -r input
         if [ "$input" = "u" ] || [ "$input" = "U" ]; then
-            brew upgrade "${pickers[@]}"
+            for p in "${pickers[@]}"; do
+                brew upgrade --overwrite $p || brew upgrade --cask $p
+            done
         fi
         if [ "$input" = "h" ] || [ "$input" = "H" ]; then
             brew home "${pickers[@]}"
@@ -486,11 +490,11 @@ function ftl() {
     local initial_query
     initial_query="${*:-}"
     tldr --list | sed -r "s/('|\[|\])//g;s/, /\n/g" |
-        fzf --ansi -e -0 -1 --cycle \
+        fzf -0 -1 -e --cycle \
             --info=inline \
             --query "${initial_query}" \
-            --preview-window='right:76%:wrap' \
-            --preview 'tldr {}'
+            --preview-window='down:80%:wrap' \
+            --preview 'tldr --color=always {}'
 }
 
 function gcfl() {
@@ -525,7 +529,7 @@ function fgdf() {
         branch=${remote_ori:-origin}"/"${curBranch}"~${change_commits_count}"
     fi
 
-    gcfl "${remote_ori}" | fzf --scrollbar=▌�� --preview-window=up:70%:wrap --preview \
+    gcfl "${remote_ori}" | fzf --scrollbar=▌ --preview-window=up:70%:wrap --preview \
         "[[ "x${remote_ori}" == 'x' ]] && git diff ${branch:-${curBranch}} -- ${proj_root}/{} |delta || batdiff --delta --color --context=1 {}"
 }
 
