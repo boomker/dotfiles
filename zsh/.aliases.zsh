@@ -13,6 +13,7 @@ alias -g FU="  fzf --ansi --preview-window=up:70%:wrap --preview "
 alias -g J="   jq ."
 alias -g B="   bat "
 alias -g BG="  batgrep -S"
+alias -g BL="  bat --plain --language=log"
 alias -g BH="  bat --plain --language=help"
 alias -g BB="  bat --plain --language=bash"
 alias -g C="   hck "
@@ -204,6 +205,7 @@ if [[ $(uname -s) == "Darwin" ]]; then
     alias brif="brew info "
     alias brin="brew install "
     alias brci="brew install --cask "
+    alias brcl="brew cleanup --prune=all"
 
     alias lsflags="/bin/ls -lO "
     alias ls="eza --color=automatic"
@@ -269,18 +271,22 @@ function fbuh() {
     local initial_query token
     local -a pickers
     initial_query="${*:-}"
-    token=$(brew outdated | awk '$0 !~ /pin/{print $1}' |
-        fzf-tmux \
-            --query="$initial_query" \
-            -1 -m -e --cycle \
-            --preview 'brew info {}')
+    token=$( (
+        brew outdated
+        mas outdated
+    ) | fzf-tmux \
+        --query="$initial_query" \
+        -1 -m -e --cycle \
+        --preview 'brew info {1} || mas info {1}')
     pickers=($(echo "${token}" | tr "\n" " "))
     if [ "x$pickers" != "x" ]; then
         echo "(u)pgrade or open the (h)omepage of $pickers"
         read -r input
         if [ "$input" = "u" ] || [ "$input" = "U" ]; then
             for p in "${pickers[@]}"; do
-                brew upgrade --overwrite $p || brew upgrade --cask $p
+                [[ "$p" =~ "[0-9]+" ]] && mas upgrade $p || {
+                    brew upgrade --overwrite $p || brew upgrade --cask $p
+                }
             done
         fi
         if [ "$input" = "h" ] || [ "$input" = "H" ]; then
@@ -367,16 +373,16 @@ function mdac() {
     mkdir --parents "$@" && cd "$_" || exit
 }
 
-function rmwd() {
-    _CDN="$(basename $PWD)"
-    cd "$(dirname $PWD)"
-    rm -rf "$_CDN"
-}
-
 function mkdf() {
     _Fn="$(basename $1)"
     _Dn="$(dirname $1)"
     mkdir -p "$_Dn" && touch "${_Dn}"/"${_Fn}"
+}
+
+function rmwd() {
+    _CDN="$(basename $PWD)"
+    cd "$(dirname $PWD)"
+    rm -rf "$_CDN"
 }
 
 # grep for zip archive
