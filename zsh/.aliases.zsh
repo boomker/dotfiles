@@ -284,7 +284,7 @@ function fbuh() {
         read -r input
         if [ "$input" = "u" ] || [ "$input" = "U" ]; then
             for p in "${pickers[@]}"; do
-                [[ "$p" =~ "[0-9]+" ]] && mas upgrade $p || {
+                [[ "$p" =~ "^[0-9]+$" ]] && mas upgrade $p || {
                     brew upgrade --overwrite $p || brew upgrade --cask $p
                 }
             done
@@ -358,7 +358,11 @@ function setproxy() {
     export https_proxy=http://127.0.0.1:${1:-7890}
     export http_proxy=http://127.0.0.1:${1:-7890}
     export all_proxy=socks5://127.0.0.1:${1:-7890}
-    git config --global https.proxy socks5://127.0.0.1:${1:-7890}
+    if [[ -f ~/.gitconfig ]]; then
+        sed -i -r "/$1/s/(\;|#) //" ~/.gitconfig
+    else
+        git config --global https.proxy socks5://127.0.0.1:${1:-7890}
+    fi
 }
 
 function cpb() {
