@@ -100,6 +100,8 @@ if [[ $- =~ i ]]; then
     ## bindings {{{
     bindkey -e
 
+    bindkey -e '^x^e' edit-command-line
+
     # ------ Ctrl-x ctrl-s, sudo
     sudo-command-line() {
         [[ -z $BUFFER ]] && zle up-history
@@ -110,16 +112,17 @@ if [[ $- =~ i ]]; then
     bindkey -e '^x^s' sudo-command-line
 
     # Use Ctrl-x Ctrl-v to get the output of the last command
-    insert-last-command-output() {
-        LBUFFER+="$(eval ${history[$((HISTCMD - 1))]})"
+    copy-last-command-output() {
+        # LBUFFER+="$(eval ${history[$((HISTCMD - 1))]})"
+        /bin/echo "$(eval ${history[$((HISTCMD - 1))]})" | pbcopy
     }
-    zle -N insert-last-command-output
-    bindkey -e "^x^v" insert-last-command-output
+    zle -N copy-last-command-output
+    bindkey -e "^x^v" copy-last-command-output
 
     # Ctrl-x Ctrl-d copies line to global pasteboard
     pb-kill-buffer-line() {
         zle kill-buffer
-        gecho $CUTBUFFER | pbcopy
+        /bin/echo $CUTBUFFER | pbcopy
     }
     zle -N pb-kill-buffer-line
     bindkey -e '^x^d' pb-kill-buffer-line
@@ -127,7 +130,7 @@ if [[ $- =~ i ]]; then
     # ------ Ctrl-u
     pb-backward-kill-line() {
         zle backward-kill-line
-        gecho $CUTBUFFER | pbcopy
+        /bin/echo $CUTBUFFER | pbcopy
     }
     zle -N pb-backward-kill-line
     bindkey -e '^u' pb-backward-kill-line
@@ -135,7 +138,7 @@ if [[ $- =~ i ]]; then
     # ------ Ctrl-k
     pb-forward-kill-line() {
         zle kill-line
-        gecho "${CUTBUFFER}" | pbcopy
+        /bin/echo "${CUTBUFFER}" | pbcopy
     }
     zle -N pb-forward-kill-line
     bindkey -e '^k' pb-forward-kill-line

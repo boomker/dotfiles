@@ -44,8 +44,8 @@ format = '[🌏$hostname](bold #6c7086) '
 [status]
 disabled = false
 map_symbol = true
-symbol = '🔴 '
-success_symbol = '🟢 SUCCESS'
+symbol = '🔴'
+success_symbol = '🟢'
 style = 'fg:#769ff0 bg:black'
 format = '[ $symbol$common_meaning$signal_name$maybe_int ]($style)'
 
