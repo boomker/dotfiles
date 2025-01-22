@@ -1,6 +1,8 @@
 {
     "diagnostics.globals": [
         "vim",
-        "utf8"
+        "utf8",
+        "Linemode",
+        "ya"
     ]
 }
