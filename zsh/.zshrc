@@ -15,11 +15,11 @@ if [[ $- =~ i ]]; then
     setopt auto_menu
     setopt always_to_end
     setopt complete_in_word
+    unsetopt flowcontrol # use c-s/c-q
 
     # You may need to manually set your language environment
     # export LC_ALL='C'
     export LANG=en_US.UTF-8
-    export XDG_CONFIG_HOME="$HOME/.config"
 
     export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(
         end-of-line
@@ -31,27 +31,26 @@ if [[ $- =~ i ]]; then
         emacs-forward-word
     )
 
-    ## configure pyvenv, Homebrew, PATH(GNU CLI tools), git on MacOS {{{
-    # if [[ $(uname -s) == "Darwin" ]]; then fi
+    ## configure Homebrew, PATH(GNU CLI tools) {
     export SHELL="/usr/local/bin/zsh"
     export PREZCUSMODIR="$HOME/.zprezto/contrib"
+    export XDG_CONFIG_HOME="$HOME/.config"
 
     export PNPM_HOME="$HOME/.pnpm"
-    # export PIPX_HOME="$HOME/.pipx"
     export PATH="$HOME/.local/bin:$PATH"
     export PATH="$HOME/go/bin:$HOME/.bun/bin:$HOME/.cargo/bin:$PATH"
-    # export PIPX_DEFAULT_PYTHON="$HOME/.version-fox/shims/python3"
     export MANPATH="/usr/local/man:/usr/local/share/man:${MANPATH}"
     export MANPATH="/usr/local/opt/coreutils/share/man:${MANPATH}"
-    ## }}}
+    ## }
 
-    ## ------ VIM environment config ----------------- {{{
+    ## ------ VIM environment config ----------------- {
     export EDITOR="nvim"
+    export VISUAL="nvim"
     export VIM="/usr/local/opt/neovim/share/nvim"
     export VIMRUNTIME="${HOME}/.nvim/runtime"
-    # }}}
+    ## }
 
-    ## ------ Bat && fd & fzf configuration ---------- {{{
+    ## ------ Bat && fd & fzf configuration ---------- {
     if [[ -n $(command -v bat) ]]; then
         export BATDIFF_USE_DELTA=true
         export BAT_THEME="Catppuccin Mocha"
@@ -95,9 +94,9 @@ if [[ $- =~ i ]]; then
             --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort'
             --bind 'alt-a:select-all'"
     fi
-    ## }}}
+    ## }
 
-    ## bindings {{{
+    ## bindings {
     bindkey -e
 
     bindkey -e '^x^e' edit-command-line
@@ -142,7 +141,7 @@ if [[ $- =~ i ]]; then
     }
     zle -N pb-forward-kill-line
     bindkey -e '^k' pb-forward-kill-line
-    ## }}}
+    ## }
 
     # zsh-defer
     [[ -f "${PREZCUSMODIR}/zsh-defer/zsh-defer.plugin.zsh" ]] && {
@@ -196,7 +195,7 @@ if [[ $- =~ i ]]; then
         source "${PREZCUSMODIR}/zsh-autopair/autopair.zsh" && autopair-init
     }
 
-    ## fzf-tab config {{{
+    ## fzf-tab config {
     zstyle -d ':completion:*' format
     zstyle ':fzf-tab:*' fzf-min-height 10
     zstyle ':fzf-tab:*' popup-min-size 60 30
@@ -208,6 +207,6 @@ if [[ $- =~ i ]]; then
     zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -a1 --icons --color=always $realpath'
     zstyle ':fzf-tab:complete:bat:argument-rest' fzf-flags --preview-window=right:70%:wrap
     zstyle ':fzf-tab:complete:bat:argument-rest' fzf-preview 'bat --style=numbers,header --color=always $realpath'
-    ## }}}
+    ## }
 
 fi

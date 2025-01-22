@@ -159,8 +159,8 @@ alias fdh="fd --exclude='.git' -H '.*' "
 alias fdp="fd -tf -p -g "
 
 # rg
-alias rg="rg --smart-case --glob='!.git*' "
-alias rgh="rg -. --glob='!.git*' "
+alias rg="rg --pretty --smart-case --glob='!.git*' "
+alias rgh="rg -. --pretty --glob='!.git*' "
 
 ## python tools:
 alias ips="ipython3"
@@ -175,6 +175,13 @@ alias upin="uv pip install "
 alias upui="uv pip uninstall "
 alias uvpt="uv venv --prompt "
 alias upur="uv pip install -Ur requirements.txt"
+
+# nvim
+alias e="nvim"
+alias vim="nvim"
+alias nvdf="nvim -d"
+alias nves="nvim -es"
+alias nvcl="nvim --clean"
 
 # zsh, tmux, ssh, hosts conf
 alias zshreload="source ~/.zshrc"
@@ -198,8 +205,6 @@ alias unsetproxy="
 #  alias for MacOS_Darwin
 if [[ $(uname -s) == "Darwin" ]]; then
     alias o="open"
-    alias e="nvim"
-    alias vim="nvim"
     alias plp="plutil -p "
     alias brho="brew home "
     alias brif="brew info "
@@ -218,8 +223,8 @@ if [[ $(uname -s) == "Darwin" ]]; then
     alias rmls="trash-list"
     alias rmrs="trash-restore"
     alias rmcl="trash-empty"
-    alias mkdir="gmkdir -pv "
-    alias tailf="gtail -f"
+    alias mdir="gmkdir -pv "
+    alias tailf="gtail -f -n "
     alias dfh="/usr/local/bin/gdf -Th"
 else
     # alias for *unix
