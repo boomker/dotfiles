@@ -290,7 +290,7 @@ function fbuh() {
         if [ "$input" = "u" ] || [ "$input" = "U" ]; then
             for p in "${pickers[@]}"; do
                 [[ "$p" =~ "^[0-9]+$" ]] && mas upgrade $p || {
-                    brew upgrade --overwrite $p || brew upgrade --cask $p
+                    brew upgrade --force --overwrite $p || brew upgrade --cask $p
                 }
             done
         fi

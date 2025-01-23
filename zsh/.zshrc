@@ -70,23 +70,17 @@ if [[ $- =~ i ]]; then
         export FZF_DEFAULT_COMMAND="fd -H --type f ${FD_OPTIONS}"
         export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
         export FZF_CTRL_R_OPTS="
-            --bind 'ctrl-/:toggle-preview'
-            --bind 'ctrl-x:track+clear-query'
-            --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
             --color header:italic
             --wrap --wrap-sign $'\t↳ '
-            --preview 'echo {}' --preview-window up:3:hidden:wrap
-            --header 'Press CTRL-Y to copy command into clipboard; CTRL-x clear-query'"
+            --bind 'ctrl-x:track+clear-query'
+            --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+            --header '[CTRL-y: copy into clipboard] [CTRL-x: clear-query]'"
 
         export FZF_CTRL_T_OPTS="
             --bind 'ctrl-y:execute-silent(printf {} | cut -f 2- |pbcopy)+accept'
             --bind 'alt-e:become(nvim {} > /dev/tty)+abort'
             --preview-window=right:70%:wrap --preview
             '(bat --style=numbers --color=always --line-range=:100 {} ) 2>/dev/null'"
-
-        export FZF_ALT_C_OPTS="--preview-window=right:70%:wrap --preview
-            '(eza -ahlF --color-scale --group-directories-first  --icons
-            --color=always --tree --level=2 -I=.git* {}) 2>/dev/null |head -20'"
 
         export FZF_DEFAULT_OPTS="
             -0 --cycle --multi --height 70% --reverse --border --tiebreak=begin
@@ -158,11 +152,11 @@ if [[ $- =~ i ]]; then
     # [ -s "~/.bun/_bun" ] && zsh-defer  source "~/.bun/_bun"
 
     # atuin shell history search
-    [[ -e $(which atuin) ]] && {
-        export ATUIN_NOBIND="true"
-        bindkey '^q' atuin-search
-        zsh-defer source ${PREZCUSMODIR}/user_plugins/atuin.zsh
-    }
+    # [[ -e $(which atuin) ]] && {
+    #     export ATUIN_NOBIND="true"
+    #     bindkey '^q' atuin-search
+    #     zsh-defer source ${PREZCUSMODIR}/user_plugins/atuin.zsh
+    # }
 
     # fzf
     [[ -e $(which fzf) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/fzf.zsh
