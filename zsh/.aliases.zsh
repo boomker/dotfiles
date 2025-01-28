@@ -72,7 +72,6 @@ alias psh='pls show '
 alias nqh='navi --query '
 
 # network
-alias pting="prettyping"
 alias lstcp="lsof -nP -iTCP"
 alias dog="dig +noall +nocmd +answer "
 
@@ -159,8 +158,8 @@ alias fdh="fd --exclude='.git' -H '.*' "
 alias fdp="fd -tf -p -g "
 
 # rg
-alias rg="rg --pretty --smart-case --glob='!.git*' "
-alias rgh="rg -. --pretty --glob='!.git*' "
+alias rg="rg  --smart-case --glob='!.git*' "
+alias rgh="rg -. --glob='!.git*' "
 
 ## python tools:
 alias ips="ipython3"

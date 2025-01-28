@@ -171,7 +171,7 @@ dynamic_padding = true
 padding = { x = 3, y = 0 }
 option_as_alt = "Both"
 decorations = "buttonless"
-startup_mode = "SimpleFullscreen"
+startup_mode = "Maximized"
 
 [scrolling]
 multiplier = 6
