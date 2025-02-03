@@ -39,8 +39,3 @@ desc = "Go to the root of repository"
 on = ["g", "p"]
 run = ''' shell 'qlmanage -p "$@"' '''
 desc = "Preview files with Quick Look"
-
-[[manager.prepend_keymap]]
-on = ["d", "u"]
-run = "plugin restore"
-desc = "Restore last deleted files/folders"
