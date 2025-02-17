@@ -1,12 +1,44 @@
-[plugin]
-deps = [
-    { use = "yazi-rs/plugins:jump-to-char", rev = "f202fa8" },
-    { use = "Rolv-Apneseth/starship", rev = "af8bf6f" },
-    { use = "yazi-rs/plugins:max-preview", rev = "f202fa8" },
-    { use = "Reledia/glow", rev = "5ce76dc" },
-    { use = "yazi-rs/plugins:smart-enter", rev = "f202fa8" },
-    { use = "yazi-rs/plugins:git", rev = "f202fa8" }, { use = "Reledia/miller", rev = "40e0265" }, { use = "boydaihungst/restore", rev = "ffc209e" },
-]
+[[plugin.deps]]
+use = "yazi-rs/plugins:jump-to-char"
+rev = "8945e54"
+hash = "af11685de39c366ec1137fcbccacdbff"
 
-[flavor]
-deps = [{ use = "yazi-rs/flavors:catppuccin-frappe", rev = "fd85060" }]
+[[plugin.deps]]
+use = "Rolv-Apneseth/starship"
+rev = "d1cd0a3"
+hash = "d1fee6d0f74cb52d4e031dc6b9207f31"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:max-preview"
+rev = "8945e54"
+hash = "15b2ff7f6563c14d5b2e93b3e9da35de"
+
+[[plugin.deps]]
+use = "Reledia/glow"
+rev = "5ce76dc"
+hash = "52e5f5c602962e7cbf874da28f52ba45"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-enter"
+rev = "8945e54"
+hash = "aef2b1a805b80cce573bb766f1459d88"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+rev = "8945e54"
+hash = "771f18427fb75fb19990ce602bb322f4"
+
+[[plugin.deps]]
+use = "Reledia/miller"
+rev = "40e0265"
+hash = "2d6d77583162aaf0a599e7a3091b5878"
+
+[[plugin.deps]]
+use = "boydaihungst/restore"
+rev = "89fddfd"
+hash = "b442aa672e07ec0765b4b00e7bfdc9b5"
+
+[[flavor.deps]]
+use = "yazi-rs/flavors:catppuccin-frappe"
+rev = "fd85060"
+hash = "e88895e8f8b7926f20946f273ecc7348"

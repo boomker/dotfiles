@@ -3,6 +3,8 @@ tap "danvergara/tools"
 tap "hanshuaikang/nping"
 tap "homebrew/bundle"
 tap "homebrew/services"
+tap "jstkdng/programs"
+tap "laishulu/homebrew"
 tap "lihaoyun6/tap"
 tap "localsend/localsend"
 tap "mrkai77/cask"
@@ -31,8 +33,12 @@ brew "sqlite"
 brew "aria2"
 # Improved shell history for zsh, bash, fish and nushell
 brew "atuin"
+# Terminal bandwidth utilization tool
+brew "bandwhich"
 # Bourne-Again SHell, a UNIX command interpreter
 brew "bash"
+# C library of Git core methods that is re-entrant and linkable
+brew "libgit2"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Bash scripts that integrate bat with various command-line tools
@@ -93,6 +99,8 @@ brew "eza"
 brew "fastfetch"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
+# GNU compiler collection
+brew "gcc"
 # Tool to install, manage and use Progressive Web Apps in Mozilla Firefox
 brew "firefoxpwa"
 # User-friendly command-line shell for UNIX-like operating systems
@@ -103,8 +111,6 @@ brew "fx"
 brew "fzf"
 # GNU awk utility
 brew "gawk"
-# GNU compiler collection
-brew "gcc"
 # Distributed revision control system
 brew "git"
 # Syntax-highlighting pager for git and diff output
@@ -115,12 +121,16 @@ brew "git-filter-repo"
 brew "glow"
 # GNU implementation of the famous stream editor
 brew "gnu-sed"
+# Common error values for all GnuPG components
+brew "libgpg-error"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
 # Library for a binary-based efficient data interchange format
 brew "msgpack"
 # Sharp cut(1) clone
 brew "hck"
+# Package compiler and linker metadata toolkit
+brew "pkgconf"
 # Command-line hex viewer
 brew "hexyl"
 # Serializes the output of command-line tools to structured JSON output
@@ -135,10 +145,6 @@ brew "jo"
 brew "jq"
 # Simple terminal UI for git commands
 brew "lazygit"
-# Common error values for all GnuPG components
-brew "libgpg-error"
-# C library of Git core methods that is re-entrant and linkable
-brew "libgit2"
 # C library of Git core methods that is re-entrant and linkable
 brew "libgit2@1.7"
 # Powerful, lightweight programming language
@@ -181,8 +187,6 @@ brew "ouch"
 brew "parallel"
 # Pinentry for GPG on Mac
 brew "pinentry-mac"
-# Package compiler and linker metadata toolkit
-brew "pkgconf"
 # Fast, disk space efficient package manager
 brew "pnpm"
 # Modern replacement for ps written in Rust
@@ -235,10 +239,14 @@ brew "vite"
 brew "watchexec"
 # Internet file retriever
 brew "wget"
+# Platform for building proxies to bypass network restrictions
+brew "xray"
 # Blazing fast terminal file manager written in Rust, based on async I/O
 brew "yazi"
 # Process YAML, JSON, XML, CSV and properties documents from the CLI
 brew "yq"
+# Network scanner for Internet-wide network studies
+brew "zmap"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
 # UNIX shell (command interpreter)
@@ -247,6 +255,10 @@ brew "zsh"
 brew "daipeihust/tap/im-select"
 # 🏎 Nping mean NB Ping, A Ping Tool in Rust with Real-Time Data and Visualizations
 brew "hanshuaikang/nping/nping"
+# Drop in replacement for ueberzug written in C++
+brew "jstkdng/programs/ueberzugpp"
+# MacOS Input Source Manager
+brew "laishulu/homebrew/macism"
 # A Trash CLI manager written in Go
 brew "umlx5h/tap/gtrash"
 # Web-based GUI client of Project V
@@ -261,6 +273,8 @@ cask "alt-tab"
 cask "baidunetdisk"
 # Dictionary and translator app
 cask "easydict"
+# Virtual workspace manager
+cask "flashspace"
 # Screen colour temperature controller
 cask "flux"
 cask "font-jetbrains-mono-nerd-font"
@@ -277,8 +291,8 @@ cask "iina"
 cask "jordanbaird-ice"
 # Keyboard customiser
 cask "karabiner-elements"
-# Window manager
-cask "loop"
+# Lunar calendar for menu bar
+cask "lunarbar"
 # Syncs files between computers and MEGA Cloud drives
 cask "megasync"
 # Provides updates to various Microsoft products
@@ -297,6 +311,8 @@ cask "netnewswire"
 cask "obsidian"
 # Document editor
 cask "onlyoffice"
+# Replacement for Docker Desktop
+cask "orbstack"
 # Screenshot tool
 cask "pixpin"
 # A lightweight and high-performance screen recorder for macOS.
@@ -315,56 +331,7 @@ cask "syncthing"
 cask "telegram-desktop"
 # Pin any window to the top of your screen.
 cask "topit"
-# Open-source code editor
-cask "visual-studio-code"
 # Gecko based web browser
 cask "zen-browser"
 mas "Picview", id: 6452016140
 mas "QQ", id: 451108668
-vscode "alefragnani.bookmarks"
-vscode "bajdzis.vscode-database"
-vscode "batisteo.vscode-django"
-vscode "catppuccin.catppuccin-vsc"
-vscode "catppuccin.catppuccin-vsc-icons"
-vscode "charliermarsh.ruff"
-vscode "clarkyu.vscode-sql-beautify"
-vscode "continue.continue"
-vscode "cweijan.vscode-office"
-vscode "dbaeumer.vscode-eslint"
-vscode "doggy8088.quicktype-refresh"
-vscode "donjayamanne.githistory"
-vscode "esbenp.prettier-vscode"
-vscode "firefox-devtools.vscode-firefox-debug"
-vscode "github.codespaces"
-vscode "github.copilot"
-vscode "github.copilot-chat"
-vscode "gitlab.gitlab-workflow"
-vscode "golang.go"
-vscode "hediet.debug-visualizer"
-vscode "humao.rest-client"
-vscode "inferrinizzard.prettier-sql-vscode"
-vscode "ivory-lab.jenkinsfile-support"
-vscode "kaiyi.qwerty-learner"
-vscode "liulongbin1314.escook-translate"
-vscode "mads-hartmann.bash-ide-vscode"
-vscode "ms-ceintl.vscode-language-pack-zh-hans"
-vscode "ms-python.debugpy"
-vscode "ms-python.isort"
-vscode "ms-python.python"
-vscode "ms-python.vscode-pylance"
-vscode "ms-vscode-remote.remote-containers"
-vscode "ms-vscode-remote.remote-ssh"
-vscode "ms-vscode-remote.remote-ssh-edit"
-vscode "ms-vscode.remote-explorer"
-vscode "naumovs.color-highlight"
-vscode "nicolasvuillamy.vscode-groovy-lint"
-vscode "pranaygp.vscode-css-peek"
-vscode "redhat.vscode-yaml"
-vscode "saoudrizwan.claude-dev"
-vscode "streetsidesoftware.code-spell-checker"
-vscode "sumneko.lua"
-vscode "vscodevim.vim"
-vscode "vue.volar"
-vscode "xyz.local-history"
-vscode "yinfei.luahelper"
-vscode "zxh404.vscode-proto3"

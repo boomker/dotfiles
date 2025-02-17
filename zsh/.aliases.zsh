@@ -16,6 +16,7 @@ alias -g BG="  batgrep -S"
 alias -g BL="  bat --plain --language=log"
 alias -g BH="  bat --plain --language=help"
 alias -g BB="  bat --plain --language=bash"
+alias -g BJ="  bat --plain --language=json"
 alias -g C="   hck "
 alias -g D="   delta -s"
 alias -g RX="  rargs"
@@ -279,23 +280,16 @@ function fbuh() {
         brew outdated
         mas outdated
     ) | fzf-tmux \
-        --query="$initial_query" \
         -1 -m -e --cycle \
+        --query="$initial_query" \
         --preview 'brew info {1} || mas info {1}')
     pickers=($(echo "${token}" | tr "\n" " "))
     if [ "x$pickers" != "x" ]; then
-        echo "(u)pgrade or open the (h)omepage of $pickers"
-        read -r input
-        if [ "$input" = "u" ] || [ "$input" = "U" ]; then
-            for p in "${pickers[@]}"; do
-                [[ "$p" =~ "^[0-9]+$" ]] && mas upgrade $p || {
-                    brew upgrade --force --overwrite $p || brew upgrade --cask $p
-                }
-            done
-        fi
-        if [ "$input" = "h" ] || [ "$input" = "H" ]; then
-            brew home "${pickers[@]}"
-        fi
+        for p in "${pickers[@]}"; do
+            [[ "$p" =~ "^[0-9]+$" ]] && mas upgrade ${p%% *} || {
+                brew upgrade --force --overwrite $p || brew upgrade --cask $p
+            }
+        done
     fi
 }
 
