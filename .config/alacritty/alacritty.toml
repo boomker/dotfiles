@@ -129,7 +129,7 @@ bindings = [
 
     { chars = "\u00078", key = "Key8", mods = "Command" },
 
-    { chars = "\u00079", key = "Key9", mods = "Command" },
+    { chars = "\u0007e", key = "Key9", mods = "Command" },
 
     { action = "ReceiveChar", key = "Back" },
 
@@ -160,6 +160,10 @@ bindings = [
     { mouse = "Middle", action = "PasteSelection" },
     { mouse = "Left", mods = "Control", action = "ExpandSelection" },
 ]
+
+[cursor]
+style.shape = "Beam"
+vi_mode_style.shape = "Block"
 
 [selection]
 save_to_clipboard = true

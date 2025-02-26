@@ -283,10 +283,10 @@ function fbuh() {
         -1 -m -e --cycle \
         --query="$initial_query" \
         --preview 'brew info {1} || mas info {1}')
-    pickers=($(echo "${token}" | tr "\n" " "))
+    pickers=($(echo "${token}" | gsed 's/ .*//;s/\n/ /'))
     if [ "x$pickers" != "x" ]; then
         for p in "${pickers[@]}"; do
-            [[ "$p" =~ "^[0-9]+$" ]] && mas upgrade ${p%% *} || {
+            [[ "$p" =~ "^[0-9]+$" ]] && mas upgrade $p || {
                 brew upgrade --force --overwrite $p || brew upgrade --cask $p
             }
         done
@@ -415,6 +415,10 @@ function yz() {
         builtin cd -- "$cwd"
     fi
     rm -f -- "$tmp"
+}
+
+function cftp() {
+    osascript -e "tell application 'Finder' to set the clipboard to (POSIX file '$1')"
 }
 
 # FZF file and cd to it's directory

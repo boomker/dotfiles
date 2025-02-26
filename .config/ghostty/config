@@ -7,7 +7,7 @@ font-family = "JetBrainsMono Nerd Font Mono"
 font-family = "MiSans"
 
 # Mouse
-cursor-style = block
+cursor-style = bar
 cursor-style-blink = false
 # mouse-scroll-multiplier = 1
 mouse-hide-while-typing = true
@@ -37,10 +37,20 @@ keybind = cmd+h=text:\x07h
 keybind = cmd+x=text:\x07x
 keybind = cmd+w=text:\x07&
 keybind = cmd+p=text:\x07P
+keybind = cmd+m=text:\x07M
+keybind = cmd+1=text:\x071
+keybind = cmd+2=text:\x072
+keybind = cmd+3=text:\x073
+keybind = cmd+4=text:\x074
+keybind = cmd+5=text:\x075
+keybind = cmd+6=text:\x076
+keybind = cmd+7=text:\x077
+keybind = cmd+8=text:\x078
+keybind = cmd+9=text:\x07e
+keybind = cmd+0=text:\x071
 keybind = cmd+d=text:\x1Bd
 keybind = cmd+b=text:\x1Bb
 keybind = cmd+f=text:\x1Bf
-keybind = cmd+m=text:\x07M
 keybind = cmd+opt+/=text:\x07c?
 keybind = cmd+shift+j=text:\x07J
 keybind = cmd+shift+k=text:\x07K
