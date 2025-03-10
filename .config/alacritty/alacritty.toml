@@ -6,19 +6,19 @@
 size = 16
 
 [font.bold]
-family = "JetBrainsMono Nerd Font"
+family = "JetBrains Maple Mono"
 style = "Bold"
 
 [font.bold_italic]
-family = "JetBrainsMono Nerd Font"
+family = "JetBrains Maple Mono"
 style = "Bold Italic"
 
 [font.italic]
-family = "JetBrainsMono Nerd Font"
+family = "JetBrains Maple Mono"
 style = "Italic"
 
 [font.normal]
-family = "JetBrainsMono Nerd Font"
+family = "JetBrains Maple Mono"
 style = "Regular"
 
 [hints]
@@ -149,7 +149,7 @@ bindings = [
         "msg",
         "create-window",
         "-e",
-        "/usr/local/bin/zsh",
+        "/usr/local/bin/fish",
     ] } },
 
 ]

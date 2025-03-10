@@ -272,7 +272,7 @@ function fbih() {
 }
 
 # fzf with brew upgrade
-function fbuh() {
+function fbug() {
     local initial_query token
     local -a pickers
     initial_query="${*:-}"
