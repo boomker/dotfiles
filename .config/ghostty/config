@@ -79,4 +79,4 @@ clipboard-trim-trailing-spaces = true
 shell-integration = zsh
 # custom-shader = shaders/sparks-from-fire.glsl
 
-initial-command = /usr/local/bin/zsh -l -c "tmux new-session -A -D -s  🚀"
+# initial-command = /opt/homebrew/bin/zsh -l -c "tmux new-session -A -D -s  🚀"

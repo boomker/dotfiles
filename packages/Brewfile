@@ -59,10 +59,10 @@ brew "btop"
 brew "freetype"
 # Perl compatible regular expressions library with a new API
 brew "pcre2"
-# Core utilities for Python packages
-brew "python-packaging"
 # Core application library for C
 brew "glib"
+# Multi-shell multi-command argument completer
+brew "carapace"
 # Binary installation for rust projects
 brew "cargo-binstall"
 # Implementation of the Unicode BiDi algorithm
@@ -81,6 +81,8 @@ brew "cmake"
 brew "cmatrix"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
+# Get a file from an HTTP, HTTPS or FTP server
+brew "curl"
 # Load/unload environment variables based on $PWD
 brew "direnv"
 # Command-line DNS Client for Humans
@@ -166,7 +168,7 @@ brew "mas"
 # Like sed, awk, cut, join & sort for name-indexed data such as CSV
 brew "miller"
 # Collection of tools that nobody wrote when UNIX was young
-brew "moreutils"
+brew "moreutils", link: false
 # Interactive cheatsheet tool for the command-line
 brew "navi"
 # Parser generator tool and incremental parsing library
@@ -189,12 +191,16 @@ brew "parallel"
 brew "pinentry-mac"
 # Fast, disk space efficient package manager
 brew "pnpm"
+# Tool for managing OCI containers and pods
+brew "podman"
 # Modern replacement for ps written in Rust
 brew "procs"
 # Protocol buffers (Google's data interchange format)
 brew "protobuf"
 # Implementation of Python 3 in Python
 brew "pypy3.10"
+# Core utilities for Python packages
+brew "python-packaging"
 # Persistent key-value database, with built-in net interface
 brew "redis"
 # Search tool like grep and The Silver Searcher
@@ -213,6 +219,8 @@ brew "rust-parallel"
 brew "scmpuff"
 # 7-Zip is a file archiver with a high compression ratio
 brew "sevenzip"
+# High level, imperative, object-oriented programming language
+brew "squirrel"
 # Cross-shell prompt for astronauts
 brew "starship"
 # Change macOS audio source from the command-line
@@ -254,7 +262,7 @@ brew "zsh"
 # Switch your input method through terminal
 brew "daipeihust/tap/im-select"
 # 🏎 Nping mean NB Ping, A Ping Tool in Rust with Real-Time Data and Visualizations
-brew "hanshuaikang/nping/nping"
+brew "hanshuaikang/nping/nping", link: false
 # Drop in replacement for ueberzug written in C++
 brew "jstkdng/programs/ueberzugpp"
 # MacOS Input Source Manager
@@ -299,8 +307,6 @@ cask "megasync"
 cask "microsoft-auto-update"
 # Multi-platform web browser
 cask "microsoft-edge"
-# Email client
-cask "microsoft-outlook"
 # Neovim Client
 cask "neovide"
 # Music streaming platform
@@ -319,6 +325,8 @@ cask "pixpin"
 cask "quickrecorder"
 # Control your tools with a few keystrokes
 cask "raycast"
+# Browse, manage, inspect containers and images
+cask "podman-desktop"
 # Open-source Git GUI client
 cask "sourcegit"
 # Rime input method engine
@@ -333,5 +341,12 @@ cask "telegram-desktop"
 cask "topit"
 # Gecko based web browser
 cask "zen-browser"
-mas "Picview", id: 6452016140
+# Network protocol analyzer
+cask "wireshark"
+mas "库乐队", id: 682658836
+mas "Pages 文稿", id: 409201541
+mas "Numbers 表格", id: 409203825
 mas "QQ", id: 451108668
+mas "Picview", id: 6452016140
+mas "百度网盘", id: 547166701
+mas "Tencent Lemon Lite", id: 1449962996

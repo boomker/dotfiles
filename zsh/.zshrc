@@ -32,12 +32,12 @@ if [[ $- =~ i ]]; then
     )
 
     ## configure Homebrew, PATH(GNU CLI tools) {
-    export SHELL="/usr/local/bin/zsh"
+    export SHELL="/opt/homebrew/bin/zsh"
     export PREZCUSMODIR="$HOME/.zprezto/contrib"
     export XDG_CONFIG_HOME="$HOME/.config"
 
     export PNPM_HOME="$HOME/.pnpm"
-    export PATH="$HOME/.local/bin:$PATH"
+    export PATH="$HOME/.local/bin:$PNPM_HOME/bin:$PATH"
     export PATH="$HOME/go/bin:$HOME/.bun/bin:$HOME/.cargo/bin:$PATH"
     export MANPATH="/usr/local/man:/usr/local/share/man:${MANPATH}"
     export MANPATH="/usr/local/opt/coreutils/share/man:${MANPATH}"
@@ -46,8 +46,8 @@ if [[ $- =~ i ]]; then
     ## ------ VIM environment config ----------------- {
     export EDITOR="nvim"
     export VISUAL="nvim"
-    export VIM="/usr/local/opt/neovim/share/nvim"
     export VIMRUNTIME="${HOME}/.nvim/runtime"
+    export VIM="/opt/homebrew/opt/neovim/share/nvim"
     ## }
 
     ## ------ Bat && fd & fzf configuration ---------- {
@@ -171,6 +171,10 @@ if [[ $- =~ i ]]; then
     # starship prompt
     [[ -e $(which starship) ]] && source ${PREZCUSMODIR}/user_plugins/starship_prompt.zsh
 
+    # carapace
+    export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
+    [[ -e $(which carapace) ]] && source <(carapace fzf) # _carapace
+
     # direnv
     # [[ -e $(which direnv) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/direnv.zsh
 
@@ -198,6 +202,7 @@ if [[ $- =~ i ]]; then
     zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
     zstyle ':fzf-tab:complete:cd:*' popup-pad 30 0
     zstyle ':completion:*:descriptions' format '[%d]'
+    # zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
     zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -a1 --icons --color=always $realpath'
     zstyle ':fzf-tab:complete:bat:argument-rest' fzf-flags --preview-window=right:70%:wrap
     zstyle ':fzf-tab:complete:bat:argument-rest' fzf-preview 'bat --style=numbers,header --color=always $realpath'

@@ -357,7 +357,8 @@ function setproxy() {
     export http_proxy=http://127.0.0.1:${1:-7890}
     export all_proxy=socks5://127.0.0.1:${1:-7890}
     if [[ -f ~/.gitconfig ]]; then
-        sed -i -r "/$1/s/(\;|#) //" ~/.gitconfig
+        # sed -i -r "/$1/s/(\;|#) //" ~/.gitconfig
+        rg '$1' ~/.gitconfig
     else
         git config --global https.proxy socks5://127.0.0.1:${1:-7890}
     fi

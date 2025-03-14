@@ -149,7 +149,7 @@ bindings = [
         "msg",
         "create-window",
         "-e",
-        "/usr/local/bin/fish",
+        "/opt/homebrew/bin/fish",
     ] } },
 
 ]
@@ -188,4 +188,4 @@ import = ["./themes/catppuccin-macchiato.toml"]
 
 [terminal.shell]
 args = ["--login", "-c", "tmux new-session -A -D -s  🚀"]
-program = "/usr/local/bin/zsh"
+program = "/opt/homebrew/bin/zsh"

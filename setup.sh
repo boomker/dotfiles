@@ -4,12 +4,6 @@
 	echo 'proxy fail' && exit
 }
 
-[[ -n $(lsof -nP -i :7890) ]] && {
-	export https_proxy=http://127.0.0.1:7890
-	export http_proxy=http://127.0.0.1:7890
-	export all_proxy=socks5://127.0.0.1:7890
-}
-
 [[ -n $(lsof -nP -i :1087) ]] && {
 	export http_proxy=http://127.0.0.1:1087
 	export https_proxy=http://127.0.0.1:1087
@@ -17,7 +11,7 @@
 }
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-curl -sSL https://raw.githubusercontent.com/boomker/dotfiles/refs/heads/main/Brewfile
+curl -sSL https://raw.githubusercontent.com/boomker/dotfiles/packages/refs/heads/main/Brewfile
 [[ -e ./Brewfile ]] && brew bundle --file=./Brewfile
 
 mkidr -p "${HOME}/.zprezto/contrib/user_plugins" "${HOME}/.tmux/plugins"
