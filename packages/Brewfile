@@ -271,8 +271,6 @@ brew "laishulu/homebrew/macism"
 brew "umlx5h/tap/gtrash"
 # Web-based GUI client of Project V
 brew "v2raya/v2raya/v2raya"
-# universal command-line SQL client interface
-brew "xo/xo/usql"
 # GPU-accelerated terminal emulator
 cask "alacritty"
 # Enable Windows-like alt-tab
@@ -311,42 +309,30 @@ cask "microsoft-edge"
 cask "neovide"
 # Music streaming platform
 cask "neteasemusic"
-# Free and open-source RSS reader
-cask "netnewswire"
-# Knowledge base that works on top of a local folder of plain text Markdown files
-cask "obsidian"
+# Get up and running with large language models locally
+cask "ollama"
 # Document editor
 cask "onlyoffice"
 # Replacement for Docker Desktop
 cask "orbstack"
 # Screenshot tool
 cask "pixpin"
-# A lightweight and high-performance screen recorder for macOS.
-cask "quickrecorder"
-# Control your tools with a few keystrokes
-cask "raycast"
 # Browse, manage, inspect containers and images
 cask "podman-desktop"
 # Open-source Git GUI client
 cask "sourcegit"
 # Rime input method engine
 cask "squirrel"
-# System monitor for the menu bar
-cask "stats"
-# Real time file synchronisation software
-cask "syncthing"
 # Desktop client for Telegram messenger
 cask "telegram-desktop"
-# Pin any window to the top of your screen.
-cask "topit"
-# Gecko based web browser
-cask "zen-browser"
 # Network protocol analyzer
 cask "wireshark"
-mas "库乐队", id: 682658836
-mas "Pages 文稿", id: 409201541
+mas "iMovie 剪辑", id: 408981434
+mas "Keynote 讲演", id: 409183694
 mas "Numbers 表格", id: 409203825
-mas "QQ", id: 451108668
+mas "Pages 文稿", id: 409201541
 mas "Picview", id: 6452016140
-mas "百度网盘", id: 547166701
+mas "QQ", id: 451108668
 mas "Tencent Lemon Lite", id: 1449962996
+mas "库乐队", id: 682658836
+mas "百度网盘", id: 547166701

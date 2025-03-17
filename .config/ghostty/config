@@ -3,8 +3,8 @@ font-size = 16
 font-thicken = true
 bold-is-bright = true
 font-feature = calt,liga
-font-family = "JetBrains Maple Mono"
-font-family = "MiSans"
+font-family = "mapleMono-NF-CN"
+# font-family = "JetBrains Maple Mono"
 
 # Mouse
 cursor-style = bar
