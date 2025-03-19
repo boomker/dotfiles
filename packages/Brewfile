@@ -277,6 +277,8 @@ cask "alacritty"
 cask "alt-tab"
 # Cloud storage service
 cask "baidunetdisk"
+# Desktop client that supports multiple LLM providers
+cask "cherry-studio"
 # Dictionary and translator app
 cask "easydict"
 # Virtual workspace manager
@@ -284,6 +286,7 @@ cask "flashspace"
 # Screen colour temperature controller
 cask "flux"
 cask "font-jetbrains-mono-nerd-font"
+cask "font-maple-mono-nf-cn"
 cask "font-symbols-only-nerd-font"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
@@ -313,8 +316,6 @@ cask "neteasemusic"
 cask "ollama"
 # Document editor
 cask "onlyoffice"
-# Replacement for Docker Desktop
-cask "orbstack"
 # Screenshot tool
 cask "pixpin"
 # Browse, manage, inspect containers and images
@@ -323,6 +324,8 @@ cask "podman-desktop"
 cask "sourcegit"
 # Rime input method engine
 cask "squirrel"
+# System monitor for the menu bar
+cask "stats"
 # Desktop client for Telegram messenger
 cask "telegram-desktop"
 # Network protocol analyzer

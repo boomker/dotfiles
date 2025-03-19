@@ -158,7 +158,7 @@ bindings = [
 hide_when_typing = true
 bindings = [
     { mouse = "Middle", action = "PasteSelection" },
-    { mouse = "Left", mods = "Control", action = "ExpandSelection" },
+    # { mouse = "Left", mods = "Option", action = "ExpandSelection" },
 ]
 
 [cursor]

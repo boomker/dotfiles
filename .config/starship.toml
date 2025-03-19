@@ -109,9 +109,9 @@ style = 'fg:#a0a9cb bg:#6373a2'
 format = '[ 🕒$time ]($style)'
 
 [cmd_duration]
-min_time = 500
+min_time = 2000
 show_notifications = true
-min_time_to_notify = 1500
+min_time_to_notify = 800
 notification_timeout = 2000
 style = 'fg:yellow bg:#6c7086'
 format = '[ 💰$duration ]($style)'

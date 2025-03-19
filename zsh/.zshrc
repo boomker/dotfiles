@@ -143,7 +143,7 @@ if [[ $- =~ i ]]; then
     }
 
     # API secret:
-    [ -f ~/.secrets ] && zsh-defer source ~/.secrets
+    # [ -f ~/.secrets ] && zsh-defer source ~/.secrets
 
     # aliases.zsh conf:
     [ -f ~/.aliases.zsh ] && zsh-defer source ~/.aliases.zsh
