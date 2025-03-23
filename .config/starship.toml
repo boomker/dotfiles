@@ -15,6 +15,7 @@ $directory\
 $git_branch\
 $git_status\
 [](fg:#394260 bg:#212736)\
+$kubernetes\
 $rust\
 $golang\
 $python\
@@ -81,6 +82,13 @@ diverged = '😵⇕⇡${ahead_count}⇣${behind_count}'
 style = 'fg:#769ff0 bg:#394260'
 format = '[($all_status$ahead_behind)]($style)'
 
+[kubernetes]
+format = ' [⛵ ($user on $cluster)](dimmed green) '
+disabled = true
+contexts = [
+    { context_pattern = "dev.local.cluster.k8s", style = "green", symbol = "💔 " },
+]
+
 [nodejs]
 symbol = ""
 style = "bg:#212736"
@@ -98,6 +106,7 @@ format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
 [python]
 symbol = '🐍 '
+disabled = false
 pyenv_version_name = false
 style = 'fg:#769ff0 bg:#212736'
 format = '[ ${symbol}${pyenv_prefix}(${version} )(\($virtualenv\))]($style)'
@@ -110,6 +119,7 @@ format = '[ 🕒$time ]($style)'
 
 [cmd_duration]
 min_time = 2000
+disabled = true
 show_notifications = true
 min_time_to_notify = 800
 notification_timeout = 2000

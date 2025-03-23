@@ -8,6 +8,7 @@ tap "laishulu/homebrew"
 tap "lihaoyun6/tap"
 tap "localsend/localsend"
 tap "mrkai77/cask"
+tap "oven-sh/bun"
 tap "pot-app/tap"
 tap "umlx5h/tap"
 tap "v2raya/v2raya"
@@ -267,6 +268,8 @@ brew "hanshuaikang/nping/nping", link: false
 brew "jstkdng/programs/ueberzugpp"
 # MacOS Input Source Manager
 brew "laishulu/homebrew/macism"
+# Incredibly fast JavaScript runtime, bundler, transpiler and package manager - all in one.
+brew "oven-sh/bun/bun"
 # A Trash CLI manager written in Go
 brew "umlx5h/tap/gtrash"
 # Web-based GUI client of Project V
@@ -330,6 +333,8 @@ cask "stats"
 cask "telegram-desktop"
 # Network protocol analyzer
 cask "wireshark"
+# Gecko based web browser
+cask "zen-browser"
 mas "iMovie 剪辑", id: 408981434
 mas "Keynote 讲演", id: 409183694
 mas "Numbers 表格", id: 409203825

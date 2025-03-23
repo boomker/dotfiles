@@ -343,19 +343,13 @@ function lt() {
     eza "${eza_parameter[@]}" "${directory:-.}"
 }
 
-# git set work-tree
-function gswt() {
-    [[ "$#" < 2 ]] && echo 'require 2 path parameters' && break 2>/dev/null
-    # git --git-dir="${HOME}/gitrepos/.dotrcfiles.git/" --work-tree="${HOME}/gitrepos/awesome-dotfiles"
-    git --git-dir="${1}" --work-tree="${2}" config --local status.showUntrackedFiles no
-    # git --git-dir="${1}" --work-tree="${2}" commit -a
-    git --git-dir="${1}" --work-tree="${2}" add -u
-}
-
 function setproxy() {
     export https_proxy=http://127.0.0.1:${1:-7890}
     export http_proxy=http://127.0.0.1:${1:-7890}
     export all_proxy=socks5://127.0.0.1:${1:-7890}
+    export HTTPS_PROXY=http://127.0.0.1:${1:-7890}
+    export HTTP_PROXY=http://127.0.0.1:${1:-7890}
+    export ALL_PROXY=socks5://127.0.0.1:${1:-7890}
     if [[ -f ~/.gitconfig ]]; then
         # sed -i -r "/$1/s/(\;|#) //" ~/.gitconfig
         rg '$1' ~/.gitconfig

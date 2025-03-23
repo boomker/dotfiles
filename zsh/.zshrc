@@ -13,6 +13,7 @@ if [[ $- =~ i ]]; then
     # Include hidden files
     setopt globdots
     setopt auto_menu
+    setopt SHARE_HISTORY
     setopt always_to_end
     setopt complete_in_word
     unsetopt flowcontrol # use c-s/c-q
