@@ -119,7 +119,7 @@ format = '[ 🕒$time ]($style)'
 
 [cmd_duration]
 min_time = 2000
-disabled = true
+disabled = false
 show_notifications = true
 min_time_to_notify = 800
 notification_timeout = 2000

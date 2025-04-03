@@ -34,8 +34,9 @@ if [[ $- =~ i ]]; then
 
     ## configure Homebrew, PATH(GNU CLI tools) {
     export SHELL="/opt/homebrew/bin/zsh"
-    export PREZCUSMODIR="$HOME/.zprezto/contrib"
     export XDG_CONFIG_HOME="$HOME/.config"
+    export PREZCUSMODIR="$HOME/.zprezto/contrib"
+    export LS_COLORS="$(vivid generate catppuccin-mocha)"
 
     export PNPM_HOME="$HOME/.pnpm"
     export PATH="$HOME/go/bin:$HOME/.bun/bin:$HOME/.cargo/bin:$PATH"
@@ -145,6 +146,10 @@ if [[ $- =~ i ]]; then
 
     # API secret:
     # [ -f ~/.secrets ] && zsh-defer source ~/.secrets
+
+    # carapace
+    export CARAPACE_BRIDGES='zsh'
+    source <(carapace _carapace)
 
     # aliases.zsh conf:
     [ -f ~/.aliases.zsh ] && zsh-defer source ~/.aliases.zsh

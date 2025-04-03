@@ -1,13 +1,8 @@
 tap "daipeihust/tap"
 tap "danvergara/tools"
-tap "hanshuaikang/nping"
-tap "homebrew/bundle"
-tap "homebrew/services"
 tap "jstkdng/programs"
 tap "laishulu/homebrew"
 tap "lihaoyun6/tap"
-tap "localsend/localsend"
-tap "mrkai77/cask"
 tap "oven-sh/bun"
 tap "pot-app/tap"
 tap "umlx5h/tap"
@@ -44,8 +39,6 @@ brew "libgit2"
 brew "bat"
 # Bash scripts that integrate bat with various command-line tools
 brew "bat-extras"
-# C/C++ and Java libraries for Unicode and globalization
-brew "icu4c@76"
 # Multi-platform support library with a focus on asynchronous I/O
 brew "libuv"
 # Platform built on V8 to build network applications
@@ -146,10 +139,10 @@ brew "jnv"
 brew "jo"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Kubernetes command-line interface
+brew "kubernetes-cli"
 # Simple terminal UI for git commands
 brew "lazygit"
-# C library of Git core methods that is re-entrant and linkable
-brew "libgit2@1.7"
 # Powerful, lightweight programming language
 brew "lua"
 # Rime Input Method Engine
@@ -169,7 +162,7 @@ brew "mas"
 # Like sed, awk, cut, join & sort for name-indexed data such as CSV
 brew "miller"
 # Collection of tools that nobody wrote when UNIX was young
-brew "moreutils", link: false
+brew "moreutils"
 # Interactive cheatsheet tool for the command-line
 brew "navi"
 # Parser generator tool and incremental parsing library
@@ -182,6 +175,8 @@ brew "neovim"
 brew "nexttrace"
 # Port scanning utility for large networks
 brew "nmap"
+# Unix command-line queue utility
+brew "nq"
 # Command-line Git information tool
 brew "onefetch"
 # Painless compression and decompression for your terminal
@@ -262,8 +257,6 @@ brew "zoxide"
 brew "zsh"
 # Switch your input method through terminal
 brew "daipeihust/tap/im-select"
-# 🏎 Nping mean NB Ping, A Ping Tool in Rust with Real-Time Data and Visualizations
-brew "hanshuaikang/nping/nping", link: false
 # Drop in replacement for ueberzug written in C++
 brew "jstkdng/programs/ueberzugpp"
 # MacOS Input Source Manager
@@ -284,8 +277,6 @@ cask "baidunetdisk"
 cask "cherry-studio"
 # Dictionary and translator app
 cask "easydict"
-# Virtual workspace manager
-cask "flashspace"
 # Screen colour temperature controller
 cask "flux"
 cask "font-jetbrains-mono-nerd-font"
@@ -303,6 +294,8 @@ cask "iina"
 cask "jordanbaird-ice"
 # Keyboard customiser
 cask "karabiner-elements"
+# Discover, download, and run local LLMs
+cask "lm-studio"
 # Lunar calendar for menu bar
 cask "lunarbar"
 # Syncs files between computers and MEGA Cloud drives
@@ -323,8 +316,6 @@ cask "onlyoffice"
 cask "pixpin"
 # Browse, manage, inspect containers and images
 cask "podman-desktop"
-# Open-source Git GUI client
-cask "sourcegit"
 # Rime input method engine
 cask "squirrel"
 # System monitor for the menu bar
@@ -335,12 +326,3 @@ cask "telegram-desktop"
 cask "wireshark"
 # Gecko based web browser
 cask "zen-browser"
-mas "iMovie 剪辑", id: 408981434
-mas "Keynote 讲演", id: 409183694
-mas "Numbers 表格", id: 409203825
-mas "Pages 文稿", id: 409201541
-mas "Picview", id: 6452016140
-mas "QQ", id: 451108668
-mas "Tencent Lemon Lite", id: 1449962996
-mas "库乐队", id: 682658836
-mas "百度网盘", id: 547166701
