@@ -1,1 +1,1 @@
-eval -- "$(/usr/local/bin/starship init bash --print-full-init)"
+eval -- "$(/opt/homebrew/bin/starship init bash --print-full-init)"

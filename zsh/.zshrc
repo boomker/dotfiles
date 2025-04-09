@@ -148,8 +148,8 @@ if [[ $- =~ i ]]; then
     # [ -f ~/.secrets ] && zsh-defer source ~/.secrets
 
     # carapace
-    export CARAPACE_BRIDGES='zsh'
-    source <(carapace _carapace)
+    # export CARAPACE_BRIDGES='zsh'
+    # source <(carapace _carapace)
 
     # aliases.zsh conf:
     [ -f ~/.aliases.zsh ] && zsh-defer source ~/.aliases.zsh

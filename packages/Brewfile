@@ -227,6 +227,8 @@ brew "terminal-notifier"
 brew "tlrc"
 # Terminal multiplexer
 brew "tmux"
+# Display directories as trees (with optional color/HTML output)
+brew "tree"
 # Simple ssh client with trzsz ( trz / tsz ) support
 brew "trzsz-ssh"
 # Extremely fast Python package installer and resolver, written in Rust
@@ -239,6 +241,8 @@ brew "vfox"
 brew "viddy"
 # Next generation frontend tooling. It's fast!
 brew "vite"
+# Generator for LS_COLORS with support for multiple color themes
+brew "vivid"
 # Execute commands when watched files change
 brew "watchexec"
 # Internet file retriever
