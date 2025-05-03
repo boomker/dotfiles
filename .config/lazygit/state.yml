@@ -1,13 +1,11 @@
 lastupdatecheck: 0
 recentrepos:
-    - /Users/cyzhu/gitrepos/rime-ice-dicts/cn_dicts-upstream
-    - /Users/cyzhu/gitrepos/rime-ice-dicts/cn_dicts-origin
     - /Users/cyzhu/gitrepos/uvcode
     - /Users/cyzhu/gitrepos/rime-fast-xhup
     - /Users/cyzhu/gitrepos/dotfiles
     - /Users/cyzhu/gitrepos/spacehammer
 startuppopupversion: 5
-lastversion: 0.48.0
+lastversion: 0.49.0
 customcommandshistory: []
 hidecommandlog: false
 ignorewhitespaceindiffview: false

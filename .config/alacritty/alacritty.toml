@@ -145,7 +145,7 @@ bindings = [
 
     { action = "ToggleViMode", key = "Space", mode = "~Vi|~Search", mods = "Shift|Command" },
 
-    { key = "N", mods = "Command|Shift", command = { program = "/usr/local/bin/alacritty", args = [
+    { key = "N", mods = "Command|Shift", command = { program = "/opt/homebrew/bin/alacritty", args = [
         "msg",
         "create-window",
         "-e",

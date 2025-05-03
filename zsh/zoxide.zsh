@@ -55,7 +55,7 @@ function __zoxide_z() {
 }
 
 # Jump to a directory using interactive search.
-function __zoxide_zi() {
+function __zoxide_ji() {
     \builtin local result
     result="$(\command zoxide query --interactive -- "$@")" && __zoxide_cd "${result}"
 }
@@ -69,8 +69,8 @@ function z() {
     __zoxide_z "$@"
 }
 
-function zi() {
-    __zoxide_zi "$@"
+function ji() {
+    __zoxide_ji "$@"
 }
 
 # Completions.

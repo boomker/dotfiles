@@ -97,12 +97,12 @@
     defaultBranch = main
 [http "https://github.com"]
     ; proxy = http://127.0.0.1:7890
-    proxy = socks5://127.0.0.1:1080
+    proxy = socks5://127.0.0.1:10808
     postBuffer = 524288000
 [https "https://github.com"]
     sslVerify = false
     ; proxy = http://127.0.0.1:7890
-    proxy = socks5://127.0.0.1:1080
+    proxy = socks5://127.0.0.1:10808
     postBuffer = 524288000
 [filter "lfs"]
 	required = true

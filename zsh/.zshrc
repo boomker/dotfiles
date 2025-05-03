@@ -7,6 +7,13 @@ if [[ $- =~ i ]]; then
         source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
     fi
 
+    # Source zinit
+    # if [[ -s "${ZINIT_HOME:-$HOME}/.zinit/zinit.zsh" ]]; then
+    #     source "${ZINIT_HOME:-$HOME}/.zinit/zinit.zsh"
+    #     autoload -Uz _zinit
+    #     (( ${+_comps} )) && _comps[zinit]=_zinit
+    # fi
+
     ## --------------User configuration--------------
     WORDCHARS='*?[]~&;!#$%^(){}<>'
 
@@ -39,10 +46,11 @@ if [[ $- =~ i ]]; then
     export LS_COLORS="$(vivid generate catppuccin-mocha)"
 
     export PNPM_HOME="$HOME/.pnpm"
-    export PATH="$HOME/go/bin:$HOME/.bun/bin:$HOME/.cargo/bin:$PATH"
-    export PATH="$HOME/.local/bin:$PNPM_HOME/bin:$HOME/.lmstudio/bin:$PATH"
-    export MANPATH="/usr/local/man:/usr/local/share/man:${MANPATH}"
+    export PATH="$HOME/.local/bin:$HOME/go/bin:$PATH"
+    export PATH="$HOME/.bun/bin:$HOME/.cargo/bin:$PATH"
+    export PATH="$PNPM_HOME/bin:$HOME/.lmstudio/bin:$PATH"
     export MANPATH="/usr/local/opt/coreutils/share/man:${MANPATH}"
+    export MANPATH="/usr/local/man:/usr/local/share/man:${MANPATH}"
     ## }
 
     ## ------ VIM environment config ----------------- {
@@ -147,13 +155,6 @@ if [[ $- =~ i ]]; then
     # API secret:
     # [ -f ~/.secrets ] && zsh-defer source ~/.secrets
 
-    # carapace
-    # export CARAPACE_BRIDGES='zsh'
-    # source <(carapace _carapace)
-
-    # aliases.zsh conf:
-    [ -f ~/.aliases.zsh ] && zsh-defer source ~/.aliases.zsh
-
     # bun completions
     # [ -s "~/.bun/_bun" ] && zsh-defer  source "~/.bun/_bun"
 
@@ -163,6 +164,13 @@ if [[ $- =~ i ]]; then
     #     bindkey '^q' atuin-search
     #     zsh-defer source ${PREZCUSMODIR}/user_plugins/atuin.zsh
     # }
+
+    # aliases.zsh conf:
+    [ -f ~/.aliases.zsh ] && zsh-defer source ~/.aliases.zsh
+
+    # carapace completion
+    [[ -e $(which carapace) ]] && source <(carapace _carapace)
+
 
     # fzf
     [[ -e $(which fzf) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/fzf.zsh
@@ -174,21 +182,11 @@ if [[ $- =~ i ]]; then
     # "$(scmpuff init --shell="zsh" --aliases=false)"
     [[ -e $(which scmpuff) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/scmpuff.zsh
 
-    # starship prompt
-    [[ -e $(which starship) ]] && source ${PREZCUSMODIR}/user_plugins/starship_prompt.zsh
-
     # direnv
     # [[ -e $(which direnv) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/direnv.zsh
 
-    # auto-venv
-    [[ -f "${PREZCUSMODIR}/auto-venv/auto-venv.plugin.zsh" ]] && {
-        zsh-defer source "${PREZCUSMODIR}/auto-venv/auto-venv.plugin.zsh"
-    }
-
-    # fzf-tab
-    [[ -f "${PREZCUSMODIR}/fzf-tab/fzf-tab.plugin.zsh" ]] && {
-        source "${PREZCUSMODIR}/fzf-tab/fzf-tab.plugin.zsh"
-    }
+    # starship prompt
+    [[ -e $(which starship) ]] && source ${PREZCUSMODIR}/user_plugins/starship_prompt.zsh
 
     # zsh-autopair
     [[ -f "${PREZCUSMODIR}/zsh-autopair/autopair.zsh" ]] && {
@@ -197,14 +195,14 @@ if [[ $- =~ i ]]; then
 
     ## fzf-tab config {
     zstyle -d ':completion:*' format
+    zstyle ':fzf-tab:*' query-string ''
+    zstyle ':fzf-tab:*' switch-group ',' '.'
     zstyle ':fzf-tab:*' fzf-min-height 10
     zstyle ':fzf-tab:*' popup-min-size 60 30
-    zstyle ':fzf-tab:*' switch-group ',' '.'
     zstyle ":fzf-tab:*" fzf-flags --color=bg+:23
     zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
     zstyle ':fzf-tab:complete:cd:*' popup-pad 30 0
     zstyle ':completion:*:descriptions' format '[%d]'
-    # zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
     zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -a1 --icons --color=always $realpath'
     zstyle ':fzf-tab:complete:bat:argument-rest' fzf-flags --preview-window=right:70%:wrap
     zstyle ':fzf-tab:complete:bat:argument-rest' fzf-preview 'bat --style=numbers,header --color=always $realpath'
