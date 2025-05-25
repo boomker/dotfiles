@@ -1,5 +1,4 @@
 tap "daipeihust/tap"
-tap "danvergara/tools"
 tap "jstkdng/programs"
 tap "laishulu/homebrew"
 tap "lihaoyun6/tap"
@@ -39,6 +38,8 @@ brew "libgit2"
 brew "bat"
 # Bash scripts that integrate bat with various command-line tools
 brew "bat-extras"
+# C/C++ and Java libraries for Unicode and globalization
+brew "icu4c@76"
 # Multi-platform support library with a focus on asynchronous I/O
 brew "libuv"
 # Platform built on V8 to build network applications
@@ -107,6 +108,8 @@ brew "fx"
 brew "fzf"
 # GNU awk utility
 brew "gawk"
+# GitHub command-line tool
+brew "gh"
 # Distributed revision control system
 brew "git"
 # Syntax-highlighting pager for git and diff output
@@ -263,7 +266,7 @@ brew "zsh"
 brew "daipeihust/tap/im-select"
 # Drop in replacement for ueberzug written in C++
 brew "jstkdng/programs/ueberzugpp"
-# MacOS Input Source Manager
+# macOS Input Source Manager
 brew "laishulu/homebrew/macism"
 # Incredibly fast JavaScript runtime, bundler, transpiler and package manager - all in one.
 brew "oven-sh/bun/bun"
@@ -286,6 +289,8 @@ cask "flux"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-maple-mono-nf-cn"
 cask "font-symbols-only-nerd-font"
+# Download accelerator and organiser
+cask "free-download-manager"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
 # Utility to provide quick look previews for files that aren't natively supported
@@ -320,13 +325,22 @@ cask "onlyoffice"
 cask "pixpin"
 # Browse, manage, inspect containers and images
 cask "podman-desktop"
+# Thumbnails, static previews, cover art and metadata for video files
+cask "qlvideo"
 # Rime input method engine
 cask "squirrel"
 # System monitor for the menu bar
 cask "stats"
+# Real time file synchronisation software
+cask "syncthing"
 # Desktop client for Telegram messenger
 cask "telegram-desktop"
 # Network protocol analyzer
 cask "wireshark"
 # Gecko based web browser
-cask "zen-browser"
+cask "zen"
+mas "Picview", id: 6452016140
+mas "QQ", id: 451108668
+mas "Tencent Lemon Lite", id: 1449962996
+mas "百度网盘", id: 547166701
+mas "腾讯会议", id: 1484048379
