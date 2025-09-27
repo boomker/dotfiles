@@ -38,8 +38,8 @@ zstyle ':prezto:load' pmodule \
   'autosuggestions' \
   'syntax-highlighting' \
   'history-substring-search' \
-  'fzf-tab' \
   'auto-venv'
+  # 'fzf-tab' \
   # 'editor' \
   # 'prompt' \
   # 'spectrum' \

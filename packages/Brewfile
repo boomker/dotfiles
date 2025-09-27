@@ -279,7 +279,6 @@ cask "alacritty"
 # Enable Windows-like alt-tab
 cask "alt-tab"
 # Cloud storage service
-cask "baidunetdisk"
 # Desktop client that supports multiple LLM providers
 cask "cherry-studio"
 # Dictionary and translator app
@@ -320,7 +319,6 @@ cask "neteasemusic"
 # Get up and running with large language models locally
 cask "ollama"
 # Document editor
-cask "onlyoffice"
 # Screenshot tool
 cask "pixpin"
 # Browse, manage, inspect containers and images
@@ -338,7 +336,6 @@ cask "telegram-desktop"
 # Network protocol analyzer
 cask "wireshark"
 # Gecko based web browser
-cask "zen"
 mas "Picview", id: 6452016140
 mas "QQ", id: 451108668
 mas "Tencent Lemon Lite", id: 1449962996

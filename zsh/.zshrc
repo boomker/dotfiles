@@ -171,7 +171,6 @@ if [[ $- =~ i ]]; then
     # carapace completion
     [[ -e $(which carapace) ]] && source <(carapace _carapace)
 
-
     # fzf
     [[ -e $(which fzf) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/fzf.zsh
 
@@ -192,20 +191,5 @@ if [[ $- =~ i ]]; then
     [[ -f "${PREZCUSMODIR}/zsh-autopair/autopair.zsh" ]] && {
         source "${PREZCUSMODIR}/zsh-autopair/autopair.zsh" && autopair-init
     }
-
-    ## fzf-tab config {
-    zstyle -d ':completion:*' format
-    zstyle ':fzf-tab:*' query-string ''
-    zstyle ':fzf-tab:*' switch-group ',' '.'
-    zstyle ':fzf-tab:*' fzf-min-height 10
-    zstyle ':fzf-tab:*' popup-min-size 60 30
-    zstyle ":fzf-tab:*" fzf-flags --color=bg+:23
-    zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-    zstyle ':fzf-tab:complete:cd:*' popup-pad 30 0
-    zstyle ':completion:*:descriptions' format '[%d]'
-    zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -a1 --icons --color=always $realpath'
-    zstyle ':fzf-tab:complete:bat:argument-rest' fzf-flags --preview-window=right:70%:wrap
-    zstyle ':fzf-tab:complete:bat:argument-rest' fzf-preview 'bat --style=numbers,header --color=always $realpath'
-    ## }
 
 fi

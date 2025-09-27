@@ -1,12 +1,12 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:jump-to-char"
-rev = "92f78dc"
-hash = "a670c03eb3760812e044a24f94cedc55"
+rev = "d1c8baa"
+hash = "ce67445ebb1bf3d97b8e44f50904b2c5"
 
 [[plugin.deps]]
 use = "Rolv-Apneseth/starship"
-rev = "6c639b4"
-hash = "5614c46d5de76623c283d415bfac8025"
+rev = "a63550b"
+hash = "c2021386289a0cbb3e152a052f67c177"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:max-preview"

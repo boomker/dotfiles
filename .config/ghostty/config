@@ -15,7 +15,7 @@ mouse-hide-while-typing = true
 # Theme
 window-theme = auto
 background-opacity = 0.9
-theme = catppuccin-macchiato
+theme = Catppuccin Macchiato
 
 # keybindings
 keybind = cmd+y=text:\x07f
@@ -79,4 +79,4 @@ clipboard-trim-trailing-spaces = true
 shell-integration = zsh
 # custom-shader = shaders/sparks-from-fire.glsl
 
-# initial-command = /opt/homebrew/bin/zsh -l -c "tmux new-session -A -D -s  🚀"
+initial-command = /opt/homebrew/bin/zsh -l -c "tmux new-session -A -D -s  🚀"

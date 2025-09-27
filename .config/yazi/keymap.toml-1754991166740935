@@ -3,39 +3,39 @@ on = "<Esc>"
 run = "close"
 desc = "Cancel input"
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = "<C-p>"
 run = "plugin max-preview"
 desc = "Maximize or restore preview"
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = "f"
 run = "plugin jump-to-char"
 desc = "Jump to char"
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = "t"
 run = "plugin smart-tab"
 desc = "Create a tab and enter the hovered directory"
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = "l"
 run = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = "p"
 run = "plugin smart-paste"
 desc = "Paste into the hovered directory or CWD"
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = ["g", "r"]
 run = '''
 	shell 'ya emit cd --str "$(git rev-parse --show-toplevel)"'
 '''
 desc = "Go to the root of repository"
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = ["g", "p"]
 run = ''' shell 'qlmanage -p "$@"' '''
 desc = "Preview files with Quick Look"
