@@ -32,20 +32,18 @@ zstyle ':prezto:load' pmodule-allow-overrides 'yes'
 
 zstyle ':prezto:load' pmodule \
   'history' \
+  'auto-venv' \
   'completion' \
   'environment' \
   'gnu-utility' \
   'autosuggestions' \
   'syntax-highlighting' \
-  'history-substring-search' \
-  'auto-venv'
-  # 'fzf-tab' \
+  'history-substring-search'
   # 'editor' \
   # 'prompt' \
   # 'spectrum' \
   # 'terminal' \
   # 'directory' \
-  # 'auto-venv' \
   # 'zsh-defer' \
   # 'zsh-notify' \
   # 'zsh-autopair' \

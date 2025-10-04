@@ -9,36 +9,31 @@ rev = "a63550b"
 hash = "c2021386289a0cbb3e152a052f67c177"
 
 [[plugin.deps]]
-use = "yazi-rs/plugins:max-preview"
-rev = "92f78dc"
-hash = "a8025f2bb311e869069364fba01abffc"
-
-[[plugin.deps]]
 use = "Reledia/glow"
-rev = "c76bf4f"
-hash = "a6b78bf9af5390e3a85a6951fbb7b93"
+rev = "bd3eaa5"
+hash = "92b5c58159a51c567f82b618cee2b78"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-enter"
-rev = "92f78dc"
-hash = "7918aab6a71caf31b58411f789195677"
+rev = "d1c8baa"
+hash = "56fdabc96fc1f4d53c96eb884b02a5be"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "92f78dc"
-hash = "806cb2842b64e976ba2c65a3e3724518"
-
-[[plugin.deps]]
-use = "Reledia/miller"
-rev = "40e0265"
-hash = "2d6d77583162aaf0a599e7a3091b5878"
+rev = "d1c8baa"
+hash = "63b6c222bf2103b3023389dde5e2ecfe"
 
 [[plugin.deps]]
 use = "boydaihungst/restore"
-rev = "5d22884"
-hash = "8e6fc2d660f661c91e30b10dd1a251b8"
+rev = "2161735"
+hash = "901741afba1979739b4650324265162e"
+
+[[plugin.deps]]
+use = "ndtoan96/ouch"
+rev = "0742fff"
+hash = "2bd799b42b8e42b8ef100310be71f8d1"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-frappe"
-rev = "b929df6"
-hash = "7780fbbc8965da5a31a76a0dcd4d1216"
+rev = "2d73b79"
+hash = "ca94f5dc2b87919439b5be2a62cf4871"
