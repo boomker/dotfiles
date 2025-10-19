@@ -46,9 +46,9 @@ if [[ $- =~ i ]]; then
     export LS_COLORS="$(vivid generate catppuccin-mocha)"
 
     export PNPM_HOME="$HOME/.pnpm"
-    export PATH="$HOME/.local/bin:$HOME/go/bin:$PATH"
-    export PATH="$HOME/.bun/bin:$HOME/.cargo/bin:$PATH"
-    export PATH="$PNPM_HOME/bin:$HOME/.lmstudio/bin:$PATH"
+    export PATH="$HOME/.local/bin:$PATH"
+    export PATH="$HOME/go/bin:$HOME/.cargo/bin:$PATH"
+    export PATH="$HOME/.bun/bin:$PNPM_HOME/bin:$PATH"
     export MANPATH="/usr/local/opt/coreutils/share/man:${MANPATH}"
     export MANPATH="/usr/local/man:/usr/local/share/man:${MANPATH}"
     ## }
@@ -116,8 +116,8 @@ if [[ $- =~ i ]]; then
 
     # Use Ctrl-x Ctrl-v to get the output of the last command
     copy-last-command-output() {
-        # LBUFFER+="$(eval ${history[$((HISTCMD - 1))]})"
-        /bin/echo "$(eval ${history[$((HISTCMD - 1))]})" | pbcopy
+        LBUFFER+="$(eval ${history[$((HISTCMD - 1))]})"
+        /bin/echo "$LBUFFER" | pbcopy
     }
     zle -N copy-last-command-output
     bindkey -e "^x^v" copy-last-command-output
@@ -186,9 +186,9 @@ if [[ $- =~ i ]]; then
     # zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
     zstyle ':completion:*' menu no
     zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-    zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -a1 --icons --color=always $realpath'
-    zstyle ':fzf-tab:complete:bat:argument-rest' fzf-flags --preview-window=right:70%:wrap
-    zstyle ':fzf-tab:complete:bat:argument-rest' fzf-preview 'bat --style=numbers,header --color=always $realpath'
+    # zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -a1 --icons --color=always $realpath'
+    # zstyle ':fzf-tab:complete:bat:argument-rest' fzf-flags --preview-window=right:70%:wrap
+    # zstyle ':fzf-tab:complete:bat:argument-rest' fzf-preview 'bat --style=numbers,header --color=always $realpath'
     ## fzf-tab config }
 
     # fzf

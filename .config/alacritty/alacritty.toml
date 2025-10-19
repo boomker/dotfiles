@@ -6,19 +6,19 @@
 size = 16
 
 [font.bold]
-family = "JetBrains Maple Mono"
+family = "Maple Mono NF CN"
 style = "Bold"
 
 [font.bold_italic]
-family = "JetBrains Maple Mono"
+family = "Maple Mono NF CN"
 style = "Bold Italic"
 
 [font.italic]
-family = "JetBrains Maple Mono"
+family = "Maple Mono NF CN"
 style = "Italic"
 
 [font.normal]
-family = "JetBrains Maple Mono"
+family = "Maple Mono NF CN"
 style = "Regular"
 
 [hints]
