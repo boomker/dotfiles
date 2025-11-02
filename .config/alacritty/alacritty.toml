@@ -139,11 +139,11 @@ bindings = [
 
     { action = "DecreaseFontSize", key = "Minus", mods = "Command" },
 
-    { action = "SearchBackward", key = "S", mode = "~Search", mods = "Shift|Command" },
+    { action = "ToggleViMode", key = "Space", mode = "~Vi", mods = "Option|Command" },
 
-    { action = "ScrollToBottom", key = "B", mode = "Vi|~Search", mods = "Shift|Command" },
+    { action = "SearchBackward", key = "/", mode = "~Search", mods = "Option|Command" },
 
-    { action = "ToggleViMode", key = "Space", mode = "~Vi|~Search", mods = "Shift|Command" },
+    # { action = "ScrollToBottom", key = "B", mode = "Vi|~Search", mods = "Shift|Command" },
 
     { key = "N", mods = "Command|Shift", command = { program = "/opt/homebrew/bin/alacritty", args = [
         "msg",
@@ -158,7 +158,7 @@ bindings = [
 hide_when_typing = true
 bindings = [
     { mouse = "Middle", action = "PasteSelection" },
-    { mouse = "Left", mods = "Option", action = "ExpandSelection" },
+    # { mouse = "Left", mods = "Alt", action = "ToggleBlockSelection" },
 ]
 
 [cursor]

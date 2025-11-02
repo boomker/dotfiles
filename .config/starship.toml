@@ -51,6 +51,7 @@ style = 'fg:#769ff0 bg:black'
 format = '[ $symbol$common_meaning$signal_name$maybe_int ]($style)'
 
 [directory]
+disabled = false
 truncation_length = 3
 truncation_symbol = "…/"
 style = "fg:#e3e5e5 bg:#769ff0"

@@ -69,7 +69,7 @@ if [[ $- =~ i ]]; then
     fi
 
     if [[ -n $(command -v fd) ]]; then
-        export FD_OPTIONS=" \
+        export FD_OPTIONS="
             --exclude .git
             --exclude .idea
             --exclude .venv
@@ -94,7 +94,6 @@ if [[ $- =~ i ]]; then
 
         export FZF_DEFAULT_OPTS="
             -0 --cycle --multi --height 70% --reverse --border --tiebreak=begin
-            --bind end:preview-down,home:preview-up,?:toggle-preview
             --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort'
             --bind 'alt-a:select-all'"
     fi
@@ -159,17 +158,18 @@ if [[ $- =~ i ]]; then
     # [ -s "~/.bun/_bun" ] && zsh-defer  source "~/.bun/_bun"
 
     # atuin shell history search
-    # [[ -e $(which atuin) ]] && {
-    #     export ATUIN_NOBIND="true"
-    #     bindkey '^q' atuin-search
-    #     zsh-defer source ${PREZCUSMODIR}/user_plugins/atuin.zsh
-    # }
+    [[ -e $(which atuin) ]] && {
+        export ATUIN_NOBIND="true"
+        bindkey '^q' atuin-search
+        zsh-defer source ${PREZCUSMODIR}/user_plugins/atuin.zsh
+        # eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
+    }
 
     # aliases.zsh conf:
     [ -f ~/.aliases.zsh ] && zsh-defer source ~/.aliases.zsh
 
     # carapace completion
-    [[ -e $(which carapace) ]] && source <(carapace _carapace)
+    # [[ -e $(which carapace) ]] && source <(carapace _carapace)
 
     zsh-defer source ${PREZCUSMODIR}/fzf-tab/fzf-tab.plugin.zsh
 

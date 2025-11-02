@@ -65,7 +65,7 @@ mouse-shift-capture = true
 # Window
 window-padding-y = 2,0
 window-save-state = always
-window-decoration = false
+window-decoration = true
 window-padding-balance = true
 
 quick-terminal-position = top
