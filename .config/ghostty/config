@@ -3,7 +3,7 @@ font-size = 16
 font-thicken = true
 bold-is-bright = true
 font-feature = calt,liga
-font-family = "mapleMono-NF-CN"
+font-family = "Maple-Mono-NF-CN"
 # font-family = "JetBrains Maple Mono"
 
 # Mouse

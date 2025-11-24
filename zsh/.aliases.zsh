@@ -60,7 +60,7 @@ alias cprp="cp -rp --parents "
 alias ll="ls -rtlh"
 alias l.="ls -d .* --color=auto"
 alias ls="ls -p --width=80 --color=auto"
-alias bdf="batdiff --color --delta --context=3 "
+alias bdf="batdiff --color --delta --context=1 "
 alias wl="wc -l"
 alias diff="delta "
 alias sei="sed -i "
@@ -166,9 +166,9 @@ alias rgh="rg -. --glob='!.git*' "
 alias ips="ipython3"
 
 # pip
-alias piu="pip3 uninstall "
-alias pii="pip3 install "
-alias pus="pip3 install --upgrade pip"
+# alias piu="pip3 uninstall "
+# alias pii="pip3 install "
+# alias pus="pip3 install --upgrade pip"
 
 # uv
 alias upin="uv pip install "
@@ -214,16 +214,15 @@ if [[ $(uname -s) == "Darwin" ]]; then
 
     alias lsflags="/bin/ls -lO "
     # alias ls="eza --color=automatic"
-    # alias l="eza --git --icons --color=automatic"
-    alias ll="eza -abghlF --color-scale --group-directories-first --git --icons --color=automatic --git-ignore"
-    alias la="eza -abghlF --color-scale --group-directories-first --git --icons --color=automatic"
+    alias l="eza --git --icons --color=automatic"
+    alias ll="eza -abghlF --color-scale --group-directories-first --git --icons --color=automatic "
     alias rm="trash"
     alias rmls="trash-list"
     alias rmrs="trash-restore"
     alias rmcl="trash-empty"
     alias mdir="gmkdir -pv "
     alias tailf="gtail -f -n "
-    alias dfh="/usr/local/bin/gdf -Th"
+    alias dfh="/opt/homebrew/bin/gdf -Th"
 else
     # alias for *unix
     alias open="xdg-open"
