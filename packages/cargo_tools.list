@@ -1,7 +1,11 @@
 Package       Installed  Latest   Needs update
 amber         v0.6.0     v0.6.0   No
-cargo-update  v16.1.0    v16.1.0  No
+cargo-update  v18.0.0    v18.0.0  No
+dysk          v3.4.0     v3.4.0   No
 huniq         v2.7.0     v2.7.0   No
-pik           v0.14.1    v0.14.1  No
+pik           v0.27.0    v0.27.0  No
+ripgrep       v15.1.0    v15.1.0  No
+shimmy        v1.7.4     v1.7.4   No
 viu           v1.5.1     v1.5.1   No
 zawk          v0.5.25    v0.5.25  No
+

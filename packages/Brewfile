@@ -1,10 +1,7 @@
-tap "daipeihust/tap"
-tap "jstkdng/programs"
-tap "laishulu/homebrew"
+tap "brewforge/chinese"
+tap "brewforge/extras"
 tap "lihaoyun6/tap"
 tap "oven-sh/bun"
-tap "pot-app/tap"
-tap "umlx5h/tap"
 tap "v2raya/v2raya"
 tap "xo/xo"
 tap "ybeapps/sourcegit"
@@ -20,8 +17,6 @@ brew "aom"
 brew "gettext"
 # Cryptography and SSL/TLS Toolkit
 brew "openssl@3"
-# Library for command-line editing
-brew "readline"
 # Command-line interface for SQLite
 brew "sqlite"
 # Download with resuming and segmented downloading
@@ -38,11 +33,9 @@ brew "libgit2"
 brew "bat"
 # Bash scripts that integrate bat with various command-line tools
 brew "bat-extras"
-# C/C++ and Java libraries for Unicode and globalization
-brew "icu4c@76"
 # Multi-platform support library with a focus on asynchronous I/O
 brew "libuv"
-# Platform built on V8 to build network applications
+# Open-source, cross-platform JavaScript runtime environment
 brew "node"
 # Secure and free password manager for all of your devices
 brew "bitwarden-cli"
@@ -96,20 +89,14 @@ brew "eza"
 brew "fastfetch"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
-# GNU compiler collection
-brew "gcc"
-# Tool to install, manage and use Progressive Web Apps in Mozilla Firefox
-brew "firefoxpwa"
 # User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
-# Terminal JSON viewer
-brew "fx"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # GNU awk utility
 brew "gawk"
-# GitHub command-line tool
-brew "gh"
+# GNU compiler collection
+brew "gcc"
 # Distributed revision control system
 brew "git"
 # Syntax-highlighting pager for git and diff output
@@ -120,16 +107,16 @@ brew "git-filter-repo"
 brew "glow"
 # GNU implementation of the famous stream editor
 brew "gnu-sed"
-# Common error values for all GnuPG components
-brew "libgpg-error"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
+# GNU troff text-formatting system
+brew "groff"
 # Library for a binary-based efficient data interchange format
 brew "msgpack"
+# Featureful Trash CLI manager: alternative to rm and trash-cli
+brew "gtrash"
 # Sharp cut(1) clone
 brew "hck"
-# Package compiler and linker metadata toolkit
-brew "pkgconf"
 # Command-line hex viewer
 brew "hexyl"
 # Serializes the output of command-line tools to structured JSON output
@@ -146,6 +133,8 @@ brew "jq"
 brew "kubernetes-cli"
 # Simple terminal UI for git commands
 brew "lazygit"
+# Common error values for all GnuPG components
+brew "libgpg-error"
 # Powerful, lightweight programming language
 brew "lua"
 # Rime Input Method Engine
@@ -168,7 +157,7 @@ brew "miller"
 brew "moreutils"
 # Interactive cheatsheet tool for the command-line
 brew "navi"
-# Parser generator tool and incremental parsing library
+# Incremental parsing library
 brew "tree-sitter"
 # Very basic terminfo library
 brew "unibilium"
@@ -180,6 +169,8 @@ brew "nexttrace"
 brew "nmap"
 # Unix command-line queue utility
 brew "nq"
+# Create, run, and share large language models (LLMs)
+brew "ollama", link: false
 # Command-line Git information tool
 brew "onefetch"
 # Painless compression and decompression for your terminal
@@ -188,6 +179,8 @@ brew "ouch"
 brew "parallel"
 # Pinentry for GPG on Mac
 brew "pinentry-mac"
+# Package compiler and linker metadata toolkit
+brew "pkgconf"
 # Fast, disk space efficient package manager
 brew "pnpm"
 # Tool for managing OCI containers and pods
@@ -202,8 +195,6 @@ brew "pypy3.10"
 brew "python-packaging"
 # Persistent key-value database, with built-in net interface
 brew "redis"
-# Search tool like grep and The Silver Searcher
-brew "ripgrep"
 # Command-line tool to batch rename files and directories
 brew "rnr"
 # Utility that provides fast incremental file transfer
@@ -214,12 +205,16 @@ brew "ruff"
 brew "rust"
 # Run commands in parallel with Rust's Tokio framework
 brew "rust-parallel"
+# Rust toolchain installer
+brew "rustup"
 # Adds numbered shortcuts for common git commands
 brew "scmpuff"
 # 7-Zip is a file archiver with a high compression ratio
 brew "sevenzip"
+# Human-friendly alternative to netstat for socket and port monitoring
+brew "somo"
 # High level, imperative, object-oriented programming language
-brew "squirrel"
+brew "squirrel-lang"
 # Cross-shell prompt for astronauts
 brew "starship"
 # Change macOS audio source from the command-line
@@ -232,6 +227,8 @@ brew "tlrc"
 brew "tmux"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
+# Parser generator tool
+brew "tree-sitter-cli"
 # Simple ssh client with trzsz ( trz / tsz ) support
 brew "trzsz-ssh"
 # Extremely fast Python package installer and resolver, written in Rust
@@ -264,27 +261,26 @@ brew "zoxide"
 brew "zsh"
 # Switch your input method through terminal
 brew "daipeihust/tap/im-select"
-# Drop in replacement for ueberzug written in C++
-brew "jstkdng/programs/ueberzugpp"
 # macOS Input Source Manager
 brew "laishulu/homebrew/macism"
 # Incredibly fast JavaScript runtime, bundler, transpiler and package manager - all in one.
 brew "oven-sh/bun/bun"
-# A Trash CLI manager written in Go
-brew "umlx5h/tap/gtrash"
 # Web-based GUI client of Project V
 brew "v2raya/v2raya/v2raya"
-# GPU-accelerated terminal emulator
-cask "alacritty"
 # Enable Windows-like alt-tab
 cask "alt-tab"
 # Cloud storage service
+cask "baidunetdisk"
 # Desktop client that supports multiple LLM providers
 cask "cherry-studio"
+# AI assistant
+cask "deepchat"
 # Dictionary and translator app
 cask "easydict"
 # Screen colour temperature controller
-cask "flux"
+cask "flux-app"
+# Information browser
+cask "folo"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-maple-mono-nf-cn"
 cask "font-symbols-only-nerd-font"
@@ -298,12 +294,8 @@ cask "glance-chamburr"
 cask "hammerspoon"
 # Free and open-source media player
 cask "iina"
-# Menu bar manager
-cask "jordanbaird-ice"
 # Keyboard customiser
 cask "karabiner-elements"
-# Discover, download, and run local LLMs
-cask "lm-studio"
 # Lunar calendar for menu bar
 cask "lunarbar"
 # Syncs files between computers and MEGA Cloud drives
@@ -313,12 +305,13 @@ cask "microsoft-auto-update"
 # Multi-platform web browser
 cask "microsoft-edge"
 # Neovim Client
-cask "neovide"
+cask "neovide-app"
 # Music streaming platform
 cask "neteasemusic"
 # Get up and running with large language models locally
-cask "ollama"
-# Document editor
+cask "ollama-app"
+# Utility to uninstall apps and remove leftover files from old/uninstalled apps
+cask "pearcleaner"
 # Screenshot tool
 cask "pixpin"
 # Browse, manage, inspect containers and images
@@ -326,18 +319,45 @@ cask "podman-desktop"
 # Thumbnails, static previews, cover art and metadata for video files
 cask "qlvideo"
 # Rime input method engine
-cask "squirrel"
+cask "squirrel-app"
 # System monitor for the menu bar
 cask "stats"
 # Real time file synchronisation software
-cask "syncthing"
+cask "syncthing-app"
+# Quicklook extension for source files
+cask "syntax-highlight"
 # Desktop client for Telegram messenger
 cask "telegram-desktop"
-# Network protocol analyzer
-cask "wireshark"
-# Gecko based web browser
+# 代理客户端，支持 Xray、sing-box 等
+cask "v2rayn"
 mas "Picview", id: 6452016140
 mas "QQ", id: 451108668
 mas "Tencent Lemon Lite", id: 1449962996
 mas "百度网盘", id: 547166701
 mas "腾讯会议", id: 1484048379
+go "github.com/yassinebenaid/bunster/cmd/bunster"
+go "golang.org/x/tools/cmd/callgraph"
+go "github.com/go-delve/delve/cmd/dlv"
+go "github.com/davidrjenni/reftools/cmd/fillswitch"
+go "github.com/onsi/ginkgo/v2/ginkgo"
+go "github.com/abice/go-enum"
+go "mvdan.cc/gofumpt"
+go "golang.org/x/tools/cmd/goimports"
+go "github.com/twpayne/go-jsonstruct/v3/cmd/gojsonstruct"
+go "github.com/golangci/golangci-lint/cmd/golangci-lint"
+go "github.com/segmentio/golines"
+go "github.com/fatih/gomodifytags"
+go "github.com/abenz1267/gomvp"
+go "golang.org/x/tools/cmd/gonew"
+go "github.com/haya14busa/goplay/cmd/goplay"
+go "golang.org/x/tools/gopls"
+go "golang.org/x/tools/cmd/gorename"
+go "github.com/cweill/gotests/gotests"
+go "gotest.tools/gotestsum"
+go "golang.org/x/vuln/cmd/govulncheck"
+go "github.com/koron/iferr"
+go "github.com/josharian/impl"
+go "github.com/tmc/json-to-struct"
+go "go.uber.org/mock/mockgen"
+go "github.com/kyoh86/richgo"
+go "honnef.co/go/tools/cmd/staticcheck"
