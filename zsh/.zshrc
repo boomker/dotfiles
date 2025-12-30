@@ -169,7 +169,7 @@ if [[ $- =~ i ]]; then
     [ -f ~/.aliases.zsh ] && zsh-defer source ~/.aliases.zsh
 
     # carapace completion
-    # [[ -e $(which carapace) ]] && source <(carapace _carapace)
+    [[ -e $(which carapace) ]] && source <(carapace rg)
 
     zsh-defer source ${PREZCUSMODIR}/fzf-tab/fzf-tab.plugin.zsh
 

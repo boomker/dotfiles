@@ -155,12 +155,12 @@ alias gla="git log --all --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bo
 # ------ git aliases end ---------
 
 # fd
-alias fdh="fd --exclude='.git' -H '.*' "
+alias fdg="fd --exclude='.git' --no-ignore "
 alias fdp="fd -tf -p -g "
 
 # rg
 alias rg="rg  --smart-case --glob='!.git*' "
-alias rgh="rg -. --glob='!.git*' "
+alias rgg="rg -. --glob='!.git*' "
 
 ## python tools:
 alias ips="ipython3"
@@ -341,17 +341,17 @@ function lt() {
 }
 
 function setproxy() {
-    export https_proxy=http://127.0.0.1:${1:-7890}
-    export http_proxy=http://127.0.0.1:${1:-7890}
-    export all_proxy=socks5://127.0.0.1:${1:-7890}
-    export HTTPS_PROXY=http://127.0.0.1:${1:-7890}
-    export HTTP_PROXY=http://127.0.0.1:${1:-7890}
-    export ALL_PROXY=socks5://127.0.0.1:${1:-7890}
+    export https_proxy=http://${1:-127.0.0.1}:${2:-7890}
+    export http_proxy=http://${1:-127.0.0.1}:${2:-7890}
+    export all_proxy=socks5://${1:-127.0.0.1}:${2:-7890}
+    export HTTPS_PROXY=http://${1:-127.0.0.1}:${2:-7890}
+    export HTTP_PROXY=http://${1:-127.0.0.1}:${2:-7890}
+    export ALL_PROXY=socks5://${1:-127.0.0.1}:${2:-7890}
     if [[ -f ~/.gitconfig ]]; then
         # sed -i -r "/$1/s/(\;|#) //" ~/.gitconfig
         rg '$1' ~/.gitconfig
     else
-        git config --global https.proxy socks5://127.0.0.1:${1:-7890}
+        git config --global https.proxy socks5://${1:-127.0.0.1}:${2:-7890}
     fi
 }
 
