@@ -77,6 +77,6 @@ clipboard-trim-trailing-spaces = true
 
 # Other
 shell-integration = zsh
-custom-shader = shaders/cursor_blaze.glsl
+# custom-shader = shaders/cursor_blaze.glsl
 
 initial-command = /opt/homebrew/bin/zsh -l -c "tmux new-session -A -D -s  🚀"

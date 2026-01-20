@@ -1,12 +1,12 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:jump-to-char"
-rev = "eaf6920"
+rev = "03cdd4b"
 hash = "ce67445ebb1bf3d97b8e44f50904b2c5"
 
 [[plugin.deps]]
 use = "Rolv-Apneseth/starship"
-rev = "a63550b"
-hash = "c2021386289a0cbb3e152a052f67c177"
+rev = "eca1861"
+hash = "e519d894e94ded741e06aae4d4775981"
 
 [[plugin.deps]]
 use = "Reledia/glow"
@@ -15,18 +15,18 @@ hash = "92b5c58159a51c567f82b618cee2b78"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-enter"
-rev = "eaf6920"
+rev = "03cdd4b"
 hash = "56fdabc96fc1f4d53c96eb884b02a5be"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "eaf6920"
-hash = "27ca02f49fd236b5cc7bf03c243859fe"
+rev = "03cdd4b"
+hash = "36a484acf6a0a0219c543ccb4cee218f"
 
 [[plugin.deps]]
 use = "boydaihungst/restore"
-rev = "2161735"
-hash = "901741afba1979739b4650324265162e"
+rev = "6395e52"
+hash = "f107436db5d2cccccc11ab54bc97b761"
 
 [[plugin.deps]]
 use = "ndtoan96/ouch"
@@ -35,5 +35,5 @@ hash = "b5067143415bd2d46c0dfa57319ddcef"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-frappe"
-rev = "3edeb49"
-hash = "2af5f0305730530f23e61ccaba119efe"
+rev = "4a1802a"
+hash = "6f261f00e5235001b8d6bcd7464d3077"
