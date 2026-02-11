@@ -47,6 +47,7 @@ if [[ $- =~ i ]]; then
 
     export PNPM_HOME="$HOME/.pnpm"
     export PATH="$HOME/.local/bin:$PATH"
+    export PATH="/opt/zerobrew/prefix/bin:$PATH"
     export PATH="$HOME/go/bin:$HOME/.cargo/bin:$PATH"
     export PATH="$HOME/.bun/bin:$PNPM_HOME/bin:$PATH"
     export MANPATH="/usr/local/opt/coreutils/share/man:${MANPATH}"
@@ -155,7 +156,34 @@ if [[ $- =~ i ]]; then
     # [ -f ~/.secrets ] && zsh-defer source ~/.secrets
 
     # bun completions
-    # [ -s "~/.bun/_bun" ] && zsh-defer  source "~/.bun/_bun"
+    # [ -s "~/.bun/_bun" ] && zsh-defer source "~/.bun/_bun"
+
+    # starship prompt
+    [[ -e $(which starship) ]] && source ${PREZCUSMODIR}/user_plugins/starship_prompt.zsh
+
+    [[ -d ${PREZCUSMODIR}/fzf-tab ]] && { compinit ; source ${PREZCUSMODIR}/fzf-tab/fzf-tab.plugin.zsh }
+
+    ## fzf-tab config {
+    zstyle ':completion:*' menu no
+    zstyle ':fzf-tab:*' query-string ''
+    zstyle ':fzf-tab:*' switch-group ',' '.'
+    zstyle ':fzf-tab:*' fzf-min-height 10
+    zstyle ':fzf-tab:*' popup-min-size 70 30
+    zstyle ":fzf-tab:*" fzf-flags --color=bg+:23
+    zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+    zstyle ':fzf-tab:*' show-group quiet # full, none
+    zstyle ':completion:*:descriptions' format '[%d]'
+    zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+    zstyle ':fzf-tab:complete:bat:argument-rest' fzf-flags --preview-window=right:75%
+    zstyle ':fzf-tab:complete:bat:argument-rest' fzf-preview \
+        '[[ -f $realpath ]] && bat --color=always $realpath || eza -1 --color=always $realpath'
+    ## fzf-tab config }
+
+    # carapace completion
+    [[ -e $(which carapace) ]] && source <(carapace rg)
+
+    # aliases.zsh conf:
+    [ -f ~/.aliases.zsh ] && zsh-defer source ~/.aliases.zsh
 
     # atuin shell history search
     [[ -e $(which atuin) ]] && {
@@ -165,47 +193,18 @@ if [[ $- =~ i ]]; then
         # eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
     }
 
-    # aliases.zsh conf:
-    [ -f ~/.aliases.zsh ] && zsh-defer source ~/.aliases.zsh
-
-    # carapace completion
-    [[ -e $(which carapace) ]] && source <(carapace rg)
-
-    zsh-defer source ${PREZCUSMODIR}/fzf-tab/fzf-tab.plugin.zsh
-
-    ## fzf-tab config {
-    zstyle -d ':completion:*' format
-    zstyle ':fzf-tab:*' query-string ''
-    zstyle ':fzf-tab:*' switch-group ',' '.'
-    zstyle ':fzf-tab:*' fzf-min-height 10
-    zstyle ':fzf-tab:*' popup-min-size 60 30
-    zstyle ":fzf-tab:*" fzf-flags --color=bg+:23
-    # zstyle ':fzf-tab:*' use-fzf-default-opts yes
-    zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-    zstyle ':completion:*:descriptions' format '[%d]'
-    # zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
-    zstyle ':completion:*' menu no
-    zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-    # zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -a1 --icons --color=always $realpath'
-    # zstyle ':fzf-tab:complete:bat:argument-rest' fzf-flags --preview-window=right:70%:wrap
-    # zstyle ':fzf-tab:complete:bat:argument-rest' fzf-preview 'bat --style=numbers,header --color=always $realpath'
-    ## fzf-tab config }
-
     # fzf
     [[ -e $(which fzf) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/fzf.zsh
 
     # zoxide
     [[ -e $(which zoxide) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/zoxide.zsh
 
-    # Git status
-    # "$(scmpuff init --shell="zsh" --aliases=false)"
-    [[ -e $(which scmpuff) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/scmpuff.zsh
-
     # direnv
     # [[ -e $(which direnv) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/direnv.zsh
 
-    # starship prompt
-    [[ -e $(which starship) ]] && source ${PREZCUSMODIR}/user_plugins/starship_prompt.zsh
+    # Git status
+    # "$(scmpuff init --shell="zsh" --aliases=false)"
+    [[ -e $(which scmpuff) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/scmpuff.zsh
 
     # zsh-autopair
     [[ -f "${PREZCUSMODIR}/zsh-autopair/autopair.zsh" ]] && {
