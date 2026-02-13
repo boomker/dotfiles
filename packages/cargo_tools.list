@@ -1,11 +1,13 @@
 Package       Installed  Latest   Needs update
 amber         v0.6.0     v0.6.0   No
+bat           v0.26.1    v0.26.1  No
 cargo-update  v18.0.0    v18.0.0  No
-dysk          v3.4.0     v3.4.0   No
+dysk          v3.6.0     v3.6.0   No
 huniq         v2.7.0     v2.7.0   No
-pik           v0.27.0    v0.27.0  No
+pik           v0.28.1    v0.28.1  No
 ripgrep       v15.1.0    v15.1.0  No
-shimmy        v1.7.4     v1.7.4   No
-viu           v1.5.1     v1.5.1   No
+shimmy        v1.8.1     v1.8.1   No
+viu           v1.6.1     v1.6.1   No
+vivid         v0.10.1    v0.10.1  No
 zawk          v0.5.25    v0.5.25  No
 

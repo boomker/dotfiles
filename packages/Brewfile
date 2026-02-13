@@ -27,10 +27,6 @@ brew "atuin"
 brew "bandwhich"
 # Bourne-Again SHell, a UNIX command interpreter
 brew "bash"
-# C library of Git core methods that is re-entrant and linkable
-brew "libgit2"
-# Clone of cat(1) with syntax highlighting and Git integration
-brew "bat"
 # Bash scripts that integrate bat with various command-line tools
 brew "bat-extras"
 # Multi-platform support library with a focus on asynchronous I/O
@@ -53,12 +49,6 @@ brew "glib"
 brew "carapace"
 # Binary installation for rust projects
 brew "cargo-binstall"
-# Implementation of the Unicode BiDi algorithm
-brew "fribidi"
-# OpenType text shaping engine
-brew "harfbuzz"
-# Versatile and fast Unicode/ASCII/ANSI graphics renderer
-brew "chafa"
 # Change Source for every software on every platform from the command-line
 brew "chsrc"
 # Cut, copy, and paste anything, anywhere, all from the terminal
@@ -83,6 +73,8 @@ brew "duf"
 brew "dust"
 # Select default apps for documents and URL schemes on macOS
 brew "duti"
+# C library of Git core methods that is re-entrant and linkable
+brew "libgit2"
 # Modern, maintained replacement for ls
 brew "eza"
 # Like neofetch, but much faster because written mostly in C
@@ -91,6 +83,8 @@ brew "fastfetch"
 brew "fd"
 # User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
+# Implementation of the Unicode BiDi algorithm
+brew "fribidi"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # GNU awk utility
@@ -101,20 +95,18 @@ brew "gcc"
 brew "git"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
-# Quickly rewrite git repository history
-brew "git-filter-repo"
+# Application-level logging library
+brew "glog"
 # Render markdown on the CLI
 brew "glow"
 # GNU implementation of the famous stream editor
 brew "gnu-sed"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
-# GNU troff text-formatting system
-brew "groff"
 # Library for a binary-based efficient data interchange format
 brew "msgpack"
-# Featureful Trash CLI manager: alternative to rm and trash-cli
-brew "gtrash"
+# OpenType text shaping engine
+brew "harfbuzz"
 # Sharp cut(1) clone
 brew "hck"
 # Command-line hex viewer
@@ -129,8 +121,6 @@ brew "jnv"
 brew "jo"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
-# Kubernetes command-line interface
-brew "kubernetes-cli"
 # Simple terminal UI for git commands
 brew "lazygit"
 # Common error values for all GnuPG components
@@ -145,8 +135,6 @@ brew "luajit"
 brew "luarocks"
 # Utility for directing compilation
 brew "make"
-# Unix documentation system
-brew "man-db"
 # Drop-in replacement for MySQL
 brew "mariadb"
 # Mac App Store command-line interface
@@ -157,8 +145,6 @@ brew "miller"
 brew "moreutils"
 # Interactive cheatsheet tool for the command-line
 brew "navi"
-# Incremental parsing library
-brew "tree-sitter"
 # Very basic terminfo library
 brew "unibilium"
 # Ambitious Vim-fork focused on extensibility and agility
@@ -219,6 +205,8 @@ brew "squirrel-lang"
 brew "starship"
 # Change macOS audio source from the command-line
 brew "switchaudio-osx"
+# Open source continuous file synchronization application
+brew "syncthing"
 # Send macOS User Notifications from the command-line
 brew "terminal-notifier"
 # Official tldr client written in Rust
@@ -227,9 +215,11 @@ brew "tlrc"
 brew "tmux"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
+# Incremental parsing library
+brew "tree-sitter"
 # Parser generator tool
 brew "tree-sitter-cli"
-# Simple ssh client with trzsz ( trz / tsz ) support
+# Alternative ssh client with additional features to meet your needs
 brew "trzsz-ssh"
 # Extremely fast Python package installer and resolver, written in Rust
 brew "uv"
@@ -259,10 +249,6 @@ brew "zmap"
 brew "zoxide"
 # UNIX shell (command interpreter)
 brew "zsh"
-# Switch your input method through terminal
-brew "daipeihust/tap/im-select"
-# macOS Input Source Manager
-brew "laishulu/homebrew/macism"
 # Incredibly fast JavaScript runtime, bundler, transpiler and package manager - all in one.
 brew "oven-sh/bun/bun"
 # Web-based GUI client of Project V
@@ -284,8 +270,6 @@ cask "folo"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-maple-mono-nf-cn"
 cask "font-symbols-only-nerd-font"
-# Download accelerator and organiser
-cask "free-download-manager"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
 # Utility to provide quick look previews for files that aren't natively supported
@@ -312,8 +296,6 @@ cask "neteasemusic"
 cask "ollama-app"
 # Utility to uninstall apps and remove leftover files from old/uninstalled apps
 cask "pearcleaner"
-# Screenshot tool
-cask "pixpin"
 # Browse, manage, inspect containers and images
 cask "podman-desktop"
 # Thumbnails, static previews, cover art and metadata for video files
@@ -329,10 +311,12 @@ cask "syntax-highlight"
 # Desktop client for Telegram messenger
 cask "telegram-desktop"
 # 代理客户端，支持 Xray、sing-box 等
-cask "v2rayn"
+cask "brewforge/chinese/v2rayn"
+# Gecko based web browser
+cask "zen"
+mas "Bob", id: 1630034110
 mas "Picview", id: 6452016140
 mas "QQ", id: 451108668
-mas "Tencent Lemon Lite", id: 1449962996
 mas "百度网盘", id: 547166701
 mas "腾讯会议", id: 1484048379
 go "github.com/yassinebenaid/bunster/cmd/bunster"
@@ -361,3 +345,14 @@ go "github.com/tmc/json-to-struct"
 go "go.uber.org/mock/mockgen"
 go "github.com/kyoh86/richgo"
 go "honnef.co/go/tools/cmd/staticcheck"
+cargo "amber"
+cargo "bat"
+cargo "cargo-update"
+cargo "dysk"
+cargo "huniq"
+cargo "pik"
+cargo "ripgrep"
+cargo "shimmy"
+cargo "viu"
+cargo "vivid"
+cargo "zawk"
