@@ -214,8 +214,8 @@ if [[ $(uname -s) == "Darwin" ]]; then
 
     alias lsflags="/bin/ls -lO "
     # alias ls="eza --color=automatic"
-    # alias l="eza --git --icons --color=automatic"
-    alias l="eza -abghlF --color-scale --group-directories-first --git --icons --color=automatic "
+    alias l="eza --git --icons --color=automatic"
+    alias ll="eza -lh --git --icons --color=automatic --group-directories-first"
     alias rm="trash"
     alias rmls="trash-list"
     alias rmrs="trash-restore"

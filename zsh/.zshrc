@@ -70,10 +70,10 @@ if [[ $- =~ i ]]; then
     fi
 
     if [[ -n $(command -v fd) ]]; then
-        export FD_OPTIONS="
-            --exclude .git
-            --exclude .idea
-            --exclude .venv
+        export FD_OPTIONS=" \
+            --exclude .git \
+            --exclude .idea \
+            --exclude .venv \
             --exclude node_modules"
     fi
 
@@ -99,6 +99,9 @@ if [[ $- =~ i ]]; then
             --bind 'alt-a:select-all'"
     fi
     ## }
+
+    export Z_OC_TAB_OPENCODE_MODEL="minimax/MiniMax-M2.5"
+    export Z_OC_TAB_EXPLAIN_PRINT_CMD='bat --plain --color=always --decorations=always --language=markdown --paging=never {}'
 
     ## bindings {
     bindkey -e
@@ -198,6 +201,8 @@ if [[ $- =~ i ]]; then
 
     # zoxide
     [[ -e $(which zoxide) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/zoxide.zsh
+
+    [[ -d ${PREZCUSMODIR}/zsh-opencode-tab ]] && zsh-defer source "${PREZCUSMODIR}/zsh-opencode-tab/zsh-opencode-tab.plugin.zsh"
 
     # direnv
     # [[ -e $(which direnv) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/direnv.zsh

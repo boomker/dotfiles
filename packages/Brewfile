@@ -21,6 +21,8 @@ brew "openssl@3"
 brew "sqlite"
 # Download with resuming and segmented downloading
 brew "aria2"
+# Code searching, linting, rewriting
+brew "ast-grep"
 # Improved shell history for zsh, bash, fish and nushell
 brew "atuin"
 # Terminal bandwidth utilization tool
@@ -73,10 +75,6 @@ brew "duf"
 brew "dust"
 # Select default apps for documents and URL schemes on macOS
 brew "duti"
-# C library of Git core methods that is re-entrant and linkable
-brew "libgit2"
-# Modern, maintained replacement for ls
-brew "eza"
 # Like neofetch, but much faster because written mostly in C
 brew "fastfetch"
 # Simple, fast and user-friendly alternative to find
@@ -93,6 +91,8 @@ brew "gawk"
 brew "gcc"
 # Distributed revision control system
 brew "git"
+# C library of Git core methods that is re-entrant and linkable
+brew "libgit2"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
 # Application-level logging library
@@ -300,6 +300,8 @@ cask "pearcleaner"
 cask "podman-desktop"
 # Thumbnails, static previews, cover art and metadata for video files
 cask "qlvideo"
+# Git GUI client
+cask "sourcegit"
 # Rime input method engine
 cask "squirrel-app"
 # System monitor for the menu bar
@@ -349,10 +351,12 @@ cargo "amber"
 cargo "bat"
 cargo "cargo-update"
 cargo "dysk"
+cargo "eza"
 cargo "huniq"
 cargo "pik"
 cargo "ripgrep"
 cargo "shimmy"
+cargo "television"
 cargo "viu"
 cargo "vivid"
 cargo "zawk"
