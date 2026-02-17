@@ -7,13 +7,6 @@ if [[ $- =~ i ]]; then
         source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
     fi
 
-    # Source zinit
-    # if [[ -s "${ZINIT_HOME:-$HOME}/.zinit/zinit.zsh" ]]; then
-    #     source "${ZINIT_HOME:-$HOME}/.zinit/zinit.zsh"
-    #     autoload -Uz _zinit
-    #     (( ${+_comps} )) && _comps[zinit]=_zinit
-    # fi
-
     ## --------------User configuration--------------
     WORDCHARS='*?[]~&;!#$%^(){}<>'
 
@@ -61,6 +54,9 @@ if [[ $- =~ i ]]; then
     export VIM="/opt/homebrew/opt/neovim/share/nvim"
     ## }
 
+    export Z_OC_TAB_OPENCODE_MODEL="minimax/MiniMax-M2.5"
+    export Z_OC_TAB_EXPLAIN_PRINT_CMD='bat --plain --color=always --decorations=always --language=markdown --paging=never {}'
+
     ## ------ Bat && fd & fzf configuration ---------- {
     if [[ -n $(command -v bat) ]]; then
         export BATDIFF_USE_DELTA=true
@@ -99,9 +95,6 @@ if [[ $- =~ i ]]; then
             --bind 'alt-a:select-all'"
     fi
     ## }
-
-    export Z_OC_TAB_OPENCODE_MODEL="minimax/MiniMax-M2.5"
-    export Z_OC_TAB_EXPLAIN_PRINT_CMD='bat --plain --color=always --decorations=always --language=markdown --paging=never {}'
 
     ## bindings {
     bindkey -e
@@ -161,9 +154,6 @@ if [[ $- =~ i ]]; then
     # bun completions
     # [ -s "~/.bun/_bun" ] && zsh-defer source "~/.bun/_bun"
 
-    # starship prompt
-    [[ -e $(which starship) ]] && source ${PREZCUSMODIR}/user_plugins/starship_prompt.zsh
-
     [[ -d ${PREZCUSMODIR}/fzf-tab ]] && { compinit ; source ${PREZCUSMODIR}/fzf-tab/fzf-tab.plugin.zsh }
 
     ## fzf-tab config {
@@ -202,8 +192,6 @@ if [[ $- =~ i ]]; then
     # zoxide
     [[ -e $(which zoxide) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/zoxide.zsh
 
-    [[ -d ${PREZCUSMODIR}/zsh-opencode-tab ]] && zsh-defer source "${PREZCUSMODIR}/zsh-opencode-tab/zsh-opencode-tab.plugin.zsh"
-
     # direnv
     # [[ -e $(which direnv) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/direnv.zsh
 
@@ -211,9 +199,16 @@ if [[ $- =~ i ]]; then
     # "$(scmpuff init --shell="zsh" --aliases=false)"
     [[ -e $(which scmpuff) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/scmpuff.zsh
 
+    [[ -d ${PREZCUSMODIR}/zsh-opencode-tab ]] && zsh-defer source "${PREZCUSMODIR}/zsh-opencode-tab/zsh-opencode-tab.plugin.zsh"
+
     # zsh-autopair
     [[ -f "${PREZCUSMODIR}/zsh-autopair/autopair.zsh" ]] && {
         source "${PREZCUSMODIR}/zsh-autopair/autopair.zsh" && autopair-init
     }
 
+    # starship prompt
+    [[ -e $(which starship) ]] && source ${PREZCUSMODIR}/user_plugins/starship_prompt.zsh
+
 fi
+
+# [[ -f "$HOME/.config/kaku/zsh/kaku.zsh" ]] && source "$HOME/.config/kaku/zsh/kaku.zsh" # Kaku Shell Integration

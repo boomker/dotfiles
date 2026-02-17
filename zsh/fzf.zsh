@@ -8,6 +8,7 @@
 # - $FZF_TMUX_OPTS
 # - $FZF_CTRL_T_COMMAND
 # - $FZF_CTRL_T_OPTS
+# - $FZF_CTRL_R_COMMAND
 # - $FZF_CTRL_R_OPTS
 # - $FZF_ALT_C_COMMAND
 # - $FZF_ALT_C_OPTS
@@ -39,13 +40,34 @@ fi
 {
 if [[ -o interactive ]]; then
 
+#----BEGIN INCLUDE common.sh
+# NOTE: Do not directly edit this section, which is copied from "common.sh".
+# To modify it, one can edit "common.sh" and run "./update.sh" to apply
+# the changes. See code comments in "common.sh" for the implementation details.
+
 __fzf_defaults() {
-  # $1: Prepend to FZF_DEFAULT_OPTS_FILE and FZF_DEFAULT_OPTS
-  # $2: Append to FZF_DEFAULT_OPTS_FILE and FZF_DEFAULT_OPTS
-  echo "--height ${FZF_TMUX_HEIGHT:-40%} --bind=ctrl-z:ignore $1"
+  printf '%s\n' "--height ${FZF_TMUX_HEIGHT:-40%} --min-height 20+ --bind=ctrl-z:ignore $1"
   command cat "${FZF_DEFAULT_OPTS_FILE-}" 2> /dev/null
-  echo "${FZF_DEFAULT_OPTS-} $2"
+  printf '%s\n' "${FZF_DEFAULT_OPTS-} $2"
 }
+
+__fzf_exec_awk() {
+  if [[ -z ${__fzf_awk-} ]]; then
+    __fzf_awk=awk
+    if [[ $OSTYPE == solaris* && -x /usr/xpg4/bin/awk ]]; then
+      __fzf_awk=/usr/xpg4/bin/awk
+    elif command -v mawk > /dev/null 2>&1; then
+      local n x y z d
+      IFS=' .' read -r n x y z d <<< $(command mawk -W version 2> /dev/null)
+      [[ $n == mawk ]] &&
+        (((x * 1000 + y) * 1000 + z >= 1003004)) 2> /dev/null &&
+        ((d >= 20230302)) 2> /dev/null &&
+        __fzf_awk=mawk
+    fi
+  fi
+  LC_ALL=C exec "$__fzf_awk" "$@"
+}
+#----END INCLUDE
 
 # CTRL-T - Paste the selected file path(s) into the command line
 __fzf_select() {
@@ -115,16 +137,16 @@ fzf-history-widget() {
   if zmodload -F zsh/parameter p:{commands,history} 2>/dev/null && (( ${+commands[perl]} )); then
     selected="$(printf '%s\t%s\000' "${(kv)history[@]}" |
       perl -0 -ne 'if (!$seen{(/^\s*[0-9]+\**\t(.*)/s, $1)}++) { s/\n/\n\t/g; print; }' |
-      FZF_DEFAULT_OPTS=$(__fzf_defaults "" "-n2..,.. --scheme=history --bind=ctrl-r:toggle-sort --wrap-sign '\t↳ ' --highlight-line ${FZF_CTRL_R_OPTS-} --query=${(qqq)LBUFFER} +m --read0") \
+      FZF_DEFAULT_OPTS=$(__fzf_defaults "" "-n2..,.. --scheme=history --bind=ctrl-r:toggle-sort,alt-r:toggle-raw --wrap-sign '\t↳ ' --highlight-line ${FZF_CTRL_R_OPTS-} --query=${(qqq)LBUFFER} +m --read0") \
       FZF_DEFAULT_OPTS_FILE='' $(__fzfcmd))"
   else
-    selected="$(fc -rl 1 | awk '{ cmd=$0; sub(/^[ \t]*[0-9]+\**[ \t]+/, "", cmd); if (!seen[cmd]++) print $0 }' |
-      FZF_DEFAULT_OPTS=$(__fzf_defaults "" "-n2..,.. --scheme=history --bind=ctrl-r:toggle-sort --wrap-sign '\t↳ ' --highlight-line ${FZF_CTRL_R_OPTS-} --query=${(qqq)LBUFFER} +m") \
+    selected="$(fc -rl 1 | __fzf_exec_awk '{ cmd=$0; sub(/^[ \t]*[0-9]+\**[ \t]+/, "", cmd); if (!seen[cmd]++) print $0 }' |
+      FZF_DEFAULT_OPTS=$(__fzf_defaults "" "-n2..,.. --scheme=history --bind=ctrl-r:toggle-sort,alt-r:toggle-raw --wrap-sign '\t↳ ' --highlight-line ${FZF_CTRL_R_OPTS-} --query=${(qqq)LBUFFER} +m") \
       FZF_DEFAULT_OPTS_FILE='' $(__fzfcmd))"
   fi
   local ret=$?
   if [ -n "$selected" ]; then
-    if [[ $(awk '{print $1; exit}' <<< "$selected") =~ ^[1-9][0-9]* ]]; then
+    if [[ $(__fzf_exec_awk '{print $1; exit}' <<< "$selected") =~ ^[1-9][0-9]* ]]; then
       zle vi-fetch-history -n $MATCH
     else # selected is a custom query, not from history
       LBUFFER="$selected"
@@ -133,10 +155,15 @@ fzf-history-widget() {
   zle reset-prompt
   return $ret
 }
-zle     -N            fzf-history-widget
-bindkey -M emacs '^R' fzf-history-widget
-bindkey -M vicmd '^R' fzf-history-widget
-bindkey -M viins '^R' fzf-history-widget
+if [[ ${FZF_CTRL_R_COMMAND-x} != "" ]]; then
+  if [[ -n ${FZF_CTRL_R_COMMAND-} ]]; then
+    echo "warning: FZF_CTRL_R_COMMAND is set to a custom command, but custom commands are not yet supported for CTRL-R" >&2
+  fi
+  zle     -N            fzf-history-widget
+  bindkey -M emacs '^R' fzf-history-widget
+  bindkey -M vicmd '^R' fzf-history-widget
+  bindkey -M viins '^R' fzf-history-widget
+fi
 fi
 
 } always {
@@ -243,13 +270,34 @@ if [[ -o interactive ]]; then
 
 ###########################################################
 
+#----BEGIN INCLUDE common.sh
+# NOTE: Do not directly edit this section, which is copied from "common.sh".
+# To modify it, one can edit "common.sh" and run "./update.sh" to apply
+# the changes. See code comments in "common.sh" for the implementation details.
+
 __fzf_defaults() {
-  # $1: Prepend to FZF_DEFAULT_OPTS_FILE and FZF_DEFAULT_OPTS
-  # $2: Append to FZF_DEFAULT_OPTS_FILE and FZF_DEFAULT_OPTS
-  echo "--height ${FZF_TMUX_HEIGHT:-40%} --bind=ctrl-z:ignore $1"
+  printf '%s\n' "--height ${FZF_TMUX_HEIGHT:-40%} --min-height 20+ --bind=ctrl-z:ignore $1"
   command cat "${FZF_DEFAULT_OPTS_FILE-}" 2> /dev/null
-  echo "${FZF_DEFAULT_OPTS-} $2"
+  printf '%s\n' "${FZF_DEFAULT_OPTS-} $2"
 }
+
+__fzf_exec_awk() {
+  if [[ -z ${__fzf_awk-} ]]; then
+    __fzf_awk=awk
+    if [[ $OSTYPE == solaris* && -x /usr/xpg4/bin/awk ]]; then
+      __fzf_awk=/usr/xpg4/bin/awk
+    elif command -v mawk > /dev/null 2>&1; then
+      local n x y z d
+      IFS=' .' read -r n x y z d <<< $(command mawk -W version 2> /dev/null)
+      [[ $n == mawk ]] &&
+        (((x * 1000 + y) * 1000 + z >= 1003004)) 2> /dev/null &&
+        ((d >= 20230302)) 2> /dev/null &&
+        __fzf_awk=mawk
+    fi
+  fi
+  LC_ALL=C exec "$__fzf_awk" "$@"
+}
+#----END INCLUDE
 
 __fzf_comprun() {
   if [[ "$(type _fzf_comprun 2>&1)" =~ function ]]; then
@@ -269,7 +317,6 @@ __fzf_comprun() {
 
 # Extract the name of the command. e.g. ls; foo=1 ssh **<tab>
 __fzf_extract_command() {
-  setopt localoptions noksh_arrays
   # Control completion with the "compstate" parameter, insert and list nothing
   compstate[insert]=
   compstate[list]=
@@ -390,11 +437,50 @@ _fzf_complete() {
 # desired sorting and with any duplicates removed, to standard output.
 if ! declare -f __fzf_list_hosts > /dev/null; then
   __fzf_list_hosts() {
-    setopt localoptions nonomatch
-    command cat <(command tail -n +1 ~/.ssh/config ~/.ssh/config.d/* /etc/ssh/ssh_config 2> /dev/null | command grep -i '^\s*host\(name\)\? ' | awk '{for (i = 2; i <= NF; i++) print $1 " " $i}' | command grep -v '[*?%]') \
-      <(command grep -oE '^[[a-z0-9.,:-]+' ~/.ssh/known_hosts 2> /dev/null | tr ',' '\n' | tr -d '[' | awk '{ print $1 " " $1 }') \
-      <(command grep -v '^\s*\(#\|$\)' /etc/hosts 2> /dev/null | command grep -Fv '0.0.0.0' | command sed 's/#.*//') |
-      awk '{for (i = 2; i <= NF; i++) print $i}' | sort -u
+    command sort -u \
+      <(
+        # Note: To make the pathname expansion of "~/.ssh/config.d/*" work
+        # properly, we need to adjust the related shell options.  We need to
+        # unset "NO_GLOB" (or reset "GLOB"), which disable the pathname
+        # expansion totally.  We need to unset "DOT_GLOB" and set "CASE_GLOB"
+        # to avoid matching unwanted files.  We need to set "NULL_GLOB" to
+        # avoid attempting to read the literal filename '~/.ssh/config.d/*'
+        # when no matching is found.
+        setopt GLOB NO_DOT_GLOB CASE_GLOB NO_NOMATCH NULL_GLOB
+
+        __fzf_exec_awk '
+          # Note: mawk <= 1.3.3-20090705 does not support the POSIX brackets of
+          # the form [[:blank:]], and Ubuntu 18.04 LTS still uses this
+          # 16-year-old mawk unfortunately.  We need to use [ \t] instead.
+          match(tolower($0), /^[ \t]*host(name)?[ \t]*[ \t=]/) {
+            $0 = substr($0, RLENGTH + 1) # Remove "Host(name)?=?"
+            sub(/#.*/, "")
+            for (i = 1; i <= NF; i++)
+              if ($i !~ /[*?%]/)
+                print $i
+          }
+        ' ~/.ssh/config ~/.ssh/config.d/* /etc/ssh/ssh_config 2> /dev/null
+      ) \
+      <(
+        __fzf_exec_awk -F ',' '
+          match($0, /^[][a-zA-Z0-9.,:-]+/) {
+            $0 = substr($0, 1, RLENGTH)
+            gsub(/[][]|:[^,]*/, "")
+            for (i = 1; i <= NF; i++)
+              print $i
+          }
+        ' ~/.ssh/known_hosts 2> /dev/null
+      ) \
+      <(
+        __fzf_exec_awk '
+          {
+            sub(/#.*/, "")
+            for (i = 2; i <= NF; i++)
+              if ($i != "0.0.0.0")
+                print $i
+          }
+        ' /etc/hosts 2> /dev/null
+      )
   }
 fi
 
@@ -414,7 +500,7 @@ _fzf_complete_ssh() {
     *)
       local user
       [[ $prefix =~ @ ]] && user="${prefix%%@*}@"
-      _fzf_complete +m -- "$@" < <(__fzf_list_hosts | awk -v user="$user" '{print user $0}')
+      _fzf_complete +m -- "$@" < <(__fzf_list_hosts | __fzf_exec_awk -v user="$user" '{print user $0}')
       ;;
   esac
 }
@@ -438,7 +524,33 @@ _fzf_complete_unalias() {
 }
 
 _fzf_complete_kill() {
-  _fzf_complete -m --header-lines=1 --no-preview --wrap -- "$@" < <(
+  local transformer
+  transformer='
+    if [[ $FZF_KEY =~ ctrl|alt|shift ]] && [[ -n $FZF_NTH ]]; then
+      nths=( ${FZF_NTH//,/ } )
+      new_nths=()
+      found=0
+      for nth in ${nths[@]}; do
+        if [[ $nth = $FZF_CLICK_HEADER_NTH ]]; then
+          found=1
+        else
+          new_nths+=($nth)
+        fi
+      done
+      [[ $found = 0 ]] && new_nths+=($FZF_CLICK_HEADER_NTH)
+      new_nths=${new_nths[*]}
+      new_nths=${new_nths// /,}
+      echo "change-nth($new_nths)+change-prompt($new_nths> )"
+    else
+      if [[ $FZF_NTH = $FZF_CLICK_HEADER_NTH ]]; then
+        echo "change-nth()+change-prompt(> )"
+      else
+        echo "change-nth($FZF_CLICK_HEADER_NTH)+change-prompt($FZF_CLICK_HEADER_WORD> )"
+      fi
+    fi
+  '
+  _fzf_complete -m --header-lines=1 --no-preview --wrap --color fg:dim,nth:regular \
+    --bind "click-header:transform:$transformer" -- "$@" < <(
     command ps -eo user,pid,ppid,start,time,command 2> /dev/null ||
       command ps -eo user,pid,ppid,time,args 2> /dev/null || # For BusyBox
       command ps --everyone --full --windows # For cygwin
@@ -446,21 +558,13 @@ _fzf_complete_kill() {
 }
 
 _fzf_complete_kill_post() {
-  awk '{print $2}'
+  __fzf_exec_awk '{print $2}'
 }
 
 fzf-completion() {
-  typeset -g cmd_word
-  trap 'unset cmd_word' EXIT
-  local tokens prefix trigger tail matches lbuf d_cmds cursor_pos
+  local tokens prefix trigger tail matches lbuf d_cmds cursor_pos cmd_word
   setopt localoptions noshwordsplit noksh_arrays noposixbuiltins
 
-  # Check if at least one completion system (old or new) is active
-  if ! zmodload -F zsh/parameter p:functions 2>/dev/null || ! (( ${+functions[compdef]} )); then
-    if ! zmodload -e zsh/compctl; then
-      zmodload -i zsh/compctl
-    fi
-  fi
   # http://zsh.sourceforge.net/FAQ/zshfaq03.html
   # http://zsh.sourceforge.net/Doc/Release/Expansion.html#Parameter-Expansion-Flags
   tokens=(${(z)LBUFFER})
@@ -486,15 +590,25 @@ fzf-completion() {
   if [ ${#tokens} -gt 1 -a "$tail" = "$trigger" ]; then
     d_cmds=(${=FZF_COMPLETION_DIR_COMMANDS-cd pushd rmdir})
 
-    cursor_pos=$CURSOR
     {
+      cursor_pos=$CURSOR
       # Move the cursor before the trigger to preserve word array elements when
       # trigger chars like ';' or '`' would otherwise reset the 'words' array.
       CURSOR=$((cursor_pos - ${#trigger} - 1))
-      # Assign the extracted command to the global variable 'cmd_word'
+      # Check if at least one completion system (old or new) is active.
+      # If at least one user-defined completion widget is detected, nothing will
+      # be completed if neither the old nor the new completion system is enabled.
+      # In such cases, the 'zsh/compctl' module is loaded as a fallback.
+      if ! zmodload -F zsh/parameter p:functions 2>/dev/null || ! (( ${+functions[compdef]} )); then
+        zmodload -F zsh/compctl 2>/dev/null
+      fi
+      # Create a completion widget to access the 'words' array (man zshcompwid)
+      zle -C __fzf_extract_command .complete-word __fzf_extract_command
       zle __fzf_extract_command
     } always {
       CURSOR=$cursor_pos
+      # Delete the completion widget
+      zle -D __fzf_extract_command  2>/dev/null
     }
 
     [ -z "$trigger"      ] && prefix=${tokens[-1]} || prefix=${tokens[-1]:0:-${#trigger}}
@@ -523,8 +637,6 @@ fzf-completion() {
   unset binding
 }
 
-# Completion widget to gain access to the 'words' array (man zshcompwid)
-zle     -C   __fzf_extract_command .complete-word __fzf_extract_command
 # Normal widget
 zle     -N   fzf-completion
 bindkey '^I' fzf-completion
