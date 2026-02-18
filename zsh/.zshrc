@@ -199,6 +199,7 @@ if [[ $- =~ i ]]; then
     # "$(scmpuff init --shell="zsh" --aliases=false)"
     [[ -e $(which scmpuff) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/scmpuff.zsh
 
+    # zsh-opencode-tab
     [[ -d ${PREZCUSMODIR}/zsh-opencode-tab ]] && zsh-defer source "${PREZCUSMODIR}/zsh-opencode-tab/zsh-opencode-tab.plugin.zsh"
 
     # zsh-autopair

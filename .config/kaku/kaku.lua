@@ -56,8 +56,12 @@ config.line_height = 1.0
 -- 1) Font family and size
 config.font_size = 16.0
 config.harfbuzz_features = { "calt=1", "clig=1", "liga=1" }
-config.font = wezterm.font({ family = "Maple Mono NF CN" })
-config.font = wezterm.font_with_fallback({ family = "JetBrains Maple Mono" })
+config.font = wezterm.font({ family = "JetBrains Maple Mono" })
+config.font = wezterm.font_with_fallback(
+	{ family = "Maple Mono NF CN" },
+	{ family = "MiSans" },
+	{ family = "MiSans L3" }
+)
 -- 针对不同语言的字体规则
 config.font_rules = {
 	-- 斜体
@@ -134,6 +138,38 @@ config.keys = {
 		mods = "CMD",
 		action = wezterm.action.Multiple({
 			wezterm.action.SendKey({ key = "f", mods = "OPT" }),
+		}),
+	},
+	{
+		key = "UpArrow",
+		mods = "CMD|SHIFT",
+		action = wezterm.action.Multiple({
+			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
+			wezterm.action.SendKey({ key = "K" }),
+		}),
+	},
+	{
+		key = "DownArrow",
+		mods = "CMD|SHIFT",
+		action = wezterm.action.Multiple({
+			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
+			wezterm.action.SendKey({ key = "J" }),
+		}),
+	},
+	{
+		key = "LeftArrow",
+		mods = "CMD|SHIFT",
+		action = wezterm.action.Multiple({
+			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
+			wezterm.action.SendKey({ key = "H" }),
+		}),
+	},
+	{
+		key = "RightArrow",
+		mods = "CMD|SHIFT",
+		action = wezterm.action.Multiple({
+			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
+			wezterm.action.SendKey({ key = "L" }),
 		}),
 	},
 	{
@@ -257,11 +293,19 @@ config.keys = {
 		}),
 	},
 	{
-		key = "w",
+		key = "g",
 		mods = "CMD|SHIFT",
 		action = wezterm.action.Multiple({
 			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
 			wezterm.action.SendKey({ key = "F" }),
+		}),
+	},
+	{
+		key = "w",
+		mods = "CMD|SHIFT",
+		action = wezterm.action.Multiple({
+			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
+			wezterm.action.SendKey({ key = "w" }),
 		}),
 	},
 	{
@@ -295,6 +339,11 @@ config.keys = {
 			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
 			wezterm.action.SendKey({ key = "P" }),
 		}),
+	},
+	{
+		key = "i",
+		mods = "CMD|SHIFT",
+		action = wezterm.action.QuickSelect,
 	},
 	{
 		key = "p",
