@@ -1,12 +1,12 @@
 lastupdatecheck: 0
 recentrepos:
+    - /Users/cyzhu/gitrepos/dotfiles
     - /Users/cyzhu/gitrepos/uvcode
     - /Users/cyzhu/gitrepos/rime-dicts/wangx
     - /Users/cyzhu/gitrepos/rime-fast-xhup
-    - /Users/cyzhu/gitrepos/dotfiles
     - /Users/cyzhu/gitrepos/spacehammer
 startuppopupversion: 5
 didshowhunkstaginghint: false
-lastversion: 0.55.1
+lastversion: 0.59.0
 customcommandshistory: []
 hidecommandlog: false

@@ -89,7 +89,7 @@ config.font_rules = {
 }
 --
 -- 2) Color scheme
-config.color_scheme = "Catppuccin Frappe"
+config.color_scheme = "Catppuccin Macchiato"
 --
 -- 3) Window size and padding
 -- config.initial_cols = 120

@@ -45,10 +45,10 @@ gui:
   skipRewordInEditorWarning: false
   screenMode: ""
 git:
-  paging:
-    colorArg: never
-    pager: "delta --paging=never"
-    useConfig: false
+  pagers:
+    - colorArg: never
+      pager: "delta --paging=never"
+      useConfig: false
   commit:
     signOff: false
     verbose: default
@@ -167,7 +167,7 @@ keybinding:
     viewResetOptions: D
     fetch: f
     toggleTreeView: '`'
-    openMergeTool: M
+    openMergeOptions: M
     openStatusFilter: <c-b>
   branches:
     createPullRequest: o

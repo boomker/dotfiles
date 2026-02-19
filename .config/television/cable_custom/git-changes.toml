@@ -1,0 +1,46 @@
+[metadata]
+name = "git-changes"
+description = "A channel to select files from git diff commands"
+requirements = ["git"]
+
+[source]
+command = [
+    "git status --short |awk '$0 !~ /(^[DMR?]|^ D)/{print $2}'",
+    "git diff --staged --name-only",
+    "git diff --name-only HEAD",
+]
+
+[preview]
+command = [
+    "git diff HEAD --color=always -- '{}'",
+    "batdiff --delta --color --context=1  '{}'",
+]
+
+[ui]
+layout = "landscape"
+
+[keybindings]
+ctrl-a = "actions:stage"
+ctrl-z = "actions:restore"
+ctrl-d = "actions:restore-staged"
+enter = "actions:edit"
+
+[actions.stage]
+description = "Stage the selected file"
+command = "git add '{}'"
+mode = "fork"
+
+[actions.restore]
+description = "Discard changes in the selected file"
+command = "git restore '{}'"
+mode = "fork"
+
+[actions.restore-staged]
+description = "Discard changes in the staged file"
+command = "git restore --staged '{}'"
+mode = "fork"
+
+[actions.edit]
+description = "Open the selected file in editor"
+command = "${EDITOR:-nvim} '{}'"
+mode = "execute"

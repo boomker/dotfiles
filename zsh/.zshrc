@@ -195,6 +195,9 @@ if [[ $- =~ i ]]; then
         # eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
     }
 
+    # television
+    [[ -e $(which tv) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/tv.zsh
+
     # fzf
     [[ -e $(which fzf) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/fzf.zsh
 
@@ -217,7 +220,7 @@ if [[ $- =~ i ]]; then
     }
 
     # starship prompt
-    [[ -e $(which starship) ]] && source ${PREZCUSMODIR}/user_plugins/starship_prompt.zsh
+    [[ -e $(which starship) ]] && source ${PREZCUSMODIR}/user_plugins/starship.zsh
 
 fi
 
