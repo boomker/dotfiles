@@ -56,12 +56,8 @@ config.line_height = 1.0
 -- 1) Font family and size
 config.font_size = 16.0
 config.harfbuzz_features = { "calt=1", "clig=1", "liga=1" }
-config.font = wezterm.font({ family = "JetBrains Maple Mono" })
-config.font = wezterm.font_with_fallback(
-	{ family = "Maple Mono NF CN" },
-	{ family = "MiSans" },
-	{ family = "MiSans L3" }
-)
+config.font = wezterm.font({ family = "Maple Mono NF CN" })
+config.font = wezterm.font_with_fallback({ "JetBrains Maple Mono", "MiSans", "MiSans L3", "LXGWNeoXiHei" })
 -- 针对不同语言的字体规则
 config.font_rules = {
 	-- 斜体
@@ -102,6 +98,7 @@ config.color_scheme = "Catppuccin Frappe"
 --
 -- 4) Default shell/program
 -- config.default_prog = { '/bin/zsh', '-l' }
+config.default_prog = { "/opt/homebrew/bin/zsh", "-l", "-c", "tmux new-session -A -D -s  🚀" }
 --
 -- 5) Cursor and scrollback
 -- config.default_cursor_style = 'BlinkingBar'
@@ -117,6 +114,22 @@ config.keys = {
 		action = wezterm.action.Multiple({
 			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
 			wezterm.action.SendKey({ key = "M" }),
+		}),
+	},
+	{
+		key = "w",
+		mods = "CMD",
+		action = wezterm.action.Multiple({
+			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
+			wezterm.action.SendKey({ key = "w" }),
+		}),
+	},
+	{
+		key = "p",
+		mods = "CMD",
+		action = wezterm.action.Multiple({
+			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
+			wezterm.action.SendKey({ key = "P" }),
 		}),
 	},
 	{
@@ -237,6 +250,14 @@ config.keys = {
 		}),
 	},
 	{
+		key = "e",
+		mods = "CMD|SHIFT",
+		action = wezterm.action.Multiple({
+			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
+			wezterm.action.SendKey({ key = "E" }),
+		}),
+	},
+	{
 		key = "r",
 		mods = "CMD|SHIFT",
 		action = wezterm.action.Multiple({
@@ -285,15 +306,15 @@ config.keys = {
 		}),
 	},
 	{
-		key = "f",
+		key = "g",
 		mods = "CMD|SHIFT",
 		action = wezterm.action.Multiple({
 			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
-			wezterm.action.SendKey({ key = "f" }),
+			wezterm.action.SendKey({ key = "g" }),
 		}),
 	},
 	{
-		key = "g",
+		key = "f",
 		mods = "CMD|SHIFT",
 		action = wezterm.action.Multiple({
 			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
@@ -301,11 +322,19 @@ config.keys = {
 		}),
 	},
 	{
+		key = "m",
+		mods = "CMD|SHIFT",
+		action = wezterm.action.Multiple({
+			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
+			wezterm.action.SendKey({ key = "m" }),
+		}),
+	},
+	{
 		key = "w",
 		mods = "CMD|SHIFT",
 		action = wezterm.action.Multiple({
 			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
-			wezterm.action.SendKey({ key = "w" }),
+			wezterm.action.SendKey({ key = "&" }),
 		}),
 	},
 	{
@@ -317,6 +346,15 @@ config.keys = {
 		}),
 	},
 	{
+		key = "v",
+		mods = "CMD|SHIFT",
+		action = wezterm.action.Multiple({
+			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
+			wezterm.action.SendKey({ key = "c" }),
+			wezterm.action.SendKey({ key = "?" }),
+		}),
+	},
+	{
 		key = "c",
 		mods = "CMD|SHIFT",
 		action = wezterm.action.Multiple({
@@ -325,19 +363,11 @@ config.keys = {
 		}),
 	},
 	{
-		key = "e",
+		key = ",",
 		mods = "CMD|SHIFT",
 		action = wezterm.action.Multiple({
 			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
 			wezterm.action.SendKey({ key = "," }),
-		}),
-	},
-	{
-		key = "m",
-		mods = "CMD|SHIFT",
-		action = wezterm.action.Multiple({
-			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
-			wezterm.action.SendKey({ key = "P" }),
 		}),
 	},
 	{

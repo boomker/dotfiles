@@ -18,16 +18,12 @@ background-opacity = 0.9
 theme = Catppuccin Macchiato
 
 # keybindings
-keybind = cmd+y=text:\x07f
 keybind = cmd+g=text:\x07g
 keybind = cmd+c=text:\x07c
 keybind = cmd+o=text:\x07o
 keybind = cmd+r=text:\x07r
 keybind = cmd+z=text:\x07z
-keybind = cmd+e=text:\x07e
 keybind = cmd+t=text:\x07t
-keybind = cmd+i=text:\x07|
-keybind = cmd+s=text:\x07-
 keybind = cmd+n=text:\x07n
 keybind = cmd+u=text:\x07u
 keybind = cmd+j=text:\x07j
@@ -35,7 +31,7 @@ keybind = cmd+k=text:\x07k
 keybind = cmd+l=text:\x07l
 keybind = cmd+h=text:\x07h
 keybind = cmd+x=text:\x07x
-keybind = cmd+w=text:\x07&
+keybind = cmd+w=text:\x07w
 keybind = cmd+p=text:\x07P
 keybind = cmd+m=text:\x07M
 keybind = cmd+1=text:\x071
@@ -50,14 +46,19 @@ keybind = cmd+9=text:\x07e
 keybind = cmd+0=text:\x071
 keybind = cmd+d=text:\x1Bd
 keybind = cmd+b=text:\x1Bb
-keybind = cmd+f=text:\x1Bf
-keybind = cmd+opt+/=text:\x07c?
+keybind = cmd+e=text:\x1Bf
+keybind = cmd+shift+m=text:\x07m
 keybind = cmd+shift+j=text:\x07J
 keybind = cmd+shift+k=text:\x07K
 keybind = cmd+shift+h=text:\x07H
 keybind = cmd+shift+l=text:\x07L
+keybind = cmd+shift+s=text:\x07-
+keybind = cmd+shift+d=text:\x07|
+keybind = cmd+shift+r=text:\x07,
+keybind = cmd+shift+w=text:\x07&
 keybind = cmd+shift+f=text:\x07F
-keybind = cmd+shift+t=toggle_quick_terminal
+keybind = cmd+shift+v=text:\x07c?
+keybind = cmd+shift+q=toggle_quick_terminal
 
 macos-option-as-alt = true
 mouse-shift-capture = true
