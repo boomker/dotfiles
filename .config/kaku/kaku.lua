@@ -55,9 +55,9 @@ end
 config.line_height = 1.0
 -- 1) Font family and size
 config.font_size = 16.0
-config.harfbuzz_features = { "calt=1", "clig=1", "liga=1" }
+config.harfbuzz_features = { "calt=1", "liga=1" }
 config.font = wezterm.font({ family = "Maple Mono NF CN" })
-config.font = wezterm.font_with_fallback({ "JetBrains Maple Mono", "MiSans", "MiSans L3", "LXGWNeoXiHei" })
+config.font = wezterm.font_with_fallback({ "JetBrains Maple Mono", "MiSans" })
 -- 针对不同语言的字体规则
 config.font_rules = {
 	-- 斜体
@@ -98,7 +98,7 @@ config.color_scheme = "Catppuccin Frappe"
 --
 -- 4) Default shell/program
 -- config.default_prog = { '/bin/zsh', '-l' }
-config.default_prog = { "/opt/homebrew/bin/zsh", "-l", "-c", "tmux new-session -A -D -s  🚀" }
+-- config.default_prog = { "/opt/homebrew/bin/zsh", "-l", "-c", "tmux new-session -A -D -s  🚀" }
 --
 -- 5) Cursor and scrollback
 -- config.default_cursor_style = 'BlinkingBar'

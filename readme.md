@@ -23,7 +23,6 @@
 - fd
 - rg
 - uv
-- pls
 - bat
 - eza
 - fzf

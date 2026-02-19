@@ -69,7 +69,6 @@ alias sre='sudo $(fc -ln -1)' # switch root exec
 # alias xssh="TERM=xterm-256color ssh"
 
 # Linux help tools:
-alias psh='pls show '
 alias nqh='navi --query '
 
 # network
@@ -78,6 +77,9 @@ alias dog="dig +noall +nocmd +answer "
 
 # markdown
 alias gpm="glow -p "
+
+# imgcat
+alias kic="kaku imgcat "
 
 # Git --------------------------
 
@@ -164,11 +166,6 @@ alias rgg="rg -. --glob='!.git*' "
 
 ## python tools:
 alias ips="ipython3"
-
-# pip
-# alias piu="pip3 uninstall "
-# alias pii="pip3 install "
-# alias pus="pip3 install --upgrade pip"
 
 # uv
 alias upin="uv pip install "

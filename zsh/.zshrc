@@ -36,6 +36,7 @@ if [[ $- =~ i ]]; then
     export SHELL="/opt/homebrew/bin/zsh"
     export XDG_CONFIG_HOME="$HOME/.config"
     export PREZCUSMODIR="$HOME/.zprezto/contrib"
+    export KAKU_ZSH_DIR="$HOME/.config/kaku/zsh"
     export LS_COLORS="$(vivid generate catppuccin-mocha)"
 
     export PNPM_HOME="$HOME/.pnpm"
@@ -43,8 +44,15 @@ if [[ $- =~ i ]]; then
     export PATH="/opt/zerobrew/prefix/bin:$PATH"
     export PATH="$HOME/go/bin:$HOME/.cargo/bin:$PATH"
     export PATH="$HOME/.bun/bin:$PNPM_HOME/bin:$PATH"
+
     export MANPATH="/usr/local/opt/coreutils/share/man:${MANPATH}"
     export MANPATH="/usr/local/man:/usr/local/share/man:${MANPATH}"
+
+    # Load zsh-completions into fpath before compinit
+    fpath=("$PREZCUSMODIR/completions" $fpath)
+    if [[ -d "$KAKU_ZSH_DIR/plugins/zsh-completions/src" ]]; then
+        fpath=("$KAKU_ZSH_DIR/plugins/zsh-completions/src" $fpath)
+    fi
     ## }
 
     ## ------ VIM environment config ----------------- {
@@ -54,6 +62,7 @@ if [[ $- =~ i ]]; then
     export VIM="/opt/homebrew/opt/neovim/share/nvim"
     ## }
 
+    # OpenCode
     export Z_OC_TAB_OPENCODE_MODEL="minimax/MiniMax-M2.5"
     export Z_OC_TAB_EXPLAIN_PRINT_CMD='bat --plain --color=always --decorations=always --language=markdown --paging=never {}'
 
@@ -173,9 +182,9 @@ if [[ $- =~ i ]]; then
     ## fzf-tab config }
 
     # carapace completion
-    [[ -e $(which carapace) ]] && source <(carapace rg)
+    # [[ -e $(which carapace) ]] && source <(carapace rg)
 
-    # aliases.zsh conf:
+    # aliases
     [ -f ~/.aliases.zsh ] && zsh-defer source ~/.aliases.zsh
 
     # atuin shell history search

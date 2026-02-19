@@ -203,38 +203,40 @@ fallback_channel = "files"
 "dirs" = ["cd", "ls", "rmdir", "z"]
 "docker-images" = ["docker run"]
 "files" = [
-  "cat",
-  "less",
-  "head",
-  "tail",
-  "vim",
-  "nano",
-  "bat",
-  "cp",
-  "mv",
-  "rm",
-  "touch",
-  "chmod",
-  "chown",
-  "ln",
-  "tar",
-  "zip",
-  "unzip",
-  "gzip",
-  "gunzip",
-  "xz",
+    "cat",
+    "less",
+    "head",
+    "tail",
+    "vim",
+    "nvim",
+    "nano",
+    "bat",
+    "cp",
+    "mv",
+    "rm",
+    "touch",
+    "chmod",
+    "chown",
+    "ln",
+    "tar",
+    "zip",
+    "unzip",
+    "gzip",
+    "gunzip",
+    "xz",
 ]
 "git-diff" = ["git add", "git restore"]
 "git-branch" = [
-  "git checkout",
-  "git branch",
-  "git merge",
-  "git rebase",
-  "git pull",
-  "git push",
+    "git checkout",
+    "git branch",
+    "git merge",
+    "git rebase",
+    "git pull",
+    "git push",
 ]
 "git-log" = ["git log", "git show", "git cherry-pick"]
-"git-repos" = ["nvim", "code", "hx", "git clone"]
+"git-repos" = ["cd", 'z']
+# "git-repos" = ["nvim", "code", "hx", "git clone"]
 
 
 [shell_integration.keybindings]
