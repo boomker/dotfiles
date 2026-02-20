@@ -7,13 +7,15 @@ requirements = ["git"]
 command = [
     "git status --short |awk '$0 !~ /(^[DMR?]|^ D)/{print $2}'",
     "git diff --staged --name-only",
-    "git diff --name-only HEAD",
+    # "git diff --name-only HEAD",
+    "git status --short |awk '{print $2}'",
 ]
 
 [preview]
 command = [
     "git diff HEAD --color=always -- '{}'",
     "batdiff --delta --color --context=1  '{}'",
+    "bat '{}'",
 ]
 
 [ui]

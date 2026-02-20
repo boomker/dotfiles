@@ -2,6 +2,7 @@ tap "brewforge/chinese"
 tap "brewforge/extras"
 tap "lihaoyun6/tap"
 tap "oven-sh/bun"
+tap "tw93/tap"
 tap "v2raya/v2raya"
 tap "xo/xo"
 tap "ybeapps/sourcegit"
@@ -156,7 +157,7 @@ brew "nmap"
 # Unix command-line queue utility
 brew "nq"
 # Create, run, and share large language models (LLMs)
-brew "ollama", link: false
+brew "ollama"
 # Command-line Git information tool
 brew "onefetch"
 # Painless compression and decompression for your terminal
@@ -278,6 +279,8 @@ cask "glance-chamburr"
 cask "hammerspoon"
 # Free and open-source media player
 cask "iina"
+# A fast, out-of-the-box terminal built for AI coding
+cask "tw93/tap/kakuku"
 # Keyboard customiser
 cask "karabiner-elements"
 # Lunar calendar for menu bar
@@ -296,6 +299,8 @@ cask "neteasemusic"
 cask "ollama-app"
 # Utility to uninstall apps and remove leftover files from old/uninstalled apps
 cask "pearcleaner"
+# Free Zip/Unzip software and Rar file extractor
+cask "brewforge/extras/peazip"
 # Browse, manage, inspect containers and images
 cask "podman-desktop"
 # Thumbnails, static previews, cover art and metadata for video files
@@ -354,6 +359,7 @@ cargo "dysk"
 cargo "eza"
 cargo "huniq"
 cargo "pik"
+cargo "rargs"
 cargo "ripgrep"
 cargo "shimmy"
 cargo "television"
