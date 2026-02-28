@@ -79,7 +79,7 @@ alias dog="dig +noall +nocmd +answer "
 alias gpm="glow -p "
 
 # imgcat
-alias kic="kaku imgcat "
+# alias kic="kaku imgcat "
 
 # Git --------------------------
 

@@ -1,8 +1,8 @@
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-source "${HOME}/gitrepos/dotfiles/bash/starship_prompt.bash"
+source "${HOME}/gitrepos/dotfiles/bash/starship.bash"
 
 # Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/cyzhu/.lmstudio/bin"
+# export PATH="$PATH:/Users/cyzhu/.lmstudio/bin"
 
 # carapace
 export CARAPACE_BRIDGES='bash,inshellisense' # optional

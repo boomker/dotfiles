@@ -105,7 +105,7 @@ config.color_scheme = "Catppuccin Macchiato"
 -- config.scrollback_lines = 20000
 --
 -- 6) Add or override a key binding
--- config.leader = { key = "g", mods = "CTRL", timeout_milliseconds = 2000 }
+config.disable_default_key_bindings = true
 config.keys = {
 	{ key = "m", mods = "CMD", action = wezterm.action.DisableDefaultAssignment },
 	{
@@ -130,6 +130,14 @@ config.keys = {
 		action = wezterm.action.Multiple({
 			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
 			wezterm.action.SendKey({ key = "P" }),
+		}),
+	},
+	{
+		key = "k",
+		mods = "CMD",
+		action = wezterm.action.Multiple({
+			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
+			wezterm.action.SendKey({ key = "g" }),
 		}),
 	},
 	{
@@ -186,6 +194,22 @@ config.keys = {
 		}),
 	},
 	{
+		key = "]",
+		mods = "CMD",
+		action = wezterm.action.Multiple({
+			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
+			wezterm.action.SendKey({ key = "n" }),
+		}),
+	},
+	{
+		key = "[",
+		mods = "CMD",
+		action = wezterm.action.Multiple({
+			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
+			wezterm.action.SendKey({ key = "b" }),
+		}),
+	},
+	--[[ {
 		key = "n",
 		mods = "CMD|SHIFT",
 		action = wezterm.action.Multiple({
@@ -208,7 +232,7 @@ config.keys = {
 			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
 			wezterm.action.SendKey({ key = "u" }),
 		}),
-	},
+	}, ]]
 	{
 		key = "o",
 		mods = "CMD|SHIFT",
@@ -226,7 +250,15 @@ config.keys = {
 		}),
 	},
 	{
-		key = "t",
+		key = "b",
+		mods = "CMD|SHIFT",
+		action = wezterm.action.Multiple({
+			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
+			wezterm.action.SendKey({ key = "u" }),
+		}),
+	},
+	{
+		key = "n",
 		mods = "CMD|SHIFT",
 		action = wezterm.action.Multiple({
 			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
@@ -306,14 +338,6 @@ config.keys = {
 		}),
 	},
 	{
-		key = "g",
-		mods = "CMD|SHIFT",
-		action = wezterm.action.Multiple({
-			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
-			wezterm.action.SendKey({ key = "g" }),
-		}),
-	},
-	{
 		key = "f",
 		mods = "CMD|SHIFT",
 		action = wezterm.action.Multiple({
@@ -346,8 +370,8 @@ config.keys = {
 		}),
 	},
 	{
-		key = "v",
-		mods = "CMD|SHIFT",
+		key = "k",
+		mods = "CMD|OPT",
 		action = wezterm.action.Multiple({
 			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
 			wezterm.action.SendKey({ key = "c" }),
@@ -363,11 +387,30 @@ config.keys = {
 		}),
 	},
 	{
-		key = ",",
+		key = [[,]],
 		mods = "CMD|SHIFT",
 		action = wezterm.action.Multiple({
 			wezterm.action.SendKey({ key = "g", mods = "CTRL" }),
 			wezterm.action.SendKey({ key = "," }),
+		}),
+	},
+	{
+		key = "u",
+		mods = "CMD|SHIFT",
+		action = wezterm.action.QuickSelectArgs({
+			label = "open url",
+			patterns = {
+				"\\((https?://\\S+)\\)",
+				"\\[(https?://\\S+)\\]",
+				"\\{(https?://\\S+)\\}",
+				"<(https?://\\S+)>",
+				"\\bhttps?://\\S+[)/a-zA-Z0-9-]+",
+			},
+			action = wezterm.action_callback(function(window, pane)
+				local url = window:get_selection_text_for_pane(pane)
+				-- wezterm.log_info('opening: ' .. url)
+				wezterm.open_with(url)
+			end),
 		}),
 	},
 	{

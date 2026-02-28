@@ -1,0 +1,6 @@
+[mgr]
+border_symbol = "│"
+border_style = { fg = "#555555" }
+
+[indicator]
+padding = { open = "", close = "" }
