@@ -201,6 +201,9 @@ if [[ $- =~ i ]]; then
     # fzf
     [[ -e $(which fzf) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/fzf.zsh
 
+    # vfox
+    [[ -e $(which vfox) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/vfox.zsh
+
     # zoxide
     [[ -e $(which zoxide) ]] && zsh-defer source ${PREZCUSMODIR}/user_plugins/zoxide.zsh
 

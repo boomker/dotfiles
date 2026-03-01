@@ -105,7 +105,7 @@ config.color_scheme = "Catppuccin Macchiato"
 -- config.scrollback_lines = 20000
 --
 -- 6) Add or override a key binding
-config.disable_default_key_bindings = true
+-- config.disable_default_key_bindings = true
 config.keys = {
 	{ key = "m", mods = "CMD", action = wezterm.action.DisableDefaultAssignment },
 	{

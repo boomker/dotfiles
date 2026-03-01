@@ -15,6 +15,7 @@ mouse-hide-while-typing = true
 # Theme
 window-theme = auto
 background-opacity = 0.9
+unfocused-split-opacity = 0.55
 theme = Catppuccin Macchiato
 
 # keybindings
@@ -25,7 +26,7 @@ keybind = cmd+r=text:\x07r
 keybind = cmd+z=text:\x07z
 keybind = cmd+t=text:\x07t
 keybind = cmd+n=text:\x07n
-keybind = cmd+u=text:\x07u
+keybind = cmd+u=text:\x07b
 keybind = cmd+j=text:\x07j
 keybind = cmd+k=text:\x07k
 keybind = cmd+l=text:\x07l
@@ -43,7 +44,6 @@ keybind = cmd+6=text:\x076
 keybind = cmd+7=text:\x077
 keybind = cmd+8=text:\x078
 keybind = cmd+9=text:\x07e
-keybind = cmd+0=text:\x071
 keybind = cmd+d=text:\x1Bd
 keybind = cmd+b=text:\x1Bb
 keybind = cmd+e=text:\x1Bf
@@ -56,8 +56,9 @@ keybind = cmd+shift+s=text:\x07-
 keybind = cmd+shift+d=text:\x07|
 keybind = cmd+shift+r=text:\x07,
 keybind = cmd+shift+w=text:\x07&
+keybind = cmd+shift+e=text:\x07E
 keybind = cmd+shift+f=text:\x07F
-keybind = cmd+shift+v=text:\x07c?
+keybind = cmd+shift+/=text:\x07c?
 keybind = cmd+shift+q=toggle_quick_terminal
 
 macos-option-as-alt = true
