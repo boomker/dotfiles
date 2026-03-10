@@ -63,6 +63,7 @@ if [[ $- =~ i ]]; then
     ## }
 
     # OpenCode
+    # export Z_OC_TAB_OPENCODE_MODEL="claude-opus-4-6"
     export Z_OC_TAB_OPENCODE_MODEL="minimax/MiniMax-M2.5"
     export Z_OC_TAB_EXPLAIN_PRINT_CMD='bat --plain --color=always --decorations=always --language=markdown --paging=never {}'
 
@@ -158,7 +159,7 @@ if [[ $- =~ i ]]; then
     }
 
     # API secret:
-    # [ -f ~/.secrets ] && zsh-defer source ~/.secrets
+    [ -f ~/.secrets ] && source ~/.secrets
 
     # bun completions
     # [ -s "~/.bun/_bun" ] && zsh-defer source "~/.bun/_bun"
@@ -222,9 +223,10 @@ if [[ $- =~ i ]]; then
         source "${PREZCUSMODIR}/zsh-autopair/autopair.zsh" && autopair-init
     }
 
+    # Kaku Shell Integration
+    # [[ -f "$HOME/.config/kaku/zsh/kaku.zsh" ]] && zsh-defer source "$HOME/.config/kaku/zsh/kaku.zsh"
+
     # starship prompt
     [[ -e $(which starship) ]] && source ${PREZCUSMODIR}/user_plugins/starship.zsh
 
 fi
-
-# [[ -f "$HOME/.config/kaku/zsh/kaku.zsh" ]] && source "$HOME/.config/kaku/zsh/kaku.zsh" # Kaku Shell Integration

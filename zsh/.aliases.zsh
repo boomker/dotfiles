@@ -78,8 +78,9 @@ alias dog="dig +noall +nocmd +answer "
 # markdown
 alias gpm="glow -p "
 
-# imgcat
-# alias kic="kaku imgcat "
+# terminal config
+alias kakc="nvim ${HOME}/.config/kaku/kaku.lua"
+alias ghoc="nvim ${HOME}/.config/ghostty/config"
 
 # Git --------------------------
 
