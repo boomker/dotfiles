@@ -98,7 +98,7 @@ config.color_scheme = "Catppuccin Macchiato"
 --
 -- 4) Default shell/program
 -- config.default_prog = { '/bin/zsh', '-l' }
--- config.default_prog = { "/opt/homebrew/bin/zsh", "-l", "-c", "tmux new-session -A -D -s  🚀" }
+config.default_prog = { "/opt/homebrew/bin/zsh", "-l", "-c", "tmux new-session -A -D -s  🚀" }
 --
 -- 5) Cursor and scrollback
 -- config.default_cursor_style = 'BlinkingBar'
@@ -435,4 +435,5 @@ config.mouse_bindings = {
 
 config.selection_word_boundary = "{}[]()|/\"'`.,;: "
 
+config.tab_bar_at_bottom = true
 return config
