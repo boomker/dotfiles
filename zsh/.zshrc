@@ -33,6 +33,7 @@ if [[ $- =~ i ]]; then
     )
 
     ## configure Homebrew, PATH(GNU CLI tools) {
+    export MAS_NO_AUTO_INDEX=1
     export SHELL="/opt/homebrew/bin/zsh"
     export XDG_CONFIG_HOME="$HOME/.config"
     export PREZCUSMODIR="$HOME/.zprezto/contrib"
@@ -63,8 +64,7 @@ if [[ $- =~ i ]]; then
     ## }
 
     # OpenCode
-    # export Z_OC_TAB_OPENCODE_MODEL="claude-opus-4-6"
-    export Z_OC_TAB_OPENCODE_MODEL="minimax/MiniMax-M2.5"
+    export Z_OC_TAB_OPENCODE_MODEL="bestai/claude-opus-4-6"
     export Z_OC_TAB_EXPLAIN_PRINT_CMD='bat --plain --color=always --decorations=always --language=markdown --paging=never {}'
 
     ## ------ Bat && fd & fzf configuration ---------- {
