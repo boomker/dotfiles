@@ -81,7 +81,10 @@ image_bound = [0, 0]
 suppress_preload = false
 
 [plugin]
-prepend_previewers = [{ mime = "text/csv", run = "miller" }]
+prepend_previewers = [
+    { mime = "text/csv", run = "miller" },
+    { mime = "application/{*zip,tar,bzip2,7z*,rar,xz,zstd,java-archive}", run = "ouch" },
+]
 previewers = [
     { name = "*/", run = "folder", sync = true },
     # Code

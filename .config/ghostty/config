@@ -3,7 +3,7 @@ font-size = 16
 font-thicken = true
 bold-is-bright = true
 font-feature = calt,liga
-font-family = "JetBrains Maple Mono"
+font-family = JetBrains Maple Mono
 font-family = "Maple Mono NF CN"
 
 # Mouse
@@ -14,43 +14,12 @@ mouse-hide-while-typing = true
 
 # Theme
 window-theme = auto
-background-opacity = 0.9
+background-opacity = 0.90
 unfocused-split-opacity = 0.55
-theme = Catppuccin Macchiato
+theme = Catppuccin Frappe
 
 # keybindings
-keybind = cmd+g=text:\x07g
-keybind = cmd+c=text:\x07c
-keybind = cmd+o=text:\x07o
-keybind = cmd+r=text:\x07r
-keybind = cmd+z=text:\x07z
-keybind = cmd+t=text:\x07t
-keybind = cmd+n=text:\x07n
-keybind = cmd+u=text:\x07b
-keybind = cmd+j=text:\x07j
-keybind = cmd+k=text:\x07k
-keybind = cmd+l=text:\x07l
-keybind = cmd+h=text:\x07h
-keybind = cmd+x=text:\x07x
-keybind = cmd+w=text:\x07w
-keybind = cmd+p=text:\x07P
-keybind = cmd+d=text:\x1Bd
-keybind = cmd+b=text:\x1Bb
-keybind = cmd+e=text:\x1Bf
 # keybind = cmd+m=text:\x07M
-keybind = cmd+shift+m=text:\x07M
-keybind = cmd+shift+j=text:\x07J
-keybind = cmd+shift+k=text:\x07K
-keybind = cmd+shift+h=text:\x07H
-keybind = cmd+shift+l=text:\x07L
-keybind = cmd+shift+s=text:\x07-
-keybind = cmd+shift+d=text:\x07|
-keybind = cmd+shift+r=text:\x07,
-keybind = cmd+shift+w=text:\x07&
-keybind = cmd+shift+e=text:\x07E
-keybind = cmd+shift+f=text:\x07F
-keybind = cmd+shift+/=text:\x07c?
-keybind = cmd+shift+q=toggle_quick_terminal
 
 macos-option-as-alt = true
 mouse-shift-capture = true
@@ -73,4 +42,37 @@ clipboard-trim-trailing-spaces = true
 shell-integration = zsh
 # custom-shader = shaders/cursor_blaze.glsl
 
-initial-command = /opt/homebrew/bin/zsh -l -c "tmux new-session -A -D -s  🚀"
+initial-command = /opt/homebrew/bin/zsh -l -c "/opt/homebrew/bin/tmux new-session -A -D -s  🚀"
+
+keybind = cmd+g=text:\x07g
+keybind = cmd+c=text:\x07c
+keybind = cmd+o=text:\x07o
+keybind = cmd+r=text:\x07r
+keybind = cmd+z=text:\x07z
+keybind = cmd+t=text:\x07t
+keybind = cmd+n=text:\x07n
+keybind = cmd+u=text:\x07b
+keybind = cmd+j=text:\x07j
+keybind = cmd+k=text:\x07k
+keybind = cmd+l=text:\x07l
+keybind = cmd+h=text:\x07h
+keybind = cmd+x=text:\x07x
+keybind = cmd+w=text:\x07w
+keybind = cmd+p=text:\x07P
+keybind = cmd+d=text:\x1Bd
+keybind = cmd+b=text:\x1Bb
+keybind = cmd+e=text:\x1Bf
+keybind = cmd+shift+m=text:\x07M
+keybind = cmd+shift+j=text:\x07J
+keybind = cmd+shift+k=text:\x07K
+keybind = cmd+shift+h=text:\x07H
+keybind = cmd+shift+l=text:\x07L
+keybind = cmd+shift+s=text:\x07-
+keybind = cmd+shift+d=text:\x07|
+keybind = cmd+shift+r=text:\x07,
+keybind = cmd+shift+w=text:\x07&
+keybind = cmd+shift+e=text:\x07E
+keybind = cmd+shift+f=text:\x07F
+keybind = cmd+shift+/=text:\x07c?
+keybind = cmd+shift+q=toggle_quick_terminal
+mouse-scroll-multiplier = 1

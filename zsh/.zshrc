@@ -38,13 +38,13 @@ if [[ $- =~ i ]]; then
     export XDG_CONFIG_HOME="$HOME/.config"
     export PREZCUSMODIR="$HOME/.zprezto/contrib"
     export KAKU_ZSH_DIR="$HOME/.config/kaku/zsh"
-    export LS_COLORS="$(vivid generate catppuccin-mocha)"
+    export LS_COLORS="$(vivid generate catppuccin-macchiato)"
 
     export PNPM_HOME="$HOME/.pnpm"
-    export PATH="$HOME/.local/bin:$PATH"
     export PATH="/opt/zerobrew/prefix/bin:$PATH"
     export PATH="$HOME/go/bin:$HOME/.cargo/bin:$PATH"
     export PATH="$HOME/.bun/bin:$PNPM_HOME/bin:$PATH"
+    export PATH="$HOME/.zerobrew/bin:$HOME/.local/bin:$PATH"
 
     export MANPATH="/usr/local/opt/coreutils/share/man:${MANPATH}"
     export MANPATH="/usr/local/man:/usr/local/share/man:${MANPATH}"
@@ -64,7 +64,7 @@ if [[ $- =~ i ]]; then
     ## }
 
     # OpenCode
-    export Z_OC_TAB_OPENCODE_MODEL="bestai/claude-opus-4-6"
+    export Z_OC_TAB_OPENCODE_MODEL="minimax/MiniMax-M2.7"
     export Z_OC_TAB_EXPLAIN_PRINT_CMD='bat --plain --color=always --decorations=always --language=markdown --paging=never {}'
 
     ## ------ Bat && fd & fzf configuration ---------- {
