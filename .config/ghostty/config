@@ -18,12 +18,6 @@ background-opacity = 0.90
 unfocused-split-opacity = 0.55
 theme = Catppuccin Frappe
 
-# keybindings
-# keybind = cmd+m=text:\x07M
-
-macos-option-as-alt = true
-mouse-shift-capture = true
-
 # Window
 window-padding-x = 4
 window-padding-y = 4
@@ -44,6 +38,9 @@ shell-integration = zsh
 
 initial-command = /opt/homebrew/bin/zsh -l -c "/opt/homebrew/bin/tmux new-session -A -D -s  🚀"
 
+# keybindings
+macos-option-as-alt = true
+mouse-shift-capture = true
 keybind = cmd+g=text:\x07g
 keybind = cmd+c=text:\x07c
 keybind = cmd+o=text:\x07o
