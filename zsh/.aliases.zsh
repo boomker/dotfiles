@@ -186,9 +186,9 @@ alias nvcl="nvim --clean"
 alias zshreload="source ~/.zshrc"
 alias hostsconf="sudo vim /etc/hosts"
 alias sshconf="nvim ${HOME}/.ssh/config"
+alias tmuxconf="nvim ${HOME}/.tmux.conf"
 alias zshconf="nvim ${HOME}/gitrepos/dotfiles/zsh/.zshrc"
 alias aliconf="nvim ${HOME}/gitrepos/dotfiles/zsh/.aliases.zsh"
-alias tmuxconf="nvim ${HOME}/gitrepos/dotfiles/tmux/.tmux.conf"
 
 # undo proxy
 alias unsetproxy="
