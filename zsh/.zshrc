@@ -153,6 +153,13 @@ if [[ $- =~ i ]]; then
     bindkey -e '^k' pb-forward-kill-line
     ## }
 
+    autoload -Uz add-zsh-hook
+    _tmux_restore_beam_cursor() {
+        [[ -n "$TMUX" ]] || return
+        printf "\033[6 q\033[5 q" > /dev/tty 2>/dev/null
+    }
+    add-zsh-hook precmd _tmux_restore_beam_cursor
+
     # zsh-defer
     [[ -f "${PREZCUSMODIR}/zsh-defer/zsh-defer.plugin.zsh" ]] && {
         source "${PREZCUSMODIR}/zsh-defer/zsh-defer.plugin.zsh"
