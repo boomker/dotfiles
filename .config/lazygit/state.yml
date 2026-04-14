@@ -8,6 +8,8 @@ recentrepos:
     - /Users/cyzhu/gitrepos/spacehammer
 startuppopupversion: 5
 didshowhunkstaginghint: false
-lastversion: 0.60.0
+lastversion: 0.61.0
 customcommandshistory: []
 hidecommandlog: false
+githubPullRequests:
+    /Users/cyzhu/gitrepos/fcitx5-android: []
