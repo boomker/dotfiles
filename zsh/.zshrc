@@ -42,6 +42,7 @@ if [[ $- =~ i ]]; then
 
     export PNPM_HOME="$HOME/.pnpm"
     export PATH="/opt/zerobrew/prefix/bin:$PATH"
+    export PATH="$HOME/.config/kaku/zsh/bin:$PATH"
     export PATH="$HOME/go/bin:$HOME/.cargo/bin:$PATH"
     export PATH="$HOME/.bun/bin:$PNPM_HOME/bin:$PATH"
     export PATH="$HOME/.zerobrew/bin:$HOME/.local/bin:$PATH"
@@ -231,7 +232,7 @@ if [[ $- =~ i ]]; then
     }
 
     # Kaku Shell Integration
-    # [[ -f "$HOME/.config/kaku/zsh/kaku.zsh" ]] && zsh-defer source "$HOME/.config/kaku/zsh/kaku.zsh"
+    [[ -f "$HOME/.config/kaku/zsh/kaku.zsh" ]] && zsh-defer source "$HOME/.config/kaku/zsh/kaku.zsh"
 
     # starship prompt
     [[ -e $(which starship) ]] && source ${PREZCUSMODIR}/user_plugins/starship.zsh

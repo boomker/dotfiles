@@ -54,7 +54,7 @@ end
 --
 config.line_height = 1.0
 -- 1) Font family and size
-config.font_size = 16.0
+config.font_size = 15.0
 config.harfbuzz_features = { "calt=1", "liga=1" }
 config.font = wezterm.font({ family = "Maple Mono NF CN" })
 config.font = wezterm.font_with_fallback({ "JetBrains Maple Mono", "MiSans" })
