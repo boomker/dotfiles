@@ -193,6 +193,9 @@ if [[ $- =~ i ]]; then
     # carapace completion
     # [[ -e $(which carapace) ]] && source <(carapace rg)
 
+    # Kaku Shell Integration
+    # [[ -f "$HOME/.config/kaku/zsh/kaku.zsh" ]] && zsh-defer source "$HOME/.config/kaku/zsh/kaku.zsh"
+
     # aliases
     [ -f ~/.aliases.zsh ] && zsh-defer source ~/.aliases.zsh
 
@@ -230,9 +233,6 @@ if [[ $- =~ i ]]; then
     [[ -f "${PREZCUSMODIR}/zsh-autopair/autopair.zsh" ]] && {
         source "${PREZCUSMODIR}/zsh-autopair/autopair.zsh" && autopair-init
     }
-
-    # Kaku Shell Integration
-    [[ -f "$HOME/.config/kaku/zsh/kaku.zsh" ]] && zsh-defer source "$HOME/.config/kaku/zsh/kaku.zsh"
 
     # starship prompt
     [[ -e $(which starship) ]] && source ${PREZCUSMODIR}/user_plugins/starship.zsh

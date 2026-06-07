@@ -29,10 +29,10 @@ _zb_path_append $ZEROBREW_PREFIX/bin
 export PATH="/opt/zerobrew/prefix/bin:$PATH"
 # >>> zerobrew >>>
 # zerobrew
+export ZEROBREW_ROOT=/opt/zerobrew
+export ZEROBREW_PREFIX=/opt/zerobrew
 export ZEROBREW_DIR=/Users/cyzhu/.zerobrew
 export ZEROBREW_BIN=/Users/cyzhu/.zerobrew/bin
-export ZEROBREW_ROOT=/opt/zerobrew
-export ZEROBREW_PREFIX=/opt/zerobrew/prefix
 export PKG_CONFIG_PATH="$ZEROBREW_PREFIX/lib/pkgconfig:${PKG_CONFIG_PATH:-}"
 
 # SSL/TLS certificates (only if ca-certificates is installed)
